@@ -1,174 +1,82 @@
 import React, { ButtonHTMLAttributes } from 'react';
-import styled, { css } from 'styled-components';
+import { twMerge } from 'tailwind-merge';
 
-type ButtonVariant = 'primary' | 'secondary' | 'outlined' | 'text';
-type ButtonSize = 'small' | 'medium' | 'large';
+type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost';
+type ButtonSize = 'sm' | 'md' | 'lg';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
   fullWidth?: boolean;
+  isLoading?: boolean;
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
-  isLoading?: boolean;
 }
-
-const ButtonBase = styled.button<ButtonProps>`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: ${({ theme }) => theme.spacing[2]};
-  font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
-  border-radius: ${({ theme }) => theme.borderRadius.md};
-  transition: ${({ theme }) => theme.transitions.default};
-  cursor: pointer;
-  outline: none;
-  position: relative;
-  overflow: hidden;
-
-  /* Taille */
-  ${({ size, theme }) => {
-    switch (size) {
-      case 'small':
-        return css`
-          padding: ${theme.spacing[1]} ${theme.spacing[2]};
-          font-size: ${theme.typography.fontSize.sm};
-        `;
-      case 'large':
-        return css`
-          padding: ${theme.spacing[3]} ${theme.spacing[6]};
-          font-size: ${theme.typography.fontSize.lg};
-        `;
-      default: // medium
-        return css`
-          padding: ${theme.spacing[2]} ${theme.spacing[4]};
-          font-size: ${theme.typography.fontSize.base};
-        `;
-    }
-  }}
-
-  /* Largeur */
-  width: ${({ fullWidth }) => (fullWidth ? '100%' : 'auto')};
-
-  /* Variantes */
-  ${({ variant, theme }) => {
-    switch (variant) {
-      case 'secondary':
-        return css`
-          background-color: ${theme.colors.secondary.main};
-          color: ${theme.colors.secondary.contrastText};
-          border: none;
-
-          &:hover, &:focus {
-            background-color: ${theme.colors.secondary.dark};
-          }
-
-          &:disabled {
-            background-color: ${theme.colors.secondary.light};
-            opacity: 0.7;
-            cursor: not-allowed;
-          }
-        `;
-      case 'outlined':
-        return css`
-          background-color: transparent;
-          color: ${theme.colors.primary.main};
-          border: 1px solid ${theme.colors.primary.main};
-
-          &:hover, &:focus {
-            background-color: ${theme.colors.primary.light}20;
-          }
-
-          &:disabled {
-            color: ${theme.colors.text.disabled};
-            border-color: ${theme.colors.text.disabled};
-            cursor: not-allowed;
-          }
-        `;
-      case 'text':
-        return css`
-          background-color: transparent;
-          color: ${theme.colors.primary.main};
-          border: none;
-          padding-left: ${theme.spacing[2]};
-          padding-right: ${theme.spacing[2]};
-
-          &:hover, &:focus {
-            background-color: ${theme.colors.primary.light}10;
-          }
-
-          &:disabled {
-            color: ${theme.colors.text.disabled};
-            cursor: not-allowed;
-          }
-        `;
-      default: // primary
-        return css`
-          background-color: ${theme.colors.primary.main};
-          color: ${theme.colors.primary.contrastText};
-          border: none;
-
-          &:hover, &:focus {
-            background-color: ${theme.colors.primary.dark};
-          }
-
-          &:disabled {
-            background-color: ${theme.colors.primary.light};
-            opacity: 0.7;
-            cursor: not-allowed;
-          }
-        `;
-    }
-  }}
-
-  /* État de chargement */
-  ${({ isLoading }) => isLoading && css`
-    pointer-events: none;
-    opacity: 0.7;
-
-    &::after {
-      content: '';
-      position: absolute;
-      width: 1em;
-      height: 1em;
-      border-radius: 50%;
-      border: 2px solid currentColor;
-      border-right-color: transparent;
-      animation: spin 0.75s linear infinite;
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-  `}
-`;
 
 const Button: React.FC<ButtonProps> = ({
   children,
   variant = 'primary',
-  size = 'medium',
+  size = 'md',
   fullWidth = false,
+  isLoading = false,
   startIcon,
   endIcon,
-  isLoading = false,
+  className,
   disabled,
   ...rest
 }) => {
+  // Base classes
+  const baseClasses = 'inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-70 disabled:cursor-not-allowed';
+
+  // Size classes
+  const sizeClasses = {
+    sm: 'px-3 py-1.5 text-sm rounded',
+    md: 'px-4 py-2 text-base rounded-md',
+    lg: 'px-6 py-3 text-lg rounded-lg',
+  };
+
+  // Variant classes
+  const variantClasses = {
+    primary: 'bg-primary-500 text-white hover:bg-primary-600 focus:ring-primary-500 disabled:bg-primary-300',
+    secondary: 'bg-secondary-500 text-white hover:bg-secondary-600 focus:ring-secondary-500 disabled:bg-secondary-300',
+    outline: 'border border-primary-500 text-primary-500 hover:bg-primary-50 focus:ring-primary-500 disabled:border-primary-300 disabled:text-primary-300',
+    ghost: 'text-primary-500 hover:bg-primary-50 focus:ring-primary-500 disabled:text-primary-300',
+  };
+
+  // Width classes
+  const widthClasses = fullWidth ? 'w-full' : '';
+
+  // Combine all classes
+  const buttonClasses = twMerge(
+    baseClasses,
+    sizeClasses[size],
+    variantClasses[variant],
+    widthClasses,
+    className
+  );
+
   return (
-    <ButtonBase
-      variant={variant}
-      size={size}
-      fullWidth={fullWidth}
-      isLoading={isLoading}
+    <button
+      className={buttonClasses}
       disabled={disabled || isLoading}
       {...rest}
     >
-      {startIcon && !isLoading && <span className="start-icon">{startIcon}</span>}
-      {isLoading ? <span className="sr-only">Chargement...</span> : children}
-      {endIcon && !isLoading && <span className="end-icon">{endIcon}</span>}
-    </ButtonBase>
+      {isLoading ? (
+        <>
+          <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          <span className="sr-only">Chargement...</span>
+        </>
+      ) : (
+        <>
+          {startIcon && <span className="mr-2">{startIcon}</span>}
+          {children}
+          {endIcon && <span className="ml-2">{endIcon}</span>}
+        </>
+      )}
+    </button>
   );
 };
 
