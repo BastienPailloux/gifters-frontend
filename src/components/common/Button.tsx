@@ -46,13 +46,20 @@ const Button: React.FC<ButtonProps> = ({
   // Width classes
   const widthClasses = fullWidth ? 'w-full' : '';
 
+  // Cursor classes
+  const cursorClasses = {
+    disabled: 'cursor-not-allowed',
+    pointer: 'cursor-pointer',
+  };
+
   // Combine all classes
   const buttonClasses = twMerge(
     baseClasses,
     sizeClasses[size],
     variantClasses[variant],
     widthClasses,
-    className
+    className,
+    cursorClasses[disabled ? 'disabled' : 'pointer']
   );
 
   return (

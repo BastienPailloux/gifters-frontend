@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../common/Button';
+import VideoPlayer from '../common/VideoPlayer';
 
 const Hero: React.FC = () => {
   return (
@@ -29,18 +30,18 @@ const Hero: React.FC = () => {
             </div>
           </div>
 
-          {/* Image */}
+          {/* Vidéo */}
           <div className="relative">
             <div className="absolute -inset-4 bg-primary-100 rounded-full opacity-30 blur-3xl"></div>
-            <img
-              src="/images/hero-image.png"
-              alt="Gifters platform"
-              className="relative w-full h-auto rounded-lg shadow-xl"
-              onError={(e) => {
-                // Fallback si l'image n'existe pas encore
-                const target = e.target as HTMLImageElement;
-                target.src = "https://via.placeholder.com/600x400?text=Gifters+Platform";
-              }}
+            <VideoPlayer
+              src="/videos/gifters-demo.mp4"
+              fallbackImage="https://via.placeholder.com/600x400?text=Gifters+Platform"
+              className="rounded-lg shadow-xl relative z-10"
+              aspectRatio="16/9"
+              autoPlay={true}
+              muted={true}
+              loop={true}
+              controls={false}
             />
           </div>
         </div>
@@ -49,7 +50,7 @@ const Hero: React.FC = () => {
         <div className="mt-16 pt-8 border-t border-gray-200">
           <p className="text-center text-gray-500 mb-6">Ils nous font confiance</p>
           <div className="flex flex-wrap justify-center gap-8 opacity-70">
-            <img src="/images/logos/logo1.svg" alt="Company 1" className="h-8" onError={(e) => {
+            {/* <img src="/images/logos/logo1.svg" alt="Company 1" className="h-8" onError={(e) => {
               const target = e.target as HTMLImageElement;
               target.src = "https://via.placeholder.com/120x40?text=Logo+1";
             }} />
@@ -64,7 +65,7 @@ const Hero: React.FC = () => {
             <img src="/images/logos/logo4.svg" alt="Company 4" className="h-8" onError={(e) => {
               const target = e.target as HTMLImageElement;
               target.src = "https://via.placeholder.com/120x40?text=Logo+4";
-            }} />
+            }} /> */}
           </div>
         </div>
       </div>
