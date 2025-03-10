@@ -1,76 +1,52 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
 /* Importer les polices Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap');
 
-@layer base {
-  html {
-    @apply scroll-smooth;
-  }
+@theme {
+  /* Colors */
+  --color-primary-50: #eef2ff;
+  --color-primary-100: #e0e7ff;
+  --color-primary-200: #c7d2fe;
+  --color-primary-300: #a5b4fc;
+  --color-primary-400: #818cf8;
+  --color-primary-500: #4F46E5;
+  --color-primary-600: #3730A3;
+  --color-primary-700: #312e81;
+  --color-primary-800: #1e1b4b;
+  --color-primary-900: #0f172a;
+  --color-primary-950: #030712;
+  --color-secondary-50: #ecfdf5;
+  --color-secondary-100: #d1fae5;
+  --color-secondary-200: #a7f3d0;
+  --color-secondary-300: #6ee7b7;
+  --color-secondary-400: #34d399;
+  --color-secondary-500: #10B981;
+  --color-secondary-600: #059669;
+  --color-secondary-700: #047857;
+  --color-secondary-800: #065f46;
+  --color-secondary-900: #064e3b;
+  --color-secondary-950: #022c22;
 
-  body {
-    @apply font-sans text-gray-800 bg-gray-50;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+  /* Fonts */
+  --font-sans: 'Inter', sans-serif;
+  --font-heading: 'Poppins', sans-serif;
+  --font-mono: 'Roboto Mono', monospace;
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-heading font-semibold text-gray-900;
-  }
+  /* Shadows */
+  --shadow-soft: 0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04);
 
-  h1 {
-    @apply text-4xl md:text-5xl;
-  }
+  /* Borders */
+  --border-radius-xl: 1rem;
+  --border-radius-2xl: 1.5rem;
 
-  h2 {
-    @apply text-3xl md:text-4xl;
-  }
-
-  h3 {
-    @apply text-2xl md:text-3xl;
-  }
-
-  h4 {
-    @apply text-xl md:text-2xl;
-  }
-
-  h5 {
-    @apply text-lg md:text-xl;
-  }
-
-  h6 {
-    @apply text-base md:text-lg;
-  }
+  /* Transitions */
+  --transition-duration: 0.3s;
+  --transition-timing-function: ease-in-out;
 }
 
-@layer components {
-  .container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-  }
-
-  .btn {
-    @apply inline-flex items-center justify-center px-4 py-2 rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2;
-  }
-
-  .btn-primary {
-    @apply btn bg-primary-500 text-white hover:bg-primary-600 focus:ring-primary-500;
-  }
-
-  .btn-secondary {
-    @apply btn bg-secondary-500 text-white hover:bg-secondary-600 focus:ring-secondary-500;
-  }
-
-  .btn-outline {
-    @apply btn border border-primary-500 text-primary-500 hover:bg-primary-50 focus:ring-primary-500;
-  }
-
-  .btn-ghost {
-    @apply btn text-primary-500 hover:bg-primary-50 focus:ring-primary-500;
-  }
-
-  .card {
-    @apply bg-white rounded-lg shadow-soft overflow-hidden;
-  }
+/* Styles de base */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
