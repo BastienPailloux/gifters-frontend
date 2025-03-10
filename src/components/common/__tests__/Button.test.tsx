@@ -1,94 +1,61 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { ThemeProvider } from 'styled-components';
 import Button from '../Button';
-import theme from '../../../styles/theme';
-
-// Helper pour rendre le composant avec le ThemeProvider
-const renderWithTheme = (ui: React.ReactElement) => {
-  return render(
-    <ThemeProvider theme={theme}>
-      {ui}
-    </ThemeProvider>
-  );
-};
 
 describe('Button Component', () => {
   test('renders correctly with default props', () => {
-    renderWithTheme(<Button>Click me</Button>);
+    render(<Button>Click me</Button>);
     const button = screen.getByRole('button', { name: /click me/i });
     expect(button).toBeInTheDocument();
   });
 
   test('applies different variants correctly', () => {
-    const { rerender } = renderWithTheme(<Button variant="primary">Primary</Button>);
+    const { rerender } = render(<Button variant="primary">Primary</Button>);
     let button = screen.getByRole('button', { name: /primary/i });
-    expect(button).toHaveStyle('background-color: #4F46E5'); // primary color
+    expect(button).toHaveClass('bg-primary-500');
 
-    rerender(
-      <ThemeProvider theme={theme}>
-        <Button variant="secondary">Secondary</Button>
-      </ThemeProvider>
-    );
+    rerender(<Button variant="secondary">Secondary</Button>);
     button = screen.getByRole('button', { name: /secondary/i });
-    expect(button).toHaveStyle('background-color: #10B981'); // secondary color
+    expect(button).toHaveClass('bg-secondary-500');
 
-    rerender(
-      <ThemeProvider theme={theme}>
-        <Button variant="outlined">Outlined</Button>
-      </ThemeProvider>
-    );
-    button = screen.getByRole('button', { name: /outlined/i });
-    expect(button).toHaveStyle('background-color: transparent');
-    expect(button).toHaveStyle('border: 1px solid #4F46E5');
+    rerender(<Button variant="outline">Outline</Button>);
+    button = screen.getByRole('button', { name: /outline/i });
+    expect(button).toHaveClass('border-primary-500');
 
-    rerender(
-      <ThemeProvider theme={theme}>
-        <Button variant="text">Text</Button>
-      </ThemeProvider>
-    );
-    button = screen.getByRole('button', { name: /text/i });
-    expect(button).toHaveStyle('background-color: transparent');
-    expect(button).toHaveStyle('border: none');
+    rerender(<Button variant="ghost">Ghost</Button>);
+    button = screen.getByRole('button', { name: /ghost/i });
+    expect(button).toHaveClass('text-primary-500');
   });
 
   test('applies different sizes correctly', () => {
-    const { rerender } = renderWithTheme(<Button size="small">Small</Button>);
+    const { rerender } = render(<Button size="sm">Small</Button>);
     let button = screen.getByRole('button', { name: /small/i });
-    expect(button).toHaveStyle('font-size: 0.875rem');
+    expect(button).toHaveClass('text-sm');
 
-    rerender(
-      <ThemeProvider theme={theme}>
-        <Button size="medium">Medium</Button>
-      </ThemeProvider>
-    );
+    rerender(<Button size="md">Medium</Button>);
     button = screen.getByRole('button', { name: /medium/i });
-    expect(button).toHaveStyle('font-size: 1rem');
+    expect(button).toHaveClass('text-base');
 
-    rerender(
-      <ThemeProvider theme={theme}>
-        <Button size="large">Large</Button>
-      </ThemeProvider>
-    );
+    rerender(<Button size="lg">Large</Button>);
     button = screen.getByRole('button', { name: /large/i });
-    expect(button).toHaveStyle('font-size: 1.125rem');
+    expect(button).toHaveClass('text-lg');
   });
 
   test('applies fullWidth prop correctly', () => {
-    renderWithTheme(<Button fullWidth>Full Width</Button>);
+    render(<Button fullWidth>Full Width</Button>);
     const button = screen.getByRole('button', { name: /full width/i });
-    expect(button).toHaveStyle('width: 100%');
+    expect(button).toHaveClass('w-full');
   });
 
   test('handles disabled state correctly', () => {
-    renderWithTheme(<Button disabled>Disabled</Button>);
+    render(<Button disabled>Disabled</Button>);
     const button = screen.getByRole('button', { name: /disabled/i });
     expect(button).toBeDisabled();
   });
 
   test('handles loading state correctly', () => {
-    renderWithTheme(<Button isLoading>Loading</Button>);
+    render(<Button isLoading>Loading</Button>);
     const button = screen.getByRole('button');
     expect(button).toBeDisabled();
     expect(screen.getByText('Chargement...')).toBeInTheDocument();
@@ -96,7 +63,7 @@ describe('Button Component', () => {
   });
 
   test('renders with start and end icons', () => {
-    renderWithTheme(
+    render(
       <Button
         startIcon={<span data-testid="start-icon">Start</span>}
         endIcon={<span data-testid="end-icon">End</span>}
@@ -112,7 +79,7 @@ describe('Button Component', () => {
 
   test('calls onClick handler when clicked', async () => {
     const handleClick = jest.fn();
-    renderWithTheme(<Button onClick={handleClick}>Click me</Button>);
+    render(<Button onClick={handleClick}>Click me</Button>);
 
     const button = screen.getByRole('button', { name: /click me/i });
     await userEvent.click(button);
