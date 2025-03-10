@@ -5,4 +5,22 @@ import { jest } from '@jest/globals';
 
 global.jest = jest;
 
+// Mock pour TextEncoder/TextDecoder qui sont utilisés par react-router mais non disponibles dans l'environnement de test
+Object.defineProperty(global, 'TextEncoder', {
+  value: class {
+    encode(input: string) {
+      return new Uint8Array(Buffer.from(input));
+    }
+  }
+});
+
+Object.defineProperty(global, 'TextDecoder', {
+  value: class {
+    decode(input?: Uint8Array) {
+      if (!input) return '';
+      return Buffer.from(input).toString();
+    }
+  }
+});
+
 // Ajouter des configurations globales pour les tests ici si nécessaire
