@@ -5,7 +5,10 @@
     "about": "About",
     "contact": "Contact",
     "login": "Login",
-    "signup": "Sign Up"
+    "signup": "Sign Up",
+    "dashboard": "Dashboard",
+    "groups": "My Groups",
+    "gifts": "My Gifts"
   },
   "hero": {
     "title": "Simplify your gift and event management",

@@ -5,7 +5,10 @@
     "about": "À propos",
     "contact": "Contact",
     "login": "Connexion",
-    "signup": "S'inscrire"
+    "signup": "S'inscrire",
+    "dashboard": "Tableau de bord",
+    "groups": "Mes Groupes",
+    "gifts": "Mes Cadeaux"
   },
   "hero": {
     "title": "Simplifiez la gestion de vos cadeaux et événements",
