@@ -1,52 +1,55 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Button from '../common/Button';
 import VideoPlayer from '../common/VideoPlayer';
 import TestimonialSlider from '../common/TestimonialSlider';
 
-// Données de témoignages
-const testimonials = [
-  {
-    content: "Gifters a complètement transformé la façon dont nous organisons les anniversaires dans notre famille. Plus de cadeaux en double et tout le monde trouve quelque chose qui lui plaît vraiment !",
-    author: {
-      name: "Marie Dupont",
-      title: "Mère de famille",
-      avatarUrl: "https://randomuser.me/api/portraits/women/44.jpg"
-    },
-    rating: 5
-  },
-  {
-    content: "J'ai utilisé Gifters pour mon mariage et c'était incroyable ! Nos invités ont adoré pouvoir choisir parmi notre liste de souhaits et nous avons reçu exactement ce dont nous avions besoin.",
-    author: {
-      name: "Thomas Martin",
-      title: "Jeune marié",
-      company: "Architecte",
-      avatarUrl: "https://randomuser.me/api/portraits/men/32.jpg"
-    },
-    rating: 5
-  },
-  {
-    content: "En tant qu'organisatrice d'événements, je recommande Gifters à tous mes clients. La plateforme est intuitive et le service client est exceptionnel.",
-    author: {
-      name: "Sophie Leclerc",
-      title: "Organisatrice d'événements",
-      company: "EventPro",
-      avatarUrl: "https://randomuser.me/api/portraits/women/68.jpg"
-    },
-    rating: 4
-  },
-  {
-    content: "Gifters m'a sauvé pour les fêtes de fin d'année ! Plus besoin de se casser la tête pour trouver des idées, tout est centralisé et facile à utiliser.",
-    author: {
-      name: "Lucas Bernard",
-      title: "Étudiant",
-      avatarUrl: "https://randomuser.me/api/portraits/men/55.jpg"
-    },
-    rating: 5
-  }
-];
-
 const Hero: React.FC = () => {
+  const { t } = useTranslation();
+
+  // Données de témoignages depuis les traductions
+  const testimonials = [
+    {
+      content: t('testimonials.1.content'),
+      author: {
+        name: t('testimonials.1.author.name'),
+        title: t('testimonials.1.author.title'),
+        avatarUrl: "https://randomuser.me/api/portraits/women/44.jpg"
+      },
+      rating: 5
+    },
+    {
+      content: t('testimonials.2.content'),
+      author: {
+        name: t('testimonials.2.author.name'),
+        title: t('testimonials.2.author.title'),
+        company: t('testimonials.2.author.company'),
+        avatarUrl: "https://randomuser.me/api/portraits/men/32.jpg"
+      },
+      rating: 5
+    },
+    {
+      content: t('testimonials.3.content'),
+      author: {
+        name: t('testimonials.3.author.name'),
+        title: t('testimonials.3.author.title'),
+        company: t('testimonials.3.author.company'),
+        avatarUrl: "https://randomuser.me/api/portraits/women/68.jpg"
+      },
+      rating: 4
+    },
+    {
+      content: t('testimonials.4.content'),
+      author: {
+        name: t('testimonials.4.author.name'),
+        title: t('testimonials.4.author.title'),
+        avatarUrl: "https://randomuser.me/api/portraits/men/55.jpg"
+      },
+      rating: 5
+    }
+  ];
+
   return (
     <div className="bg-gradient-to-b from-gray-50 to-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
@@ -54,20 +57,20 @@ const Hero: React.FC = () => {
           {/* Contenu textuel */}
           <div className="max-w-xl">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Simplifiez la gestion de vos cadeaux et événements
+              {t('hero.title')}
             </h1>
             <p className="text-xl text-gray-600 mb-8">
-              Créez des listes de souhaits, organisez des événements et trouvez l'inspiration pour des cadeaux parfaits. Gifters connecte les gens à travers des moments de partage mémorables.
+              {t('hero.description')}
             </p>
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
               <Link to="/signup">
                 <Button variant="primary" size="lg">
-                  Commencer gratuitement
+                  {t('hero.cta.primary')}
                 </Button>
               </Link>
               <Link to="/features">
                 <Button variant="outline" size="lg">
-                  En savoir plus
+                  {t('hero.cta.secondary')}
                 </Button>
               </Link>
             </div>
@@ -91,8 +94,12 @@ const Hero: React.FC = () => {
 
         {/* Témoignages clients */}
         <div className="mt-16 pt-8 border-t border-gray-200">
-          <h2 className="text-2xl font-bold text-center text-gray-900 mb-2">Ce que nos utilisateurs disent</h2>
-          <p className="text-center text-gray-500 mb-8">Découvrez comment Gifters transforme l'expérience des cadeaux</p>
+          <h2 className="text-2xl font-bold text-center text-gray-900 mb-2">
+            {t('hero.testimonials.title')}
+          </h2>
+          <p className="text-center text-gray-500 mb-8">
+            {t('hero.testimonials.subtitle')}
+          </p>
           <TestimonialSlider
             testimonials={testimonials}
             autoPlay={true}

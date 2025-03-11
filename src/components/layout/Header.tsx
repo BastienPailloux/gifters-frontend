@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Button from '../common/Button';
+import LanguageSwitcher from '../common/LanguageSwitcher';
 
 const Header: React.FC = () => {
+  const { t } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -23,35 +26,37 @@ const Header: React.FC = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             <Link to="/features" className="text-white hover:text-primary-200 font-medium">
-              Fonctionnalités
+              {t('header.features')}
             </Link>
             <Link to="/pricing" className="text-white hover:text-primary-200 font-medium">
-              Tarifs
+              {t('header.pricing')}
             </Link>
             <Link to="/about" className="text-white hover:text-primary-200 font-medium">
-              À propos
+              {t('header.about')}
             </Link>
             <Link to="/contact" className="text-white hover:text-primary-200 font-medium">
-              Contact
+              {t('header.contact')}
             </Link>
           </nav>
 
-          {/* Desktop CTA Buttons */}
+          {/* Desktop CTA Buttons and Language Switcher */}
           <div className="hidden md:flex items-center space-x-4">
+            <LanguageSwitcher className="text-white mr-2" />
             <Link to="/login">
               <Button variant="outline" size="sm" className="text-white border-white hover:bg-primary-600">
-                Connexion
+                {t('header.login')}
               </Button>
             </Link>
             <Link to="/signup">
               <Button variant="secondary" size="sm">
-                S'inscrire
+                {t('header.signup')}
               </Button>
             </Link>
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center">
+            <LanguageSwitcher className="text-white mr-4" />
             <button
               type="button"
               className="text-white hover:text-primary-200 focus:outline-none"
@@ -77,27 +82,27 @@ const Header: React.FC = () => {
           <div className="md:hidden py-4 border-t border-primary-400">
             <nav className="flex flex-col space-y-4 pb-4">
               <Link to="/features" className="text-white hover:text-primary-200 font-medium">
-                Fonctionnalités
+                {t('header.features')}
               </Link>
               <Link to="/pricing" className="text-white hover:text-primary-200 font-medium">
-                Tarifs
+                {t('header.pricing')}
               </Link>
               <Link to="/about" className="text-white hover:text-primary-200 font-medium">
-                À propos
+                {t('header.about')}
               </Link>
               <Link to="/contact" className="text-white hover:text-primary-200 font-medium">
-                Contact
+                {t('header.contact')}
               </Link>
             </nav>
             <div className="flex flex-col space-y-3 pt-4 border-t border-primary-400">
               <Link to="/login">
                 <Button variant="outline" fullWidth className="text-white border-white hover:bg-primary-600">
-                  Connexion
+                  {t('header.login')}
                 </Button>
               </Link>
               <Link to="/signup">
                 <Button variant="secondary" fullWidth>
-                  S'inscrire
+                  {t('header.signup')}
                 </Button>
               </Link>
             </div>

@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const Footer: React.FC = () => {
+  const { t } = useTranslation();
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="bg-gray-900 text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -12,7 +16,7 @@ const Footer: React.FC = () => {
               <span className="text-2xl font-bold text-white">Gifters</span>
             </Link>
             <p className="text-gray-400 mb-4">
-              Simplifiez la gestion de vos cadeaux et événements avec Gifters, la plateforme qui connecte les gens à travers des moments de partage.
+              {t('hero.description')}
             </p>
             <div className="flex space-x-4">
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
@@ -36,54 +40,51 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Liens rapides */}
+          {/* Company */}
           <div className="col-span-1">
-            <h3 className="text-lg font-semibold text-white mb-4">Liens rapides</h3>
+            <h3 className="text-lg font-semibold text-white mb-4">{t('footer.company.title')}</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/features" className="text-gray-400 hover:text-white">Fonctionnalités</Link>
+                <Link to="/about" className="text-gray-400 hover:text-white">{t('footer.company.about')}</Link>
               </li>
               <li>
-                <Link to="/pricing" className="text-gray-400 hover:text-white">Tarifs</Link>
+                <Link to="/careers" className="text-gray-400 hover:text-white">{t('footer.company.careers')}</Link>
               </li>
               <li>
-                <Link to="/about" className="text-gray-400 hover:text-white">À propos</Link>
+                <Link to="/press" className="text-gray-400 hover:text-white">{t('footer.company.press')}</Link>
               </li>
               <li>
-                <Link to="/contact" className="text-gray-400 hover:text-white">Contact</Link>
-              </li>
-              <li>
-                <Link to="/blog" className="text-gray-400 hover:text-white">Blog</Link>
+                <Link to="/blog" className="text-gray-400 hover:text-white">{t('footer.company.blog')}</Link>
               </li>
             </ul>
           </div>
 
-          {/* Légal */}
+          {/* Product */}
           <div className="col-span-1">
-            <h3 className="text-lg font-semibold text-white mb-4">Légal</h3>
+            <h3 className="text-lg font-semibold text-white mb-4">{t('footer.product.title')}</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/privacy" className="text-gray-400 hover:text-white">Politique de confidentialité</Link>
+                <Link to="/features" className="text-gray-400 hover:text-white">{t('footer.product.features')}</Link>
               </li>
               <li>
-                <Link to="/terms" className="text-gray-400 hover:text-white">Conditions d'utilisation</Link>
+                <Link to="/pricing" className="text-gray-400 hover:text-white">{t('footer.product.pricing')}</Link>
               </li>
               <li>
-                <Link to="/cookies" className="text-gray-400 hover:text-white">Politique de cookies</Link>
+                <Link to="/security" className="text-gray-400 hover:text-white">{t('footer.product.security')}</Link>
               </li>
               <li>
-                <Link to="/gdpr" className="text-gray-400 hover:text-white">RGPD</Link>
+                <Link to="/enterprise" className="text-gray-400 hover:text-white">{t('footer.product.enterprise')}</Link>
               </li>
             </ul>
           </div>
 
           {/* Newsletter */}
           <div className="col-span-1">
-            <h3 className="text-lg font-semibold text-white mb-4">Restez informé</h3>
-            <p className="text-gray-400 mb-4">Abonnez-vous à notre newsletter pour recevoir nos dernières actualités.</p>
+            <h3 className="text-lg font-semibold text-white mb-4">{t('footer.newsletter.title')}</h3>
+            <p className="text-gray-400 mb-4">{t('footer.newsletter.description')}</p>
             <form className="space-y-2">
               <div>
-                <label htmlFor="email-address" className="sr-only">Adresse email</label>
+                <label htmlFor="email-address" className="sr-only">{t('footer.newsletter.placeholder')}</label>
                 <input
                   id="email-address"
                   name="email"
@@ -91,7 +92,7 @@ const Footer: React.FC = () => {
                   autoComplete="email"
                   required
                   className="w-full px-4 py-2 text-base text-gray-900 placeholder-gray-500 bg-white border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  placeholder="Votre adresse email"
+                  placeholder={t('footer.newsletter.placeholder')}
                 />
               </div>
               <div>
@@ -99,17 +100,18 @@ const Footer: React.FC = () => {
                   type="submit"
                   className="w-full px-4 py-2 text-base font-medium text-white bg-primary-500 border border-transparent rounded-md hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
                 >
-                  S'abonner
+                  {t('footer.newsletter.button')}
                 </button>
               </div>
+              <p className="text-xs text-gray-500 mt-2">{t('footer.newsletter.privacy')}</p>
             </form>
           </div>
         </div>
 
         {/* Copyright */}
-        <div className="mt-12 pt-8 border-t border-gray-800">
-          <p className="text-gray-400 text-center">
-            &copy; {new Date().getFullYear()} Gifters. Tous droits réservés.
+        <div className="mt-12 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-gray-400 text-center md:text-left">
+            {t('footer.copyright').replace('2025', currentYear.toString())}
           </p>
         </div>
       </div>

@@ -1,0 +1,130 @@
+{
+  "header": {
+    "features": "Features",
+    "pricing": "Pricing",
+    "about": "About",
+    "contact": "Contact",
+    "login": "Login",
+    "signup": "Sign Up"
+  },
+  "hero": {
+    "title": "Simplify your gift and event management",
+    "description": "Create wishlists, organize events, and find inspiration for perfect gifts. Gifters connects people through memorable sharing moments.",
+    "cta": {
+      "primary": "Start for free",
+      "secondary": "Learn more"
+    },
+    "testimonials": {
+      "title": "What our users say",
+      "subtitle": "Discover how Gifters transforms the gift experience"
+    }
+  },
+  "features": {
+    "title": "Key Features",
+    "subtitle": "Everything you need to manage your gifts and events",
+    "items": {
+      "wishlists": {
+        "title": "Wishlists",
+        "description": "Easily create and share wishlists for any occasion. Add items from any website with just one click."
+      },
+      "events": {
+        "title": "Event Management",
+        "description": "Organize birthdays, weddings, and other celebrations. Send invitations and track responses in real-time."
+      },
+      "inspiration": {
+        "title": "Gift Ideas",
+        "description": "Discover personalized suggestions based on your loved ones' interests and preferences."
+      },
+      "reminders": {
+        "title": "Smart Reminders",
+        "description": "Never miss a birthday or special occasion again with our customizable notifications."
+      },
+      "groups": {
+        "title": "Group Gifting",
+        "description": "Easily organize collective gifts and track everyone's contributions."
+      },
+      "privacy": {
+        "title": "Privacy Controls",
+        "description": "Decide who can see your lists and what information is shared."
+      }
+    },
+    "cta": "Explore all features"
+  },
+  "testimonials": {
+    "1": {
+      "content": "Gifters has completely transformed how we organize birthdays in our family. No more duplicate gifts and everyone finds something they really like!",
+      "author": {
+        "name": "Marie Dupont",
+        "title": "Mother"
+      }
+    },
+    "2": {
+      "content": "I used Gifters for my wedding and it was amazing! Our guests loved being able to choose from our wishlist and we received exactly what we needed.",
+      "author": {
+        "name": "Thomas Martin",
+        "title": "Newlywed",
+        "company": "Architect"
+      }
+    },
+    "3": {
+      "content": "As an event organizer, I recommend Gifters to all my clients. The platform is intuitive and the customer service is exceptional.",
+      "author": {
+        "name": "Sophie Leclerc",
+        "title": "Event Organizer",
+        "company": "EventPro"
+      }
+    },
+    "4": {
+      "content": "Gifters saved me for the holidays! No more racking my brain to find ideas, everything is centralized and easy to use.",
+      "author": {
+        "name": "Lucas Bernard",
+        "title": "Student"
+      }
+    }
+  },
+  "footer": {
+    "company": {
+      "title": "Company",
+      "about": "About",
+      "careers": "Careers",
+      "press": "Press",
+      "blog": "Blog"
+    },
+    "product": {
+      "title": "Product",
+      "features": "Features",
+      "pricing": "Pricing",
+      "security": "Security",
+      "enterprise": "Enterprise"
+    },
+    "resources": {
+      "title": "Resources",
+      "docs": "Documentation",
+      "guides": "Guides",
+      "api": "API",
+      "status": "Status"
+    },
+    "legal": {
+      "title": "Legal",
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "cookies": "Cookies"
+    },
+    "copyright": "© 2025 Gifters. All rights reserved.",
+    "language": "Language",
+    "newsletter": {
+      "title": "Subscribe to our newsletter",
+      "description": "The latest news, articles, and resources, sent to your inbox monthly.",
+      "placeholder": "Enter your email",
+      "button": "Subscribe",
+      "privacy": "We care about your data. Unsubscribe at any time."
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "retry": "Retry",
+    "next": "Next",
+    "previous": "Previous"
+  }
+}
