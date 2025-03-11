@@ -8,6 +8,14 @@ interface User {
   email: string;
 }
 
+// Interface pour les données d'inscription
+interface RegisterData {
+  name: string;
+  email: string;
+  password: string;
+  password_confirmation: string;
+}
+
 // Définir l'interface pour le contexte d'authentification
 interface AuthContextType {
   user: User | null;
@@ -15,7 +23,7 @@ interface AuthContextType {
   isLoading: boolean;
   error: string | null;
   login: (credentials: { email: string; password: string }) => Promise<{ success: boolean; error?: string }>;
-  register: (userData: { name: string; email: string; password: string }) => Promise<{ success: boolean; error?: string }>;
+  register: (userData: RegisterData) => Promise<{ success: boolean; error?: string }>;
   logout: () => void;
   clearError: () => void;
 }

@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import AuthForm from '../../components/auth/AuthForm';
-import Input from '../../components/common/Input';
-import Button from '../../components/common/Button';
-import Checkbox from '../../components/common/Checkbox';
+import Input from '../../components/common/forms/Input';
+import Button from '../../components/common/forms/Button';
+import Checkbox from '../../components/common/forms/Checkbox';
+import FlatButton from '../../components/common/forms/FlatButton';
 
 const Login: React.FC = () => {
   const { t } = useTranslation();
@@ -90,6 +91,18 @@ const Login: React.FC = () => {
       >
         {t('auth.login.submit')}
       </Button>
+
+      {/* Forgot password link */}
+      <div className="mt-2 flex justify-end">
+        <FlatButton
+          variant="primary"
+          asLink
+          href="/auth/forgot-password"
+          size="small"
+        >
+          {t('auth.forgotPassword')}
+        </FlatButton>
+      </div>
     </AuthForm>
   );
 };

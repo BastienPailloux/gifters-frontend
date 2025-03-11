@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import AuthForm from '../../components/auth/AuthForm';
-import Input from '../../components/common/Input';
-import Button from '../../components/common/Button';
-import Checkbox from '../../components/common/Checkbox';
+import Input from '../../components/common/forms/Input';
+import Button from '../../components/common/forms/Button';
+import Checkbox from '../../components/common/forms/Checkbox';
 
 const Register: React.FC = () => {
   const { t } = useTranslation();

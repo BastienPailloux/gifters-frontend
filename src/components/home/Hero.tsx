@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import Button from '../common/Button';
-import VideoPlayer from '../common/VideoPlayer';
-import TestimonialSlider from '../common/TestimonialSlider';
+import Button from '../common/forms/Button';
+import VideoPlayer from '../common/display/VideoPlayer';
+import TestimonialSlider from '../common/display/TestimonialSlider';
 
 const Hero: React.FC = () => {
   const { t } = useTranslation();
