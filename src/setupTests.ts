@@ -10,6 +10,24 @@ dotenv.config({ path: '.env.test' });
 
 global.jest = jest;
 
+// Mock pour react-i18next
+jest.mock('react-i18next', () => ({
+  // retourner la clé telle quelle au lieu de la traduction
+  useTranslation: () => {
+    return {
+      t: (key: string) => key,
+      i18n: {
+        changeLanguage: () => new Promise(() => {}),
+        language: 'fr',
+      },
+    };
+  },
+  initReactI18next: {
+    type: '3rdParty',
+    init: () => {},
+  },
+}));
+
 // Mock pour TextEncoder/TextDecoder qui sont utilisés par react-router mais non disponibles dans l'environnement de test
 Object.defineProperty(global, 'TextEncoder', {
   value: class {
