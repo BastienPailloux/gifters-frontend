@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import Button from '../common/Button';
-import LanguageSwitcher from '../common/LanguageSwitcher';
+import Button from '../common/forms/Button';
+import LanguageSwitcher from '../common/navigation/LanguageSwitcher';
 
 const Header: React.FC = () => {
   const { t } = useTranslation();
@@ -47,7 +47,7 @@ const Header: React.FC = () => {
                 {t('header.login')}
               </Button>
             </Link>
-            <Link to="/signup">
+            <Link to="/register">
               <Button variant="secondary" size="sm">
                 {t('header.signup')}
               </Button>

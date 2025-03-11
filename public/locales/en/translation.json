@@ -120,6 +120,64 @@
       "privacy": "We care about your data. Unsubscribe at any time."
     }
   },
+  "auth": {
+    "login": {
+      "title": "Sign in to your account",
+      "subtitle": "Don't have an account?",
+      "registerLink": "Sign up for free",
+      "submit": "Sign in",
+      "rememberMe": "Remember me",
+      "forgotPassword": "Forgot your password?",
+      "orContinueWith": "Or continue with"
+    },
+    "register": {
+      "title": "Create your account",
+      "subtitle": "Already have an account?",
+      "loginLink": "Sign in",
+      "submit": "Create account",
+      "acceptTerms": "I agree to the",
+      "termsLink": "Terms of Service",
+      "orContinueWith": "Or continue with"
+    },
+    "logout": "Sign out",
+    "fields": {
+      "name": "Name",
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password"
+    },
+    "errors": {
+      "login": "Invalid email or password",
+      "register": "Could not create account",
+      "googleLogin": "Could not sign in with Google",
+      "logout": "Could not sign out",
+      "loadUser": "Could not load user information",
+      "passwordMismatch": "Passwords do not match"
+    },
+    "forgotPassword": "Forgot your password?"
+  },
+  "dashboard": {
+    "welcome": "Welcome to your dashboard",
+    "personalInfo": "Your personal information",
+    "noName": "No name provided",
+    "cards": {
+      "gifts": {
+        "title": "My Gifts",
+        "description": "Manage your wishlists and gift ideas",
+        "action": "View gifts"
+      },
+      "events": {
+        "title": "My Events",
+        "description": "Organize and track your upcoming events",
+        "action": "View events"
+      },
+      "profile": {
+        "title": "My Profile",
+        "description": "Update your personal information and preferences",
+        "action": "Edit profile"
+      }
+    }
+  },
   "common": {
     "loading": "Loading...",
     "error": "An error occurred",

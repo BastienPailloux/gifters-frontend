@@ -120,6 +120,64 @@
       "privacy": "Nous respectons votre vie privée. Désabonnez-vous à tout moment."
     }
   },
+  "auth": {
+    "login": {
+      "title": "Connectez-vous à votre compte",
+      "subtitle": "Vous n'avez pas de compte ?",
+      "registerLink": "Inscrivez-vous gratuitement",
+      "submit": "Se connecter",
+      "rememberMe": "Se souvenir de moi",
+      "forgotPassword": "Mot de passe oublié ?",
+      "orContinueWith": "Ou continuer avec"
+    },
+    "register": {
+      "title": "Créez votre compte",
+      "subtitle": "Vous avez déjà un compte ?",
+      "loginLink": "Connectez-vous",
+      "submit": "Créer un compte",
+      "acceptTerms": "J'accepte les",
+      "termsLink": "Conditions d'utilisation",
+      "orContinueWith": "Ou continuer avec"
+    },
+    "logout": "Se déconnecter",
+    "fields": {
+      "name": "Nom",
+      "email": "Adresse e-mail",
+      "password": "Mot de passe",
+      "confirmPassword": "Confirmer le mot de passe"
+    },
+    "errors": {
+      "login": "Email ou mot de passe invalide",
+      "register": "Impossible de créer le compte",
+      "googleLogin": "Impossible de se connecter avec Google",
+      "logout": "Impossible de se déconnecter",
+      "loadUser": "Impossible de charger les informations utilisateur",
+      "passwordMismatch": "Les mots de passe ne correspondent pas"
+    },
+    "forgotPassword": "Mot de passe oublié ?"
+  },
+  "dashboard": {
+    "welcome": "Bienvenue sur votre tableau de bord",
+    "personalInfo": "Vos informations personnelles",
+    "noName": "Aucun nom fourni",
+    "cards": {
+      "gifts": {
+        "title": "Mes Cadeaux",
+        "description": "Gérez vos listes de souhaits et idées de cadeaux",
+        "action": "Voir les cadeaux"
+      },
+      "events": {
+        "title": "Mes Événements",
+        "description": "Organisez et suivez vos événements à venir",
+        "action": "Voir les événements"
+      },
+      "profile": {
+        "title": "Mon Profil",
+        "description": "Mettez à jour vos informations personnelles et préférences",
+        "action": "Modifier le profil"
+      }
+    }
+  },
   "common": {
     "loading": "Chargement...",
     "error": "Une erreur est survenue",

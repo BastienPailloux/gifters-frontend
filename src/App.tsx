@@ -1,14 +1,57 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Home from './pages/Home';
+import Login from './pages/auth/Login';
+import Register from './pages/auth/Register';
+import Dashboard from './pages/Dashboard';
+
+// Composant pour les routes protégées
+interface ProtectedRouteProps {
+  children: React.ReactNode;
+}
+
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
+  const { isAuthenticated, isLoading } = useAuth();
+
+  if (isLoading) {
+    // Afficher un indicateur de chargement pendant la vérification de l'authentification
+    return <div className="flex justify-center items-center h-screen">Chargement...</div>;
+  }
+
+  if (!isAuthenticated) {
+    // Rediriger vers la page de connexion si l'utilisateur n'est pas authentifié
+    return <Navigate to="/login" />;
+  }
+
+  return <>{children}</>;
+};
+
+const AppRoutes: React.FC = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+      {/* Autres routes à ajouter ici */}
+    </Routes>
+  );
+};
 
 const App: React.FC = () => {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        {/* Autres routes à ajouter ici */}
-      </Routes>
+      <AuthProvider>
+        <AppRoutes />
+      </AuthProvider>
     </Router>
   );
 };

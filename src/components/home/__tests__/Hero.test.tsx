@@ -18,30 +18,37 @@ describe('Hero Component', () => {
 
     // Vérifier que le titre principal est présent
     expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument();
-    expect(screen.getByText(/Simplifiez la gestion de vos cadeaux/i)).toBeInTheDocument();
+    expect(screen.getByText('hero.title')).toBeInTheDocument();
   });
 
   test('renders description correctly', () => {
     renderWithRouter(<Hero />);
 
     // Vérifier que la description est présente
-    expect(screen.getByText(/Créez des listes de souhaits, organisez des événements/i)).toBeInTheDocument();
+    expect(screen.getByText('hero.description')).toBeInTheDocument();
   });
 
   test('renders call-to-action buttons', () => {
     renderWithRouter(<Hero />);
 
     // Vérifier que les boutons CTA sont présents
-    expect(screen.getByRole('link', { name: /commencer gratuitement/i })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /en savoir plus/i })).toBeInTheDocument();
+    expect(screen.getByText('hero.cta.primary')).toBeInTheDocument();
+    expect(screen.getByText('hero.cta.secondary')).toBeInTheDocument();
   });
 
-  test('renders hero image', () => {
+  test('renders testimonials section', () => {
     renderWithRouter(<Hero />);
 
-    // Vérifier que l'image est présente
-    const heroImage = screen.getByAltText(/Gifters platform/i);
-    expect(heroImage).toBeInTheDocument();
-    expect(heroImage.tagName).toBe('IMG');
+    // Vérifier que la section de témoignages est présente
+    expect(screen.getByText('hero.testimonials.title')).toBeInTheDocument();
+    expect(screen.getByText('hero.testimonials.subtitle')).toBeInTheDocument();
+  });
+
+  test('renders video player', () => {
+    renderWithRouter(<Hero />);
+
+    // Vérifier que la vidéo est présente
+    const videoElement = screen.getByText(/Votre navigateur ne prend pas en charge la lecture de vidéos./i);
+    expect(videoElement).toBeInTheDocument();
   });
 });
