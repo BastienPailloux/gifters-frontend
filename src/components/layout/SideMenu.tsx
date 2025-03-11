@@ -21,11 +21,26 @@ const SideMenu: React.FC = () => {
       try {
         setLoading(true);
         const result = await groupService.getGroups();
-        setGroups(result.data || []);
+
+        // Gestion améliorée de la réponse basée sur la structure de l'API
+        let groupsData: Group[] = [];
+
+        if (result && result.data) {
+          // Si les données sont dans result.data
+          groupsData = Array.isArray(result.data) ? result.data : [];
+        } else if (result && Array.isArray(result)) {
+          // Si le résultat est directement un tableau
+          groupsData = result;
+        } else if (result && result.groups) {
+          // Si les données sont dans result.groups
+          groupsData = Array.isArray(result.groups) ? result.groups : [];
+        }
+
+        setGroups(groupsData);
         setError(null);
       } catch (err) {
         console.error('Error fetching groups:', err);
-        setError(t('common.error'));
+        setError(t('common.error') || 'Failed to load groups');
       } finally {
         setLoading(false);
       }

@@ -105,8 +105,14 @@ export const authService = {
 export const groupService = {
   // Récupérer tous les groupes de l'utilisateur
   getGroups: async () => {
-    const response = await api.get('/groups');
-    return response.data;
+    console.log('API call: GET /groups');
+    try {
+      const response = await api.get('/groups');
+      return response.data;
+    } catch (error) {
+      console.error('Error in getGroups API call:', error);
+      throw error;
+    }
   },
 
   // Récupérer un groupe spécifique
