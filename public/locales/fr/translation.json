@@ -19,6 +19,37 @@
       "subtitle": "Découvrez comment Gifters transforme l'expérience des cadeaux"
     }
   },
+  "features": {
+    "title": "Fonctionnalités principales",
+    "subtitle": "Tout ce dont vous avez besoin pour gérer vos cadeaux et événements",
+    "items": {
+      "wishlists": {
+        "title": "Listes de souhaits",
+        "description": "Créez et partagez facilement des listes de souhaits pour toutes les occasions. Ajoutez des articles de n'importe quel site web en un clic."
+      },
+      "events": {
+        "title": "Gestion d'événements",
+        "description": "Organisez des anniversaires, mariages et autres célébrations. Envoyez des invitations et suivez les réponses en temps réel."
+      },
+      "inspiration": {
+        "title": "Idées de cadeaux",
+        "description": "Découvrez des suggestions personnalisées basées sur les intérêts et préférences de vos proches."
+      },
+      "reminders": {
+        "title": "Rappels intelligents",
+        "description": "Ne manquez plus jamais un anniversaire ou une occasion spéciale grâce à nos notifications personnalisables."
+      },
+      "groups": {
+        "title": "Cadeaux de groupe",
+        "description": "Organisez facilement des cadeaux collectifs et suivez les contributions de chacun."
+      },
+      "privacy": {
+        "title": "Contrôle de confidentialité",
+        "description": "Décidez qui peut voir vos listes et quelles informations sont partagées."
+      }
+    },
+    "cta": "Découvrir toutes les fonctionnalités"
+  },
   "testimonials": {
     "1": {
       "content": "Gifters a complètement transformé la façon dont nous organisons les anniversaires dans notre famille. Plus de cadeaux en double et tout le monde trouve quelque chose qui lui plaît vraiment !",
@@ -49,6 +80,44 @@
         "name": "Lucas Bernard",
         "title": "Étudiant"
       }
+    }
+  },
+  "footer": {
+    "company": {
+      "title": "Entreprise",
+      "about": "À propos",
+      "careers": "Carrières",
+      "press": "Presse",
+      "blog": "Blog"
+    },
+    "product": {
+      "title": "Produit",
+      "features": "Fonctionnalités",
+      "pricing": "Tarifs",
+      "security": "Sécurité",
+      "enterprise": "Entreprises"
+    },
+    "resources": {
+      "title": "Ressources",
+      "docs": "Documentation",
+      "guides": "Guides",
+      "api": "API",
+      "status": "Statut"
+    },
+    "legal": {
+      "title": "Mentions légales",
+      "privacy": "Confidentialité",
+      "terms": "Conditions d'utilisation",
+      "cookies": "Cookies"
+    },
+    "copyright": "© 2025 Gifters. Tous droits réservés.",
+    "language": "Langue",
+    "newsletter": {
+      "title": "Abonnez-vous à notre newsletter",
+      "description": "Les dernières nouvelles, articles et ressources, envoyés chaque mois dans votre boîte de réception.",
+      "placeholder": "Entrez votre email",
+      "button": "S'abonner",
+      "privacy": "Nous respectons votre vie privée. Désabonnez-vous à tout moment."
     }
   },
   "common": {

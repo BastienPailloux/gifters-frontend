@@ -19,6 +19,37 @@
       "subtitle": "Discover how Gifters transforms the gift experience"
     }
   },
+  "features": {
+    "title": "Key Features",
+    "subtitle": "Everything you need to manage your gifts and events",
+    "items": {
+      "wishlists": {
+        "title": "Wishlists",
+        "description": "Easily create and share wishlists for any occasion. Add items from any website with just one click."
+      },
+      "events": {
+        "title": "Event Management",
+        "description": "Organize birthdays, weddings, and other celebrations. Send invitations and track responses in real-time."
+      },
+      "inspiration": {
+        "title": "Gift Ideas",
+        "description": "Discover personalized suggestions based on your loved ones' interests and preferences."
+      },
+      "reminders": {
+        "title": "Smart Reminders",
+        "description": "Never miss a birthday or special occasion again with our customizable notifications."
+      },
+      "groups": {
+        "title": "Group Gifting",
+        "description": "Easily organize collective gifts and track everyone's contributions."
+      },
+      "privacy": {
+        "title": "Privacy Controls",
+        "description": "Decide who can see your lists and what information is shared."
+      }
+    },
+    "cta": "Explore all features"
+  },
   "testimonials": {
     "1": {
       "content": "Gifters has completely transformed how we organize birthdays in our family. No more duplicate gifts and everyone finds something they really like!",
@@ -49,6 +80,44 @@
         "name": "Lucas Bernard",
         "title": "Student"
       }
+    }
+  },
+  "footer": {
+    "company": {
+      "title": "Company",
+      "about": "About",
+      "careers": "Careers",
+      "press": "Press",
+      "blog": "Blog"
+    },
+    "product": {
+      "title": "Product",
+      "features": "Features",
+      "pricing": "Pricing",
+      "security": "Security",
+      "enterprise": "Enterprise"
+    },
+    "resources": {
+      "title": "Resources",
+      "docs": "Documentation",
+      "guides": "Guides",
+      "api": "API",
+      "status": "Status"
+    },
+    "legal": {
+      "title": "Legal",
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "cookies": "Cookies"
+    },
+    "copyright": "© 2025 Gifters. All rights reserved.",
+    "language": "Language",
+    "newsletter": {
+      "title": "Subscribe to our newsletter",
+      "description": "The latest news, articles, and resources, sent to your inbox monthly.",
+      "placeholder": "Enter your email",
+      "button": "Subscribe",
+      "privacy": "We care about your data. Unsubscribe at any time."
     }
   },
   "common": {
