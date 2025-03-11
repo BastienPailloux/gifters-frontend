@@ -161,8 +161,28 @@
   },
   "dashboard": {
     "welcome": "Bienvenue sur votre tableau de bord",
+    "summary": "Retrouvez ici un résumé de vos prochains événements et vos cadeaux en cours.",
     "personalInfo": "Vos informations personnelles",
     "noName": "Aucun nom fourni",
+    "upcomingEvents": "Prochains événements",
+    "birthday": "Anniversaire",
+    "christmas": "Noël",
+    "daysLeft": "jours restants",
+    "noUpcomingEvents": "Aucun événement à venir",
+    "viewAllEvents": "Voir tous les événements",
+    "buyingGifts": "Cadeaux en cours d'achat",
+    "noBuyingGifts": "Aucun cadeau en cours d'achat",
+    "for": "Pour",
+    "viewGift": "Voir le cadeau",
+    "markAsBought": "Marquer comme acheté",
+    "viewAllGifts": "Voir tous les cadeaux",
+    "quickActions": "Actions rapides",
+    "errors": {
+      "loadingData": "Erreur lors du chargement des données",
+      "loadingEvents": "Erreur lors du chargement des événements",
+      "loadingGifts": "Erreur lors du chargement des cadeaux",
+      "markingGift": "Erreur lors du marquage du cadeau comme acheté"
+    },
     "cards": {
       "gifts": {
         "title": "Mes Cadeaux",
