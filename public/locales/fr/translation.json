@@ -1,0 +1,61 @@
+{
+  "header": {
+    "features": "Fonctionnalités",
+    "pricing": "Tarifs",
+    "about": "À propos",
+    "contact": "Contact",
+    "login": "Connexion",
+    "signup": "S'inscrire"
+  },
+  "hero": {
+    "title": "Simplifiez la gestion de vos cadeaux et événements",
+    "description": "Créez des listes de souhaits, organisez des événements et trouvez l'inspiration pour des cadeaux parfaits. Gifters connecte les gens à travers des moments de partage mémorables.",
+    "cta": {
+      "primary": "Commencer gratuitement",
+      "secondary": "En savoir plus"
+    },
+    "testimonials": {
+      "title": "Ce que nos utilisateurs disent",
+      "subtitle": "Découvrez comment Gifters transforme l'expérience des cadeaux"
+    }
+  },
+  "testimonials": {
+    "1": {
+      "content": "Gifters a complètement transformé la façon dont nous organisons les anniversaires dans notre famille. Plus de cadeaux en double et tout le monde trouve quelque chose qui lui plaît vraiment !",
+      "author": {
+        "name": "Marie Dupont",
+        "title": "Mère de famille"
+      }
+    },
+    "2": {
+      "content": "J'ai utilisé Gifters pour mon mariage et c'était incroyable ! Nos invités ont adoré pouvoir choisir parmi notre liste de souhaits et nous avons reçu exactement ce dont nous avions besoin.",
+      "author": {
+        "name": "Thomas Martin",
+        "title": "Jeune marié",
+        "company": "Architecte"
+      }
+    },
+    "3": {
+      "content": "En tant qu'organisatrice d'événements, je recommande Gifters à tous mes clients. La plateforme est intuitive et le service client est exceptionnel.",
+      "author": {
+        "name": "Sophie Leclerc",
+        "title": "Organisatrice d'événements",
+        "company": "EventPro"
+      }
+    },
+    "4": {
+      "content": "Gifters m'a sauvé pour les fêtes de fin d'année ! Plus besoin de se casser la tête pour trouver des idées, tout est centralisé et facile à utiliser.",
+      "author": {
+        "name": "Lucas Bernard",
+        "title": "Étudiant"
+      }
+    }
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Une erreur est survenue",
+    "retry": "Réessayer",
+    "next": "Suivant",
+    "previous": "Précédent"
+  }
+}
