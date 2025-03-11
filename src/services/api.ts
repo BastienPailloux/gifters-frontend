@@ -42,9 +42,14 @@ api.interceptors.response.use(
 export const authService = {
   // Inscription d'un nouvel utilisateur
   register: async (userData: { name: string; email: string; password: string; password_confirmation: string }) => {
+    // On envoie les données directement sans les imbriquer dans un objet 'user'
     const response = await api.post('/signup', { user: userData });
+
     // Stocker le token et les informations utilisateur dans le localStorage
-    if (response.data.data && response.data.data.token) {
+    if (response.data && response.data.token) {
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+    } else if (response.data.data && response.data.data.token) {
       localStorage.setItem('token', response.data.data.token);
       localStorage.setItem('user', JSON.stringify(response.data.data.user));
     }
@@ -53,9 +58,16 @@ export const authService = {
 
   // Connexion d'un utilisateur
   login: async (credentials: { email: string; password: string }) => {
+    // On envoie les données directement sans les imbriquer dans un objet 'user'
     const response = await api.post('/login', { user: credentials });
+
+    console.log('Login response:', response.data);
+
     // Stocker le token et les informations utilisateur dans le localStorage
-    if (response.data.data && response.data.data.token) {
+    if (response.data && response.data.token) {
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+    } else if (response.data.data && response.data.data.token) {
       localStorage.setItem('token', response.data.data.token);
       localStorage.setItem('user', JSON.stringify(response.data.data.user));
     }
