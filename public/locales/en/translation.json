@@ -187,5 +187,13 @@
     "retry": "Retry",
     "next": "Next",
     "previous": "Previous"
+  },
+  "sidemenu": {
+    "groups": "My Groups",
+    "noGroups": "You don't have any groups yet",
+    "createGroup": "Create a group",
+    "joinGroup": "Join a group",
+    "collapse": "Collapse sidebar",
+    "expand": "Expand sidebar"
   }
 }

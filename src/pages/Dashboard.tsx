@@ -8,8 +8,8 @@ const Dashboard: React.FC = () => {
   const { user } = useAuth();
 
   return (
-    <div className="bg-gray-100 py-6 h-full min-h-full flex-grow">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="py-6 overflow-y-auto h-full transition-all duration-300 ease-in-out">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-300 ease-in-out">
         <div className="bg-white shadow overflow-hidden sm:rounded-lg mb-6">
           <div className="px-4 py-5 sm:px-6">
             <h2 className="text-lg leading-6 font-medium text-gray-900">

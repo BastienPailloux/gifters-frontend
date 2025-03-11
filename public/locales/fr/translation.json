@@ -187,5 +187,13 @@
     "retry": "Réessayer",
     "next": "Suivant",
     "previous": "Précédent"
+  },
+  "sidemenu": {
+    "groups": "Mes Groupes",
+    "noGroups": "Vous n'avez pas encore de groupes",
+    "createGroup": "Créer un groupe",
+    "joinGroup": "Rejoindre un groupe",
+    "collapse": "Réduire le menu",
+    "expand": "Développer le menu"
   }
 }
