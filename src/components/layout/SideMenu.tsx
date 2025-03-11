@@ -1,89 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { groupService } from '../../services/api';
-
-// Interface pour le type Group
-interface Group {
-  id: string;
-  name: string;
-  description?: string;
-}
+import GroupList from './GroupList';
 
 const SideMenu: React.FC = () => {
   const { t } = useTranslation();
-  const [groups, setGroups] = useState<Group[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchGroups = async () => {
-      try {
-        setLoading(true);
-        const result = await groupService.getGroups();
-
-        // Gestion améliorée de la réponse basée sur la structure de l'API
-        let groupsData: Group[] = [];
-
-        if (result && result.data) {
-          // Si les données sont dans result.data
-          groupsData = Array.isArray(result.data) ? result.data : [];
-        } else if (result && Array.isArray(result)) {
-          // Si le résultat est directement un tableau
-          groupsData = result;
-        } else if (result && result.groups) {
-          // Si les données sont dans result.groups
-          groupsData = Array.isArray(result.groups) ? result.groups : [];
-        }
-
-        setGroups(groupsData);
-        setError(null);
-      } catch (err) {
-        console.error('Error fetching groups:', err);
-        setError(t('common.error') || 'Failed to load groups');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchGroups();
-  }, [t]);
 
   return (
     <div className="bg-white h-full shadow-md flex-shrink-0 border-r border-gray-200 w-full overflow-hidden">
       <div className="p-4 h-full overflow-y-auto">
         <h2 className="text-lg font-medium text-gray-900 mb-4">{t('sidemenu.groups')}</h2>
 
-        {/* Loading state */}
-        {loading && (
-          <div className="flex justify-center py-4">
-            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary-500"></div>
-          </div>
-        )}
-
-        {/* Error state */}
-        {error && (
-          <div className="text-red-500 mb-4">
-            {error}
-          </div>
-        )}
-
-        {/* Group list */}
-        {!loading && !error && groups.length === 0 && (
-          <p className="text-gray-500 mb-4">{t('sidemenu.noGroups')}</p>
-        )}
-
-        <nav className="space-y-1">
-          {groups.map((group) => (
-            <Link
-              key={group.id}
-              to={`/groups/${group.id}`}
-              className="flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-            >
-              <span className="truncate">{group.name}</span>
-            </Link>
-          ))}
-        </nav>
+        {/* Utilisation du composant GroupList */}
+        <GroupList />
 
         <div className="mt-6 space-y-2">
           <Link
