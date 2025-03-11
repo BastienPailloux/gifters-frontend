@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import LanguageSwitcher from '../common/LanguageSwitcher';
 
 const Footer: React.FC = () => {
   const { t } = useTranslation();
@@ -109,10 +108,10 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Copyright and Language Switcher */}
+        {/* Copyright */}
         <div className="mt-12 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-center md:text-left">
-            {t('footer.copyright').replace('2024', currentYear.toString())}
+            {t('footer.copyright').replace('2025', currentYear.toString())}
           </p>
         </div>
       </div>
