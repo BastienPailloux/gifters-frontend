@@ -75,11 +75,14 @@ const Login: React.FC = () => {
           containerClassName="mb-0"
         />
 
-        <div className="text-sm">
-          <a href="/forgot-password" className="font-medium text-primary-600 hover:text-primary-500">
-            {t('auth.login.forgotPassword')}
-          </a>
-        </div>
+        <FlatButton
+          variant="primary"
+          asLink
+          href="/auth/forgot-password"
+          size="small"
+        >
+          {t('auth.forgotPassword')}
+        </FlatButton>
       </div>
 
       <Button
@@ -92,17 +95,6 @@ const Login: React.FC = () => {
         {t('auth.login.submit')}
       </Button>
 
-      {/* Forgot password link */}
-      <div className="mt-2 flex justify-end">
-        <FlatButton
-          variant="primary"
-          asLink
-          href="/auth/forgot-password"
-          size="small"
-        >
-          {t('auth.forgotPassword')}
-        </FlatButton>
-      </div>
     </AuthForm>
   );
 };

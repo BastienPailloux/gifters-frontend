@@ -54,7 +54,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     );
 
     return (
-      <div className={twMerge('mb-4', containerClassName)}>
+      <div className={twMerge('mb-4', containerClassName)} data-testid="input-container">
         {label && (
           <label htmlFor={inputId} className="block text-sm font-medium text-gray-700 mb-1">
             {label}

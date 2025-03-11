@@ -47,7 +47,7 @@ const Header: React.FC = () => {
                 {t('header.login')}
               </Button>
             </Link>
-            <Link to="/signup">
+            <Link to="/register">
               <Button variant="secondary" size="sm">
                 {t('header.signup')}
               </Button>

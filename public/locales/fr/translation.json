@@ -153,7 +153,8 @@
       "logout": "Impossible de se déconnecter",
       "loadUser": "Impossible de charger les informations utilisateur",
       "passwordMismatch": "Les mots de passe ne correspondent pas"
-    }
+    },
+    "forgotPassword": "Mot de passe oublié ?"
   },
   "dashboard": {
     "welcome": "Bienvenue sur votre tableau de bord",
