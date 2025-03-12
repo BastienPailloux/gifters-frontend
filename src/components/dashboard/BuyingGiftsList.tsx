@@ -39,10 +39,15 @@ const BuyingGiftsList: React.FC<BuyingGiftsListProps> = ({ maxGifts = 5 }) => {
   const [showCelebration, setShowCelebration] = useState(false);
   const [celebrationGift, setCelebrationGift] = useState<GiftIdea | null>(null);
 
-  // Mémorisez la fonction qui récupère les cadeaux
-  const fetchBuyingGifts = useCallback(() => {
-    if (!user) return Promise.resolve({ giftIdeas: [] });
-    return giftIdeaService.getGiftIdeasByBuyer(user.id, undefined, ['buying']);
+  // Mémoriser la fonction de récupération des données pour éviter les rendus en boucle
+  const fetchUserGifts = useCallback(async () => {
+    if (!user) return { giftIdeas: [] };
+    try {
+      return await giftIdeaService.getGiftIdeasByBuyer(user.id, undefined, ['buying']);
+    } catch (err) {
+      console.error('BuyingGiftsList - Erreur lors de l\'appel à l\'API:', err);
+      throw err;
+    }
   }, [user]);
 
   // Utiliser un hook personnalisé pour gérer le chargement asynchrone des données
@@ -51,7 +56,7 @@ const BuyingGiftsList: React.FC<BuyingGiftsListProps> = ({ maxGifts = 5 }) => {
     loading,
     error,
     refetch: fetchGifts
-  } = useAsyncData<ApiResponse>(fetchBuyingGifts);
+  } = useAsyncData<ApiResponse>(fetchUserGifts);
 
   // Marquer un cadeau comme acheté
   const handleMarkAsBought = async (giftId: string) => {

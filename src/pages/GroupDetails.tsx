@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { groupService } from '../services/api';
+import { groupService, giftIdeaService } from '../services/api';
 import Button from '../components/common/forms/Button';
 import GroupItemsList from '../components/groups/GroupItemsList';
 import PageHeader from '../components/common/layout/PageHeader';
+import GiftIdeaItem, { GiftIdea } from '../components/groups/GiftIdeaItem';
 
 // Types
 interface GroupDetailsData {
@@ -32,15 +33,27 @@ interface Event {
   date: string;
 }
 
+// Type pour la réponse API des idées de cadeaux
+interface ApiGiftIdea {
+  id: number | string;
+  title: string;
+  status: string;
+  forUser?: { id: number | string; name: string } | string;
+  forUserName?: string;
+  price?: number;
+}
+
 const GroupDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const [group, setGroup] = useState<GroupDetailsData | null>(null);
+  const [giftIdeas, setGiftIdeas] = useState<GiftIdea[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  // Récupérer les détails du groupe
   useEffect(() => {
     const fetchGroupDetails = async () => {
       if (!id) {
@@ -78,6 +91,47 @@ const GroupDetails: React.FC = () => {
     fetchGroupDetails();
   }, [id, t]);
 
+  // Récupérer les idées de cadeaux du groupe
+  useEffect(() => {
+    const fetchGiftIdeas = async () => {
+      if (!id) return;
+
+      try {
+        // Ne récupérer que les idées avec statut "proposed" ou "buying"
+        const result = await giftIdeaService.getGiftIdeasByGroup(id, ['proposed', 'buying']);
+
+        // Mapper les données API en GiftIdea
+        if (result && result.giftIdeas) {
+          const mappedGifts = result.giftIdeas.map((gift: ApiGiftIdea): GiftIdea => {
+            // Déterminer le nom du destinataire
+            let recipientName = t('common.unknownUser');
+            if (gift.forUser && typeof gift.forUser === 'object' && gift.forUser.name) {
+              recipientName = gift.forUser.name;
+            } else if (gift.forUserName) {
+              recipientName = gift.forUserName;
+            } else if (gift.forUser && typeof gift.forUser === 'string') {
+              recipientName = gift.forUser as string;
+            }
+
+            return {
+              id: String(gift.id),
+              title: gift.title,
+              for_user_name: recipientName,
+              price: gift.price,
+              status: gift.status as 'proposed' | 'buying' | 'bought'
+            };
+          });
+
+          setGiftIdeas(mappedGifts);
+        }
+      } catch (err) {
+        console.error('Error fetching gift ideas:', err);
+      }
+    };
+
+    fetchGiftIdeas();
+  }, [id, t]);
+
   // Fonctions de gestion des événements
   const handleBackClick = () => {
     navigate(-1);
@@ -108,6 +162,11 @@ const GroupDetails: React.FC = () => {
     alert(`View event ${eventId} functionality coming soon!`);
   };
 
+  const handleViewGift = (giftId: string) => {
+    // Sera implémenté ultérieurement
+    alert(`View gift ${giftId} functionality coming soon!`);
+  };
+
   // Rendu des éléments de liste
   const renderEvent = (event: Event) => (
     <div className="flex items-center justify-between">
@@ -125,6 +184,14 @@ const GroupDetails: React.FC = () => {
         {t('common.view') || 'View'}
       </Button>
     </div>
+  );
+
+  // Rendu des idées de cadeaux
+  const renderGiftIdea = (gift: GiftIdea) => (
+    <GiftIdeaItem
+      gift={gift}
+      onViewGift={handleViewGift}
+    />
   );
 
   // Rendu des actions d'en-tête
@@ -200,14 +267,14 @@ const GroupDetails: React.FC = () => {
           renderItem={renderEvent}
         />
 
-        {/* Liste des cadeaux - pour l'instant avec une liste vide car API ne retourne pas encore les gift ideas */}
+        {/* Liste des idées de cadeaux */}
         <GroupItemsList
-          title={t('groups.giftIdeas') || 'Gift Ideas'}
-          items={[]}
-          emptyMessage={t('groups.noGiftIdeas') || 'No gift ideas have been shared yet.'}
-          actionLabel={t('groups.addGiftIdea') || 'Add Gift Idea'}
+          title={t('giftIdeas.title') || 'Gift Ideas'}
+          items={giftIdeas}
+          emptyMessage={t('giftIdeas.noGiftIdeas') || 'No gift ideas have been shared yet.'}
+          actionLabel={t('giftIdeas.addGiftIdea') || 'Add Gift Idea'}
           onAction={handleAddGiftIdea}
-          renderItem={() => <div />} // Pas encore de rendu pour les gift ideas
+          renderItem={renderGiftIdea}
         />
       </div>
     </div>
