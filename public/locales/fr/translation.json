@@ -206,7 +206,17 @@
     "error": "Une erreur est survenue",
     "retry": "Réessayer",
     "next": "Suivant",
-    "previous": "Précédent"
+    "previous": "Précédent",
+    "dismiss": "Fermer",
+    "processing": "En cours...",
+    "defaultGroup": "Groupe par défaut",
+    "unknownUser": "Utilisateur inconnu",
+    "close": "Fermer"
+  },
+  "celebration": {
+    "congratulations": "Félicitations !",
+    "giftMarkedAsBought": "Vous avez marqué \"{{giftTitle}}\" comme acheté pour {{recipientName}}.",
+    "genericSuccess": "Le cadeau a été marqué comme acheté avec succès !"
   },
   "sidemenu": {
     "groups": "Mes Groupes",
