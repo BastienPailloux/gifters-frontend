@@ -5,13 +5,33 @@ import { FaChevronRight } from 'react-icons/fa';
 import BuyingGiftItem, { GiftIdea } from './BuyingGiftItem';
 import { giftIdeaService } from '../../services/api';
 
+// Interface reflétant la structure des données de l'API avec les sérialiseurs
 interface ApiGiftIdea {
-  id: string;
+  id: number | string;
   title: string;
-  for_user_name: string;
-  group_name: string;
+  description?: string;
+  price?: string | number;
+  link?: string;
+  imageUrl?: string;
   status: string;
-  [key: string]: unknown; // Pour les autres propriétés potentielles
+  createdAt?: string;
+  updatedAt?: string;
+  forUserId?: number | string;
+  createdById?: number | string;
+  forUserName?: string;
+  createdByName?: string;
+  groupName?: string;
+  // Les informations complètes sur les utilisateurs (si incluses par le sérialiseur)
+  forUser?: {
+    id: number | string;
+    name: string;
+    email?: string;
+  };
+  createdBy?: {
+    id: number | string;
+    name: string;
+    email?: string;
+  };
 }
 
 interface BuyingGiftsListProps {
@@ -27,23 +47,43 @@ const BuyingGiftsList: React.FC<BuyingGiftsListProps> = ({ maxGifts = 5 }) => {
   const fetchGifts = async () => {
     try {
       setLoading(true);
-      // Récupérer les cadeaux en cours d'achat
-      const buyingResponse = await giftIdeaService.getGiftIdeas();
-      if (buyingResponse.data) {
-        const buyingItems = buyingResponse.data
-          .filter((gift: ApiGiftIdea) => gift.status === 'buying')
-          .map((gift: ApiGiftIdea) => ({
-            id: gift.id,
-            title: gift.title,
-            for_user_name: gift.for_user_name,
-            group_name: gift.group_name,
-            status: gift.status as 'new' | 'buying' | 'bought'
-          }));
-        setBuyingGifts(buyingItems);
-      }
       setError(null);
-    } catch (err) {
-      console.error('Error fetching buying gifts:', err);
+
+      // Récupérer les cadeaux en cours d'achat
+      const response = await giftIdeaService.getBuyingGiftIdeas();
+
+      // Afficher la réponse pour le débogage
+      console.log('API response for buying gifts:', response);
+
+      // Traiter les données selon leur format
+      let buyingItems: GiftIdea[] = [];
+
+      // Gérer le cas où la réponse pourrait être dans response.data (avec Axios) ou directement dans response
+      const giftData = response.data && Array.isArray(response.data)
+        ? response.data
+        : (Array.isArray(response) ? response : []);
+
+      // Mapper les données en tenant compte de la structure camelCase
+      buyingItems = giftData.map((gift: ApiGiftIdea) => {
+        // Pour l'utilisateur, on prend d'abord l'objet forUser complet,
+        // sinon on crée un objet à partir du nom utilisateur
+        const userObject = gift.forUser ||
+          (gift.forUserName ? { name: gift.forUserName } : { name: t('common.unknownUser') });
+
+        return {
+          id: String(gift.id),
+          title: gift.title,
+          for_user: userObject,
+          // On prend le nom de groupe s'il existe, sinon on utilise une valeur par défaut
+          group_name: gift.groupName || t('common.defaultGroup'),
+          // On s'assure que le statut est conforme aux valeurs attendues
+          status: gift.status as 'proposed' | 'buying' | 'bought'
+        };
+      });
+
+      setBuyingGifts(buyingItems);
+    } catch (error) {
+      console.error('Error fetching buying gifts:', error);
       setError(t('dashboard.errors.loadingGifts'));
     } finally {
       setLoading(false);
@@ -60,8 +100,8 @@ const BuyingGiftsList: React.FC<BuyingGiftsListProps> = ({ maxGifts = 5 }) => {
       await giftIdeaService.markAsBought(giftId);
       // Mettre à jour la liste des cadeaux après avoir marqué comme acheté
       setBuyingGifts(prevGifts => prevGifts.filter(gift => gift.id !== giftId));
-    } catch (err) {
-      console.error('Error marking gift as bought:', err);
+    } catch (error) {
+      console.error('Error marking gift as bought:', error);
       setError(t('dashboard.errors.markingGift'));
     }
   };
