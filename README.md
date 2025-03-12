@@ -6,13 +6,14 @@
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 > Gifters is an open-source application that helps you manage your gift ideas and events with friends and family.
+> The application is still under working. Not all functionnalities are implemented or are susceptible of sensitive changes.
 
 ## ✨ Features
 
-- 📋 Create and manage wishlists
-- 👪 Organize groups for special occasions
-- 🎂 Track birthdays and events
-- 💝 Discover and reserve gift ideas for your loved ones
+- 📋 Create and manage wishlists - ONGOING
+- 👪 Organize groups for special occasions - ONGOING
+- 🎂 Track birthdays and events - ONGOING
+- 💝 Discover and reserve gift ideas for your loved ones - ONGOING
 - 🔐 User authentication and authorization
 - 🌐 Internationalization (i18n) support for multiple languages
 - 📱 Responsive design for mobile and desktop
