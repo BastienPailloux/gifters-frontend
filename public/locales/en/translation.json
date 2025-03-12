@@ -213,6 +213,19 @@
     "unknownUser": "Unknown User",
     "close": "Close"
   },
+  "validation": {
+    "required": "This field is required",
+    "tooShort": "Must contain at least {{min}} characters",
+    "tooLong": "Must not exceed {{max}} characters",
+    "invalidCharacters": "Contains unauthorized characters",
+    "invalid": "This value is invalid",
+    "groupName": {
+      "required": "Group name is required",
+      "tooShort": "Group name must contain at least {{min}} characters",
+      "tooLong": "Group name must not exceed {{max}} characters",
+      "invalidCharacters": "Group name contains unauthorized characters"
+    }
+  },
   "celebration": {
     "congratulations": "Congratulations!",
     "giftMarkedAsBought": "You have marked \"{{giftTitle}}\" as bought for {{recipientName}}.",
@@ -225,6 +238,7 @@
     "joinGroup": "Join a group",
     "collapse": "Collapse sidebar",
     "expand": "Expand sidebar",
-    "groupNamePlaceholder": "Enter group name..."
+    "groupNamePlaceholder": "Enter group name...",
+    "createGroupFormLabel": "Group creation form"
   }
 }
