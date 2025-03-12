@@ -224,6 +224,7 @@
     "createGroup": "Créer un groupe",
     "joinGroup": "Rejoindre un groupe",
     "collapse": "Réduire le menu",
-    "expand": "Développer le menu"
+    "expand": "Développer le menu",
+    "groupNamePlaceholder": "Nom du groupe..."
   }
 }

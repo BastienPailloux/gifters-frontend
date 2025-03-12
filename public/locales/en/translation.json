@@ -224,6 +224,7 @@
     "createGroup": "Create a group",
     "joinGroup": "Join a group",
     "collapse": "Collapse sidebar",
-    "expand": "Expand sidebar"
+    "expand": "Expand sidebar",
+    "groupNamePlaceholder": "Enter group name..."
   }
 }
