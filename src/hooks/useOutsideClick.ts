@@ -1,39 +1,33 @@
-import { useEffect, RefObject, useCallback } from 'react';
+import { useEffect, RefObject } from 'react';
 
 /**
- * Hook pour détecter les clics en dehors d'un élément spécifié
- * @param ref - Référence React à l'élément à surveiller
- * @param handler - Fonction à exécuter lorsqu'un clic est détecté en dehors de l'élément
- * @param active - Indique si la détection est active ou non (utile pour les modales conditionnelles)
+ * Hook qui permet de détecter les clics en dehors d'un élément référencé.
+ * @param ref La référence de l'élément à surveiller
+ * @param callback La fonction à appeler lorsqu'un clic est détecté en dehors de l'élément
+ * @param active Indique si la détection des clics extérieurs est active (par défaut: true)
  */
 const useOutsideClick = <T extends HTMLElement>(
   ref: RefObject<T | null>,
-  handler: () => void,
+  callback: () => void,
   active: boolean = true
 ): void => {
-  // Mémoriser le gestionnaire d'événements pour éviter des re-render inutiles
-  const memoizedHandler = useCallback(
-    (event: MouseEvent) => {
-      // Vérifier que la référence est définie et que le clic n'est pas à l'intérieur de l'élément
-      if (active && ref.current && !ref.current.contains(event.target as Node)) {
-        handler();
-      }
-    },
-    [ref, handler, active]
-  );
-
   useEffect(() => {
-    // N'ajouter l'écouteur que si le hook est actif
-    if (active) {
-      document.addEventListener('mousedown', memoizedHandler);
-
-      // Nettoyer l'écouteur à la désactivation du hook ou au démontage du composant
-      return () => {
-        document.removeEventListener('mousedown', memoizedHandler);
-      };
+    function handleClickOutside(event: MouseEvent) {
+      if (active && ref.current && !ref.current.contains(event.target as Node)) {
+        callback();
+      }
     }
-    return undefined;
-  }, [active, memoizedHandler]);
+
+    if (active) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      if (active) {
+        document.removeEventListener('mousedown', handleClickOutside);
+      }
+    };
+  }, [ref, callback, active]);
 };
 
 export default useOutsideClick;
