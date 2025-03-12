@@ -207,11 +207,14 @@
     "retry": "Réessayer",
     "next": "Suivant",
     "previous": "Précédent",
+    "back": "Retour",
     "dismiss": "Fermer",
     "processing": "En cours...",
     "defaultGroup": "Groupe par défaut",
     "unknownUser": "Utilisateur inconnu",
-    "close": "Fermer"
+    "edit": "Modifier",
+    "close": "Fermer",
+    "view": "Voir"
   },
   "validation": {
     "required": "Ce champ est requis",
@@ -233,12 +236,27 @@
   },
   "sidemenu": {
     "groups": "Mes Groupes",
+    "home": "Accueil",
     "noGroups": "Vous n'avez pas encore de groupes",
     "createGroup": "Créer un groupe",
     "joinGroup": "Rejoindre un groupe",
     "collapse": "Réduire le menu",
     "expand": "Développer le menu",
     "groupNamePlaceholder": "Nom du groupe...",
-    "createGroupFormLabel": "Formulaire de création de groupe"
+    "createGroupFormLabel": "Formulaire de création de groupe",
+    "newGroup": "Nouveau groupe"
+  },
+  "groups": {
+    "members": "Membres",
+    "noMembers": "Aucun membre pour le moment.",
+    "upcomingEvents": "Événements à venir",
+    "noEvents": "Aucun événement planifié.",
+    "createEvent": "Créer un événement",
+    "giftIdeas": "Idées de cadeaux",
+    "noGiftIdeas": "Aucune idée de cadeau n'a été partagée pour le moment.",
+    "addGiftIdea": "Ajouter une idée de cadeau",
+    "inviteMember": "Inviter un membre",
+    "details": "Détails du groupe",
+    "edit": "Modifier le groupe"
   }
 }

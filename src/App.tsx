@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import Dashboard from './pages/Dashboard';
+import GroupDetails from './pages/GroupDetails';
 
 // Composant pour les routes protégées
 interface ProtectedRouteProps {
@@ -52,6 +53,18 @@ const AppRoutes: React.FC = () => {
           <ProtectedRoute>
             <LayoutRoute>
               <Dashboard />
+            </LayoutRoute>
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Route pour les détails d'un groupe */}
+      <Route
+        path="/groups/:id"
+        element={
+          <ProtectedRoute>
+            <LayoutRoute>
+              <GroupDetails />
             </LayoutRoute>
           </ProtectedRoute>
         }
