@@ -172,6 +172,47 @@ export const giftIdeaService = {
     }
   },
 
+  // Récupérer les idées de cadeaux pour un groupe spécifique
+  getGiftIdeasByGroup: async (groupId: string, statuses?: string[]) => {
+    try {
+      const params: { group_id: string; status?: string[] } = { group_id: groupId };
+
+      // Ajouter les statuts à filtrer s'ils sont spécifiés
+      if (statuses && statuses.length > 0) {
+        params.status = statuses;
+      }
+
+      const response = await api.get('/gift_ideas', { params });
+      return response.data;
+    } catch (error) {
+      console.error(`Error fetching gift ideas for group ${groupId}:`, error);
+      throw error;
+    }
+  },
+
+  // Récupérer les idées de cadeaux pour un acheteur spécifique
+  getGiftIdeasByBuyer: async (buyerId: string, groupId?: string, statuses?: string[]) => {
+    try {
+      const params: { buyer_id: string; group_id?: string; status?: string[] } = { buyer_id: buyerId };
+
+      // Ajouter le groupe si spécifié
+      if (groupId) {
+        params.group_id = groupId;
+      }
+
+      // Ajouter les statuts à filtrer s'ils sont spécifiés
+      if (statuses && statuses.length > 0) {
+        params.status = statuses;
+      }
+
+      const response = await api.get('/gift_ideas', { params });
+      return response.data;
+    } catch (error) {
+      console.error(`Error fetching gift ideas for buyer ${buyerId}:`, error);
+      throw error;
+    }
+  },
+
   // Récupérer une idée de cadeau spécifique
   getGiftIdea: async (id: string) => {
     const response = await api.get(`/gift_ideas/${id}`);

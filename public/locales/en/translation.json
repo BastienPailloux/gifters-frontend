@@ -252,11 +252,20 @@
     "upcomingEvents": "Upcoming Events",
     "noEvents": "No events scheduled.",
     "createEvent": "Create Event",
-    "giftIdeas": "Gift Ideas",
-    "noGiftIdeas": "No gift ideas have been shared yet.",
-    "addGiftIdea": "Add Gift Idea",
     "inviteMember": "Invite Member",
+    "viewMembers": "View Members",
     "details": "Group Details",
     "edit": "Edit Group"
+  },
+  "giftIdeas": {
+    "title": "Gift Ideas",
+    "description": "Manage your wishlists and gift ideas",
+    "action": "View gifts",
+    "addGiftIdea": "Add Gift Idea",
+    "noGiftIdeas": "No gift ideas have been shared yet.",
+    "for": "For",
+    "statusProposed": "Proposed",
+    "statusBuying": "Buying",
+    "statusBought": "Bought"
   }
 }

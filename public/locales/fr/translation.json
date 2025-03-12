@@ -252,11 +252,20 @@
     "upcomingEvents": "Événements à venir",
     "noEvents": "Aucun événement planifié.",
     "createEvent": "Créer un événement",
-    "giftIdeas": "Idées de cadeaux",
-    "noGiftIdeas": "Aucune idée de cadeau n'a été partagée pour le moment.",
-    "addGiftIdea": "Ajouter une idée de cadeau",
     "inviteMember": "Inviter un membre",
+    "viewMembers": "Voir les membres",
     "details": "Détails du groupe",
     "edit": "Modifier le groupe"
+  },
+  "giftIdeas": {
+    "title": "Idées de cadeaux",
+    "description": "Gérez vos listes de souhaits et idées de cadeaux",
+    "action": "Voir les cadeaux",
+    "addGiftIdea": "Ajouter une idée de cadeau",
+    "noGiftIdeas": "Aucune idée de cadeau n'a été partagée pour le moment.",
+    "for": "Pour",
+    "statusProposed": "Proposé",
+    "statusBuying": "En cours d'achat",
+    "statusBought": "Acheté"
   }
 }
