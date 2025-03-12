@@ -5,7 +5,10 @@
     "about": "À propos",
     "contact": "Contact",
     "login": "Connexion",
-    "signup": "S'inscrire"
+    "signup": "S'inscrire",
+    "dashboard": "Tableau de bord",
+    "groups": "Mes Groupes",
+    "gifts": "Mes Cadeaux"
   },
   "hero": {
     "title": "Simplifiez la gestion de vos cadeaux et événements",
@@ -158,8 +161,28 @@
   },
   "dashboard": {
     "welcome": "Bienvenue sur votre tableau de bord",
+    "summary": "Retrouvez ici un résumé de vos prochains événements et vos cadeaux en cours.",
     "personalInfo": "Vos informations personnelles",
     "noName": "Aucun nom fourni",
+    "upcomingEvents": "Prochains événements",
+    "birthday": "Anniversaire",
+    "christmas": "Noël",
+    "daysLeft": "jours restants",
+    "noUpcomingEvents": "Aucun événement à venir",
+    "viewAllEvents": "Voir tous les événements",
+    "buyingGifts": "Cadeaux en cours d'achat",
+    "noBuyingGifts": "Aucun cadeau en cours d'achat",
+    "for": "Pour",
+    "viewGift": "Voir le cadeau",
+    "markAsBought": "Marquer comme acheté",
+    "viewAllGifts": "Voir tous les cadeaux",
+    "quickActions": "Actions rapides",
+    "errors": {
+      "loadingData": "Erreur lors du chargement des données",
+      "loadingEvents": "Erreur lors du chargement des événements",
+      "loadingGifts": "Erreur lors du chargement des cadeaux",
+      "markingGift": "Erreur lors du marquage du cadeau comme acheté"
+    },
     "cards": {
       "gifts": {
         "title": "Mes Cadeaux",
@@ -183,6 +206,24 @@
     "error": "Une erreur est survenue",
     "retry": "Réessayer",
     "next": "Suivant",
-    "previous": "Précédent"
+    "previous": "Précédent",
+    "dismiss": "Fermer",
+    "processing": "En cours...",
+    "defaultGroup": "Groupe par défaut",
+    "unknownUser": "Utilisateur inconnu",
+    "close": "Fermer"
+  },
+  "celebration": {
+    "congratulations": "Félicitations !",
+    "giftMarkedAsBought": "Vous avez marqué \"{{giftTitle}}\" comme acheté pour {{recipientName}}.",
+    "genericSuccess": "Le cadeau a été marqué comme acheté avec succès !"
+  },
+  "sidemenu": {
+    "groups": "Mes Groupes",
+    "noGroups": "Vous n'avez pas encore de groupes",
+    "createGroup": "Créer un groupe",
+    "joinGroup": "Rejoindre un groupe",
+    "collapse": "Réduire le menu",
+    "expand": "Développer le menu"
   }
 }

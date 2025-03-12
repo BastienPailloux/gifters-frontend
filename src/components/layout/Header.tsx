@@ -1,15 +1,123 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../../contexts/AuthContext';
 import Button from '../common/forms/Button';
 import LanguageSwitcher from '../common/navigation/LanguageSwitcher';
 
 const Header: React.FC = () => {
   const { t } = useTranslation();
+  const { isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    navigate('/login');
+  };
+
+  // Navigation items based on authentication status
+  const getNavLinks = () => {
+    if (isAuthenticated) {
+      return (
+        <>
+          <Link to="/dashboard" className="text-white hover:text-primary-200 font-medium">
+            {t('header.dashboard')}
+          </Link>
+          <Link to="/groups" className="text-white hover:text-primary-200 font-medium">
+            {t('header.groups')}
+          </Link>
+          <Link to="/gifts" className="text-white hover:text-primary-200 font-medium">
+            {t('header.gifts')}
+          </Link>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <Link to="/features" className="text-white hover:text-primary-200 font-medium">
+            {t('header.features')}
+          </Link>
+          <Link to="/pricing" className="text-white hover:text-primary-200 font-medium">
+            {t('header.pricing')}
+          </Link>
+          <Link to="/about" className="text-white hover:text-primary-200 font-medium">
+            {t('header.about')}
+          </Link>
+          <Link to="/contact" className="text-white hover:text-primary-200 font-medium">
+            {t('header.contact')}
+          </Link>
+        </>
+      );
+    }
+  };
+
+  // Buttons based on authentication status
+  const getActionButtons = () => {
+    if (isAuthenticated) {
+      return (
+        <Button
+          variant="outline"
+          size="sm"
+          className="text-white border-white hover:bg-primary-600"
+          onClick={handleLogout}
+        >
+          {t('auth.logout')}
+        </Button>
+      );
+    } else {
+      return (
+        <>
+          <Link to="/login">
+            <Button variant="outline" size="sm" className="text-white border-white hover:bg-primary-600">
+              {t('header.login')}
+            </Button>
+          </Link>
+          <Link to="/register">
+            <Button variant="secondary" size="sm">
+              {t('header.signup')}
+            </Button>
+          </Link>
+        </>
+      );
+    }
+  };
+
+  // Mobile menu actions
+  const getMobileActions = () => {
+    if (isAuthenticated) {
+      return (
+        <div className="flex flex-col space-y-3 pt-4 border-t border-primary-400">
+          <Button
+            variant="outline"
+            fullWidth
+            className="text-white border-white hover:bg-primary-600"
+            onClick={handleLogout}
+          >
+            {t('auth.logout')}
+          </Button>
+        </div>
+      );
+    } else {
+      return (
+        <div className="flex flex-col space-y-3 pt-4 border-t border-primary-400">
+          <Link to="/login">
+            <Button variant="outline" fullWidth className="text-white border-white hover:bg-primary-600">
+              {t('header.login')}
+            </Button>
+          </Link>
+          <Link to="/register">
+            <Button variant="secondary" fullWidth>
+              {t('header.signup')}
+            </Button>
+          </Link>
+        </div>
+      );
+    }
   };
 
   return (
@@ -25,33 +133,13 @@ const Header: React.FC = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <Link to="/features" className="text-white hover:text-primary-200 font-medium">
-              {t('header.features')}
-            </Link>
-            <Link to="/pricing" className="text-white hover:text-primary-200 font-medium">
-              {t('header.pricing')}
-            </Link>
-            <Link to="/about" className="text-white hover:text-primary-200 font-medium">
-              {t('header.about')}
-            </Link>
-            <Link to="/contact" className="text-white hover:text-primary-200 font-medium">
-              {t('header.contact')}
-            </Link>
+            {getNavLinks()}
           </nav>
 
           {/* Desktop CTA Buttons and Language Switcher */}
           <div className="hidden md:flex items-center space-x-4">
             <LanguageSwitcher className="text-white mr-2" />
-            <Link to="/login">
-              <Button variant="outline" size="sm" className="text-white border-white hover:bg-primary-600">
-                {t('header.login')}
-              </Button>
-            </Link>
-            <Link to="/register">
-              <Button variant="secondary" size="sm">
-                {t('header.signup')}
-              </Button>
-            </Link>
+            {getActionButtons()}
           </div>
 
           {/* Mobile Menu Button */}
@@ -81,31 +169,36 @@ const Header: React.FC = () => {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-primary-400">
             <nav className="flex flex-col space-y-4 pb-4">
-              <Link to="/features" className="text-white hover:text-primary-200 font-medium">
-                {t('header.features')}
-              </Link>
-              <Link to="/pricing" className="text-white hover:text-primary-200 font-medium">
-                {t('header.pricing')}
-              </Link>
-              <Link to="/about" className="text-white hover:text-primary-200 font-medium">
-                {t('header.about')}
-              </Link>
-              <Link to="/contact" className="text-white hover:text-primary-200 font-medium">
-                {t('header.contact')}
-              </Link>
+              {isAuthenticated ? (
+                <>
+                  <Link to="/dashboard" className="text-white hover:text-primary-200 font-medium">
+                    {t('header.dashboard')}
+                  </Link>
+                  <Link to="/groups" className="text-white hover:text-primary-200 font-medium">
+                    {t('header.groups')}
+                  </Link>
+                  <Link to="/gifts" className="text-white hover:text-primary-200 font-medium">
+                    {t('header.gifts')}
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link to="/features" className="text-white hover:text-primary-200 font-medium">
+                    {t('header.features')}
+                  </Link>
+                  <Link to="/pricing" className="text-white hover:text-primary-200 font-medium">
+                    {t('header.pricing')}
+                  </Link>
+                  <Link to="/about" className="text-white hover:text-primary-200 font-medium">
+                    {t('header.about')}
+                  </Link>
+                  <Link to="/contact" className="text-white hover:text-primary-200 font-medium">
+                    {t('header.contact')}
+                  </Link>
+                </>
+              )}
             </nav>
-            <div className="flex flex-col space-y-3 pt-4 border-t border-primary-400">
-              <Link to="/login">
-                <Button variant="outline" fullWidth className="text-white border-white hover:bg-primary-600">
-                  {t('header.login')}
-                </Button>
-              </Link>
-              <Link to="/signup">
-                <Button variant="secondary" fullWidth>
-                  {t('header.signup')}
-                </Button>
-              </Link>
-            </div>
+            {getMobileActions()}
           </div>
         )}
       </div>

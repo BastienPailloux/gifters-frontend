@@ -5,7 +5,10 @@
     "about": "About",
     "contact": "Contact",
     "login": "Login",
-    "signup": "Sign Up"
+    "signup": "Sign Up",
+    "dashboard": "Dashboard",
+    "groups": "My Groups",
+    "gifts": "My Gifts"
   },
   "hero": {
     "title": "Simplify your gift and event management",
@@ -158,8 +161,28 @@
   },
   "dashboard": {
     "welcome": "Welcome to your dashboard",
+    "summary": "Find here a summary of your upcoming events and gifts you're buying.",
     "personalInfo": "Your personal information",
     "noName": "No name provided",
+    "upcomingEvents": "Upcoming events",
+    "birthday": "Birthday",
+    "christmas": "Christmas",
+    "daysLeft": "days left",
+    "noUpcomingEvents": "No upcoming events",
+    "viewAllEvents": "View all events",
+    "buyingGifts": "Gifts you're buying",
+    "noBuyingGifts": "No gifts in progress",
+    "for": "For",
+    "viewGift": "View gift",
+    "markAsBought": "Mark as bought",
+    "viewAllGifts": "View all gifts",
+    "quickActions": "Quick actions",
+    "errors": {
+      "loadingData": "Error loading data",
+      "loadingEvents": "Error loading events",
+      "loadingGifts": "Error loading gifts",
+      "markingGift": "Error marking gift as bought"
+    },
     "cards": {
       "gifts": {
         "title": "My Gifts",
@@ -183,6 +206,24 @@
     "error": "An error occurred",
     "retry": "Retry",
     "next": "Next",
-    "previous": "Previous"
+    "previous": "Previous",
+    "dismiss": "Dismiss",
+    "processing": "Processing...",
+    "defaultGroup": "Default Group",
+    "unknownUser": "Unknown User",
+    "close": "Close"
+  },
+  "celebration": {
+    "congratulations": "Congratulations!",
+    "giftMarkedAsBought": "You have marked \"{{giftTitle}}\" as bought for {{recipientName}}.",
+    "genericSuccess": "The gift has been successfully marked as bought!"
+  },
+  "sidemenu": {
+    "groups": "My Groups",
+    "noGroups": "You don't have any groups yet",
+    "createGroup": "Create a group",
+    "joinGroup": "Join a group",
+    "collapse": "Collapse sidebar",
+    "expand": "Expand sidebar"
   }
 }
