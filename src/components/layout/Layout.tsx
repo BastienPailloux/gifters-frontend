@@ -5,25 +5,39 @@ import MainContainer from './MainContainer';
 import SideMenu from './SideMenu';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
 
 interface LayoutProps {
   children: React.ReactNode;
+  // Prop optionnelle pour forcer l'affichage ou non du SideMenu
+  forceSideMenu?: boolean;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout: React.FC<LayoutProps> = ({ children, forceSideMenu }) => {
   const { isAuthenticated } = useAuth();
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(true);
   const { t } = useTranslation();
+  const location = useLocation();
 
   const toggleSideMenu = () => {
     setIsSideMenuOpen(!isSideMenuOpen);
   };
 
+  // Vérifier si nous sommes sur la page d'accueil
+  const isHomePage = location.pathname === '/';
+
+  // Déterminer si le SideMenu doit être affiché
+  // Si forceSideMenu est défini, utiliser cette valeur
+  // Sinon, afficher le SideMenu uniquement si l'utilisateur est authentifié ET que nous ne sommes PAS sur la page d'accueil
+  const shouldShowSideMenu = forceSideMenu !== undefined
+    ? forceSideMenu
+    : (isAuthenticated && !isHomePage);
+
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
       <Header />
       <div className="flex flex-grow overflow-hidden">
-        {isAuthenticated && (
+        {shouldShowSideMenu && (
           <div className="flex">
             <div className={`transition-all duration-300 ease-in-out ${isSideMenuOpen ? 'w-64' : 'w-0 overflow-hidden'}`}>
               <SideMenu />
