@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { groupService } from '../services/api';
+import Button from '../components/common/forms/Button';
+import GroupItemsList from '../components/groups/GroupItemsList';
+import PageHeader from '../components/common/layout/PageHeader';
 
 // Types
 interface GroupDetailsData {
@@ -21,6 +24,12 @@ interface GroupDetailsData {
   }[];
   createdAt?: string;
   updatedAt?: string;
+}
+
+interface Event {
+  id: string;
+  title: string;
+  date: string;
 }
 
 const GroupDetails: React.FC = () => {
@@ -79,10 +88,62 @@ const GroupDetails: React.FC = () => {
     alert('Edit functionality coming soon!');
   };
 
-  const handleInviteMember = () => {
+  const handleViewMembers = () => {
     // Sera implémenté ultérieurement
-    alert('Invite functionality coming soon!');
+    alert('View members functionality coming soon!');
   };
+
+  const handleCreateEvent = () => {
+    // Sera implémenté ultérieurement
+    alert('Create event functionality coming soon!');
+  };
+
+  const handleAddGiftIdea = () => {
+    // Sera implémenté ultérieurement
+    alert('Add gift idea functionality coming soon!');
+  };
+
+  const handleViewEvent = (eventId: string) => {
+    // Sera implémenté ultérieurement
+    alert(`View event ${eventId} functionality coming soon!`);
+  };
+
+  // Rendu des éléments de liste
+  const renderEvent = (event: Event) => (
+    <div className="flex items-center justify-between">
+      <div>
+        <p className="text-sm font-medium text-gray-900">{event.title}</p>
+        <p className="text-sm text-gray-500">
+          {new Date(event.date).toLocaleDateString()}
+        </p>
+      </div>
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={() => handleViewEvent(event.id)}
+      >
+        {t('common.view') || 'View'}
+      </Button>
+    </div>
+  );
+
+  // Rendu des actions d'en-tête
+  const renderHeaderActions = () => (
+    <>
+      <Button
+        variant="primary"
+        onClick={handleViewMembers}
+      >
+        {t('groups.viewMembers') || 'View Members'}
+      </Button>
+      <Button
+        variant="outline"
+        onClick={handleEditGroup}
+      >
+        {t('common.edit') || 'Edit'}
+      </Button>
+    </>
+  );
 
   if (loading) {
     return (
@@ -107,12 +168,12 @@ const GroupDetails: React.FC = () => {
             </div>
           </div>
         </div>
-        <button
+        <Button
+          variant="outline"
           onClick={handleBackClick}
-          className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-md shadow-sm transition-colors"
         >
           {t('common.back') || 'Back'}
-        </button>
+        </Button>
       </div>
     );
   }
@@ -120,120 +181,34 @@ const GroupDetails: React.FC = () => {
   return (
     <div className="p-6 max-w-7xl mx-auto">
       {/* En-tête */}
-      <div className="mb-8 flex justify-between items-center flex-wrap gap-4">
-        <div>
-          <button
-            onClick={handleBackClick}
-            className="inline-flex items-center mb-4 text-sm text-gray-500 hover:text-gray-700"
-          >
-            <svg className="mr-1 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            {t('common.back') || 'Back'}
-          </button>
-          <h1 className="text-2xl font-bold text-gray-900">{group.name}</h1>
-          {group.description && (
-            <p className="mt-2 text-gray-500">{group.description}</p>
-          )}
-        </div>
-        <div className="flex gap-3">
-          <button
-            onClick={handleInviteMember}
-            className="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-md shadow-sm transition-colors"
-          >
-            {t('groups.inviteMember') || 'Invite Member'}
-          </button>
-          <button
-            onClick={handleEditGroup}
-            className="px-4 py-2 bg-white hover:bg-gray-50 text-gray-700 border border-gray-300 rounded-md shadow-sm transition-colors"
-          >
-            {t('common.edit') || 'Edit'}
-          </button>
-        </div>
-      </div>
+      <PageHeader
+        title={group.name}
+        description={group.description}
+        onBackClick={handleBackClick}
+        actions={renderHeaderActions()}
+      />
 
-      {/* Contenu principal */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Panneau latéral - Membres */}
-        <div className="lg:col-span-1">
-          <div className="bg-white shadow rounded-lg p-6">
-            <h2 className="text-lg font-medium text-gray-900 mb-4">{t('groups.members') || 'Members'}</h2>
+      {/* Contenu principal - 2 colonnes */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Événements à venir */}
+        <GroupItemsList
+          title={t('groups.upcomingEvents') || 'Upcoming Events'}
+          items={group.events}
+          emptyMessage={t('groups.noEvents') || 'No events scheduled.'}
+          actionLabel={t('groups.createEvent') || 'Create Event'}
+          onAction={handleCreateEvent}
+          renderItem={renderEvent}
+        />
 
-            {group.members && group.members.length > 0 ? (
-              <ul className="divide-y divide-gray-200">
-                {group.members.map(member => (
-                  <li key={member.id} className="py-3 flex items-center justify-between">
-                    <div className="flex items-center">
-                      <div className="bg-primary-100 text-primary-800 h-8 w-8 rounded-full flex items-center justify-center font-medium">
-                        {member.name.charAt(0).toUpperCase()}
-                      </div>
-                      <div className="ml-3">
-                        <p className="text-sm font-medium text-gray-900">{member.name}</p>
-                        <p className="text-sm text-gray-500">{member.email}</p>
-                      </div>
-                    </div>
-                    {member.role && (
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                        {member.role}
-                      </span>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-gray-500">{t('groups.noMembers') || 'No members yet.'}</p>
-            )}
-          </div>
-        </div>
-
-        {/* Zone principale de contenu */}
-        <div className="lg:col-span-2">
-          {/* Événements à venir */}
-          <div className="bg-white shadow rounded-lg p-6 mb-6">
-            <h2 className="text-lg font-medium text-gray-900 mb-4">{t('groups.upcomingEvents') || 'Upcoming Events'}</h2>
-
-            {group.events && group.events.length > 0 ? (
-              <ul className="divide-y divide-gray-200">
-                {group.events.map(event => (
-                  <li key={event.id} className="py-3">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm font-medium text-gray-900">{event.title}</p>
-                        <p className="text-sm text-gray-500">
-                          {new Date(event.date).toLocaleDateString()}
-                        </p>
-                      </div>
-                      <button className="text-primary-600 hover:text-primary-800 text-sm font-medium">
-                        {t('common.view') || 'View'}
-                      </button>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-gray-500">{t('groups.noEvents') || 'No events scheduled.'}</p>
-            )}
-
-            <div className="mt-4">
-              <button className="w-full px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
-                {t('groups.createEvent') || 'Create Event'}
-              </button>
-            </div>
-          </div>
-
-          {/* Liste des cadeaux */}
-          <div className="bg-white shadow rounded-lg p-6">
-            <h2 className="text-lg font-medium text-gray-900 mb-4">{t('groups.giftIdeas') || 'Gift Ideas'}</h2>
-
-            <p className="text-gray-500 mb-4">{t('groups.noGiftIdeas') || 'No gift ideas have been shared yet.'}</p>
-
-            <div className="mt-4">
-              <button className="w-full px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
-                {t('groups.addGiftIdea') || 'Add Gift Idea'}
-              </button>
-            </div>
-          </div>
-        </div>
+        {/* Liste des cadeaux - pour l'instant avec une liste vide car API ne retourne pas encore les gift ideas */}
+        <GroupItemsList
+          title={t('groups.giftIdeas') || 'Gift Ideas'}
+          items={[]}
+          emptyMessage={t('groups.noGiftIdeas') || 'No gift ideas have been shared yet.'}
+          actionLabel={t('groups.addGiftIdea') || 'Add Gift Idea'}
+          onAction={handleAddGiftIdea}
+          renderItem={() => <div />} // Pas encore de rendu pour les gift ideas
+        />
       </div>
     </div>
   );
