@@ -105,7 +105,6 @@ export const authService = {
 export const groupService = {
   // Récupérer tous les groupes de l'utilisateur
   getGroups: async () => {
-    console.log('API call: GET /groups');
     try {
       const response = await api.get('/groups');
       return response.data;
@@ -158,6 +157,19 @@ export const giftIdeaService = {
   getGiftIdeas: async () => {
     const response = await api.get('/gift_ideas');
     return response.data;
+  },
+
+  // Récupérer spécifiquement les idées de cadeaux en cours d'achat par l'utilisateur actuel
+  getBuyingGiftIdeas: async () => {
+    try {
+      const response = await api.get('/gift_ideas', {
+        params: { status: 'buying' }
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching buying gifts:', error);
+      throw error;
+    }
   },
 
   // Récupérer une idée de cadeau spécifique

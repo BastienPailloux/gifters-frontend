@@ -7,15 +7,20 @@ export interface GiftIdea {
   title: string;
   for_user_name: string;
   group_name: string;
-  status: 'new' | 'buying' | 'bought';
+  status: 'proposed' | 'buying' | 'bought';
 }
 
 interface BuyingGiftItemProps {
   gift: GiftIdea;
   onMarkAsBought: (giftId: string) => void;
+  isProcessing?: boolean;
 }
 
-const BuyingGiftItem: React.FC<BuyingGiftItemProps> = ({ gift, onMarkAsBought }) => {
+const BuyingGiftItem: React.FC<BuyingGiftItemProps> = ({
+  gift,
+  onMarkAsBought,
+  isProcessing = false
+}) => {
   const { t } = useTranslation();
 
   return (
@@ -28,7 +33,7 @@ const BuyingGiftItem: React.FC<BuyingGiftItemProps> = ({ gift, onMarkAsBought })
           {t('dashboard.for')} {gift.for_user_name} • {gift.group_name}
         </p>
       </div>
-      <div className="mt-2 flex gap-4">
+      <div className="mt-2 flex gap-4 items-center">
         <FlatButton
           asLink
           href={`/gift_ideas/${gift.id}`}
@@ -40,8 +45,16 @@ const BuyingGiftItem: React.FC<BuyingGiftItemProps> = ({ gift, onMarkAsBought })
           variant="secondary"
           size="small"
           onClick={() => onMarkAsBought(gift.id)}
+          disabled={isProcessing}
         >
-          {t('dashboard.markAsBought')}
+          {isProcessing ? (
+            <>
+              <span className="inline-block h-4 w-4 rounded-full border-2 border-t-transparent border-white animate-spin mr-2" />
+              {t('common.processing')}
+            </>
+          ) : (
+            t('dashboard.markAsBought')
+          )}
         </FlatButton>
       </div>
     </li>
