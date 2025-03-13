@@ -214,7 +214,12 @@
     "unknownUser": "Utilisateur inconnu",
     "edit": "Modifier",
     "close": "Fermer",
-    "view": "Voir"
+    "view": "Voir",
+    "email": "Email",
+    "optional": "optionnel",
+    "message": "Message",
+    "sending": "Envoi en cours...",
+    "copy": "Copier"
   },
   "validation": {
     "required": "Ce champ est requis",
@@ -276,7 +281,21 @@
     "upgradeRole": "Faire Admin",
     "downgradeRole": "Faire Membre",
     "remove": "Retirer",
-    "removeMember": "Retirer le membre"
+    "removeMember": "Retirer le membre",
+    "addNewMember": "Ajouter un nouveau membre",
+    "invitePeople": "Inviter des personnes au groupe",
+    "shareLink": "Partager le lien d'invitation",
+    "sendEmail": "Envoyer une invitation par email",
+    "inviteLinkCopied": "Lien d'invitation copié dans le presse-papiers !",
+    "inviteEmailSubject": "Rejoignez mon groupe sur Gifters",
+    "inviteEmailBody": "Bonjour,\n\nJe vous invite à rejoindre mon groupe sur Gifters. Cliquez sur le lien ci-dessous pour rejoindre :\n\n{link}\n\nCordialement",
+    "inviteWhatsAppMessage": "Bonjour ! Je vous invite à rejoindre mon groupe sur Gifters. Cliquez sur ce lien pour rejoindre : {link}",
+    "shareInvitationDescription": "Partagez ce lien d'invitation avec les personnes que vous souhaitez inviter dans le groupe.",
+    "enterEmail": "Entrez l'adresse email du destinataire",
+    "enterMessage": "Ajoutez un message personnel (optionnel)",
+    "sendInvitation": "Envoyer l'invitation",
+    "invitationSent": "Invitation envoyée avec succès !",
+    "errorSendingInvitation": "Erreur lors de l'envoi de l'invitation. Veuillez réessayer."
   },
   "giftIdeas": {
     "title": "Idées de cadeaux",
