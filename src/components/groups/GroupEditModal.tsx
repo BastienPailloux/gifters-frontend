@@ -52,6 +52,10 @@ const GroupEditModal: React.FC<GroupEditModalProps> = ({
         description: description.trim(),
       });
 
+      // Émettre un événement pour mettre à jour la liste des groupes dans le SideMenu
+      const groupUpdatedEvent = new Event('groupUpdated');
+      document.dispatchEvent(groupUpdatedEvent);
+
       onUpdate();
       onClose();
     } catch (err) {
