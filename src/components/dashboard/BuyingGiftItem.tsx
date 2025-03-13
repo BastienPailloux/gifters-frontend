@@ -1,13 +1,14 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import FlatButton from '../common/forms/FlatButton';
+import StatusTag, { GiftStatus } from '../common/display/StatusTag';
 
 export interface GiftIdea {
   id: string;
   title: string;
   for_user_name: string;
   group_name: string;
-  status: 'proposed' | 'buying' | 'bought';
+  status: GiftStatus;
 }
 
 interface BuyingGiftItemProps {
@@ -25,13 +26,18 @@ const BuyingGiftItem: React.FC<BuyingGiftItemProps> = ({
 
   return (
     <li className="bg-gray-50 p-3 rounded-md">
-      <div>
-        <span className="text-sm font-medium text-gray-900">
-          {gift.title}
-        </span>
-        <p className="text-sm text-gray-500">
-          {t('dashboard.for')} {gift.for_user_name} • {gift.group_name}
-        </p>
+      <div className="flex items-start justify-between">
+        <div>
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-medium text-gray-900">
+              {gift.title}
+            </span>
+            <StatusTag status={gift.status} size="small" />
+          </div>
+          <p className="text-sm text-gray-500 mt-1">
+            {t('dashboard.for')} {gift.for_user_name} • {gift.group_name}
+          </p>
+        </div>
       </div>
       <div className="mt-2 flex gap-4 items-center">
         <FlatButton
