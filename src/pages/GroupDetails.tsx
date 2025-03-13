@@ -7,6 +7,7 @@ import GroupItemsList from '../components/groups/GroupItemsList';
 import PageHeader from '../components/common/layout/PageHeader';
 import GiftIdeaItem from '../components/groups/GiftIdeaItem';
 import MembersList from '../components/groups/MembersList';
+import GroupEditModal from '../components/groups/GroupEditModal';
 import useAuth from '../hooks/useAuth';
 
 // Types
@@ -59,55 +60,41 @@ const GroupDetails: React.FC = () => {
   const [giftIdeas, setGiftIdeas] = useState<ApiGiftIdea[]>([]);
   const [showMembers, setShowMembers] = useState<boolean>(false);
   const [isUserAdmin, setIsUserAdmin] = useState<boolean>(false);
+  const [isGroupEditModalOpen, setIsGroupEditModalOpen] = useState<boolean>(false);
+
+  // Fonction pour récupérer les détails du groupe
+  const fetchGroupDetails = async () => {
+    if (!id) return;
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      const groupData = await groupService.getGroup(id);
+      setGroup(groupData);
+
+      // Vérifier si l'utilisateur est admin du groupe
+      if (groupData && groupData.members && user) {
+        const currentUserMember = groupData.members.find(
+          (member: {id: string; name: string; email: string; role?: string}) => member.id === user.id
+        );
+        setIsUserAdmin(
+          currentUserMember?.role === 'admin'
+        );
+      }
+
+      setError(null);
+    } catch (err) {
+      console.error('Error fetching group details:', err);
+      setError(t('common.error') || 'Failed to load group details');
+    } finally {
+      setLoading(false);
+      setAdminStatusLoaded(true);
+    }
+  };
 
   // Récupérer les détails du groupe
   useEffect(() => {
-    const fetchGroupDetails = async () => {
-      if (!id) {
-        setError(t('common.error') || 'Group ID is missing');
-        setLoading(false);
-        setAdminStatusLoaded(true);
-        return;
-      }
-
-      try {
-        setLoading(true);
-        setAdminStatusLoaded(false);
-        const result = await groupService.getGroup(id);
-
-        // Gestion de la réponse de l'API
-        let groupData = null;
-        if (result && result.data) {
-          groupData = result.data;
-        } else if (result) {
-          groupData = result;
-        }
-
-        if (!groupData) {
-          throw new Error('No group data received');
-        }
-
-        setGroup(groupData);
-
-        // Vérifier si l'utilisateur actuel est admin du groupe
-        if (user) {
-          const currentUserMembership = groupData.members?.find(
-            (member: { id: string; email: string; role?: string }) =>
-              member.id === user.id || member.email === user.email
-          );
-          setIsUserAdmin(currentUserMembership?.role === 'admin');
-        }
-
-        setError(null);
-      } catch (err) {
-        console.error('Error fetching group details:', err);
-        setError(t('common.error') || 'Failed to load group details');
-      } finally {
-        setLoading(false);
-        setAdminStatusLoaded(true);
-      }
-    };
-
     fetchGroupDetails();
   }, [id, t, user]);
 
@@ -155,8 +142,7 @@ const GroupDetails: React.FC = () => {
   };
 
   const handleEditGroup = () => {
-    // Sera implémenté ultérieurement
-    alert('Edit functionality coming soon!');
+    setIsGroupEditModalOpen(true);
   };
 
   const handleViewMembers = () => {
@@ -307,6 +293,20 @@ const GroupDetails: React.FC = () => {
           groupId={id}
           groupName={group.name}
           isCurrentUserAdmin={isUserAdmin}
+        />
+      )}
+
+      {isGroupEditModalOpen && (
+        <GroupEditModal
+          isOpen={isGroupEditModalOpen}
+          onClose={() => setIsGroupEditModalOpen(false)}
+          group={group}
+          onUpdate={() => {
+            // Rafraîchir les données du groupe
+            if (id) {
+              fetchGroupDetails();
+            }
+          }}
         />
       )}
     </div>

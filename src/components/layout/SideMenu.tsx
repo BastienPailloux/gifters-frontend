@@ -27,11 +27,15 @@ const SideMenu: React.FC = () => {
     document.addEventListener('groupCreated', handleGroupChange);
     document.addEventListener('groupJoined', handleGroupChange);
     document.addEventListener('groupLeft', handleGroupChange);
+    document.addEventListener('groupDeleted', handleGroupChange);
+    document.addEventListener('groupUpdated', handleGroupChange);
 
     return () => {
       document.removeEventListener('groupCreated', handleGroupChange);
       document.removeEventListener('groupJoined', handleGroupChange);
       document.removeEventListener('groupLeft', handleGroupChange);
+      document.removeEventListener('groupDeleted', handleGroupChange);
+      document.removeEventListener('groupUpdated', handleGroupChange);
     };
   }, [refreshGroupList]);
 
