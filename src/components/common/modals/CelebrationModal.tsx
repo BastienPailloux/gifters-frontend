@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import Confetti from 'react-confetti-boom';
 import { useTranslation } from 'react-i18next';
+import Modal from './Modal';
 
 interface CelebrationModalProps {
   isOpen: boolean;
@@ -19,7 +20,7 @@ const CelebrationModal: React.FC<CelebrationModalProps> = ({
   recipientName = ''
 }) => {
   const { t } = useTranslation();
-  const modalContentRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   // Fermer automatiquement la modal après 5 secondes
   useEffect(() => {
@@ -31,8 +32,6 @@ const CelebrationModal: React.FC<CelebrationModalProps> = ({
     }
   }, [isOpen, onClose]);
 
-  if (!isOpen) return null;
-
   // Construire le message avec les variables
   const celebrationMessage = giftTitle && recipientName
     ? t('celebration.giftMarkedAsBought', {
@@ -42,18 +41,14 @@ const CelebrationModal: React.FC<CelebrationModalProps> = ({
     : t('celebration.genericSuccess');
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      {/* Overlay semi-transparent */}
-      <div
-        className="absolute inset-0 bg-black bg-opacity-50"
-        onClick={onClose}
-      />
-
-      {/* Contenu de la modal */}
-      <div
-        ref={modalContentRef}
-        className="relative bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4 text-center transform transition-all overflow-hidden"
-      >
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      hideCloseButton={true}
+      closeOnOutsideClick={true}
+      size="md"
+    >
+      <div ref={contentRef} className="text-center relative overflow-hidden">
         {/* Confettis limités à la modal */}
         <div className="absolute inset-0 pointer-events-none">
           <Confetti
@@ -89,7 +84,7 @@ const CelebrationModal: React.FC<CelebrationModalProps> = ({
           </button>
         </div>
       </div>
-    </div>
+    </Modal>
   );
 };
 
