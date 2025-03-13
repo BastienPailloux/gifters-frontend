@@ -5,7 +5,9 @@ import { groupService, giftIdeaService } from '../services/api';
 import Button from '../components/common/forms/Button';
 import GroupItemsList from '../components/groups/GroupItemsList';
 import PageHeader from '../components/common/layout/PageHeader';
-import GiftIdeaItem, { GiftIdea } from '../components/groups/GiftIdeaItem';
+import GiftIdeaItem from '../components/groups/GiftIdeaItem';
+import MembersList from '../components/groups/MembersList';
+import useAuth from '../hooks/useAuth';
 
 // Types
 interface GroupDetailsData {
@@ -41,17 +43,22 @@ interface ApiGiftIdea {
   forUser?: { id: number | string; name: string } | string;
   forUserName?: string;
   price?: number;
+  for_user_name?: string;
 }
 
 const GroupDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const [group, setGroup] = useState<GroupDetailsData | null>(null);
-  const [giftIdeas, setGiftIdeas] = useState<GiftIdea[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [adminStatusLoaded, setAdminStatusLoaded] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [giftIdeas, setGiftIdeas] = useState<ApiGiftIdea[]>([]);
+  const [showMembers, setShowMembers] = useState<boolean>(false);
+  const [isUserAdmin, setIsUserAdmin] = useState<boolean>(false);
 
   // Récupérer les détails du groupe
   useEffect(() => {
@@ -59,11 +66,13 @@ const GroupDetails: React.FC = () => {
       if (!id) {
         setError(t('common.error') || 'Group ID is missing');
         setLoading(false);
+        setAdminStatusLoaded(true);
         return;
       }
 
       try {
         setLoading(true);
+        setAdminStatusLoaded(false);
         const result = await groupService.getGroup(id);
 
         // Gestion de la réponse de l'API
@@ -79,17 +88,28 @@ const GroupDetails: React.FC = () => {
         }
 
         setGroup(groupData);
+
+        // Vérifier si l'utilisateur actuel est admin du groupe
+        if (user) {
+          const currentUserMembership = groupData.members?.find(
+            (member: { id: string; email: string; role?: string }) =>
+              member.id === user.id || member.email === user.email
+          );
+          setIsUserAdmin(currentUserMembership?.role === 'admin');
+        }
+
         setError(null);
       } catch (err) {
         console.error('Error fetching group details:', err);
         setError(t('common.error') || 'Failed to load group details');
       } finally {
         setLoading(false);
+        setAdminStatusLoaded(true);
       }
     };
 
     fetchGroupDetails();
-  }, [id, t]);
+  }, [id, t, user]);
 
   // Récupérer les idées de cadeaux du groupe
   useEffect(() => {
@@ -102,7 +122,7 @@ const GroupDetails: React.FC = () => {
 
         // Mapper les données API en GiftIdea
         if (result && result.giftIdeas) {
-          const mappedGifts = result.giftIdeas.map((gift: ApiGiftIdea): GiftIdea => {
+          const mappedGifts = result.giftIdeas.map((gift: ApiGiftIdea): ApiGiftIdea => {
             // Déterminer le nom du destinataire
             let recipientName = t('common.unknownUser');
             if (gift.forUser && typeof gift.forUser === 'object' && gift.forUser.name) {
@@ -114,11 +134,8 @@ const GroupDetails: React.FC = () => {
             }
 
             return {
-              id: String(gift.id),
-              title: gift.title,
+              ...gift,
               for_user_name: recipientName,
-              price: gift.price,
-              status: gift.status as 'proposed' | 'buying' | 'bought'
             };
           });
 
@@ -143,8 +160,7 @@ const GroupDetails: React.FC = () => {
   };
 
   const handleViewMembers = () => {
-    // Sera implémenté ultérieurement
-    alert('View members functionality coming soon!');
+    setShowMembers(!showMembers);
   };
 
   const handleCreateEvent = () => {
@@ -187,9 +203,15 @@ const GroupDetails: React.FC = () => {
   );
 
   // Rendu des idées de cadeaux
-  const renderGiftIdea = (gift: GiftIdea) => (
+  const renderGiftIdea = (gift: ApiGiftIdea) => (
     <GiftIdeaItem
-      gift={gift}
+      gift={{
+        id: String(gift.id),
+        title: gift.title,
+        for_user_name: gift.for_user_name || '',
+        price: gift.price,
+        status: gift.status as 'proposed' | 'buying' | 'bought'
+      }}
       onViewGift={handleViewGift}
     />
   );
@@ -201,18 +223,20 @@ const GroupDetails: React.FC = () => {
         variant="primary"
         onClick={handleViewMembers}
       >
-        {t('groups.viewMembers') || 'View Members'}
+        {showMembers ? t('groups.hideMembers') : t('groups.viewMembers')}
       </Button>
-      <Button
-        variant="outline"
-        onClick={handleEditGroup}
-      >
-        {t('common.edit') || 'Edit'}
-      </Button>
+      {isUserAdmin && (
+        <Button
+          variant="outline"
+          onClick={handleEditGroup}
+        >
+          {t('common.edit') || 'Edit'}
+        </Button>
+      )}
     </>
   );
 
-  if (loading) {
+  if (loading || !adminStatusLoaded) {
     return (
       <div className="flex justify-center items-center h-full p-8">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
@@ -277,6 +301,13 @@ const GroupDetails: React.FC = () => {
           renderItem={renderGiftIdea}
         />
       </div>
+
+      {showMembers && id && (
+        <MembersList
+          groupId={id}
+          isCurrentUserAdmin={isUserAdmin}
+        />
+      )}
     </div>
   );
 };
