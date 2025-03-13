@@ -211,7 +211,10 @@
     "processing": "Processing...",
     "defaultGroup": "Default Group",
     "unknownUser": "Unknown User",
-    "close": "Close"
+    "close": "Close",
+    "back": "Back",
+    "edit": "Edit",
+    "view": "View"
   },
   "validation": {
     "required": "This field is required",
@@ -234,11 +237,35 @@
   "sidemenu": {
     "groups": "My Groups",
     "noGroups": "You don't have any groups yet",
+    "home": "Home",
     "createGroup": "Create a group",
     "joinGroup": "Join a group",
     "collapse": "Collapse sidebar",
     "expand": "Expand sidebar",
     "groupNamePlaceholder": "Enter group name...",
-    "createGroupFormLabel": "Group creation form"
+    "createGroupFormLabel": "Group creation form",
+    "newGroup": "New group"
+  },
+  "groups": {
+    "members": "Members",
+    "noMembers": "No members yet.",
+    "upcomingEvents": "Upcoming Events",
+    "noEvents": "No events scheduled.",
+    "createEvent": "Create Event",
+    "inviteMember": "Invite Member",
+    "viewMembers": "View Members",
+    "details": "Group Details",
+    "edit": "Edit Group"
+  },
+  "giftIdeas": {
+    "title": "Gift Ideas",
+    "description": "Manage your wishlists and gift ideas",
+    "action": "View gifts",
+    "addGiftIdea": "Add Gift Idea",
+    "noGiftIdeas": "No gift ideas have been shared yet.",
+    "for": "For",
+    "statusProposed": "Proposed",
+    "statusBuying": "Buying",
+    "statusBought": "Bought"
   }
 }

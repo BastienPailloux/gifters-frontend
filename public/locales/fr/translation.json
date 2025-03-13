@@ -207,11 +207,14 @@
     "retry": "Réessayer",
     "next": "Suivant",
     "previous": "Précédent",
+    "back": "Retour",
     "dismiss": "Fermer",
     "processing": "En cours...",
     "defaultGroup": "Groupe par défaut",
     "unknownUser": "Utilisateur inconnu",
-    "close": "Fermer"
+    "edit": "Modifier",
+    "close": "Fermer",
+    "view": "Voir"
   },
   "validation": {
     "required": "Ce champ est requis",
@@ -233,12 +236,36 @@
   },
   "sidemenu": {
     "groups": "Mes Groupes",
+    "home": "Accueil",
     "noGroups": "Vous n'avez pas encore de groupes",
     "createGroup": "Créer un groupe",
     "joinGroup": "Rejoindre un groupe",
     "collapse": "Réduire le menu",
     "expand": "Développer le menu",
     "groupNamePlaceholder": "Nom du groupe...",
-    "createGroupFormLabel": "Formulaire de création de groupe"
+    "createGroupFormLabel": "Formulaire de création de groupe",
+    "newGroup": "Nouveau groupe"
+  },
+  "groups": {
+    "members": "Membres",
+    "noMembers": "Aucun membre pour le moment.",
+    "upcomingEvents": "Événements à venir",
+    "noEvents": "Aucun événement planifié.",
+    "createEvent": "Créer un événement",
+    "inviteMember": "Inviter un membre",
+    "viewMembers": "Voir les membres",
+    "details": "Détails du groupe",
+    "edit": "Modifier le groupe"
+  },
+  "giftIdeas": {
+    "title": "Idées de cadeaux",
+    "description": "Gérez vos listes de souhaits et idées de cadeaux",
+    "action": "Voir les cadeaux",
+    "addGiftIdea": "Ajouter une idée de cadeau",
+    "noGiftIdeas": "Aucune idée de cadeau n'a été partagée pour le moment.",
+    "for": "Pour",
+    "statusProposed": "Proposé",
+    "statusBuying": "En cours d'achat",
+    "statusBought": "Acheté"
   }
 }

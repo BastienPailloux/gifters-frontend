@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import FlatButton from '../common/forms/FlatButton';
 import { FaChevronRight } from 'react-icons/fa';
@@ -6,6 +6,7 @@ import BuyingGiftItem, { GiftIdea } from './BuyingGiftItem';
 import { giftIdeaService } from '../../services/api';
 import useAsyncData from '../../hooks/useAsyncData';
 import CelebrationModal from '../common/modals/CelebrationModal';
+import { useAuth } from '../../contexts/AuthContext';
 
 // Type pour la structure des données de l'API
 interface ApiGiftIdea {
@@ -31,13 +32,23 @@ interface BuyingGiftsListProps {
  * Composant qui affiche une liste des cadeaux en cours d'achat
  */
 const BuyingGiftsList: React.FC<BuyingGiftsListProps> = ({ maxGifts = 5 }) => {
-  console.log('BuyingGiftsList - Composant rendu');
-
   const { t } = useTranslation();
+  const { user } = useAuth();
   const [actionError, setActionError] = useState<string | null>(null);
   const [processingGiftId, setProcessingGiftId] = useState<string | null>(null);
   const [showCelebration, setShowCelebration] = useState(false);
   const [celebrationGift, setCelebrationGift] = useState<GiftIdea | null>(null);
+
+  // Mémoriser la fonction de récupération des données pour éviter les rendus en boucle
+  const fetchUserGifts = useCallback(async () => {
+    if (!user) return { giftIdeas: [] };
+    try {
+      return await giftIdeaService.getGiftIdeasByBuyer(user.id, undefined, ['buying']);
+    } catch (err) {
+      console.error('BuyingGiftsList - Erreur lors de l\'appel à l\'API:', err);
+      throw err;
+    }
+  }, [user]);
 
   // Utiliser un hook personnalisé pour gérer le chargement asynchrone des données
   const {
@@ -45,48 +56,7 @@ const BuyingGiftsList: React.FC<BuyingGiftsListProps> = ({ maxGifts = 5 }) => {
     loading,
     error,
     refetch: fetchGifts
-  } = useAsyncData<ApiResponse>(giftIdeaService.getBuyingGiftIdeas);
-
-  // Log immédiat après récupération des données
-  console.log('BuyingGiftsList - État actuel:', {
-    hasResponse: !!response,
-    hasGiftIdeas: !!response?.giftIdeas,
-    loading,
-    error
-  });
-
-  // Pour le débogage - afficher la structure des données reçues
-  useEffect(() => {
-    console.log('BuyingGiftsList - useEffect pour les données déclenché');
-
-    if (response) {
-      console.log('BuyingGiftsList - response existe:', response);
-    }
-
-    if (response?.giftIdeas) {
-      console.log('Données reçues de l\'API:', response.giftIdeas);
-    } else if (response) {
-      console.log('Données reçues de l\'API sont vides ou mal structurées:', response);
-    }
-  }, [response]);
-
-  // Vérifier la structure de la réponse API une fois lors du montage du composant
-  useEffect(() => {
-    console.log('BuyingGiftsList - useEffect au montage déclenché');
-
-    // Faire un appel manuel à l'API pour vérifier la structure
-    const checkApiDirectly = async () => {
-      try {
-        console.log('BuyingGiftsList - Appel direct à l\'API...');
-        const data = await giftIdeaService.getBuyingGiftIdeas();
-        console.log('BuyingGiftsList - Réponse directe de l\'API:', data);
-      } catch (err) {
-        console.error('BuyingGiftsList - Erreur lors de l\'appel direct à l\'API:', err);
-      }
-    };
-
-    checkApiDirectly();
-  }, []);
+  } = useAsyncData<ApiResponse>(fetchUserGifts);
 
   // Marquer un cadeau comme acheté
   const handleMarkAsBought = async (giftId: string) => {
@@ -118,25 +88,12 @@ const BuyingGiftsList: React.FC<BuyingGiftsListProps> = ({ maxGifts = 5 }) => {
 
   // Traiter et mapper les données pour l'affichage
   const buyingGifts = useMemo(() => {
-    console.log('BuyingGiftsList - useMemo pour mapper les cadeaux déclenché');
 
     if (!response?.giftIdeas) {
-      console.log('BuyingGiftsList - Pas de giftIdeas à mapper');
       return [];
     }
 
-    console.log('BuyingGiftsList - Mapping de', response.giftIdeas.length, 'cadeaux');
-
     const mappedGifts = response.giftIdeas.map((gift: ApiGiftIdea): GiftIdea => {
-      // Débogage des propriétés individuelles
-      console.log('Gift data:', {
-        id: gift.id,
-        title: gift.title,
-        forUser: gift.forUser,
-        forUserName: gift.forUserName,
-        groupName: gift.groupName,
-        group: gift.group
-      });
 
       // Déterminer le nom de l'utilisateur avec une logique plus robuste
       let recipientName = t('common.unknownUser');
@@ -169,9 +126,6 @@ const BuyingGiftsList: React.FC<BuyingGiftsListProps> = ({ maxGifts = 5 }) => {
       };
     });
 
-    // Débogage des données transformées
-    console.log('Mapped gifts:', mappedGifts);
-
     return mappedGifts;
   }, [response, t]);
 
@@ -181,12 +135,8 @@ const BuyingGiftsList: React.FC<BuyingGiftsListProps> = ({ maxGifts = 5 }) => {
     setCelebrationGift(null);
   };
 
-  // Log avant le rendu conditionnel
-  console.log('BuyingGiftsList - État avant rendu conditionnel:', { loading, error, giftsCount: buyingGifts.length });
-
   // Afficher un spinner pendant le chargement
   if (loading) {
-    console.log('BuyingGiftsList - Affichage du spinner de chargement');
     return (
       <div className="flex justify-center py-4">
         <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary-500" />
@@ -196,7 +146,6 @@ const BuyingGiftsList: React.FC<BuyingGiftsListProps> = ({ maxGifts = 5 }) => {
 
   // Afficher un message d'erreur en cas de problème
   if (error) {
-    console.log('BuyingGiftsList - Affichage de l\'erreur:', error);
     return (
       <div>
         <p className="text-red-500">{t('dashboard.errors.loadingGifts')}</p>
@@ -209,8 +158,6 @@ const BuyingGiftsList: React.FC<BuyingGiftsListProps> = ({ maxGifts = 5 }) => {
       </div>
     );
   }
-
-  console.log('BuyingGiftsList - Rendu final avec', buyingGifts.length, 'cadeaux');
 
   return (
     <div>
