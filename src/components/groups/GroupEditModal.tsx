@@ -69,6 +69,11 @@ const GroupEditModal: React.FC<GroupEditModalProps> = ({
 
     try {
       await groupService.deleteGroup(group.id);
+
+      // Émettre un événement pour mettre à jour la liste des groupes dans le SideMenu
+      const groupDeletedEvent = new Event('groupDeleted');
+      document.dispatchEvent(groupDeletedEvent);
+
       onClose();
       navigate('/dashboard'); // Rediriger vers le dashboard après la suppression
     } catch (err) {
