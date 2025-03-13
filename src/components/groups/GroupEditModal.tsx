@@ -32,6 +32,7 @@ const GroupEditModal: React.FC<GroupEditModalProps> = ({
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [confirmGroupName, setConfirmGroupName] = useState('');
 
   // Gestionnaire de soumission du formulaire
   const handleSubmit = async (e: React.FormEvent) => {
@@ -163,6 +164,17 @@ const GroupEditModal: React.FC<GroupEditModalProps> = ({
             </div>
           )}
 
+          <div className="mb-6">
+            <p className="text-sm text-gray-700 mb-2">
+              {t('groups.typeGroupNameToConfirm', { name: group.name }) || `Please type "${group.name}" to confirm:`}
+            </p>
+            <TextInput
+              value={confirmGroupName}
+              onChange={(e) => setConfirmGroupName(e.target.value)}
+              placeholder={t('groups.confirmGroupNamePlaceholder') || "Enter group name"}
+            />
+          </div>
+
           <div className="flex justify-end space-x-3">
             <Button
               type="button"
@@ -177,7 +189,7 @@ const GroupEditModal: React.FC<GroupEditModalProps> = ({
               type="button"
               variant="danger"
               onClick={handleDelete}
-              disabled={isLoading}
+              disabled={isLoading || confirmGroupName !== group.name}
             >
               {isLoading ? (
                 <span className="flex items-center">

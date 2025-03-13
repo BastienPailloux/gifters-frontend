@@ -289,6 +289,8 @@
     "deleteError": "Failed to delete group",
     "confirmDelete": "Are you sure you want to delete this group?",
     "deleteWarning": "This action cannot be undone. All group data will be permanently removed.",
+    "typeGroupNameToConfirm": "Please type \"{{name}}\" to confirm:",
+    "confirmGroupNamePlaceholder": "Enter group name to confirm",
     "confirmRemoveMember": "Are you sure you want to remove this member from the group?",
     "errorUpdatingRole": "Error updating member role",
     "errorRemovingMember": "Error removing member",

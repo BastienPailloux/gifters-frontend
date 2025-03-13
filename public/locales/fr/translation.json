@@ -289,6 +289,8 @@
     "deleteError": "Échec de la suppression du groupe",
     "confirmDelete": "Êtes-vous sûr de vouloir supprimer ce groupe ?",
     "deleteWarning": "Cette action est irréversible. Toutes les données du groupe seront définitivement supprimées.",
+    "typeGroupNameToConfirm": "Veuillez saisir \"{{name}}\" pour confirmer :",
+    "confirmGroupNamePlaceholder": "Saisissez le nom du groupe pour confirmer",
     "roleAdmin": "Administrateur",
     "roleMember": "Membre",
     "makeUserAdmin": "Faire de cet utilisateur un administrateur",
