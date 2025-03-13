@@ -9,9 +9,10 @@ import InvitationModal from './InvitationModal';
 interface MembersListProps {
   groupId: string;
   isCurrentUserAdmin?: boolean;
+  groupName: string;
 }
 
-const MembersList: React.FC<MembersListProps> = ({ groupId, isCurrentUserAdmin }) => {
+const MembersList: React.FC<MembersListProps> = ({ groupId, isCurrentUserAdmin, groupName }) => {
   const { t } = useTranslation();
   const { user } = useAuth();
 
@@ -160,6 +161,7 @@ const MembersList: React.FC<MembersListProps> = ({ groupId, isCurrentUserAdmin }
 
       <InvitationModal
         groupId={groupId}
+        groupName={groupName}
         isOpen={isInvitationModalOpen}
         onClose={closeInvitationModal}
       />

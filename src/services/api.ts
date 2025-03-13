@@ -138,12 +138,6 @@ export const groupService = {
     return response.data;
   },
 
-  // Rejoindre un groupe
-  joinGroup: async (id: string) => {
-    const response = await api.post(`/groups/${id}/join`);
-    return response.data;
-  },
-
   // Quitter un groupe
   leaveGroup: async (id: string) => {
     const response = await api.delete(`/groups/${id}/leave`);
@@ -272,7 +266,12 @@ export const invitationService = {
 
   // Créer une nouvelle invitation
   createInvitation: async (groupId: string, invitationData: { email: string; message?: string }) => {
-    const response = await api.post(`/groups/${groupId}/invitations`, { invitation: invitationData });
+    // Envoyer email et message comme paramètres directs au lieu de les encapsuler dans un objet invitation
+    const response = await api.post(`/groups/${groupId}/invitations`, {
+      email: invitationData.email,
+      message: invitationData.message || '',
+      invitation: { role: 'member' } // Garder l'objet invitation pour le paramètre role
+    });
     return response.data;
   },
 

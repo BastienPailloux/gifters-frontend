@@ -305,6 +305,7 @@ const GroupDetails: React.FC = () => {
       {showMembers && id && (
         <MembersList
           groupId={id}
+          groupName={group.name}
           isCurrentUserAdmin={isUserAdmin}
         />
       )}

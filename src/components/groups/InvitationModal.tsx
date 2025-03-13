@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Button from '../common/forms/Button';
 import TextInput from '../common/forms/TextInput';
@@ -7,16 +7,16 @@ import { invitationService } from '../../services/api';
 
 interface InvitationModalProps {
   groupId: string;
+  groupName: string;
   isOpen: boolean;
   onClose: () => void;
-  invitationURL?: string;
 }
 
 const InvitationModal: React.FC<InvitationModalProps> = ({
   groupId,
+  groupName,
   isOpen,
   onClose,
-  invitationURL = window.location.origin + `/invitation/join?group=${groupId}`,
 }) => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<'share' | 'email'>('share');
@@ -25,6 +25,41 @@ const InvitationModal: React.FC<InvitationModalProps> = ({
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const [invitationToken, setInvitationToken] = useState<string | null>(null);
+  const [invitationURL, setInvitationURL] = useState<string>('');
+
+  // Récupérer ou créer un token d'invitation pour le partage
+  useEffect(() => {
+    if (!isOpen || !groupId) return;
+
+    const fetchInvitationToken = async () => {
+      try {
+        // Vérifier s'il existe déjà des invitations actives pour ce groupe
+        const invitations = await invitationService.getGroupInvitations(groupId);
+
+        if (invitations && invitations.length > 0) {
+          // Utiliser le premier token d'invitation disponible
+          setInvitationToken(invitations[0].token);
+          setInvitationURL(`${window.location.origin}/invitation/join?token=${invitations[0].token}`);
+        } else {
+          // Créer une nouvelle invitation générique avec l'email et le message en paramètres directs
+          const newInvitation = await invitationService.createInvitation(groupId, {
+            email: 'share@example.com',
+            message: 'Shared invitation link'
+          });
+          setInvitationToken(newInvitation.token);
+          setInvitationURL(`${window.location.origin}/invitation/join?token=${newInvitation.token}`);
+        }
+      } catch (err) {
+        console.error('Error getting invitation token:', err);
+        setError(t('groups.errorGettingInvitationLink'));
+        // Fallback à l'ancienne méthode en cas d'erreur
+        setInvitationURL(`${window.location.origin}/invitation/join?group=${groupId}`);
+      }
+    };
+
+    fetchInvitationToken();
+  }, [groupId, isOpen, t]);
 
   // Fonction pour partager via différentes plateformes
   const handleShare = (platform: 'copy' | 'email' | 'whatsapp') => {
@@ -35,10 +70,10 @@ const InvitationModal: React.FC<InvitationModalProps> = ({
         setTimeout(() => setSuccess(null), 3000);
         break;
       case 'email':
-        window.location.href = `mailto:?subject=${encodeURIComponent(t('groups.inviteEmailSubject'))}&body=${encodeURIComponent(t('groups.inviteEmailBody', { link: invitationURL }))}`;
+        window.location.href = `mailto:?subject=${encodeURIComponent(t('groups.inviteEmailSubject'))}&body=${encodeURIComponent(t('groups.inviteEmailBody', { link: invitationURL, groupName: groupName }))}`;
         break;
       case 'whatsapp':
-        window.open(`https://wa.me/?text=${encodeURIComponent(t('groups.inviteWhatsAppMessage', { link: invitationURL }))}`, '_blank');
+        window.open(`https://wa.me/?text=${encodeURIComponent(t('groups.inviteWhatsAppMessage', { link: invitationURL, groupName: groupName }))}`, '_blank');
         break;
       default:
         break;
