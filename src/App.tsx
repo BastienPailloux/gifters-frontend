@@ -7,6 +7,7 @@ import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import Dashboard from './pages/Dashboard';
 import GroupDetails from './pages/GroupDetails';
+import InvitationJoin from './pages/invitation/InvitationJoin';
 
 // Composant pour les routes protégées
 interface ProtectedRouteProps {
@@ -45,6 +46,9 @@ const AppRoutes: React.FC = () => {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+
+      {/* Route publique pour les invitations */}
+      <Route path="/invitation/join" element={<InvitationJoin />} />
 
       {/* Routes protégées avec Layout */}
       <Route

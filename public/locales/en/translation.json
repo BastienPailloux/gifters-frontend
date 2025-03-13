@@ -214,7 +214,14 @@
     "close": "Close",
     "back": "Back",
     "edit": "Edit",
-    "view": "View"
+    "view": "View",
+    "email": "Email",
+    "optional": "optional",
+    "message": "Message",
+    "sending": "Sending...",
+    "copy": "Copy",
+    "or": "or",
+    "backToHome": "Back to Home"
   },
   "validation": {
     "required": "This field is required",
@@ -276,7 +283,22 @@
     "upgradeRole": "Make Admin",
     "downgradeRole": "Make Member",
     "remove": "Remove",
-    "removeMember": "Remove member"
+    "removeMember": "Remove member",
+    "addNewMember": "Add New Member",
+    "invitePeople": "Invite People to Group",
+    "shareLink": "Share Invitation Link",
+    "sendEmail": "Send Invitation Email",
+    "inviteLinkCopied": "Invitation link copied to clipboard!",
+    "inviteEmailSubject": "Join my group on Gifters",
+    "inviteEmailBody": "Hi there,\n\nI'd like to invite you to join the group {{groupName}} on Gifters. Click on the link below to join:\n\n{{link}}\n\nBest regards",
+    "inviteWhatsAppMessage": "Hi! I'd like to invite you to join the group {{groupName}} on Gifters. Click on this link to join: {{link}}",
+    "shareInvitationDescription": "Share this invitation link with people you want to invite to the group.",
+    "enterEmail": "Enter recipient's email address",
+    "enterMessage": "Add a personal message (optional)",
+    "sendInvitation": "Send Invitation",
+    "invitationSent": "Invitation sent successfully!",
+    "errorSendingInvitation": "Error sending invitation. Please try again.",
+    "errorGettingInvitationLink": "Error getting invitation link. A simpler link has been generated."
   },
   "giftIdeas": {
     "title": "Gift Ideas",
@@ -288,5 +310,17 @@
     "statusProposed": "Proposed",
     "statusBuying": "Buying",
     "statusBought": "Bought"
+  },
+  "invitation": {
+    "joinGroupTitle": "Join Group",
+    "youAreInvitedTo": "You've been invited to join",
+    "acceptInvitation": "Accept Invitation",
+    "alreadyMember": "You are already a member of this group",
+    "needAccount": "You need to log in or create an account to join this group",
+    "errorTitle": "Invitation Error",
+    "genericError": "There was a problem with this invitation",
+    "missingParameters": "Invalid invitation link",
+    "errorFetchingDetails": "Could not retrieve group details",
+    "errorAccepting": "Error accepting invitation"
   }
 }
