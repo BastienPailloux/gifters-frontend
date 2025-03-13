@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import ColorTag from '../common/display/ColorTag';
 import ClickableCard from '../common/display/ClickableCard';
 import FlatButton from '../common/forms/FlatButton';
+import Avatar from '../common/display/Avatar';
 
 export interface Member {
   id: string;
@@ -53,9 +54,11 @@ const MemberItem: React.FC<MemberItemProps> = ({
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center">
-          <div className="w-10 h-10 flex items-center justify-center bg-indigo-100 rounded-full text-lg font-semibold text-indigo-600">
-            {member.user_name.charAt(0).toUpperCase()}
-          </div>
+          <Avatar
+            name={member.user_name}
+            size="md"
+            variant={member.role === 'admin' ? 'primary' : 'secondary'}
+          />
           <div className="ml-3">
             <div className="font-medium text-gray-900">{member.user_name}</div>
             <div className="text-sm text-gray-500">{member.user_email}</div>
