@@ -7,6 +7,7 @@ export interface GiftIdea {
   id: string;
   title: string;
   for_user_name: string;
+  recipients?: Array<{id: string, name: string}>;
   price?: number;
   status: GiftStatus;
 }
@@ -30,7 +31,9 @@ const GiftIdeaItem: React.FC<GiftIdeaItemProps> = ({ gift, onViewGift }) => {
           <StatusTag status={gift.status} />
         </div>
         <p className="text-sm text-gray-500">
-          {t('giftIdeas.for') || 'For'}: {gift.for_user_name}
+          {t('giftIdeas.for') || 'For'}: {gift.recipients && gift.recipients.length > 0
+            ? gift.recipients.map(r => r.name).join(', ')
+            : gift.for_user_name}
           {gift.price && ` • ${new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(gift.price)}`}
         </p>
       </div>
