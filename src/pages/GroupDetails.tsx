@@ -43,6 +43,7 @@ interface ApiGiftIdea {
   status: string;
   forUser?: { id: number | string; name: string } | string;
   forUserName?: string;
+  recipients?: Array<{ id: number | string; name: string }>;
   price?: number;
   for_user_name?: string;
 }
@@ -123,6 +124,10 @@ const GroupDetails: React.FC = () => {
             return {
               ...gift,
               for_user_name: recipientName,
+              recipients: gift.recipients?.map(r => ({
+                id: String(r.id),
+                name: r.name
+              }))
             };
           });
 
@@ -195,6 +200,10 @@ const GroupDetails: React.FC = () => {
         id: String(gift.id),
         title: gift.title,
         for_user_name: gift.for_user_name || '',
+        recipients: gift.recipients?.map(r => ({
+          id: String(r.id),
+          name: r.name
+        })),
         price: gift.price,
         status: gift.status as 'proposed' | 'buying' | 'bought'
       }}

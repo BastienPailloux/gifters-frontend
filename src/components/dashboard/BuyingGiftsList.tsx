@@ -15,6 +15,7 @@ interface ApiGiftIdea {
   status: string;
   forUser?: { id: number | string; name: string } | string;
   forUserName?: string;
+  recipients?: Array<{ id: number | string; name: string }>;
   groupName?: string;
   group?: { id: number | string; name: string } | string;
 }
@@ -121,6 +122,10 @@ const BuyingGiftsList: React.FC<BuyingGiftsListProps> = ({ maxGifts = 5 }) => {
         id: String(gift.id),
         title: gift.title,
         for_user_name: recipientName,
+        recipients: gift.recipients?.map(r => ({
+          id: String(r.id),
+          name: r.name
+        })),
         group_name: groupName,
         status: gift.status as 'proposed' | 'buying' | 'bought'
       };
