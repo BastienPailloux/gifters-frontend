@@ -128,13 +128,13 @@ const GiftIdeaDetailCard: React.FC<GiftIdeaDetailCardProps> = ({
 
             <div className="mt-auto">
               <LabelValue
-                label={t('giftIdeas.createdBy')}
+                label={t('giftIdeas.proposedBy')}
                 value={giftIdea.created_by?.name || ''}
               />
 
               {giftIdea.buyer && (
                 <LabelValue
-                  label={t('giftIdeas.buyer')}
+                  label={t('giftIdeas.onGoingBuyer')}
                   value={giftIdea.buyer.name}
                 />
               )}
@@ -169,13 +169,13 @@ const GiftIdeaDetailCard: React.FC<GiftIdeaDetailCardProps> = ({
           {!giftIdea.image_url && (
             <>
               <LabelValue
-                label={t('giftIdeas.createdBy')}
+                label={t('giftIdeas.proposedBy')}
                 value={giftIdea.created_by?.name || ''}
               />
 
               {giftIdea.buyer && (
                 <LabelValue
-                  label={t('giftIdeas.buyer')}
+                  label={t('giftIdeas.onGoingBuyer')}
                   value={giftIdea.buyer.name}
                 />
               )}
