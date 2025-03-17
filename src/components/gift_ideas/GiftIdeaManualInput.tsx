@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { GiftMetadata } from './GiftIdeaFromUrl';
+import Input from '../common/forms/Input';
 
 interface GiftIdeaManualInputProps {
   giftData: GiftMetadata;
@@ -15,19 +16,14 @@ const GiftIdeaManualInput: React.FC<GiftIdeaManualInputProps> = ({
 
   return (
     <div className="space-y-4">
-      <div className="space-y-2">
-        <label htmlFor="gift-title" className="block text-sm font-medium text-gray-700">
-          {t('giftIdeas.titleLabel')}
-        </label>
-        <input
-          id="gift-title"
-          type="text"
-          value={giftData.title || ''}
-          onChange={(e) => onChange('title', e.target.value)}
-          className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-          required
-        />
-      </div>
+      <Input
+        id="gift-title"
+        type="text"
+        value={giftData.title || ''}
+        onChange={(e) => onChange('title', e.target.value)}
+        label={t('giftIdeas.titleLabel')}
+        required
+      />
 
       <div className="space-y-2">
         <label htmlFor="gift-description" className="block text-sm font-medium text-gray-700">
@@ -42,34 +38,24 @@ const GiftIdeaManualInput: React.FC<GiftIdeaManualInputProps> = ({
         />
       </div>
 
-      <div className="space-y-2">
-        <label htmlFor="gift-price" className="block text-sm font-medium text-gray-700">
-          {t('giftIdeas.priceLabel')}
-        </label>
-        <input
-          id="gift-price"
-          type="number"
-          min="0"
-          step="0.01"
-          value={giftData.price || ''}
-          onChange={(e) => onChange('price', parseFloat(e.target.value) || 0)}
-          className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-        />
-      </div>
+      <Input
+        id="gift-price"
+        type="number"
+        min="0"
+        step="0.01"
+        value={giftData.price || ''}
+        onChange={(e) => onChange('price', parseFloat(e.target.value) || 0)}
+        label={t('giftIdeas.priceLabel')}
+      />
 
-      <div className="space-y-2">
-        <label htmlFor="gift-image-url" className="block text-sm font-medium text-gray-700">
-          {t('giftIdeas.imageUrlLabel')}
-        </label>
-        <input
-          id="gift-image-url"
-          type="text"
-          value={giftData.imageUrl || ''}
-          onChange={(e) => onChange('imageUrl', e.target.value)}
-          placeholder="https://example.com/image.jpg"
-          className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-        />
-      </div>
+      <Input
+        id="gift-image-url"
+        type="text"
+        value={giftData.imageUrl || ''}
+        onChange={(e) => onChange('imageUrl', e.target.value)}
+        placeholder="https://example.com/image.jpg"
+        label={t('giftIdeas.imageUrlLabel')}
+      />
 
       {giftData.imageUrl && (
         <div className="mt-4">

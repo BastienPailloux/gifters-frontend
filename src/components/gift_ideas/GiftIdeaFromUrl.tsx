@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Button from '../common/forms/Button';
+import Input from '../common/forms/Input';
 
 export interface GiftMetadata {
   title?: string;
@@ -60,32 +61,29 @@ const GiftIdeaFromUrl: React.FC<GiftIdeaFromUrlProps> = ({
 
   return (
     <div className="space-y-4">
-      <div className="space-y-2">
-        <label htmlFor="gift-url" className="block text-sm font-medium text-gray-700">
-          {t('giftIdeas.urlLabel')}
-        </label>
-        <div className="flex space-x-2">
-          <input
-            id="gift-url"
-            type="text"
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            placeholder="https://example.com/produit"
-            className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-            disabled={isLoading}
-          />
+      <div className="flex space-x-2">
+        <Input
+          id="gift-url"
+          type="text"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+          placeholder="https://example.com/produit"
+          disabled={isLoading}
+          label={t('giftIdeas.urlLabel')}
+          error={urlError || undefined}
+          fullWidth={true}
+        />
+        <div className="flex items-end">
           <Button
             type="button"
             variant="secondary"
             onClick={() => fetchMetadata(url)}
             disabled={!url || isLoading}
+            className="mb-4"
           >
             {isLoading ? t('common.loading') : t('giftIdeas.fetchMetadata')}
           </Button>
         </div>
-        {urlError && (
-          <p className="text-sm text-red-600">{urlError}</p>
-        )}
       </div>
     </div>
   );
