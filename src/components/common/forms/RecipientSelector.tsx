@@ -2,12 +2,7 @@ import React, { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { useTranslation } from 'react-i18next';
 import Avatar from '../display/Avatar';
-
-export interface Recipient {
-  id: string;
-  name: string;
-  email?: string;
-}
+import { Recipient } from '../../../types/gift-ideas';
 
 export interface RecipientSelectorProps {
   recipients: Recipient[];

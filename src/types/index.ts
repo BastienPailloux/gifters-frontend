@@ -25,3 +25,6 @@ export * from './common';
 
 // Dashboard types
 export * from './dashboard';
+
+// Layout types
+export * from './layout';

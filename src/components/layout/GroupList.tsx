@@ -3,18 +3,12 @@ import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { groupService } from '../../services/api';
 import GroupItem from './GroupItem';
+import { SideMenuGroup, GroupListProps } from '../../types';
 
-// Interface pour le type Group
-interface Group {
-  id: string;
-  name: string;
-  description?: string;
-}
-
-const GroupList: React.FC = () => {
+const GroupList: React.FC<GroupListProps> = ({ onGroupCreated }) => {
   const { t } = useTranslation();
   const location = useLocation();
-  const [groups, setGroups] = useState<Group[]>([]);
+  const [groups, setGroups] = useState<SideMenuGroup[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -33,7 +27,7 @@ const GroupList: React.FC = () => {
         console.log('Groups API response:', result);
 
         // Gestion améliorée de la réponse basée sur la structure de l'API
-        let groupsData: Group[] = [];
+        let groupsData: SideMenuGroup[] = [];
 
         if (result && result.data) {
           // Si les données sont dans result.data

@@ -1,4 +1,6 @@
 import { User } from './auth';
+import { ReactNode } from 'react';
+import { GiftStatus } from './ui';
 
 /**
  * Représente un groupe d'utilisateurs
@@ -98,4 +100,71 @@ export interface InvitationData {
   email: string;
   group_id: string;
   message?: string;
+}
+
+/**
+ * Props pour le composant InvitationModal
+ */
+export interface InvitationModalProps {
+  groupId: string;
+  groupName: string;
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+/**
+ * Props pour le composant GroupEditModal
+ */
+export interface GroupEditModalProps {
+  group: {
+    id: string;
+    name: string;
+    description?: string;
+  };
+  isOpen: boolean;
+  onClose: () => void;
+  onUpdate: () => void;
+}
+
+/**
+ * Props pour le composant GiftIdeaCreationModal
+ */
+export interface GiftIdeaCreationModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  groupMembers: Member[];
+  onSuccess: () => void;
+}
+
+/**
+ * Props pour le composant GroupItemsList
+ */
+export interface GroupItemsListProps<T> {
+  title: string;
+  items: T[] | undefined;
+  emptyMessage: string;
+  actionLabel: string;
+  onAction: () => void;
+  renderItem: (item: T) => ReactNode;
+  className?: string;
+}
+
+/**
+ * Représente une idée cadeau simplifiée dans le contexte d'un groupe
+ */
+export interface GroupGiftIdea {
+  id: string;
+  title: string;
+  for_user_name: string;
+  recipients?: Array<{id: string, name: string}>;
+  price?: number;
+  status: GiftStatus;
+}
+
+/**
+ * Props pour le composant GiftIdeaItem dans le contexte des groupes
+ */
+export interface GroupGiftIdeaItemProps {
+  gift: GroupGiftIdea;
+  onViewGift: (giftId: string) => void;
 }

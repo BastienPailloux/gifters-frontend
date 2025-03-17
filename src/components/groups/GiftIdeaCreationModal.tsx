@@ -12,27 +12,7 @@ import {
   GiftIdeaManualInput,
   GiftMetadata
 } from '../gift_ideas';
-
-interface Member {
-  id: string;
-  name: string;
-  email: string;
-  role?: string;
-}
-
-interface GiftIdeaCreationModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  groupId: string;
-  groupMembers: Member[];
-  onSuccess: () => void;
-}
-
-// TODO: SCRAPING_FEATURE - Enum conservé pour référence future
-// enum CreationMode {
-//   URL = 'url',
-//   MANUAL = 'manual'
-// }
+import { GiftIdeaCreationModalProps } from '../../types/groups';
 
 /**
  * Modal pour créer une nouvelle idée cadeau
@@ -116,7 +96,7 @@ const GiftIdeaCreationModal: React.FC<GiftIdeaCreationModalProps> = ({
 
   // Gestionnaire pour le changement des données du cadeau
   const handleGiftDataChange = (field: keyof GiftMetadata, value: string | number) => {
-    setGiftData(prev => ({
+    setGiftData((prev: GiftMetadata) => ({
       ...prev,
       [field]: value
     }));
@@ -172,7 +152,7 @@ const GiftIdeaCreationModal: React.FC<GiftIdeaCreationModalProps> = ({
             <RecipientSelector
               recipients={groupMembers.map(member => ({
                 id: member.id,
-                name: member.name,
+                name: member.name || '',
                 email: member.email
               }))}
               selectedIds={selectedRecipients}
