@@ -51,11 +51,14 @@ const GiftIdeaManualInput: React.FC<GiftIdeaManualInputProps> = ({
       <Input
         id="gift-url"
         type="url"
-        value={giftData.url || ''}
-        onChange={(e) => onChange('url', e.target.value)}
+        value={giftData.link || ''}
+        onChange={(e) => onChange('link', e.target.value)}
         placeholder="https://example.com/product"
         label={t('giftIdeas.urlLabel')}
         helperText={t('giftIdeas.urlHelperText')}
+        required={true}
+        pattern="https?://.+"
+        error={giftData.link && !giftData.link.match(/^https?:\/\/.+/) ? t('giftIdeas.invalidUrl') : undefined}
       />
 
       <Input

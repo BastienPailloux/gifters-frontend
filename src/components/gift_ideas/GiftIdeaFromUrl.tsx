@@ -10,7 +10,7 @@ export interface GiftMetadata {
   description?: string;
   price?: number;
   imageUrl?: string;
-  url?: string; // URL d'achat pour le produit
+  link?: string; // Champ correspondant à l'attribut 'link' dans le backend
 }
 
 /**

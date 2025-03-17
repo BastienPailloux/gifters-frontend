@@ -43,7 +43,6 @@ interface GiftIdeaCreationModalProps {
 const GiftIdeaCreationModal: React.FC<GiftIdeaCreationModalProps> = ({
   isOpen,
   onClose,
-  groupId,
   groupMembers,
   onSuccess
 }) => {
@@ -89,16 +88,26 @@ const GiftIdeaCreationModal: React.FC<GiftIdeaCreationModalProps> = ({
         title: giftData.title || '',
         description: giftData.description || '',
         price: giftData.price || 0,
-        url: giftData.url || undefined, // Utiliser directement le champ URL saisi manuellement
+        link: giftData.link,
         recipient_ids: selectedRecipients,
-        group_id: groupId
       });
 
       onSuccess();
       onClose();
     } catch (error) {
       console.error('Error creating gift idea:', error);
-      alert(t('giftIdeas.creationError'));
+
+      // Afficher un message d'erreur plus spécifique si possible
+      if (error && typeof error === 'object' && 'response' in error) {
+        const axiosError = error as { response?: { data?: { errors?: string[] } } };
+        if (axiosError.response?.data?.errors?.length) {
+          alert(axiosError.response.data.errors.join('\n'));
+        } else {
+          alert(t('giftIdeas.creationError'));
+        }
+      } else {
+        alert(t('giftIdeas.creationError'));
+      }
     } finally {
       setIsLoading(false);
     }
@@ -186,7 +195,13 @@ const GiftIdeaCreationModal: React.FC<GiftIdeaCreationModalProps> = ({
           <Button
             type="submit"
             variant="primary"
-            disabled={isLoading || selectedRecipients.length === 0 || !giftData.title}
+            disabled={
+              isLoading ||
+              selectedRecipients.length === 0 ||
+              !giftData.title ||
+              !giftData.link ||
+              !giftData.link.match(/^https?:\/\/.+/)
+            }
           >
             {isLoading ? t('common.processing') : t('giftIdeas.createButton')}
           </Button>

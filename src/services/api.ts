@@ -218,9 +218,8 @@ export const giftIdeaService = {
     title: string;
     description: string;
     price: number;
-    url?: string;
+    link?: string;
     recipient_ids: string[];
-    group_id: string;
   }) => {
     const response = await api.post('/gift_ideas', { gift_idea: giftData });
     return response.data;
@@ -231,7 +230,7 @@ export const giftIdeaService = {
     title?: string;
     description?: string;
     price?: number;
-    url?: string;
+    link?: string;
     recipient_ids?: string[];
   }) => {
     const response = await api.put(`/gift_ideas/${id}`, { gift_idea: giftData });
