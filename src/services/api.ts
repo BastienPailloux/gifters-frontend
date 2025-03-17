@@ -357,4 +357,19 @@ export const membershipService = {
   },
 };
 
+/**
+ * Service pour l'extraction de métadonnées à partir d'URL
+ *
+ * TODO: SCRAPING_FEATURE - Ce service est temporairement désactivé dans l'interface
+ * mais le code est conservé pour une utilisation future lorsque les problèmes
+ * de scraping seront résolus.
+ */
+export const metadataService = {
+  // Récupère les métadonnées d'une URL
+  fetchMetadata: async (url: string) => {
+    const response = await api.post('/metadata/fetch', { url });
+    return response.data;
+  },
+};
+
 export default api;

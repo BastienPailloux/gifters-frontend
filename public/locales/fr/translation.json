@@ -350,6 +350,7 @@
     "maxRecipients": "max {{count}}",
     "creationError": "Erreur lors de la création de l'idée de cadeau",
     "imageUrlLabel": "URL de l'image",
+    "urlHelperText": "Lien vers la page où acheter ce cadeau (optionnel)",
     "editFetchedMetadata": "Modifier les informations récupérées"
   },
   "invitation": {

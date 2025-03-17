@@ -353,6 +353,7 @@
     "maxRecipients": "max {{count}}",
     "creationError": "Error creating gift idea",
     "imageUrlLabel": "Image URL",
+    "urlHelperText": "Link to the page where this gift can be purchased (optional)",
     "editFetchedMetadata": "Edit retrieved information"
   },
   "invitation": {

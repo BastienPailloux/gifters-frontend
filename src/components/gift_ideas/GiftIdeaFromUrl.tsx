@@ -3,14 +3,24 @@ import { useTranslation } from 'react-i18next';
 import Button from '../common/forms/Button';
 import Input from '../common/forms/Input';
 import GiftIdeaManualInput from './GiftIdeaManualInput';
+import { metadataService } from '../../services/api';
 
 export interface GiftMetadata {
   title?: string;
   description?: string;
   price?: number;
   imageUrl?: string;
+  url?: string; // URL d'achat pour le produit
 }
 
+/**
+ * Composant pour la création d'une idée cadeau à partir d'une URL
+ *
+ * TODO: SCRAPING_FEATURE - Ce composant est temporairement désactivé en production
+ * en raison de problèmes de scraping. Il sera réactivé lorsque ces problèmes seront résolus.
+ * Les problèmes principaux incluent: timeout lors de requêtes, problèmes de CORS, blocage par
+ * certains sites, etc. Garder le composant en place pour une réactivation future.
+ */
 interface GiftIdeaFromUrlProps {
   onMetadataFetched: (metadata: GiftMetadata) => void;
   isLoading: boolean;
@@ -32,6 +42,8 @@ const GiftIdeaFromUrl: React.FC<GiftIdeaFromUrlProps> = ({
   const [metadataFetched, setMetadataFetched] = useState(false);
 
   // Fonction pour récupérer les métadonnées d'une URL
+  // TODO: SCRAPING_FEATURE - Cette fonction est temporairement inactive en production
+  // mais est maintenue pour référence et utilisation future.
   const fetchMetadata = async (url: string) => {
     setIsLoading(true);
     setUrlError(null);
@@ -42,30 +54,43 @@ const GiftIdeaFromUrl: React.FC<GiftIdeaFromUrlProps> = ({
         throw new Error(t('giftIdeas.invalidUrl'));
       }
 
-      // Simuler une requête API
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Appel à l'API pour récupérer les métadonnées
+      const metadata = await metadataService.fetchMetadata(url);
 
-      // Dans une application réelle, vous appelleriez votre backend
-      // const response = await metadataService.fetchMetadata(url);
-
-      // Données factices pour la démonstration
-      const mockData = {
-        title: 'Produit Exemple',
-        description: 'Description détaillée du produit que vous venez de partager.',
-        price: 49.99,
-        imageUrl: 'https://via.placeholder.com/150'
+      // Convertir les propriétés pour correspondre à notre format
+      const formattedMetadata: GiftMetadata = {
+        title: metadata.title,
+        description: metadata.description,
+        price: metadata.price,
+        imageUrl: metadata.image_url
       };
 
-      onMetadataFetched(mockData);
+      onMetadataFetched(formattedMetadata);
       setMetadataFetched(true);
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Error fetching metadata:', error);
-      setUrlError(error instanceof Error ? error.message : t('giftIdeas.metadataError'));
+
+      // Gestion des erreurs spécifiques de l'API
+      if (error && typeof error === 'object' && 'response' in error) {
+        const axiosError = error as { response?: { data?: { error?: string } } };
+        if (axiosError.response?.data?.error) {
+          setUrlError(axiosError.response.data.error);
+        } else if (error instanceof Error) {
+          setUrlError(error.message);
+        } else {
+          setUrlError(t('giftIdeas.metadataError'));
+        }
+      } else if (error instanceof Error) {
+        setUrlError(error.message);
+      } else {
+        setUrlError(t('giftIdeas.metadataError'));
+      }
     } finally {
       setIsLoading(false);
     }
   };
 
+  // TODO: SCRAPING_FEATURE - Ce composant reste inchangé pour une réactivation future
   return (
     <div className="space-y-6">
       <div className="flex space-x-2">

@@ -8,6 +8,7 @@ import PageHeader from '../components/common/layout/PageHeader';
 import GiftIdeaItem from '../components/groups/GiftIdeaItem';
 import MembersList from '../components/groups/MembersList';
 import GroupEditModal from '../components/groups/GroupEditModal';
+import GiftIdeaCreationModal from '../components/groups/GiftIdeaCreationModal';
 import useAuth from '../hooks/useAuth';
 
 // Types
@@ -62,6 +63,7 @@ const GroupDetails: React.FC = () => {
   const [showMembers, setShowMembers] = useState<boolean>(false);
   const [isUserAdmin, setIsUserAdmin] = useState<boolean>(false);
   const [isGroupEditModalOpen, setIsGroupEditModalOpen] = useState<boolean>(false);
+  const [isGiftIdeaModalOpen, setIsGiftIdeaModalOpen] = useState<boolean>(false);
 
   // Fonction pour récupérer les détails du groupe
   const fetchGroupDetails = async () => {
@@ -160,8 +162,7 @@ const GroupDetails: React.FC = () => {
   };
 
   const handleAddGiftIdea = () => {
-    // Sera implémenté ultérieurement
-    alert('Add gift idea functionality coming soon!');
+    setIsGiftIdeaModalOpen(true);
   };
 
   const handleViewEvent = (eventId: string) => {
@@ -172,6 +173,49 @@ const GroupDetails: React.FC = () => {
   const handleViewGift = (giftId: string) => {
     // Sera implémenté ultérieurement
     alert(`View gift ${giftId} functionality coming soon!`);
+  };
+
+  // Fonction pour rafraîchir les idées de cadeaux après en avoir ajouté une nouvelle
+  const handleGiftIdeaCreationSuccess = () => {
+    if (id) {
+      // Rafraîchir la liste des idées de cadeaux
+      const fetchGiftIdeas = async () => {
+        try {
+          // Ne récupérer que les idées avec statut "proposed" ou "buying"
+          const result = await giftIdeaService.getGiftIdeasByGroup(id, ['proposed', 'buying']);
+
+          // Mapper les données API en GiftIdea
+          if (result && result.giftIdeas) {
+            const mappedGifts = result.giftIdeas.map((gift: ApiGiftIdea): ApiGiftIdea => {
+              // Déterminer le nom du destinataire
+              let recipientName = t('common.unknownUser');
+              if (gift.forUser && typeof gift.forUser === 'object' && gift.forUser.name) {
+                recipientName = gift.forUser.name;
+              } else if (gift.forUserName) {
+                recipientName = gift.forUserName;
+              } else if (gift.forUser && typeof gift.forUser === 'string') {
+                recipientName = gift.forUser as string;
+              }
+
+              return {
+                ...gift,
+                for_user_name: recipientName,
+                recipients: gift.recipients?.map(r => ({
+                  id: String(r.id),
+                  name: r.name
+                }))
+              };
+            });
+
+            setGiftIdeas(mappedGifts);
+          }
+        } catch (err) {
+          console.error('Error fetching gift ideas:', err);
+        }
+      };
+
+      fetchGiftIdeas();
+    }
   };
 
   // Rendu des éléments de liste
@@ -316,6 +360,16 @@ const GroupDetails: React.FC = () => {
               fetchGroupDetails();
             }
           }}
+        />
+      )}
+
+      {isGiftIdeaModalOpen && group && id && (
+        <GiftIdeaCreationModal
+          isOpen={isGiftIdeaModalOpen}
+          onClose={() => setIsGiftIdeaModalOpen(false)}
+          groupId={id}
+          groupMembers={group.members || []}
+          onSuccess={handleGiftIdeaCreationSuccess}
         />
       )}
     </div>

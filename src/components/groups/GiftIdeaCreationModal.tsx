@@ -3,8 +3,15 @@ import { useTranslation } from 'react-i18next';
 import Modal from '../common/modals/Modal';
 import Button from '../common/forms/Button';
 import RecipientSelector from '../common/forms/RecipientSelector';
+// TODO: SCRAPING_FEATURE - Import commenté temporairement mais conservé pour référence
+// import ToggleSelect from '../common/forms/ToggleSelect';
 import { giftIdeaService } from '../../services/api';
-import { GiftIdeaFromUrl, GiftIdeaManualInput, GiftMetadata } from '../gift_ideas';
+import {
+  // TODO: SCRAPING_FEATURE - Import commenté temporairement mais conservé pour référence
+  // GiftIdeaFromUrl,
+  GiftIdeaManualInput,
+  GiftMetadata
+} from '../gift_ideas';
 
 interface Member {
   id: string;
@@ -21,11 +28,18 @@ interface GiftIdeaCreationModalProps {
   onSuccess: () => void;
 }
 
-enum CreationMode {
-  URL = 'url',
-  MANUAL = 'manual'
-}
+// TODO: SCRAPING_FEATURE - Enum conservé pour référence future
+// enum CreationMode {
+//   URL = 'url',
+//   MANUAL = 'manual'
+// }
 
+/**
+ * Modal pour créer une nouvelle idée cadeau
+ *
+ * TODO: SCRAPING_FEATURE - Réactiver la fonctionnalité de scraping de sites web quand celle-ci sera stable
+ * Pour l'instant, seule la saisie manuelle est disponible.
+ */
 const GiftIdeaCreationModal: React.FC<GiftIdeaCreationModalProps> = ({
   isOpen,
   onClose,
@@ -34,7 +48,10 @@ const GiftIdeaCreationModal: React.FC<GiftIdeaCreationModalProps> = ({
   onSuccess
 }) => {
   const { t } = useTranslation();
-  const [mode, setMode] = useState<CreationMode>(CreationMode.URL);
+
+  // TODO: SCRAPING_FEATURE - L'option URL est temporairement désactivée
+  // mais on garde la logique en place pour une activation future
+
   const [isLoading, setIsLoading] = useState(false);
   const [selectedRecipients, setSelectedRecipients] = useState<string[]>([]);
   const [giftData, setGiftData] = useState<GiftMetadata>({
@@ -43,6 +60,13 @@ const GiftIdeaCreationModal: React.FC<GiftIdeaCreationModalProps> = ({
     price: undefined,
     imageUrl: ''
   });
+
+  // Options du toggle pour les modes de création
+  // TODO: SCRAPING_FEATURE - Temporairement désactivé, à réactiver plus tard
+  // const toggleOptions = [
+  //   { value: CreationMode.URL, label: t('giftIdeas.fromUrl') },
+  //   { value: CreationMode.MANUAL, label: t('giftIdeas.manualInput') }
+  // ];
 
   // Gestionnaire pour la soumission du formulaire
   const handleSubmit = async (e: React.FormEvent) => {
@@ -65,7 +89,7 @@ const GiftIdeaCreationModal: React.FC<GiftIdeaCreationModalProps> = ({
         title: giftData.title || '',
         description: giftData.description || '',
         price: giftData.price || 0,
-        url: mode === CreationMode.URL ? giftData.imageUrl : undefined,
+        url: giftData.url || undefined, // Utiliser directement le champ URL saisi manuellement
         recipient_ids: selectedRecipients,
         group_id: groupId
       });
@@ -80,20 +104,6 @@ const GiftIdeaCreationModal: React.FC<GiftIdeaCreationModalProps> = ({
     }
   };
 
-  // Gestionnaire pour basculer entre les modes de création
-  const handleModeChange = (newMode: CreationMode) => {
-    setMode(newMode);
-    // Réinitialiser les données si on change de mode
-    if (newMode === CreationMode.MANUAL) {
-      setGiftData({
-        title: '',
-        description: '',
-        price: undefined,
-        imageUrl: ''
-      });
-    }
-  };
-
   // Gestionnaire pour le changement des données du cadeau
   const handleGiftDataChange = (field: keyof GiftMetadata, value: string | number) => {
     setGiftData(prev => ({
@@ -103,9 +113,10 @@ const GiftIdeaCreationModal: React.FC<GiftIdeaCreationModalProps> = ({
   };
 
   // Gestionnaire pour les métadonnées récupérées de l'URL
-  const handleMetadataFetched = (metadata: GiftMetadata) => {
-    setGiftData(metadata);
-  };
+  // TODO: SCRAPING_FEATURE - Fonction maintenue pour une future réactivation
+  // const handleMetadataFetched = (metadata: GiftMetadata) => {
+  //   setGiftData(metadata);
+  // };
 
   return (
     <Modal
@@ -115,35 +126,23 @@ const GiftIdeaCreationModal: React.FC<GiftIdeaCreationModalProps> = ({
       size="lg"
     >
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Sélection du mode de création */}
-        <div className="flex space-x-4 border-b pb-4 sticky top-0 bg-white z-10">
-          <button
-            type="button"
-            className={`py-2 px-4 rounded-t-lg ${
-              mode === CreationMode.URL
-                ? 'bg-primary-100 text-primary-700 font-medium'
-                : 'text-gray-500 hover:text-gray-700'
-            }`}
-            onClick={() => handleModeChange(CreationMode.URL)}
-          >
-            {t('giftIdeas.fromUrl')}
-          </button>
-          <button
-            type="button"
-            className={`py-2 px-4 rounded-t-lg ${
-              mode === CreationMode.MANUAL
-                ? 'bg-primary-100 text-primary-700 font-medium'
-                : 'text-gray-500 hover:text-gray-700'
-            }`}
-            onClick={() => handleModeChange(CreationMode.MANUAL)}
-          >
-            {t('giftIdeas.manualInput')}
-          </button>
-        </div>
+        {/*
+          TODO: SCRAPING_FEATURE - Le toggle est désactivé pour l'instant puisqu'il n'y a qu'une option
+          À réactiver quand la fonctionnalité de scraping sera prête
+        */}
+        {/* {toggleOptions.length > 1 && (
+          <ToggleSelect
+            options={toggleOptions}
+            value={mode}
+            onChange={handleModeChange}
+            className="sticky top-0 bg-white z-10"
+          />
+        )} */}
 
         <div className="space-y-6">
-          {/* Contenu selon le mode */}
-          {mode === CreationMode.URL ? (
+          {/* Contenu selon le mode - actuellement seule la saisie manuelle est activée */}
+          {/* TODO: SCRAPING_FEATURE - L'option URL est temporairement désactivée */}
+          {/* {mode === CreationMode.URL ? (
             <GiftIdeaFromUrl
               onMetadataFetched={handleMetadataFetched}
               isLoading={isLoading}
@@ -151,12 +150,12 @@ const GiftIdeaCreationModal: React.FC<GiftIdeaCreationModalProps> = ({
               giftData={giftData}
               onChange={handleGiftDataChange}
             />
-          ) : (
+          ) : ( */}
             <GiftIdeaManualInput
               giftData={giftData}
               onChange={handleGiftDataChange}
             />
-          )}
+          {/* )} */}
 
           {/* Sélection des destinataires */}
           <div className="space-y-2">
