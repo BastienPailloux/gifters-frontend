@@ -1,6 +1,5 @@
 import React from 'react';
-
-export type ColorVariant = 'blue' | 'green' | 'yellow' | 'red' | 'gray' | 'purple' | 'pink';
+import { ColorVariant } from '../../../types';
 
 interface ColorTagProps {
   text: string; // Le texte est maintenant obligatoire

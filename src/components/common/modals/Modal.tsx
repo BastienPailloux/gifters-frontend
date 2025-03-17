@@ -1,15 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-
-interface ModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  title?: string;
-  hideCloseButton?: boolean;
-  closeOnOutsideClick?: boolean;
-  size?: 'sm' | 'md' | 'lg' | 'xl';
-  children: React.ReactNode;
-}
+import { ModalProps } from '../../../types';
 
 /**
  * Composant Modal générique réutilisable
@@ -18,10 +9,10 @@ const Modal: React.FC<ModalProps> = ({
   isOpen,
   onClose,
   title,
-  hideCloseButton = false,
-  closeOnOutsideClick = true,
   size = 'md',
-  children
+  children,
+  hideCloseButton = false,
+  closeOnOutsideClick = true
 }) => {
   const { t } = useTranslation();
 
@@ -33,6 +24,7 @@ const Modal: React.FC<ModalProps> = ({
     md: 'max-w-md',
     lg: 'max-w-lg',
     xl: 'max-w-xl',
+    full: 'max-w-full'
   }[size];
 
   // Gestionnaire pour fermer la modal lors d'un clic à l'extérieur

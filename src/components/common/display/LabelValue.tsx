@@ -1,15 +1,6 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { twMerge } from 'tailwind-merge';
-
-interface LabelValueProps {
-  label?: string;
-  value: ReactNode;
-  className?: string;
-  labelClassName?: string;
-  valueClassName?: string;
-  orientation?: 'vertical' | 'horizontal';
-  isImportant?: boolean;
-}
+import { LabelValueProps } from '../../../types';
 
 /**
  * Composant LabelValue - Affiche une paire label/valeur avec différentes options de mise en forme

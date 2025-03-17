@@ -1,19 +1,6 @@
 import React, { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
-
-interface ImageProps {
-  src: string;
-  alt: string;
-  className?: string;
-  containerClassName?: string;
-  fallbackSrc?: string;
-  objectFit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
-  aspectRatio?: 'auto' | 'square' | '16/9' | '4/3' | '1/1';
-  rounded?: boolean;
-  bordered?: boolean;
-  onClick?: () => void;
-  hasShadow?: boolean;
-}
+import { ImageProps } from '../../../types';
 
 /**
  * Composant Image réutilisable

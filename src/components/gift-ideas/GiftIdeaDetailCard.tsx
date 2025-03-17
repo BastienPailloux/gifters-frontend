@@ -4,41 +4,7 @@ import Card from '../common/display/Card';
 import Image from '../common/display/Image';
 import LabelValue from '../common/display/LabelValue';
 import Button from '../common/forms/Button';
-import { GiftStatus } from '../common/display/StatusTag';
-import { User } from '../../types/auth';
-
-interface GiftIdeaDetailCardProps {
-  giftIdea: {
-    id: string;
-    title: string;
-    description?: string;
-    price?: number;
-    link?: string;
-    image_url?: string;
-    status: GiftStatus;
-    created_by_id: string;
-    buyer_id?: string;
-    recipients: Array<{
-      id: string;
-      name: string;
-    }>;
-    group_name?: string;
-    created_by?: {
-      id: string;
-      name: string;
-      email?: string;
-    };
-    buyer?: {
-      id: string;
-      name: string;
-      email?: string;
-    };
-  };
-  currentUser: User | null;
-  onMarkAsBuying: () => void;
-  onMarkAsBought: () => void;
-  formatPrice: (price?: number) => string;
-}
+import { GiftIdeaDetailCardProps } from '../../types';
 
 /**
  * Composant GiftIdeaDetailCard - Affiche les détails d'une idée cadeau dans une carte structurée
@@ -58,7 +24,7 @@ const GiftIdeaDetailCard: React.FC<GiftIdeaDetailCardProps> = ({
     if (!giftIdea || !currentUser) return false;
 
     // L'utilisateur ne peut pas acheter son propre cadeau
-    const isRecipient = giftIdea.recipients.some(recipient => recipient.id === currentUser.id);
+    const isRecipient = giftIdea.recipients.some((recipient) => recipient.id === currentUser.id);
     if (isRecipient) return false;
 
     // Si le cadeau est déjà acheté, personne ne peut interagir
@@ -146,7 +112,7 @@ const GiftIdeaDetailCard: React.FC<GiftIdeaDetailCardProps> = ({
         <div>
           <LabelValue
             label={t('giftIdeas.for')}
-            value={giftIdea.recipients.map(recipient => recipient.name).join(', ')}
+            value={giftIdea.recipients.map((recipient) => recipient.name).join(', ')}
             isImportant
           />
 
