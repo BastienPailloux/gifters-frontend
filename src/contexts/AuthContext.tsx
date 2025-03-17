@@ -1,37 +1,19 @@
 import React, { createContext, useContext, ReactNode } from 'react';
 import useAuthHook from '../hooks/useAuth';
-
-// Interface pour l'utilisateur
-interface User {
-  id: string;
-  name: string;
-  email: string;
-}
-
-// Interface pour les données d'inscription
-interface RegisterData {
-  name: string;
-  email: string;
-  password: string;
-  password_confirmation: string;
-}
+import { AuthState, RegisterData, LoginCredentials } from '../types/auth';
 
 // Définir l'interface pour le contexte d'authentification
-interface AuthContextType {
-  user: User | null;
-  isAuthenticated: boolean;
-  isLoading: boolean;
-  error: string | null;
-  login: (credentials: { email: string; password: string }) => Promise<{ success: boolean; error?: string }>;
+interface AuthContextType extends AuthState {
+  login: (credentials: LoginCredentials) => Promise<{ success: boolean; error?: string }>;
   register: (userData: RegisterData) => Promise<{ success: boolean; error?: string }>;
   logout: () => void;
   clearError: () => void;
 }
 
-// Créer le contexte avec une valeur par défaut
+// Créer le contexte
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Props pour le fournisseur de contexte
+// Interface pour les props du provider
 interface AuthProviderProps {
   children: ReactNode;
 }
