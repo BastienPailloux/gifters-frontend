@@ -2,11 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import FlatButton from '../common/forms/FlatButton';
 import { FaChevronRight } from 'react-icons/fa';
-import UpcomingEventItem, { UpcomingEvent } from './UpcomingEventItem';
-
-interface UpcomingEventsListProps {
-  maxEvents?: number;
-}
+import UpcomingEventItem from './UpcomingEventItem';
+import { UpcomingEvent, UpcomingEventsListProps } from '../../types';
 
 const UpcomingEventsList: React.FC<UpcomingEventsListProps> = ({ maxEvents = 5 }) => {
   const { t } = useTranslation();
@@ -49,7 +46,12 @@ const UpcomingEventsList: React.FC<UpcomingEventsListProps> = ({ maxEvents = 5 }
         ];
 
         // Tri des événements par nombre de jours restants (du plus proche au plus éloigné)
-        const sortedEvents = mockUpcomingEvents.sort((a, b) => a.daysLeft - b.daysLeft);
+        const sortedEvents = mockUpcomingEvents.sort((a, b) => {
+          const daysLeftA = a.daysLeft ?? a.daysUntil ?? 0;
+          const daysLeftB = b.daysLeft ?? b.daysUntil ?? 0;
+          return daysLeftA - daysLeftB;
+        });
+
         setUpcomingEvents(sortedEvents);
         setError(null);
       } catch (err) {

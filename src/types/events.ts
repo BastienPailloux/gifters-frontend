@@ -25,10 +25,14 @@ export interface Event {
  */
 export interface UpcomingEvent {
   id: string;
-  title: string;
-  date: string;
-  formattedDate: string;
-  daysUntil: number;
+  title?: string;
+  type?: 'birthday' | 'christmas' | 'other';
+  date: string | Date;
+  formattedDate?: string;
+  daysUntil?: number;
+  daysLeft?: number;
+  personName?: string;
+  groupName?: string;
   group?: {
     id: string;
     name: string;

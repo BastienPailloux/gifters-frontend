@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 /**
  * Types liés à l'authentification et aux utilisateurs
  */
@@ -42,4 +44,21 @@ export interface ApiErrorResponse {
     message: string;
   };
   errors?: string[];
+}
+
+/**
+ * Interface pour le contexte d'authentification
+ */
+export interface AuthContextType extends AuthState {
+  login: (credentials: LoginCredentials) => Promise<{ success: boolean; error?: string }>;
+  register: (userData: RegisterData) => Promise<{ success: boolean; error?: string }>;
+  logout: () => void;
+  clearError: () => void;
+}
+
+/**
+ * Interface pour les props du provider d'authentification
+ */
+export interface AuthProviderProps {
+  children: ReactNode;
 }
