@@ -7,16 +7,7 @@ import PageHeader from '../components/common/layout/PageHeader';
 import StatusTag from '../components/common/display/StatusTag';
 import GiftIdeaDetailCard from '../components/gift-ideas/GiftIdeaDetailCard';
 import useAuth from '../hooks/useAuth';
-import { GiftIdea, GiftStatus } from '../types';
-
-// Type étendu pour les détails d'un GiftIdea tel que retourné par l'API
-interface ExtendedGiftIdea extends GiftIdea {
-  recipients: Array<{
-    id: string;
-    name: string;
-  }>;
-  group_name?: string;
-}
+import { GiftStatus, ExtendedGiftIdea } from '../types';
 
 const GiftIdeaDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();

@@ -2,32 +2,17 @@ import React, { useMemo, useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import FlatButton from '../common/forms/FlatButton';
 import { FaChevronRight } from 'react-icons/fa';
-import BuyingGiftItem, { GiftIdea } from './BuyingGiftItem';
+import BuyingGiftItem from './BuyingGiftItem';
 import { giftIdeaService } from '../../services/api';
 import useAsyncData from '../../hooks/useAsyncData';
 import CelebrationModal from '../common/modals/CelebrationModal';
 import { useAuth } from '../../contexts/AuthContext';
-
-// Type pour la structure des données de l'API
-interface ApiGiftIdea {
-  id: number | string;
-  title: string;
-  status: string;
-  forUser?: { id: number | string; name: string } | string;
-  forUserName?: string;
-  recipients?: Array<{ id: number | string; name: string }>;
-  groupName?: string;
-  group?: { id: number | string; name: string } | string;
-}
-
-// Type pour la réponse API
-interface ApiResponse {
-  giftIdeas: ApiGiftIdea[];
-}
-
-interface BuyingGiftsListProps {
-  maxGifts?: number;
-}
+import {
+  BuyingGift,
+  BuyingGiftsListProps,
+  ApiGiftIdea,
+  ApiResponse
+} from '../../types/gift-ideas';
 
 /**
  * Composant qui affiche une liste des cadeaux en cours d'achat
@@ -38,7 +23,7 @@ const BuyingGiftsList: React.FC<BuyingGiftsListProps> = ({ maxGifts = 5 }) => {
   const [actionError, setActionError] = useState<string | null>(null);
   const [processingGiftId, setProcessingGiftId] = useState<string | null>(null);
   const [showCelebration, setShowCelebration] = useState(false);
-  const [celebrationGift, setCelebrationGift] = useState<GiftIdea | null>(null);
+  const [celebrationGift, setCelebrationGift] = useState<BuyingGift | null>(null);
 
   // Mémoriser la fonction de récupération des données pour éviter les rendus en boucle
   const fetchUserGifts = useCallback(async () => {
@@ -94,7 +79,7 @@ const BuyingGiftsList: React.FC<BuyingGiftsListProps> = ({ maxGifts = 5 }) => {
       return [];
     }
 
-    const mappedGifts = response.giftIdeas.map((gift: ApiGiftIdea): GiftIdea => {
+    const mappedGifts = response.giftIdeas.map((gift: ApiGiftIdea): BuyingGift => {
 
       // Déterminer le nom de l'utilisateur avec une logique plus robuste
       let recipientName = t('common.unknownUser');
