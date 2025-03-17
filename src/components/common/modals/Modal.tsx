@@ -44,12 +44,12 @@ const Modal: React.FC<ModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 overflow-y-auto"
       onClick={handleOutsideClick}
     >
-      <div className={`bg-white rounded-lg shadow-xl w-full ${maxWidthClass} mx-4`}>
+      <div className={`bg-white rounded-lg shadow-xl w-full ${maxWidthClass} mx-4 my-8`}>
         {title && (
-          <div className="flex justify-between items-center p-4 border-b">
+          <div className="flex justify-between items-center p-4 border-b sticky top-0 bg-white z-10">
             <h2 className="text-xl font-semibold">{title}</h2>
             {!hideCloseButton && (
               <button
@@ -65,7 +65,7 @@ const Modal: React.FC<ModalProps> = ({
           </div>
         )}
 
-        <div className="p-6">
+        <div className="p-6 max-h-[calc(80vh-4rem)] overflow-y-auto">
           {children}
         </div>
       </div>

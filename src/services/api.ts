@@ -218,9 +218,8 @@ export const giftIdeaService = {
     title: string;
     description: string;
     price: number;
-    url?: string;
+    link?: string;
     recipient_ids: string[];
-    group_id: string;
   }) => {
     const response = await api.post('/gift_ideas', { gift_idea: giftData });
     return response.data;
@@ -231,7 +230,7 @@ export const giftIdeaService = {
     title?: string;
     description?: string;
     price?: number;
-    url?: string;
+    link?: string;
     recipient_ids?: string[];
   }) => {
     const response = await api.put(`/gift_ideas/${id}`, { gift_idea: giftData });
@@ -354,6 +353,21 @@ export const membershipService = {
       console.error(`Error removing membership ${membershipId}:`, error);
       throw error;
     }
+  },
+};
+
+/**
+ * Service pour l'extraction de métadonnées à partir d'URL
+ *
+ * TODO: SCRAPING_FEATURE - Ce service est temporairement désactivé dans l'interface
+ * mais le code est conservé pour une utilisation future lorsque les problèmes
+ * de scraping seront résolus.
+ */
+export const metadataService = {
+  // Récupère les métadonnées d'une URL
+  fetchMetadata: async (url: string) => {
+    const response = await api.post('/metadata/fetch', { url });
+    return response.data;
   },
 };
 
