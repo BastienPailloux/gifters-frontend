@@ -116,7 +116,7 @@ const GiftIdeaCreationModal: React.FC<GiftIdeaCreationModalProps> = ({
     >
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Sélection du mode de création */}
-        <div className="flex space-x-4 border-b pb-4">
+        <div className="flex space-x-4 border-b pb-4 sticky top-0 bg-white z-10">
           <button
             type="button"
             className={`py-2 px-4 rounded-t-lg ${
@@ -141,39 +141,41 @@ const GiftIdeaCreationModal: React.FC<GiftIdeaCreationModalProps> = ({
           </button>
         </div>
 
-        {/* Contenu selon le mode */}
-        {mode === CreationMode.URL ? (
-          <GiftIdeaFromUrl
-            onMetadataFetched={handleMetadataFetched}
-            isLoading={isLoading}
-            setIsLoading={setIsLoading}
-            giftData={giftData}
-            onChange={handleGiftDataChange}
-          />
-        ) : (
-          <GiftIdeaManualInput
-            giftData={giftData}
-            onChange={handleGiftDataChange}
-          />
-        )}
+        <div className="space-y-6">
+          {/* Contenu selon le mode */}
+          {mode === CreationMode.URL ? (
+            <GiftIdeaFromUrl
+              onMetadataFetched={handleMetadataFetched}
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
+              giftData={giftData}
+              onChange={handleGiftDataChange}
+            />
+          ) : (
+            <GiftIdeaManualInput
+              giftData={giftData}
+              onChange={handleGiftDataChange}
+            />
+          )}
 
-        {/* Sélection des destinataires */}
-        <div className="space-y-2">
-          <RecipientSelector
-            recipients={groupMembers.map(member => ({
-              id: member.id,
-              name: member.name,
-              email: member.email
-            }))}
-            selectedIds={selectedRecipients}
-            onChange={setSelectedRecipients}
-            label={t('giftIdeas.selectRecipients')}
-            errorMessage={selectedRecipients.length === 0 ? t('giftIdeas.recipientRequired') : ''}
-          />
+          {/* Sélection des destinataires */}
+          <div className="space-y-2">
+            <RecipientSelector
+              recipients={groupMembers.map(member => ({
+                id: member.id,
+                name: member.name,
+                email: member.email
+              }))}
+              selectedIds={selectedRecipients}
+              onChange={setSelectedRecipients}
+              label={t('giftIdeas.selectRecipients')}
+              errorMessage={selectedRecipients.length === 0 ? t('giftIdeas.recipientRequired') : ''}
+            />
+          </div>
         </div>
 
         {/* Actions */}
-        <div className="flex justify-end space-x-3 pt-4 border-t">
+        <div className="flex justify-end space-x-3 pt-4 border-t sticky bottom-0 bg-white pb-2">
           <Button
             type="button"
             variant="outline"
