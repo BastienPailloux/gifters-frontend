@@ -20,6 +20,7 @@ interface GiftIdeaDetails {
   created_at: string;
   updated_at: string;
   created_by_id: string;
+  buyer_id?: string;
 
   // Données structurées
   recipients: Array<{
@@ -28,14 +29,13 @@ interface GiftIdeaDetails {
   }>;
   group_name?: string;
 
-  // Information sur l'acheteur
-  buyer?: {
+  // Relations
+  created_by?: {
     id: string;
     name: string;
+    email?: string;
   };
-
-  // Données du créateur
-  created_by?: {
+  buyer?: {
     id: string;
     name: string;
     email?: string;
