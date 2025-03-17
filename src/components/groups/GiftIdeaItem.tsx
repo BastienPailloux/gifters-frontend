@@ -1,26 +1,13 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import Button from '../common/forms/Button';
-import StatusTag, { GiftStatus } from '../common/display/StatusTag';
-
-export interface GiftIdea {
-  id: string;
-  title: string;
-  for_user_name: string;
-  recipients?: Array<{id: string, name: string}>;
-  price?: number;
-  status: GiftStatus;
-}
-
-interface GiftIdeaItemProps {
-  gift: GiftIdea;
-  onViewGift: (giftId: string) => void;
-}
+import StatusTag from '../common/display/StatusTag';
+import { GroupGiftIdeaItemProps } from '../../types/groups';
 
 /**
  * Composant qui affiche une idée de cadeau avec son statut dans la page de détails du groupe
  */
-const GiftIdeaItem: React.FC<GiftIdeaItemProps> = ({ gift, onViewGift }) => {
+const GiftIdeaItem: React.FC<GroupGiftIdeaItemProps> = ({ gift, onViewGift }) => {
   const { t } = useTranslation();
 
   return (

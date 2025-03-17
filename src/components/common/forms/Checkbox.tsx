@@ -1,14 +1,6 @@
-import React, { InputHTMLAttributes, forwardRef, ReactNode } from 'react';
+import React, { forwardRef } from 'react';
 import { twMerge } from 'tailwind-merge';
-
-export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
-  label?: ReactNode;
-  error?: string;
-  helperText?: string;
-  labelClassName?: string;
-  containerClassName?: string;
-  checkboxClassName?: string;
-}
+import { CheckboxProps } from '../../../types';
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (

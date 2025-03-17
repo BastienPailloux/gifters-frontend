@@ -1,12 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { GiftMetadata } from './GiftIdeaFromUrl';
 import Input from '../common/forms/Input';
-
-interface GiftIdeaManualInputProps {
-  giftData: GiftMetadata;
-  onChange: (field: keyof GiftMetadata, value: string | number) => void;
-}
+import { GiftIdeaManualInputProps } from '../../types';
 
 const GiftIdeaManualInput: React.FC<GiftIdeaManualInputProps> = ({
   giftData,

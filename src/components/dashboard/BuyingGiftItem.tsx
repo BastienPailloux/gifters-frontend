@@ -1,22 +1,11 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import FlatButton from '../common/forms/FlatButton';
-import StatusTag, { GiftStatus } from '../common/display/StatusTag';
+import StatusTag from '../common/display/StatusTag';
+import { BuyingGiftItemProps, BuyingGift } from '../../types/gift-ideas';
 
-export interface GiftIdea {
-  id: string;
-  title: string;
-  for_user_name: string;
-  recipients?: Array<{id: string, name: string}>;
-  group_name: string;
-  status: GiftStatus;
-}
-
-interface BuyingGiftItemProps {
-  gift: GiftIdea;
-  onMarkAsBought: (giftId: string) => void;
-  isProcessing?: boolean;
-}
+// Exporter uniquement le type pour la rétrocompatibilité
+export type { BuyingGift as GiftIdea };
 
 const BuyingGiftItem: React.FC<BuyingGiftItemProps> = ({
   gift,
@@ -33,7 +22,7 @@ const BuyingGiftItem: React.FC<BuyingGiftItemProps> = ({
             <span className="text-sm font-medium text-gray-900">
               {gift.title}
             </span>
-            <StatusTag status={gift.status} size="small" />
+            <StatusTag status={gift.status} size="sm" />
           </div>
           <p className="text-sm text-gray-500 mt-1">
             {t('dashboard.for')} {gift.recipients && gift.recipients.length > 0

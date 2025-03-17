@@ -1,14 +1,6 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import BackButton from '../navigation/BackButton';
-
-interface PageHeaderProps {
-  title: string;
-  description?: string;
-  onBackClick?: () => void;
-  actions?: ReactNode;
-  className?: string;
-  showBackButton?: boolean;
-}
+import { PageHeaderProps } from '../../../types';
 
 /**
  * Composant d'en-tête de page réutilisable

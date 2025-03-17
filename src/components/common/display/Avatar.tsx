@@ -1,15 +1,6 @@
 import React from 'react';
 import { twMerge } from 'tailwind-merge';
-
-export interface AvatarProps {
-  name: string;
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-  variant?: 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'info';
-  className?: string;
-  textClassName?: string;
-  fallback?: string;
-  onClick?: () => void;
-}
+import { AvatarProps } from '../../../types';
 
 /**
  * Composant Avatar qui affiche la première lettre du nom fourni dans un cercle

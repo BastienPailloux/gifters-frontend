@@ -1,17 +1,6 @@
-import React, { ButtonHTMLAttributes } from 'react';
+import React from 'react';
 import { twMerge } from 'tailwind-merge';
-
-export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
-export type ButtonSize = 'sm' | 'md' | 'lg';
-
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: ButtonVariant;
-  size?: ButtonSize;
-  fullWidth?: boolean;
-  isLoading?: boolean;
-  startIcon?: React.ReactNode;
-  endIcon?: React.ReactNode;
-}
+import { ButtonProps } from '../../../types';
 
 const Button: React.FC<ButtonProps> = ({
   children,

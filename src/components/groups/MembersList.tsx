@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import MemberItem, { Member } from './MemberItem';
+import MemberItem from './MemberItem';
 import { membershipService } from '../../services/api';
 import useAuth from '../../hooks/useAuth';
 import Button from '../common/forms/Button';
 import InvitationModal from './InvitationModal';
-
-interface MembersListProps {
-  groupId: string;
-  isCurrentUserAdmin?: boolean;
-  groupName: string;
-}
+import { MembersListProps, Member } from '../../types';
 
 const MembersList: React.FC<MembersListProps> = ({ groupId, isCurrentUserAdmin, groupName }) => {
   const { t } = useTranslation();

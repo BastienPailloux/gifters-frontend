@@ -1,20 +1,6 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import Card from './Card';
-
-interface ClickableCardProps {
-  title?: string;
-  subtitle?: string;
-  children: ReactNode;
-  footer?: ReactNode;
-  className?: string;
-  titleClassName?: string;
-  bodyClassName?: string;
-  footerClassName?: string;
-  onClick?: () => void;
-  variant?: 'elevated' | 'outlined' | 'filled';
-  activeClassName?: string;
-  isActive?: boolean;
-}
+import { ClickableCardProps } from '../../../types';
 
 /**
  * Composant ClickableCard - Une extension du composant Card avec des fonctionnalités de clic améliorées

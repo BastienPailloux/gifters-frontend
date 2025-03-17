@@ -5,17 +5,7 @@ import Button from '../common/forms/Button';
 import TextInput from '../common/forms/TextInput';
 import Modal from '../common/modals/Modal';
 import { groupService } from '../../services/api';
-
-interface GroupEditModalProps {
-  group: {
-    id: string;
-    name: string;
-    description?: string;
-  };
-  isOpen: boolean;
-  onClose: () => void;
-  onUpdate: () => void;
-}
+import { GroupEditModalProps } from '../../types/groups';
 
 const GroupEditModal: React.FC<GroupEditModalProps> = ({
   group,

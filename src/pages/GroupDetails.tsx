@@ -10,44 +10,24 @@ import MembersList from '../components/groups/MembersList';
 import GroupEditModal from '../components/groups/GroupEditModal';
 import GiftIdeaCreationModal from '../components/groups/GiftIdeaCreationModal';
 import useAuth from '../hooks/useAuth';
+import { GroupDetailsData, GroupEvent, Member } from '../types/groups';
+import { ApiGiftIdea } from '../types/gift-ideas';
 
-// Types
-interface GroupDetailsData {
-  id: string;
-  name: string;
-  description?: string;
-  members?: {
-    id: string;
-    name: string;
-    email: string;
-    role?: string;
-  }[];
-  events?: {
-    id: string;
-    title: string;
-    date: string;
-  }[];
-  createdAt?: string;
-  updatedAt?: string;
-}
-
-interface Event {
-  id: string;
-  title: string;
-  date: string;
-}
-
-// Type pour la réponse API des idées de cadeaux
-interface ApiGiftIdea {
-  id: number | string;
-  title: string;
-  status: string;
-  forUser?: { id: number | string; name: string } | string;
-  forUserName?: string;
-  recipients?: Array<{ id: number | string; name: string }>;
-  price?: number;
-  for_user_name?: string;
-}
+/**
+ * Adapte les membres du format simplifié de GroupDetailsData au format Member
+ */
+const adaptMembersToFullFormat = (simplifiedMembers: GroupDetailsData['members'] = []): Member[] => {
+  return simplifiedMembers.map(member => ({
+    id: member.id,
+    user_id: member.id,
+    group_id: '', // Sera rempli par le contexte du composant
+    role: (member.role as 'member' | 'admin') || 'member',
+    user_name: member.name,
+    user_email: member.email,
+    email: member.email,
+    name: member.name
+  }));
+};
 
 const GroupDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -219,7 +199,7 @@ const GroupDetails: React.FC = () => {
   };
 
   // Rendu des éléments de liste
-  const renderEvent = (event: Event) => (
+  const renderEvent = (event: GroupEvent) => (
     <div className="flex items-center justify-between">
       <div>
         <p className="text-sm font-medium text-gray-900">{event.title}</p>
@@ -367,8 +347,7 @@ const GroupDetails: React.FC = () => {
         <GiftIdeaCreationModal
           isOpen={isGiftIdeaModalOpen}
           onClose={() => setIsGiftIdeaModalOpen(false)}
-          groupId={id}
-          groupMembers={group.members || []}
+          groupMembers={adaptMembersToFullFormat(group.members)}
           onSuccess={handleGiftIdeaCreationSuccess}
         />
       )}

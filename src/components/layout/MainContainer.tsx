@@ -1,8 +1,5 @@
 import React from 'react';
-
-interface MainContainerProps {
-  children: React.ReactNode;
-}
+import { MainContainerProps } from '../../types';
 
 const MainContainer: React.FC<MainContainerProps> = ({ children }) => {
   return (

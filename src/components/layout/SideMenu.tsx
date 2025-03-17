@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import GroupList from './GroupList';
 import GroupCreationForm from '../common/forms/GroupCreationForm';
+import { SideMenuProps } from '../../types';
 
-const SideMenu: React.FC = () => {
+const SideMenu: React.FC<SideMenuProps> = () => {
   const { t } = useTranslation();
   const [groupListKey, setGroupListKey] = useState(0);
 

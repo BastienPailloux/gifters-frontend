@@ -1,19 +1,5 @@
 import { twMerge } from 'tailwind-merge';
-
-export interface ToggleOption<T extends string | number> {
-  value: T;
-  label: string;
-}
-
-interface ToggleSelectProps<T extends string | number> {
-  options: ToggleOption<T>[];
-  value: T;
-  onChange: (value: T) => void;
-  className?: string;
-  optionClassName?: string;
-  selectedClassName?: string;
-  unselectedClassName?: string;
-}
+import { ToggleSelectProps } from '../../../types';
 
 /**
  * Composant générique permettant de basculer entre plusieurs options

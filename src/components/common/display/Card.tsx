@@ -1,19 +1,6 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { twMerge } from 'tailwind-merge';
-
-interface CardProps {
-  title?: string;
-  subtitle?: string;
-  children: ReactNode;
-  footer?: ReactNode;
-  className?: string;
-  titleClassName?: string;
-  bodyClassName?: string;
-  footerClassName?: string;
-  onClick?: () => void;
-  hoverable?: boolean;
-  variant?: 'elevated' | 'outlined' | 'filled';
-}
+import { CardProps } from '../../../types';
 
 const Card: React.FC<CardProps> = ({
   title,

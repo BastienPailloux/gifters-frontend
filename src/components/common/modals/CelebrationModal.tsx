@@ -2,13 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import Confetti from 'react-confetti-boom';
 import { useTranslation } from 'react-i18next';
 import Modal from './Modal';
-
-interface CelebrationModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  giftTitle?: string;
-  recipientName?: string;
-}
+import { CelebrationModalProps } from '../../../types/gift-ideas';
 
 /**
  * Modal de célébration avec des confettis qui s'affiche lorsqu'un cadeau est marqué comme acheté

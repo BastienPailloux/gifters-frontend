@@ -1,15 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import ColorTag from './ColorTag';
-
-// Définir les types de statuts possibles
-export type GiftStatus = 'proposed' | 'buying' | 'bought';
-
-interface StatusTagProps {
-  status: GiftStatus;
-  className?: string;
-  size?: 'small' | 'medium' | 'large';
-}
+import { GiftStatus, StatusTagProps } from '../../../types';
 
 /**
  * Composant pour afficher un tag coloré indiquant le statut d'une idée cadeau
@@ -41,12 +33,23 @@ const StatusTag: React.FC<StatusTagProps> = ({
     return t(`giftIdeas.status${status.charAt(0).toUpperCase() + status.slice(1)}`);
   };
 
+  // Convertir les tailles du format sm/md/lg vers small/medium/large
+  const convertSize = (size?: 'sm' | 'md' | 'lg') => {
+    if (!size) return undefined;
+    const sizeMap: Record<'sm' | 'md' | 'lg', 'small' | 'medium' | 'large'> = {
+      'sm': 'small',
+      'md': 'medium',
+      'lg': 'large'
+    };
+    return sizeMap[size];
+  };
+
   return (
     <ColorTag
       text={getStatusText(status)}
       color={getStatusColor(status)}
       className={className}
-      size={size}
+      size={convertSize(size)}
     />
   );
 };

@@ -1,12 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-
-interface BackButtonProps {
-  onClick?: () => void;
-  className?: string;
-  label?: string;
-}
+import { BackButtonProps } from '../../../types';
 
 const BackButton: React.FC<BackButtonProps> = ({
   onClick,

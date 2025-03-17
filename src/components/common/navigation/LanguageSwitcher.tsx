@@ -1,14 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
-
-interface LanguageSwitcherProps {
-  variant?: 'dropdown' | 'buttons' | 'minimal';
-  className?: string;
-  buttonClassName?: string;
-  dropdownClassName?: string;
-  languages?: { code: string; name: string; flag?: string }[];
-}
+import { LanguageSwitcherProps } from '../../../types';
 
 const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
   variant = 'dropdown',

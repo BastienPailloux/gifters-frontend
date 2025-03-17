@@ -1,15 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { SideMenuGroupItemProps } from '../../types';
 
-// Interface pour le type Group
-interface GroupItemProps {
-  id: string;
-  name: string;
-  description?: string;
-  isActive?: boolean;
-}
-
-const GroupItem: React.FC<GroupItemProps> = ({ id, name, isActive = false }) => {
+const GroupItem: React.FC<SideMenuGroupItemProps> = ({ id, name, isActive = false }) => {
   return (
     <Link
       to={`/groups/${id}`}

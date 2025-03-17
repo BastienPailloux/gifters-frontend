@@ -1,17 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-
-interface VideoPlayerProps {
-  src: string;
-  poster?: string;
-  autoPlay?: boolean;
-  muted?: boolean;
-  loop?: boolean;
-  controls?: boolean;
-  className?: string;
-  overlayClassName?: string;
-  fallbackImage?: string;
-  aspectRatio?: '16/9' | '4/3' | '1/1' | '21/9';
-}
+import { VideoPlayerProps } from '../../../types';
 
 const VideoPlayer: React.FC<VideoPlayerProps> = ({
   src,
