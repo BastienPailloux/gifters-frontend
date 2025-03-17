@@ -41,6 +41,8 @@ export interface GiftMetadata {
   description?: string;
   price?: number;
   image_url?: string;
+  imageUrl?: string;
+  link?: string;
 }
 
 /**
@@ -93,4 +95,23 @@ export interface GiftIdeaDetailCardProps {
   onMarkAsBuying: () => void;
   onMarkAsBought: () => void;
   formatPrice: (price?: number) => string;
+}
+
+/**
+ * Props pour le composant de saisie manuelle d'une idée cadeau
+ */
+export interface GiftIdeaManualInputProps {
+  giftData: GiftMetadata;
+  onChange: (field: keyof GiftMetadata, value: string | number) => void;
+}
+
+/**
+ * Props pour le composant de récupération d'une idée cadeau à partir d'une URL
+ */
+export interface GiftIdeaFromUrlProps {
+  onMetadataFetched: (metadata: GiftMetadata) => void;
+  isLoading: boolean;
+  setIsLoading: (isLoading: boolean) => void;
+  giftData: GiftMetadata;
+  onChange: (field: keyof GiftMetadata, value: string | number) => void;
 }

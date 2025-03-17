@@ -4,24 +4,7 @@ import ColorTag from '../common/display/ColorTag';
 import ClickableCard from '../common/display/ClickableCard';
 import FlatButton from '../common/forms/FlatButton';
 import Avatar from '../common/display/Avatar';
-
-export interface Member {
-  id: string;
-  user_id: string;
-  group_id: string;
-  role: 'member' | 'admin';
-  user_name: string;
-  user_email: string;
-}
-
-interface MemberItemProps {
-  member: Member;
-  currentUserIsAdmin: boolean;
-  onChangeRole?: (memberId: string, newRole: 'member' | 'admin') => void;
-  onRemove?: (memberId: string) => void;
-  onClick?: () => void;
-  isActive?: boolean;
-}
+import { MemberItemProps } from '../../types';
 
 const MemberItem: React.FC<MemberItemProps> = ({
   member,

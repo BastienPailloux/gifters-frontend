@@ -158,3 +158,28 @@ export interface AvatarProps {
   fallback?: string;
   onClick?: () => void;
 }
+
+/**
+ * Interface pour les props du composant ClickableCard
+ */
+export interface ClickableCardProps extends CardProps {
+  activeClassName?: string;
+  isActive?: boolean;
+}
+
+/**
+ * Interface pour les props du composant FlatButton
+ */
+export interface FlatButtonProps {
+  children: React.ReactNode;
+  onClick?: () => void;
+  variant?: 'primary' | 'secondary' | 'danger';
+  size?: 'small' | 'medium' | 'large';
+  disabled?: boolean;
+  className?: string;
+  asLink?: boolean;
+  href?: string;
+  underline?: 'none' | 'hover' | 'always';
+  icon?: React.ReactNode;
+  iconPosition?: 'left' | 'right';
+}

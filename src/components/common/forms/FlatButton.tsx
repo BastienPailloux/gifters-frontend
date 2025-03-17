@@ -1,20 +1,7 @@
 import React from 'react';
 import { twMerge } from 'tailwind-merge';
 import { Link } from 'react-router-dom';
-
-export interface FlatButtonProps {
-  children: React.ReactNode;
-  onClick?: () => void;
-  variant?: 'primary' | 'secondary' | 'danger';
-  size?: 'small' | 'medium' | 'large';
-  disabled?: boolean;
-  className?: string;
-  asLink?: boolean;
-  href?: string;
-  underline?: 'none' | 'hover' | 'always';
-  icon?: React.ReactNode;
-  iconPosition?: 'left' | 'right';
-}
+import { FlatButtonProps } from '../../../types';
 
 const FlatButton: React.FC<FlatButtonProps> = ({
   children,

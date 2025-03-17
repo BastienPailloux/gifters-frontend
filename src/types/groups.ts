@@ -20,8 +20,13 @@ export interface Group {
  */
 export interface Member {
   id: string;
-  name: string;
-  email: string;
+  user_id: string;
+  group_id: string;
+  role: 'member' | 'admin';
+  user_name: string;
+  user_email: string;
+  name?: string;
+  email?: string;
   avatar?: string;
   isAdmin?: boolean;
   membership_id?: string;
@@ -42,11 +47,11 @@ export interface GroupItemProps {
  */
 export interface MemberItemProps {
   member: Member;
-  isCurrentUser?: boolean;
-  onRemove?: (id: string) => void;
-  onMakeAdmin?: (id: string) => void;
-  onRemoveAdmin?: (id: string) => void;
-  canEdit?: boolean;
+  currentUserIsAdmin: boolean;
+  onChangeRole?: (memberId: string, newRole: 'member' | 'admin') => void;
+  onRemove?: (memberId: string) => void;
+  onClick?: () => void;
+  isActive?: boolean;
 }
 
 /**
@@ -54,7 +59,8 @@ export interface MemberItemProps {
  */
 export interface MembersListProps {
   groupId: string;
-  canEdit?: boolean;
+  isCurrentUserAdmin?: boolean;
+  groupName: string;
   className?: string;
 }
 

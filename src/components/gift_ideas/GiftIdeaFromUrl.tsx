@@ -4,14 +4,7 @@ import Button from '../common/forms/Button';
 import Input from '../common/forms/Input';
 import GiftIdeaManualInput from './GiftIdeaManualInput';
 import { metadataService } from '../../services/api';
-
-export interface GiftMetadata {
-  title?: string;
-  description?: string;
-  price?: number;
-  imageUrl?: string;
-  link?: string; // Champ correspondant à l'attribut 'link' dans le backend
-}
+import { GiftIdeaFromUrlProps, GiftMetadata } from '../../types';
 
 /**
  * Composant pour la création d'une idée cadeau à partir d'une URL
@@ -21,14 +14,6 @@ export interface GiftMetadata {
  * Les problèmes principaux incluent: timeout lors de requêtes, problèmes de CORS, blocage par
  * certains sites, etc. Garder le composant en place pour une réactivation future.
  */
-interface GiftIdeaFromUrlProps {
-  onMetadataFetched: (metadata: GiftMetadata) => void;
-  isLoading: boolean;
-  setIsLoading: (isLoading: boolean) => void;
-  giftData: GiftMetadata;
-  onChange: (field: keyof GiftMetadata, value: string | number) => void;
-}
-
 const GiftIdeaFromUrl: React.FC<GiftIdeaFromUrlProps> = ({
   onMetadataFetched,
   isLoading,
