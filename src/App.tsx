@@ -7,6 +7,7 @@ import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import Dashboard from './pages/Dashboard';
 import GroupDetails from './pages/GroupDetails';
+import GiftIdeaDetails from './pages/GiftIdeaDetails';
 import InvitationJoin from './pages/invitation/InvitationJoin';
 
 // Composant pour les routes protégées
@@ -69,6 +70,18 @@ const AppRoutes: React.FC = () => {
           <ProtectedRoute>
             <LayoutRoute>
               <GroupDetails />
+            </LayoutRoute>
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Route pour les détails d'une idée cadeau */}
+      <Route
+        path="/gift-ideas/:id"
+        element={
+          <ProtectedRoute>
+            <LayoutRoute>
+              <GiftIdeaDetails />
             </LayoutRoute>
           </ProtectedRoute>
         }

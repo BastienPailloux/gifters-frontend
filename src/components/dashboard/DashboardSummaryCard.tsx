@@ -3,12 +3,7 @@ import { useTranslation } from 'react-i18next';
 import Card from '../common/display/Card';
 import UpcomingEventsList from './UpcomingEventsList';
 import BuyingGiftsList from './BuyingGiftsList';
-
-interface User {
-  id: string;
-  name: string;
-  email: string;
-}
+import { User } from '../../types/auth';
 
 interface DashboardSummaryCardProps {
   user: User | null;

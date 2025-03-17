@@ -2,40 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { authService } from '../services/api';
 import { useTranslation } from 'react-i18next';
 import axios, { AxiosError } from 'axios';
-
-// Définir les types pour notre hook
-interface User {
-  id: string;
-  name: string;
-  email: string;
-}
-
-interface AuthState {
-  user: User | null;
-  isAuthenticated: boolean;
-  isLoading: boolean;
-  error: string | null;
-}
-
-interface LoginCredentials {
-  email: string;
-  password: string;
-}
-
-interface RegisterData {
-  name: string;
-  email: string;
-  password: string;
-  password_confirmation: string;
-}
-
-// Interface pour les réponses d'erreur de l'API
-interface ApiErrorResponse {
-  status?: {
-    message: string;
-  };
-  errors?: string[];
-}
+import { AuthState, LoginCredentials, RegisterData, ApiErrorResponse } from '../types/auth';
 
 // Hook personnalisé pour l'authentification
 const useAuth = () => {
