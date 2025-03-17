@@ -309,7 +309,7 @@ const GroupDetails: React.FC = () => {
   }
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
+    <div className="p-6 mx-auto">
       {/* En-tête */}
       <PageHeader
         title={group.name}

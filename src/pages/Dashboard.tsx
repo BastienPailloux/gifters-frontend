@@ -8,7 +8,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="py-6 overflow-y-auto h-full transition-all duration-300 ease-in-out">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-300 ease-in-out">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-300 ease-in-out">
         {/* Carte principale du dashboard avec le résumé */}
         <DashboardSummaryCard user={user} />
 
