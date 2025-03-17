@@ -1,11 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import QuickActionCard, { QuickActionProps } from './QuickActionCard';
+import QuickActionCard from './QuickActionCard';
 import { FaGift, FaCalendarAlt, FaUserCog } from 'react-icons/fa';
-
-interface QuickActionsListProps {
-  className?: string;
-}
+import { QuickActionProps, QuickActionsListProps } from '../../types/dashboard';
 
 const QuickActionsList: React.FC<QuickActionsListProps> = ({ className = '' }) => {
   const { t } = useTranslation();

@@ -5,7 +5,7 @@ import { groupService } from '../../services/api';
 import GroupItem from './GroupItem';
 import { SideMenuGroup, GroupListProps } from '../../types';
 
-const GroupList: React.FC<GroupListProps> = ({ onGroupCreated }) => {
+const GroupList: React.FC<GroupListProps> = () => {
   const { t } = useTranslation();
   const location = useLocation();
   const [groups, setGroups] = useState<SideMenuGroup[]>([]);

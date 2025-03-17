@@ -88,11 +88,36 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 }
 
 /**
+ * Interface pour les props du composant Checkbox
+ */
+export interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
+  label?: ReactNode;
+  error?: string;
+  helperText?: string;
+  labelClassName?: string;
+  containerClassName?: string;
+  checkboxClassName?: string;
+}
+
+/**
  * Interface pour les options d'un toggle select
  */
 export interface ToggleOption<T extends string | number> {
   value: T;
   label: string;
+}
+
+/**
+ * Interface pour les props du composant ToggleSelect
+ */
+export interface ToggleSelectProps<T extends string | number> {
+  options: ToggleOption<T>[];
+  value: T;
+  onChange: (value: T) => void;
+  className?: string;
+  optionClassName?: string;
+  selectedClassName?: string;
+  unselectedClassName?: string;
 }
 
 /**
@@ -182,4 +207,76 @@ export interface FlatButtonProps {
   underline?: 'none' | 'hover' | 'always';
   icon?: React.ReactNode;
   iconPosition?: 'left' | 'right';
+}
+
+/**
+ * Props pour le composant de témoignage
+ */
+export interface TestimonialProps {
+  content: string;
+  author: {
+    name: string;
+    title?: string;
+    company?: string;
+    avatarUrl?: string;
+  };
+  rating?: number;
+  className?: string;
+}
+
+/**
+ * Props pour le composant de slider de témoignages
+ */
+export interface TestimonialSliderProps {
+  testimonials: TestimonialProps[];
+  autoPlay?: boolean;
+  autoPlayInterval?: number;
+  className?: string;
+  maxDesktopItems?: number;
+}
+
+/**
+ * Props pour le composant de bouton retour
+ */
+export interface BackButtonProps {
+  onClick?: () => void;
+  className?: string;
+  label?: string;
+}
+
+/**
+ * Props pour le composant de sélection de langue
+ */
+export interface LanguageSwitcherProps {
+  variant?: 'dropdown' | 'buttons' | 'minimal';
+  className?: string;
+  buttonClassName?: string;
+  dropdownClassName?: string;
+  languages?: { code: string; name: string; flag?: string }[];
+}
+
+/**
+ * Props pour le composant d'étiquette colorée
+ */
+export interface ColorTagProps {
+  text: string;
+  color?: ColorVariant;
+  className?: string;
+  size?: 'small' | 'medium' | 'large';
+}
+
+/**
+ * Props pour le composant de lecteur vidéo
+ */
+export interface VideoPlayerProps {
+  src: string;
+  poster?: string;
+  autoPlay?: boolean;
+  muted?: boolean;
+  loop?: boolean;
+  controls?: boolean;
+  className?: string;
+  overlayClassName?: string;
+  fallbackImage?: string;
+  aspectRatio?: '16/9' | '4/3' | '1/1' | '21/9';
 }

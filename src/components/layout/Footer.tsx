@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { FooterProps } from '../../types';
 
-const Footer: React.FC = () => {
+const Footer: React.FC<FooterProps> = () => {
   const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
 

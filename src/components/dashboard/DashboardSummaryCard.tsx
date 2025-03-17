@@ -3,11 +3,7 @@ import { useTranslation } from 'react-i18next';
 import Card from '../common/display/Card';
 import UpcomingEventsList from './UpcomingEventsList';
 import BuyingGiftsList from './BuyingGiftsList';
-import { User } from '../../types/auth';
-
-interface DashboardSummaryCardProps {
-  user: User | null;
-}
+import { DashboardSummaryCardProps } from '../../types/dashboard';
 
 const DashboardSummaryCard: React.FC<DashboardSummaryCardProps> = ({ user }) => {
   const { t } = useTranslation();

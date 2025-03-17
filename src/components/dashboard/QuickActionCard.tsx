@@ -2,14 +2,7 @@ import React from 'react';
 import Card from '../common/display/Card';
 import Button from '../common/forms/Button';
 import { Link } from 'react-router-dom';
-
-export interface QuickActionProps {
-  title: string;
-  description: string;
-  actionLabel: string;
-  route: string;
-  icon?: React.ReactNode;
-}
+import { QuickActionProps } from '../../types/dashboard';
 
 const QuickActionCard: React.FC<QuickActionProps> = ({
   title,

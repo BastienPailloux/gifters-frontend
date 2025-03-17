@@ -2,18 +2,7 @@ import React, { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { useTranslation } from 'react-i18next';
 import Avatar from '../display/Avatar';
-import { Recipient } from '../../../types/gift-ideas';
-
-export interface RecipientSelectorProps {
-  recipients: Recipient[];
-  selectedIds: string[];
-  onChange: (selectedIds: string[]) => void;
-  className?: string;
-  maxDisplayed?: number;
-  maxSelection?: number;
-  label?: string;
-  errorMessage?: string;
-}
+import { RecipientSelectorProps } from '../../../types';
 
 /**
  * Composant de sélection de destinataires multiples avec des avatars

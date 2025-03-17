@@ -70,7 +70,7 @@ const GiftIdeaCreationModal: React.FC<GiftIdeaCreationModalProps> = ({
         price: giftData.price || 0,
         link: giftData.link,
         image_url: giftData.imageUrl,
-        recipient_ids: selectedRecipients,
+        recipient_ids: selectedRecipients
       });
 
       onSuccess();

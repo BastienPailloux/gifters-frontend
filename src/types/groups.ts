@@ -76,6 +76,22 @@ export interface GroupCreationData {
 }
 
 /**
+ * Props pour le composant de formulaire de création de groupe
+ */
+export interface GroupCreationFormProps {
+  /** Callback appelée après la création réussie d'un groupe */
+  onGroupCreated?: () => void;
+  /** Style personnalisé pour le conteneur */
+  className?: string;
+  /** Texte du bouton pour créer un groupe */
+  buttonText?: string;
+  /** Afficher uniquement l'input (sans bouton) */
+  inputOnly?: boolean;
+  /** Indique si le composant doit refetch les données après création (au lieu de recharger la page) */
+  refetchOnCreate?: boolean;
+}
+
+/**
  * Réponse API pour la liste des groupes
  */
 export interface GroupsApiResponse {
@@ -167,4 +183,31 @@ export interface GroupGiftIdea {
 export interface GroupGiftIdeaItemProps {
   gift: GroupGiftIdea;
   onViewGift: (giftId: string) => void;
+}
+
+/**
+ * Représente les données détaillées d'un groupe
+ */
+export interface GroupDetailsData {
+  id: string;
+  name: string;
+  description?: string;
+  members?: {
+    id: string;
+    name: string;
+    email: string;
+    role?: string;
+  }[];
+  events?: GroupEvent[];
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+/**
+ * Représente un événement dans le contexte d'un groupe
+ */
+export interface GroupEvent {
+  id: string;
+  title: string;
+  date: string;
 }

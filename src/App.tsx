@@ -9,12 +9,9 @@ import Dashboard from './pages/Dashboard';
 import GroupDetails from './pages/GroupDetails';
 import GiftIdeaDetails from './pages/GiftIdeaDetails';
 import InvitationJoin from './pages/invitation/InvitationJoin';
+import { ProtectedRouteProps, LayoutRouteProps } from './types';
 
 // Composant pour les routes protégées
-interface ProtectedRouteProps {
-  children: React.ReactNode;
-}
-
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const { isAuthenticated, isLoading } = useAuth();
 
@@ -32,10 +29,6 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
 };
 
 // Composant pour les routes qui utilisent le Layout commun
-interface LayoutRouteProps {
-  children: React.ReactNode;
-}
-
 const LayoutRoute: React.FC<LayoutRouteProps> = ({ children }) => {
   return <Layout>{children}</Layout>;
 };

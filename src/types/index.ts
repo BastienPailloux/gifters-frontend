@@ -28,3 +28,6 @@ export * from './dashboard';
 
 // Layout types
 export * from './layout';
+
+// Routes types
+export * from './routes';

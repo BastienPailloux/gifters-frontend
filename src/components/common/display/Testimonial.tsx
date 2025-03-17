@@ -1,16 +1,5 @@
 import React from 'react';
-
-export interface TestimonialProps {
-  content: string;
-  author: {
-    name: string;
-    title?: string;
-    company?: string;
-    avatarUrl?: string;
-  };
-  rating?: number;
-  className?: string;
-}
+import { TestimonialProps } from '../../../types';
 
 const Testimonial: React.FC<TestimonialProps> = ({
   content,

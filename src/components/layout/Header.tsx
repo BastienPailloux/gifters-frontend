@@ -4,8 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext';
 import Button from '../common/forms/Button';
 import LanguageSwitcher from '../common/navigation/LanguageSwitcher';
+import { HeaderProps } from '../../types';
 
-const Header: React.FC = () => {
+const Header: React.FC<HeaderProps> = ({ onLogout }) => {
   const { t } = useTranslation();
   const { isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
@@ -16,7 +17,11 @@ const Header: React.FC = () => {
   };
 
   const handleLogout = async () => {
-    await logout();
+    if (onLogout) {
+      onLogout();
+    } else {
+      await logout();
+    }
     navigate('/login');
   };
 

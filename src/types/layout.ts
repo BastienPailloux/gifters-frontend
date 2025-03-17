@@ -56,6 +56,7 @@ export interface HeaderProps {
  */
 export interface LayoutProps {
   children: ReactNode;
+  forceSideMenu?: boolean;
 }
 
 /**

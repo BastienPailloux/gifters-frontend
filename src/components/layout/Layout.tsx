@@ -6,12 +6,7 @@ import SideMenu from './SideMenu';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
-
-interface LayoutProps {
-  children: React.ReactNode;
-  // Prop optionnelle pour forcer l'affichage ou non du SideMenu
-  forceSideMenu?: boolean;
-}
+import { LayoutProps } from '../../types';
 
 const Layout: React.FC<LayoutProps> = ({ children, forceSideMenu }) => {
   const { isAuthenticated } = useAuth();

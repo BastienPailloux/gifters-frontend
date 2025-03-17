@@ -1,13 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Testimonial, { TestimonialProps } from './Testimonial';
-
-interface TestimonialSliderProps {
-  testimonials: TestimonialProps[];
-  autoPlay?: boolean;
-  autoPlayInterval?: number;
-  className?: string;
-  maxDesktopItems?: number;
-}
+import Testimonial from './Testimonial';
+import { TestimonialSliderProps } from '../../../types';
 
 const TestimonialSlider: React.FC<TestimonialSliderProps> = ({
   testimonials,
@@ -18,8 +11,8 @@ const TestimonialSlider: React.FC<TestimonialSliderProps> = ({
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [desktopIndex, setDesktopIndex] = useState(0);
-  const [touchStart, setTouchStart] = useState<number | null>(null);
-  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+  const [touchEndX, setTouchEndX] = useState<number | null>(null);
   const autoPlayTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Gestion du défilement automatique
@@ -114,16 +107,16 @@ const TestimonialSlider: React.FC<TestimonialSliderProps> = ({
 
   // Gestion du swipe sur mobile
   const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStart(e.targetTouches[0].clientX);
+    setTouchStartX(e.targetTouches[0].clientX);
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
+    setTouchEndX(e.targetTouches[0].clientX);
   };
 
   const handleTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-    const distance = touchStart - touchEnd;
+    if (!touchStartX || !touchEndX) return;
+    const distance = touchStartX - touchEndX;
     const isLeftSwipe = distance > 50;
     const isRightSwipe = distance < -50;
 
@@ -133,8 +126,8 @@ const TestimonialSlider: React.FC<TestimonialSliderProps> = ({
       goToPrevious();
     }
 
-    setTouchStart(null);
-    setTouchEnd(null);
+    setTouchStartX(null);
+    setTouchEndX(null);
   };
 
   // Si pas de témoignages, ne rien afficher

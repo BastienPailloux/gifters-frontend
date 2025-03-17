@@ -4,19 +4,7 @@ import { groupService } from '../../../services/api';
 import useOutsideClick from '../../../hooks/useOutsideClick';
 import useKeyPress from '../../../hooks/useKeyPress';
 import { validateGroupName } from '../../../utils/validation';
-
-interface GroupCreationFormProps {
-  /** Callback appelée après la création réussie d'un groupe */
-  onGroupCreated?: () => void;
-  /** Style personnalisé pour le conteneur */
-  className?: string;
-  /** Texte du bouton pour créer un groupe */
-  buttonText?: string;
-  /** Afficher uniquement l'input (sans bouton) */
-  inputOnly?: boolean;
-  /** Indique si le composant doit refetch les données après création (au lieu de recharger la page) */
-  refetchOnCreate?: boolean;
-}
+import { GroupCreationFormProps } from '../../../types';
 
 /**
  * Composant pour la création de groupe avec une interface utilisateur intuitive
