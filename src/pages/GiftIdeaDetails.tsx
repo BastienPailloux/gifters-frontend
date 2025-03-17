@@ -5,9 +5,7 @@ import { giftIdeaService } from '../services/api';
 import Button from '../components/common/forms/Button';
 import PageHeader from '../components/common/layout/PageHeader';
 import StatusTag, { GiftStatus } from '../components/common/display/StatusTag';
-import Card from '../components/common/display/Card';
-import Image from '../components/common/display/Image';
-import LabelValue from '../components/common/display/LabelValue';
+import GiftIdeaDetailCard from '../components/gift-ideas/GiftIdeaDetailCard';
 import useAuth from '../hooks/useAuth';
 
 // Type pour les détails d'un GiftIdea
@@ -70,7 +68,6 @@ const GiftIdeaDetails: React.FC = () => {
 
       try {
         const response = await giftIdeaService.getGiftIdea(id);
-        console.log('response', response);
         setGiftIdea(response.giftIdea);
       } catch (error) {
         console.error('Error fetching gift idea details:', error);
@@ -83,23 +80,9 @@ const GiftIdeaDetails: React.FC = () => {
     fetchGiftIdeaDetails();
   }, [id, t]);
 
-  // Vérifier si l'utilisateur peut interagir avec ce cadeau
-  const canInteract = () => {
-    if (!giftIdea || !user) return false;
-
-    // L'utilisateur ne peut pas acheter son propre cadeau
-    const isRecipient = giftIdea.recipients.some(recipient => recipient.id === user.id);
-    if (isRecipient) return false;
-
-    // Si le cadeau est déjà acheté, personne ne peut interagir
-    if (giftIdea.status === 'bought') return false;
-
-    return true;
-  };
-
   // Gérer l'action "Je vais l'acheter"
   const handleMarkAsBuying = async () => {
-    if (!id || !canInteract()) return;
+    if (!id) return;
 
     try {
       const response = await giftIdeaService.markAsBuying(id);
@@ -112,7 +95,7 @@ const GiftIdeaDetails: React.FC = () => {
 
   // Gérer l'action "J'ai acheté"
   const handleMarkAsBought = async () => {
-    if (!id || !canInteract()) return;
+    if (!id) return;
 
     try {
       const response = await giftIdeaService.markAsBought(id);
@@ -169,117 +152,13 @@ const GiftIdeaDetails: React.FC = () => {
         <StatusTag status={giftIdea.status as GiftStatus} />
       </div>
 
-      <Card
-        variant="elevated"
-        className="mb-6"
-        bodyClassName="p-0"
-      >
-        <div className="relative">
-          {/* Boutons d'action en haut à droite */}
-          <div className="absolute top-4 right-4 flex gap-2 z-10">
-            {canInteract() && (
-              <>
-                {giftIdea.status === 'proposed' && (
-                  <Button variant="primary" onClick={handleMarkAsBuying}>
-                    {t('giftIdeas.markAsBuying')}
-                  </Button>
-                )}
-                {giftIdea.status === 'buying' && giftIdea.buyer?.id === user?.id && (
-                  <Button variant="primary" onClick={handleMarkAsBought}>
-                    {t('giftIdeas.markAsBought')}
-                  </Button>
-                )}
-                {giftIdea.link && (
-                  <a
-                    href={giftIdea.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
-                  >
-                    {t('giftIdeas.visitStore')}
-                  </a>
-                )}
-              </>
-            )}
-          </div>
-
-          {/* Contenu principal */}
-          <div className={`p-6 grid ${giftIdea.image_url ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'} gap-6`}>
-            {/* Colonne de gauche avec l'image (si disponible) */}
-            {giftIdea.image_url && (
-              <div className="flex flex-col">
-                <LabelValue
-                  value={
-                    <Image
-                      src={giftIdea.image_url}
-                      alt={giftIdea.title}
-                      objectFit="contain"
-                      aspectRatio="auto"
-                      rounded
-                      containerClassName="max-h-200"
-                    />
-                  }
-                />
-
-                <div className="mt-auto">
-                  <LabelValue
-                    label={t('giftIdeas.createdBy')}
-                    value={giftIdea.created_by?.name || ''}
-                  />
-
-                  {giftIdea.buyer && (
-                    <LabelValue
-                      label={t('giftIdeas.buyer')}
-                      value={giftIdea.buyer.name}
-                    />
-                  )}
-                </div>
-              </div>
-            )}
-
-            {/* Colonne d'informations (ou colonne unique si pas d'image) */}
-            <div>
-              <LabelValue
-                label={t('giftIdeas.for')}
-                value={giftIdea.recipients.map(recipient => recipient.name).join(', ')}
-                isImportant
-              />
-
-              {giftIdea.price !== undefined && (
-                <LabelValue
-                  label={t('giftIdeas.priceLabel')}
-                  value={formatPrice(giftIdea.price)}
-                  isImportant
-                />
-              )}
-
-              {giftIdea.description && (
-                <LabelValue
-                  label={t('giftIdeas.descriptionLabel')}
-                  value={<p className="whitespace-pre-wrap">{giftIdea.description}</p>}
-                />
-              )}
-
-              {/* Afficher les informations de création/achat quand il n'y a pas d'image */}
-              {!giftIdea.image_url && (
-                <>
-                  <LabelValue
-                    label={t('giftIdeas.createdBy')}
-                    value={giftIdea.created_by?.name || ''}
-                  />
-
-                  {giftIdea.buyer && (
-                    <LabelValue
-                      label={t('giftIdeas.buyer')}
-                      value={giftIdea.buyer.name}
-                    />
-                  )}
-                </>
-              )}
-            </div>
-          </div>
-        </div>
-      </Card>
+      <GiftIdeaDetailCard
+        giftIdea={giftIdea}
+        currentUser={user}
+        onMarkAsBuying={handleMarkAsBuying}
+        onMarkAsBought={handleMarkAsBought}
+        formatPrice={formatPrice}
+      />
     </div>
   );
 };
