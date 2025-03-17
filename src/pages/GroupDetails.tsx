@@ -171,8 +171,8 @@ const GroupDetails: React.FC = () => {
   };
 
   const handleViewGift = (giftId: string) => {
-    // Sera implémenté ultérieurement
-    alert(`View gift ${giftId} functionality coming soon!`);
+    // Naviguer vers la page de détails de l'idée cadeau
+    navigate(`/gift-ideas/${giftId}`);
   };
 
   // Fonction pour rafraîchir les idées de cadeaux après en avoir ajouté une nouvelle

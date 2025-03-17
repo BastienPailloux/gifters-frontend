@@ -6,6 +6,8 @@ import Button from '../components/common/forms/Button';
 import PageHeader from '../components/common/layout/PageHeader';
 import StatusTag, { GiftStatus } from '../components/common/display/StatusTag';
 import Card from '../components/common/display/Card';
+import Image from '../components/common/display/Image';
+import LabelValue from '../components/common/display/LabelValue';
 import useAuth from '../hooks/useAuth';
 
 // Type pour les détails d'un GiftIdea
@@ -206,26 +208,30 @@ const GiftIdeaDetails: React.FC = () => {
             {/* Colonne de gauche avec l'image (si disponible) */}
             {giftIdea.image_url && (
               <div className="flex flex-col">
-                <div className="mb-4">
-                  <p className="text-sm text-gray-500 mb-2">{t('giftIdeas.imageLabel')}</p>
-                  <img
-                    src={giftIdea.image_url}
-                    alt={giftIdea.title}
-                    className="max-w-full h-auto max-h-60 object-contain rounded border"
-                  />
-                </div>
+                <LabelValue
+                  value={
+                    <Image
+                      src={giftIdea.image_url}
+                      alt={giftIdea.title}
+                      objectFit="contain"
+                      aspectRatio="auto"
+                      rounded
+                      containerClassName="max-h-200"
+                    />
+                  }
+                />
 
                 <div className="mt-auto">
-                  <div className="mb-4">
-                    <p className="text-sm text-gray-500">{t('giftIdeas.createdBy')}</p>
-                    <p>{giftIdea.created_by?.name}</p>
-                  </div>
+                  <LabelValue
+                    label={t('giftIdeas.createdBy')}
+                    value={giftIdea.created_by?.name || ''}
+                  />
 
                   {giftIdea.buyer && (
-                    <div className="mb-4">
-                      <p className="text-sm text-gray-500">{t('giftIdeas.buyer')}</p>
-                      <p>{giftIdea.buyer.name}</p>
-                    </div>
+                    <LabelValue
+                      label={t('giftIdeas.buyer')}
+                      value={giftIdea.buyer.name}
+                    />
                   )}
                 </div>
               </div>
@@ -233,59 +239,40 @@ const GiftIdeaDetails: React.FC = () => {
 
             {/* Colonne d'informations (ou colonne unique si pas d'image) */}
             <div>
-              <div className="mb-4">
-                <p className="text-sm text-gray-500">{t('giftIdeas.for')}</p>
-                <p className="font-medium">
-                  {giftIdea.recipients.map(recipient => recipient.name).join(', ')}
-                </p>
-              </div>
+              <LabelValue
+                label={t('giftIdeas.for')}
+                value={giftIdea.recipients.map(recipient => recipient.name).join(', ')}
+                isImportant
+              />
 
               {giftIdea.price !== undefined && (
-                <div className="mb-4">
-                  <p className="text-sm text-gray-500">{t('giftIdeas.priceLabel')}</p>
-                  <p className="font-medium">{formatPrice(giftIdea.price)}</p>
-                </div>
+                <LabelValue
+                  label={t('giftIdeas.priceLabel')}
+                  value={formatPrice(giftIdea.price)}
+                  isImportant
+                />
               )}
 
               {giftIdea.description && (
-                <div className="mb-4">
-                  <p className="text-sm text-gray-500">{t('giftIdeas.descriptionLabel')}</p>
-                  <p className="whitespace-pre-wrap">{giftIdea.description}</p>
-                </div>
+                <LabelValue
+                  label={t('giftIdeas.descriptionLabel')}
+                  value={<p className="whitespace-pre-wrap">{giftIdea.description}</p>}
+                />
               )}
-
-              {giftIdea.link && (
-                <div className="mb-4">
-                  <p className="text-sm text-gray-500">{t('giftIdeas.urlLabel')}</p>
-                  <a
-                    href={giftIdea.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-600 hover:underline break-all"
-                  >
-                    {giftIdea.link}
-                  </a>
-                </div>
-              )}
-
-              <div className="mb-4">
-                <p className="text-sm text-gray-500">{t('giftIdeas.group')}</p>
-                <p>{giftIdea.group_name}</p>
-              </div>
 
               {/* Afficher les informations de création/achat quand il n'y a pas d'image */}
               {!giftIdea.image_url && (
                 <>
-                  <div className="mb-4">
-                    <p className="text-sm text-gray-500">{t('giftIdeas.createdBy')}</p>
-                    <p>{giftIdea.created_by?.name}</p>
-                  </div>
+                  <LabelValue
+                    label={t('giftIdeas.createdBy')}
+                    value={giftIdea.created_by?.name || ''}
+                  />
 
                   {giftIdea.buyer && (
-                    <div className="mb-4">
-                      <p className="text-sm text-gray-500">{t('giftIdeas.buyer')}</p>
-                      <p>{giftIdea.buyer.name}</p>
-                    </div>
+                    <LabelValue
+                      label={t('giftIdeas.buyer')}
+                      value={giftIdea.buyer.name}
+                    />
                   )}
                 </>
               )}
