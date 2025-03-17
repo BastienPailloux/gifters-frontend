@@ -147,6 +147,8 @@ const GiftIdeaCreationModal: React.FC<GiftIdeaCreationModalProps> = ({
             onMetadataFetched={handleMetadataFetched}
             isLoading={isLoading}
             setIsLoading={setIsLoading}
+            giftData={giftData}
+            onChange={handleGiftDataChange}
           />
         ) : (
           <GiftIdeaManualInput

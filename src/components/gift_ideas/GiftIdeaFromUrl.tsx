@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Button from '../common/forms/Button';
 import Input from '../common/forms/Input';
+import GiftIdeaManualInput from './GiftIdeaManualInput';
 
 export interface GiftMetadata {
   title?: string;
@@ -14,16 +15,21 @@ interface GiftIdeaFromUrlProps {
   onMetadataFetched: (metadata: GiftMetadata) => void;
   isLoading: boolean;
   setIsLoading: (isLoading: boolean) => void;
+  giftData: GiftMetadata;
+  onChange: (field: keyof GiftMetadata, value: string | number) => void;
 }
 
 const GiftIdeaFromUrl: React.FC<GiftIdeaFromUrlProps> = ({
   onMetadataFetched,
   isLoading,
-  setIsLoading
+  setIsLoading,
+  giftData,
+  onChange
 }) => {
   const { t } = useTranslation();
   const [url, setUrl] = useState('');
   const [urlError, setUrlError] = useState<string | null>(null);
+  const [metadataFetched, setMetadataFetched] = useState(false);
 
   // Fonction pour récupérer les métadonnées d'une URL
   const fetchMetadata = async (url: string) => {
@@ -51,6 +57,7 @@ const GiftIdeaFromUrl: React.FC<GiftIdeaFromUrlProps> = ({
       };
 
       onMetadataFetched(mockData);
+      setMetadataFetched(true);
     } catch (error) {
       console.error('Error fetching metadata:', error);
       setUrlError(error instanceof Error ? error.message : t('giftIdeas.metadataError'));
@@ -60,7 +67,7 @@ const GiftIdeaFromUrl: React.FC<GiftIdeaFromUrlProps> = ({
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       <div className="flex space-x-2">
         <Input
           id="gift-url"
@@ -85,6 +92,18 @@ const GiftIdeaFromUrl: React.FC<GiftIdeaFromUrlProps> = ({
           </Button>
         </div>
       </div>
+
+      {metadataFetched && (
+        <div className="mt-4 pt-4 border-t border-gray-200">
+          <h3 className="text-sm font-medium text-gray-700 mb-3">
+            {t('giftIdeas.editFetchedMetadata')}
+          </h3>
+          <GiftIdeaManualInput
+            giftData={giftData}
+            onChange={onChange}
+          />
+        </div>
+      )}
     </div>
   );
 };
