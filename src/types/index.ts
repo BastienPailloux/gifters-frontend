@@ -6,6 +6,7 @@
 
 // Auth types
 export * from './auth';
+export * from './auth-components';
 
 // Gift ideas types
 export * from './gift-ideas';
@@ -21,3 +22,6 @@ export * from './ui';
 
 // Common types
 export * from './common';
+
+// Dashboard types
+export * from './dashboard';

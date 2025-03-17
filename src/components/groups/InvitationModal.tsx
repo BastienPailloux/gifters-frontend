@@ -4,13 +4,7 @@ import Button from '../common/forms/Button';
 import TextInput from '../common/forms/TextInput';
 import Modal from '../common/modals/Modal';
 import { invitationService } from '../../services/api';
-
-interface InvitationModalProps {
-  groupId: string;
-  groupName: string;
-  isOpen: boolean;
-  onClose: () => void;
-}
+import { InvitationModalProps } from '../../types/groups';
 
 const InvitationModal: React.FC<InvitationModalProps> = ({
   groupId,

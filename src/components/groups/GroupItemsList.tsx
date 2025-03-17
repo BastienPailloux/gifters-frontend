@@ -1,18 +1,10 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import Card from '../common/display/Card';
 import Button from '../common/forms/Button';
-
-interface GroupItemsListProps<T> {
-  title: string;
-  items: T[] | undefined;
-  emptyMessage: string;
-  actionLabel: string;
-  onAction: () => void;
-  renderItem: (item: T) => ReactNode;
-  className?: string;
-}
+import { GroupItemsListProps } from '../../types/groups';
 
 // Composant générique pour afficher une liste d'éléments avec un titre et une action
+// Ce composant utilise les types centralisés pour une meilleure maintenabilité
 function GroupItemsList<T>({
   title,
   items,

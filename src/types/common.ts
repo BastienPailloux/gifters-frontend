@@ -27,8 +27,8 @@ export interface ApiResponse<T> {
 export interface ApiError {
   status?: {
     message: string;
+    errors?: string[];
   };
-  errors?: string[];
 }
 
 /**
