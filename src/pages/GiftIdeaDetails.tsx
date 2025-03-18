@@ -25,6 +25,22 @@ const GiftIdeaDetails: React.FC = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
   const [groupMembers, setGroupMembers] = useState<Array<{ id: string; name: string; email?: string }>>([]);
 
+  // Fonction pour vérifier si le créateur est aussi un destinataire
+  const isCreatorAlsoRecipient = (): boolean => {
+    if (!giftIdea || !user) return false;
+
+    // Vérifie si l'utilisateur actuel est le créateur
+    const isCreator = giftIdea.created_by_id === user.id;
+
+    // Vérifie si l'utilisateur actuel est aussi un destinataire
+    const isRecipient = giftIdea.recipients?.some(
+      (recipient: { id: string }) => recipient.id === user.id
+    ) || false;
+
+    // Retourne true si les deux conditions sont remplies
+    return isCreator && isRecipient;
+  };
+
   // Formatage du prix en euros
   const formatPrice = (price?: number) => {
     if (!price) return '';
@@ -236,7 +252,7 @@ const GiftIdeaDetails: React.FC = () => {
           onBackClick={handleBackToGroup}
           className="mb-0"
           showBackButton={true}
-          status={giftIdea.status as GiftStatus}
+          status={isCreatorAlsoRecipient() ? 'wishlist' as GiftStatus : giftIdea.status as GiftStatus}
         />
         {headerActions}
       </div>

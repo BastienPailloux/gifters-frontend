@@ -213,6 +213,7 @@
     "unknownUser": "Utilisateur inconnu",
     "close": "Fermer",
     "back": "Retour",
+    "create": "Créer",
     "edit": "Modifier",
     "view": "Voir",
     "email": "Email",
@@ -233,7 +234,12 @@
       "message": "Êtes-vous sûr de vouloir effectuer cette action ?",
       "confirm": "Confirmer",
       "cancel": "Annuler"
-    }
+    },
+    "confirmDeleteGiftIdea": "Êtes-vous sûr de vouloir supprimer cette idée cadeau ?",
+    "statusProposed": "Proposé",
+    "statusBuying": "En cours d'achat",
+    "statusBought": "Acheté",
+    "statusWishlist": "Liste de souhaits"
   },
   "validation": {
     "required": "Ce champ est requis",
@@ -332,6 +338,7 @@
     "statusProposed": "Proposé",
     "statusBuying": "En cours d'achat",
     "statusBought": "Acheté",
+    "statusWishlist": "Liste de souhaits",
     "create": "Ajouter une idée cadeau",
     "edit": "Modifier l'idée cadeau",
     "createNew": "Créer une nouvelle idée de cadeau",
@@ -410,5 +417,20 @@
     "errorCheckingInvitation": "Erreur lors de la vérification de l'invitation",
     "enterInvitationDescription": "Entrez le code d'invitation ou collez le lien d'invitation que vous avez reçu pour rejoindre un groupe.",
     "proceed": "Continuer"
+  },
+  "myGifts": {
+    "title": "Mes Cadeaux",
+    "description": "Gérez les cadeaux que vous avez suggérés et ceux qu'on vous a suggérés",
+    "myWishlist": "Ma liste de souhaits",
+    "mySuggestions": "Idées proposées par moi",
+    "buyingGifts": "Cadeaux en cours d'achat",
+    "boughtGifts": "Cadeaux déjà achetés",
+    "noWishlist": "Aucun cadeau ne vous a été suggéré pour le moment",
+    "noSuggestions": "Vous n'avez pas encore suggéré d'idées de cadeaux pour d'autres",
+    "noBuyingGifts": "Vous n'avez pas de cadeaux en cours d'achat",
+    "noBoughtGifts": "Vous n'avez pas encore acheté de cadeaux",
+    "addedOn": "Ajouté le {{date}}",
+    "markedAsBuying": "Marqué comme 'En cours d'achat' le {{date}}",
+    "markedAsBought": "Acheté le {{date}}"
   }
 }

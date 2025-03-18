@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 /**
  * Statut d'une idée cadeau
  */
-export type GiftStatus = 'proposed' | 'buying' | 'bought';
+export type GiftStatus = 'proposed' | 'buying' | 'bought' | 'wishlist';
 
 /**
  * Variantes de couleurs utilisées dans l'application
@@ -280,4 +280,59 @@ export interface VideoPlayerProps {
   overlayClassName?: string;
   fallbackImage?: string;
   aspectRatio?: '16/9' | '4/3' | '1/1' | '21/9';
+}
+
+/**
+ * Props pour le composant de modal de confirmation
+ */
+export interface ConfirmationModalProps {
+  /**
+   * Détermine si la modal est visible
+   */
+  isOpen: boolean;
+
+  /**
+   * Fonction appelée lors de la fermeture de la modal
+   */
+  onClose: () => void;
+
+  /**
+   * Titre de la modal de confirmation
+   */
+  title?: string;
+
+  /**
+   * Message de confirmation à afficher
+   */
+  message?: string;
+
+  /**
+   * Fonction appelée lorsque l'utilisateur confirme l'action
+   */
+  onConfirm: () => void;
+
+  /**
+   * Texte du bouton de confirmation
+   */
+  confirmText?: string;
+
+  /**
+   * Texte du bouton d'annulation
+   */
+  cancelText?: string;
+
+  /**
+   * Si l'action est en cours (pour afficher un état de chargement)
+   */
+  isLoading?: boolean;
+
+  /**
+   * Variante du bouton de confirmation
+   */
+  confirmVariant?: 'primary' | 'danger' | 'secondary';
+
+  /**
+   * Taille de la modal
+   */
+  size?: 'sm' | 'md' | 'lg' | 'xl';
 }

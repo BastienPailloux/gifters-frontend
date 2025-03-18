@@ -207,6 +207,24 @@ export const giftIdeaService = {
     }
   },
 
+  // Récupérer les idées de cadeaux créées par un utilisateur spécifique
+  getGiftIdeasByCreator: async (creatorId: string, statuses?: string[]) => {
+    try {
+      const params: { created_by_id: string; status?: string[] } = { created_by_id: creatorId };
+
+      // Ajouter les statuts à filtrer s'ils sont spécifiés
+      if (statuses && statuses.length > 0) {
+        params.status = statuses;
+      }
+
+      const response = await api.get('/gift_ideas', { params });
+      return response.data;
+    } catch (error) {
+      console.error(`Error fetching gift ideas created by user ${creatorId}:`, error);
+      throw error;
+    }
+  },
+
   // Récupérer une idée de cadeau spécifique
   getGiftIdea: async (id: string) => {
     const response = await api.get(`/gift_ideas/${id}`);

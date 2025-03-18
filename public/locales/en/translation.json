@@ -213,6 +213,7 @@
     "unknownUser": "Unknown User",
     "close": "Close",
     "back": "Back",
+    "create": "Create",
     "edit": "Edit",
     "view": "View",
     "email": "Email",
@@ -408,5 +409,26 @@
     "errorCheckingInvitation": "Error checking invitation",
     "enterInvitationDescription": "Enter the invitation code or paste the invitation link you received to join a group.",
     "proceed": "Continue"
+  },
+  "myGifts": {
+    "title": "My Gifts",
+    "description": "Manage gifts you've suggested and those suggested for you",
+    "myWishlist": "My wishlist",
+    "mySuggestions": "Ideas suggested by me",
+    "buyingGifts": "Gifts I'm buying",
+    "boughtGifts": "Gifts I've bought",
+    "noWishlist": "No gifts have been suggested for you yet",
+    "noSuggestions": "You haven't suggested gift ideas for others yet",
+    "noBuyingGifts": "You don't have any gifts in progress",
+    "noBoughtGifts": "You haven't bought any gifts yet",
+    "addedOn": "Added on {{date}}",
+    "markedAsBuying": "Marked as 'Buying' on {{date}}",
+    "markedAsBought": "Bought on {{date}}",
+    "confirmDeleteGiftIdea": "Are you sure you want to delete this gift idea?",
+    "statusProposed": "Proposed",
+    "statusBuying": "Buying",
+    "statusBought": "Bought",
+    "statusWishlist": "Wishlist",
+    "create": "Add a gift idea"
   }
 }
