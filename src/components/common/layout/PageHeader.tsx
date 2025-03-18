@@ -1,5 +1,6 @@
 import React from 'react';
 import BackButton from '../navigation/BackButton';
+import StatusTag from '../display/StatusTag';
 import { PageHeaderProps } from '../../../types';
 
 /**
@@ -12,7 +13,8 @@ const PageHeader: React.FC<PageHeaderProps> = ({
   onBackClick,
   actions,
   className = '',
-  showBackButton = true
+  showBackButton = true,
+  status
 }) => {
   return (
     <div className={`mb-8 flex justify-between items-center flex-wrap gap-4 ${className}`}>
@@ -23,7 +25,10 @@ const PageHeader: React.FC<PageHeaderProps> = ({
             className="mb-4"
           />
         )}
-        <h1 className="text-2xl font-bold text-gray-900">{title}</h1>
+        <div className="flex items-center gap-3">
+          <h1 className="text-2xl font-bold text-gray-900">{title}</h1>
+          {status && <StatusTag status={status} />}
+        </div>
         {description && (
           <p className="mt-2 text-gray-500">{description}</p>
         )}

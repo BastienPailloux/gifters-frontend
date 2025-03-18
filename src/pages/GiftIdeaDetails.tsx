@@ -4,11 +4,11 @@ import { useTranslation } from 'react-i18next';
 import { giftIdeaService } from '../services/api';
 import Button from '../components/common/forms/Button';
 import PageHeader from '../components/common/layout/PageHeader';
-import StatusTag from '../components/common/display/StatusTag';
 import GiftIdeaDetailCard from '../components/gift-ideas/GiftIdeaDetailCard';
 import useAuth from '../hooks/useAuth';
 import { GiftStatus, ExtendedGiftIdea } from '../types';
 import { toast } from '../utils/toast';
+import { FaEdit, FaTrash } from 'react-icons/fa';
 
 const GiftIdeaDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -104,14 +104,22 @@ const GiftIdeaDetails: React.FC = () => {
     // setIsEditModalOpen(true);
   };
 
-  // Fermer la modal d'édition (à implémenter dans une tâche future)
-  // const handleCloseEditModal = () => {
-  //   setIsEditModalOpen(false);
-  // };
-
   // Retourner à la liste des cadeaux du groupe
   const handleBackToGroup = () => {
     navigate(-1);
+  };
+
+  // Vérifier si l'utilisateur peut modifier ou supprimer l'idée cadeau
+  const canEditOrDelete = (): boolean => {
+    if (!giftIdea || !user) return false;
+
+    // L'utilisateur peut modifier/supprimer s'il est le créateur de l'idée
+    const isCreator = giftIdea.created_by_id === user.id;
+
+    // Ou s'il est l'acheteur actuel
+    const isBuyer = giftIdea.buyer_id === user.id;
+
+    return isCreator || isBuyer;
   };
 
   if (loading) {
@@ -144,15 +152,50 @@ const GiftIdeaDetails: React.FC = () => {
     );
   }
 
+  // Préparer les actions pour le PageHeader
+  const headerActions = canEditOrDelete() ? (
+    <div className="flex gap-2">
+      <Button
+        variant="outline"
+        onClick={handleEditGiftIdea}
+        className="flex items-center gap-1"
+      >
+        <FaEdit className="h-4 w-4" />
+        {t('common.edit')}
+      </Button>
+
+      <Button
+        variant="danger"
+        onClick={handleDeleteGiftIdea}
+        disabled={isDeleting}
+        className="flex items-center gap-1"
+      >
+        {isDeleting ? (
+          <>
+            <span className="inline-block h-4 w-4 rounded-full border-2 border-t-transparent border-white animate-spin mr-2" />
+            {t('common.deleting')}
+          </>
+        ) : (
+          <>
+            <FaTrash className="h-4 w-4" />
+            {t('common.delete')}
+          </>
+        )}
+      </Button>
+    </div>
+  ) : null;
+
   return (
     <div className="container mx-auto px-4 py-6">
-      <div className="flex items-center mb-6">
+      <div className="flex items-center justify-between mb-6">
         <PageHeader
           title={giftIdea.title}
           onBackClick={handleBackToGroup}
-          className="mb-0 mr-3"
+          className="mb-0"
+          showBackButton={true}
+          status={giftIdea.status as GiftStatus}
         />
-        <StatusTag status={giftIdea.status as GiftStatus} />
+        {headerActions}
       </div>
 
       <GiftIdeaDetailCard
@@ -160,8 +203,6 @@ const GiftIdeaDetails: React.FC = () => {
         currentUser={user}
         onMarkAsBuying={handleMarkAsBuying}
         onMarkAsBought={handleMarkAsBought}
-        onEditGiftIdea={handleEditGiftIdea}
-        onDeleteGiftIdea={isDeleting ? undefined : handleDeleteGiftIdea}
         formatPrice={formatPrice}
       />
 
