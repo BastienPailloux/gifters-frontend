@@ -5,7 +5,7 @@ import { groupService, giftIdeaService } from '../services/api';
 import Button from '../components/common/forms/Button';
 import GroupItemsList from '../components/groups/GroupItemsList';
 import PageHeader from '../components/common/layout/PageHeader';
-import GiftIdeaItem from '../components/groups/GiftIdeaItem';
+import GiftIdeaItem from '../components/gift-ideas/GiftIdeaItem';
 import MembersList from '../components/groups/MembersList';
 import GroupEditModal from '../components/groups/GroupEditModal';
 import { GiftIdeaFormModal } from '../components/gift-ideas/GiftIdeaFormModal';
@@ -145,7 +145,7 @@ const GroupDetails: React.FC = () => {
     alert(`View event ${eventId} functionality coming soon!`);
   };
 
-  const handleViewGift = (giftId: string) => {
+  const handleViewGift = (giftId: string | number) => {
     // Naviguer vers la page de détails de l'idée cadeau
     navigate(`/gift-ideas/${giftId}`);
   };
@@ -215,17 +215,7 @@ const GroupDetails: React.FC = () => {
   // Rendu des idées de cadeaux
   const renderGiftIdea = (gift: ApiGiftIdea) => (
     <GiftIdeaItem
-      gift={{
-        id: String(gift.id),
-        title: gift.title,
-        for_user_name: gift.for_user_name || '',
-        recipients: gift.recipients?.map(r => ({
-          id: String(r.id),
-          name: r.name
-        })),
-        price: gift.price,
-        status: gift.status as 'proposed' | 'buying' | 'bought'
-      }}
+      gift={gift}
       onViewGift={handleViewGift}
     />
   );

@@ -2,58 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import Modal from './Modal';
 import Button from '../forms/Button';
-
-export interface ConfirmationModalProps {
-  /**
-   * Détermine si la modal est visible
-   */
-  isOpen: boolean;
-
-  /**
-   * Fonction appelée lors de la fermeture de la modal
-   */
-  onClose: () => void;
-
-  /**
-   * Titre de la modal de confirmation
-   */
-  title?: string;
-
-  /**
-   * Message de confirmation à afficher
-   */
-  message?: string;
-
-  /**
-   * Fonction appelée lorsque l'utilisateur confirme l'action
-   */
-  onConfirm: () => void;
-
-  /**
-   * Texte du bouton de confirmation
-   */
-  confirmText?: string;
-
-  /**
-   * Texte du bouton d'annulation
-   */
-  cancelText?: string;
-
-  /**
-   * Si l'action est en cours (pour afficher un état de chargement)
-   */
-  isLoading?: boolean;
-
-  /**
-   * Variante du bouton de confirmation
-   */
-  confirmVariant?: 'primary' | 'danger' | 'secondary';
-
-  /**
-   * Taille de la modal
-   */
-  size?: 'sm' | 'md' | 'lg' | 'xl';
-}
+import { ConfirmationModalProps } from '../../../types/ui';
 
 /**
  * Composant réutilisable pour afficher une modal de confirmation

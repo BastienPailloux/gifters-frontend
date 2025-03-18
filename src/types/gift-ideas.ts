@@ -63,11 +63,9 @@ export interface GiftMetadata {
  * Props pour le composant GiftIdeaItem
  */
 export interface GiftIdeaItemProps {
-  giftIdea: GiftIdea;
-  onClick?: (id: string) => void;
-  onMarkAsBuying?: (id: string) => void;
-  onMarkAsBought?: (id: string) => void;
-  canEdit?: boolean;
+  gift: ApiGiftIdea;
+  onViewGift: (giftId: number | string) => void;
+  hideStatus?: boolean;
 }
 
 /**

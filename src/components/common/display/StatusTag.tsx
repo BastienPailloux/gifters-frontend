@@ -23,6 +23,8 @@ const StatusTag: React.FC<StatusTagProps> = ({
         return 'yellow';
       case 'bought':
         return 'green';
+      case 'wishlist':
+        return 'purple';
       default:
         return 'gray';
     }
