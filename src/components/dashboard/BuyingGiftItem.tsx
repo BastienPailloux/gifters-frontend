@@ -27,7 +27,7 @@ const BuyingGiftItem: React.FC<BuyingGiftItemProps> = ({
           <p className="text-sm text-gray-500 mt-1">
             {t('dashboard.for')} {gift.recipients && gift.recipients.length > 0
               ? gift.recipients.map(r => r.name).join(', ')
-              : gift.for_user_name} • {gift.group_name}
+              : gift.for_user_name}
           </p>
         </div>
       </div>
