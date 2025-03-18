@@ -33,7 +33,7 @@ const Header: React.FC<HeaderProps> = ({ onLogout }) => {
           <Link to="/dashboard" className="text-white hover:text-primary-200 font-medium">
             {t('header.dashboard')}
           </Link>
-          <Link to="/groups" className="text-white hover:text-primary-200 font-medium">
+          <Link to="/my-groups" className="text-white hover:text-primary-200 font-medium">
             {t('header.groups')}
           </Link>
           <Link to="/my-gifts" className="text-white hover:text-primary-200 font-medium">
@@ -179,7 +179,7 @@ const Header: React.FC<HeaderProps> = ({ onLogout }) => {
                   <Link to="/dashboard" className="text-white hover:text-primary-200 font-medium">
                     {t('header.dashboard')}
                   </Link>
-                  <Link to="/groups" className="text-white hover:text-primary-200 font-medium">
+                  <Link to="/my-groups" className="text-white hover:text-primary-200 font-medium">
                     {t('header.groups')}
                   </Link>
                   <Link to="/my-gifts" className="text-white hover:text-primary-200 font-medium">

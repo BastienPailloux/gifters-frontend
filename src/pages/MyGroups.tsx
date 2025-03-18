@@ -4,10 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { groupService } from '../services/api';
 import useAuth from '../hooks/useAuth';
 import PageHeader from '../components/common/layout/PageHeader';
-import Card from '../components/common/display/Card';
 import Button from '../components/common/forms/Button';
 import { Group } from '../types/groups';
-import GroupEditModal from '../components/groups/GroupEditModal';
+import GroupsList from '../components/groups/GroupsList';
+import AddGroupCard from '../components/groups/AddGroupCard';
+import GroupFormModal from '../components/groups/GroupFormModal';
 
 /**
  * Page "Mes Groupes" qui affiche tous les groupes de l'utilisateur
@@ -66,70 +67,7 @@ const MyGroups: React.FC = () => {
     fetchGroups();
   };
 
-  // Rendu d'un groupe
-  const renderGroupItem = (group: Group) => (
-    <div className="flex items-center justify-between py-3 hover:bg-gray-50 rounded-md px-3 transition-colors duration-200" key={group.id}>
-      <div>
-        <p className="text-sm font-medium text-gray-900">{group.name}</p>
-        {group.description && (
-          <p className="text-sm text-gray-500 truncate max-w-xs">{group.description}</p>
-        )}
-        <p className="text-xs text-gray-400">
-          {group.member_count === 1
-            ? t('groups.memberCount.singular', { count: 1 })
-            : t('groups.memberCount.plural', { count: group.member_count || 0 })}
-        </p>
-      </div>
-      <Button
-        variant="ghost"
-        size="sm"
-        onClick={() => handleViewGroup(group.id)}
-      >
-        {t('common.view')}
-      </Button>
-    </div>
-  );
-
-  // Rendu d'un élément "Ajouter un groupe"
-  const renderAddGroupItem = () => (
-    <div
-      className="flex items-center justify-center py-6 border-2 border-dashed border-gray-300 rounded-md hover:bg-gray-50 cursor-pointer transition-colors duration-200"
-      onClick={handleCreateGroup}
-    >
-      <div className="text-center">
-        <div className="flex justify-center">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-10 w-10 text-gray-400"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-            />
-          </svg>
-        </div>
-        <p className="mt-2 text-sm font-medium text-gray-900">{t('groups.createNew')}</p>
-        <p className="mt-1 text-xs text-gray-500">{t('groups.createNewSubtitle')}</p>
-      </div>
-    </div>
-  );
-
-  if (isLoading) {
-    return (
-      <div className="p-4">
-        <PageHeader title={t('groups.myGroups')} />
-        <div className="flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
-        </div>
-      </div>
-    );
-  }
-
+  // Afficher seulement le message d'erreur si nécessaire
   if (error) {
     return (
       <div className="p-4">
@@ -156,28 +94,24 @@ const MyGroups: React.FC = () => {
         }
       />
 
-      <Card>
-        <div className="p-4 divide-y divide-gray-200">
-          {groups.length === 0 && !isLoading ? (
-            <p className="text-gray-500 p-4 text-center">
-              {t('groups.noGroups')}
-            </p>
-          ) : (
-            groups.map(group => renderGroupItem(group))
-          )}
-        </div>
-      </Card>
+      <GroupsList
+        groups={groups}
+        onViewGroup={handleViewGroup}
+        isLoading={isLoading}
+        emptyMessage={t('groups.noGroups')}
+      />
 
       <div className="mt-6">
-        {renderAddGroupItem()}
+        <AddGroupCard onClick={handleCreateGroup} />
       </div>
 
       {/* Modal pour créer un nouveau groupe */}
       {isCreateModalOpen && (
-        <GroupEditModal
+        <GroupFormModal
+          mode="create"
           isOpen={isCreateModalOpen}
           onClose={() => setIsCreateModalOpen(false)}
-          onUpdate={handleGroupCreated}
+          onSuccess={handleGroupCreated}
           group={{ id: '', name: '', description: '' }}
         />
       )}

@@ -7,7 +7,7 @@ import GroupItemsList from '../components/groups/GroupItemsList';
 import PageHeader from '../components/common/layout/PageHeader';
 import GiftIdeaItem from '../components/gift-ideas/GiftIdeaItem';
 import MembersList from '../components/groups/MembersList';
-import GroupEditModal from '../components/groups/GroupEditModal';
+import GroupFormModal from '../components/groups/GroupFormModal';
 import { GiftIdeaFormModal } from '../components/gift-ideas/GiftIdeaFormModal';
 import useAuth from '../hooks/useAuth';
 import { GroupDetailsData, GroupEvent } from '../types/groups';
@@ -250,35 +250,32 @@ const GroupDetails: React.FC = () => {
 
   if (error || !group) {
     return (
-      <div className="p-8">
-        <div className="bg-red-50 border border-red-200 rounded-md p-4 mb-6">
-          <div className="flex">
-            <div className="flex-shrink-0">
-              <svg className="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-              </svg>
-            </div>
-            <div className="ml-3">
-              <h3 className="text-sm font-medium text-red-800">{error || t('common.error')}</h3>
-            </div>
-          </div>
+      <div className="p-4">
+        <div className="bg-red-50 p-4 rounded-md text-red-600">
+          {error || t('common.notFound')}
         </div>
-        <Button
-          variant="outline"
-          onClick={handleBackClick}
-        >
-          {t('common.back') || 'Back'}
-        </Button>
       </div>
     );
   }
 
+  // Formater la description avec le nombre de membres
+  const getFormattedDescription = () => {
+    const memberCount = group.members_count || (group.members?.length || 0);
+    const baseDescription = group.description || '';
+    const memberCountText = memberCount === 1
+      ? t('groups.memberCount.singular', { count: 1 })
+      : t('groups.memberCount.plural', { count: memberCount });
+
+    return baseDescription
+      ? `${baseDescription} · ${memberCountText}`
+      : memberCountText;
+  };
+
   return (
-    <div className="p-6 mx-auto">
-      {/* En-tête */}
+    <div className="p-4">
       <PageHeader
         title={group.name}
-        description={group.description}
+        description={getFormattedDescription()}
         onBackClick={handleBackClick}
         actions={renderHeaderActions()}
       />
@@ -315,11 +312,12 @@ const GroupDetails: React.FC = () => {
       )}
 
       {isGroupEditModalOpen && (
-        <GroupEditModal
+        <GroupFormModal
+          mode="edit"
           isOpen={isGroupEditModalOpen}
           onClose={() => setIsGroupEditModalOpen(false)}
           group={group}
-          onUpdate={() => {
+          onSuccess={() => {
             // Rafraîchir les données du groupe
             if (id) {
               fetchGroupDetails();

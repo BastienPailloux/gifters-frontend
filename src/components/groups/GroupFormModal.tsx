@@ -5,20 +5,26 @@ import Button from '../common/forms/Button';
 import TextInput from '../common/forms/TextInput';
 import Modal from '../common/modals/Modal';
 import { groupService } from '../../services/api';
-import { GroupEditModalProps } from '../../types/groups';
+import { GroupFormModalProps } from '../../types/groups';
 
-const GroupEditModal: React.FC<GroupEditModalProps> = ({
+/**
+ * Composant qui affiche un modal pour créer ou modifier un groupe
+ * Ce composant peut fonctionner en deux modes: création ou édition
+ */
+const GroupFormModal: React.FC<GroupFormModalProps> = ({
+  mode = 'create',
   group,
   isOpen,
   onClose,
-  onUpdate,
+  onSuccess,
 }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const isCreateMode = mode === 'create';
 
   // États pour le formulaire
-  const [name, setName] = useState(group.name);
-  const [description, setDescription] = useState(group.description || '');
+  const [name, setName] = useState(group?.name || '');
+  const [description, setDescription] = useState(group?.description || '');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
@@ -37,27 +43,46 @@ const GroupEditModal: React.FC<GroupEditModalProps> = ({
     setError(null);
 
     try {
-      await groupService.updateGroup(group.id, {
-        name: name.trim(),
-        description: description.trim(),
-      });
+      if (isCreateMode) {
+        // Création d'un nouveau groupe
+        await groupService.createGroup({
+          name: name.trim(),
+          description: description.trim(),
+        });
 
-      // Émettre un événement pour mettre à jour la liste des groupes dans le SideMenu
-      const groupUpdatedEvent = new Event('groupUpdated');
-      document.dispatchEvent(groupUpdatedEvent);
+        // Émettre un événement pour mettre à jour la liste des groupes dans le SideMenu
+        const groupCreatedEvent = new Event('groupCreated');
+        document.dispatchEvent(groupCreatedEvent);
+      } else {
+        // Modification d'un groupe existant
+        await groupService.updateGroup(group.id, {
+          name: name.trim(),
+          description: description.trim(),
+        });
 
-      onUpdate();
+        // Émettre un événement pour mettre à jour la liste des groupes dans le SideMenu
+        const groupUpdatedEvent = new Event('groupUpdated');
+        document.dispatchEvent(groupUpdatedEvent);
+      }
+
+      onSuccess();
       onClose();
     } catch (err) {
-      console.error('Error updating group:', err);
-      setError(t('groups.updateError') || 'Failed to update group');
+      console.error(`Error ${isCreateMode ? 'creating' : 'updating'} group:`, err);
+      setError(
+        isCreateMode
+          ? t('groups.createError') || 'Failed to create group'
+          : t('groups.updateError') || 'Failed to update group'
+      );
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Gestionnaire de suppression du groupe
+  // Gestionnaire de suppression du groupe (uniquement en mode édition)
   const handleDelete = async () => {
+    if (isCreateMode || !group?.id) return;
+
     setIsLoading(true);
     setError(null);
 
@@ -79,11 +104,16 @@ const GroupEditModal: React.FC<GroupEditModalProps> = ({
     }
   };
 
+  // Titre du modal en fonction du mode
+  const modalTitle = isCreateMode
+    ? t('groups.createGroup') || 'Create Group'
+    : t('groups.editGroup') || 'Edit Group';
+
   return (
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title={t('groups.editGroup') || 'Edit Group'}
+      title={modalTitle}
       size="md"
     >
       {!showDeleteConfirm ? (
@@ -110,15 +140,18 @@ const GroupEditModal: React.FC<GroupEditModalProps> = ({
           />
 
           <div className="mt-6 flex justify-between">
-            <Button
-              type="button"
-              variant="danger"
-              onClick={() => setShowDeleteConfirm(true)}
-            >
-              {t('common.delete') || 'Delete'}
-            </Button>
+            {/* Bouton Supprimer uniquement visible en mode édition */}
+            {!isCreateMode && (
+              <Button
+                type="button"
+                variant="danger"
+                onClick={() => setShowDeleteConfirm(true)}
+              >
+                {t('common.delete') || 'Delete'}
+              </Button>
+            )}
 
-            <div className="flex space-x-3">
+            <div className={`flex space-x-3 ${isCreateMode ? 'ml-auto' : ''}`}>
               <Button
                 type="button"
                 variant="secondary"
@@ -142,7 +175,9 @@ const GroupEditModal: React.FC<GroupEditModalProps> = ({
                     {t('common.saving') || 'Saving...'}
                   </span>
                 ) : (
-                  t('common.save') || 'Save'
+                  isCreateMode
+                    ? t('common.create') || 'Create'
+                    : t('common.save') || 'Save'
                 )}
               </Button>
             </div>
@@ -165,7 +200,7 @@ const GroupEditModal: React.FC<GroupEditModalProps> = ({
 
           <div className="mb-6">
             <p className="text-sm text-gray-700 mb-2">
-              {t('groups.typeGroupNameToConfirm', { name: group.name }) || `Please type "${group.name}" to confirm:`}
+              {t('groups.typeGroupNameToConfirm', { name: group?.name }) || `Please type "${group?.name}" to confirm:`}
             </p>
             <TextInput
               value={confirmGroupName}
@@ -188,7 +223,7 @@ const GroupEditModal: React.FC<GroupEditModalProps> = ({
               type="button"
               variant="danger"
               onClick={handleDelete}
-              disabled={isLoading || confirmGroupName !== group.name}
+              disabled={isLoading || confirmGroupName !== group?.name}
             >
               {isLoading ? (
                 <span className="flex items-center">
@@ -209,4 +244,4 @@ const GroupEditModal: React.FC<GroupEditModalProps> = ({
   );
 };
 
-export default GroupEditModal;
+export default GroupFormModal;
