@@ -8,24 +8,19 @@ import PageHeader from '../components/common/layout/PageHeader';
 import GiftIdeaItem from '../components/groups/GiftIdeaItem';
 import MembersList from '../components/groups/MembersList';
 import GroupEditModal from '../components/groups/GroupEditModal';
-import GiftIdeaCreationModal from '../components/groups/GiftIdeaCreationModal';
+import { GiftIdeaFormModal } from '../components/gift-ideas/GiftIdeaFormModal';
 import useAuth from '../hooks/useAuth';
-import { GroupDetailsData, GroupEvent, Member } from '../types/groups';
+import { GroupDetailsData, GroupEvent } from '../types/groups';
 import { ApiGiftIdea } from '../types/gift-ideas';
 
 /**
- * Adapte les membres du format simplifié de GroupDetailsData au format Member
+ * Adapte les membres du format simplifié de GroupDetailsData au format compatible avec GiftIdeaFormModal
  */
-const adaptMembersToFullFormat = (simplifiedMembers: GroupDetailsData['members'] = []): Member[] => {
+const adaptMembersToFullFormat = (simplifiedMembers: GroupDetailsData['members'] = []): Array<{ id: string; name: string; email?: string }> => {
   return simplifiedMembers.map(member => ({
     id: member.id,
-    user_id: member.id,
-    group_id: '', // Sera rempli par le contexte du composant
-    role: (member.role as 'member' | 'admin') || 'member',
-    user_name: member.name,
-    user_email: member.email,
-    email: member.email,
-    name: member.name
+    name: member.name || 'Unknown',
+    email: member.email
   }));
 };
 
@@ -344,11 +339,12 @@ const GroupDetails: React.FC = () => {
       )}
 
       {isGiftIdeaModalOpen && group && id && (
-        <GiftIdeaCreationModal
+        <GiftIdeaFormModal
           isOpen={isGiftIdeaModalOpen}
           onClose={() => setIsGiftIdeaModalOpen(false)}
           groupMembers={adaptMembersToFullFormat(group.members)}
           onSuccess={handleGiftIdeaCreationSuccess}
+          mode="create"
         />
       )}
     </div>

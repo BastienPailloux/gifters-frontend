@@ -169,6 +169,7 @@ export interface PageHeaderProps {
   actions?: ReactNode;
   className?: string;
   showBackButton?: boolean;
+  status?: GiftStatus;
 }
 
 /**

@@ -35,29 +35,31 @@ const GiftIdeaDetailCard: React.FC<GiftIdeaDetailCardProps> = ({
 
   // Rendu des boutons d'action
   const renderActionButtons = () => {
-    if (!canInteract()) return null;
+    const canBuyOrMark = canInteract();
+
+    if (!canBuyOrMark) return null;
 
     return (
-      <div className="flex gap-2 mb-4">
-        {giftIdea.status === 'proposed' && (
-          <Button variant="primary" onClick={onMarkAsBuying}>
-            {t('giftIdeas.markAsBuying')}
-          </Button>
+      <div className="flex gap-2 mb-4 flex-wrap">
+        {canBuyOrMark && (
+          <>
+            {giftIdea.status === 'proposed' && (
+              <Button variant="primary" onClick={onMarkAsBuying}>
+                {t('giftIdeas.markAsBuying')}
+              </Button>
+            )}
+            {giftIdea.status === 'buying' && giftIdea.buyer?.id === currentUser?.id && (
+              <Button variant="primary" onClick={onMarkAsBought}>
+                {t('giftIdeas.markAsBought')}
+              </Button>
+            )}
+          </>
         )}
-        {giftIdea.status === 'buying' && giftIdea.buyer?.id === currentUser?.id && (
-          <Button variant="primary" onClick={onMarkAsBought}>
-            {t('giftIdeas.markAsBought')}
-          </Button>
-        )}
+
         {giftIdea.link && (
-          <a
-            href={giftIdea.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
-          >
+          <Button variant="outline" onClick={() => window.open(giftIdea.link, '_blank')}>
             {t('giftIdeas.visitStore')}
-          </a>
+          </Button>
         )}
       </div>
     );
