@@ -98,18 +98,10 @@ export interface SingleGiftIdeaApiResponse {
  * Props pour le composant de carte détaillée d'une idée cadeau
  */
 export interface GiftIdeaDetailCardProps {
-  giftIdea: GiftIdea & {
-    recipients: Array<{
-      id: string;
-      name: string;
-    }>;
-    group_name?: string;
-  };
+  giftIdea: ExtendedGiftIdea;
   currentUser: User | null;
   onMarkAsBuying: () => void;
   onMarkAsBought: () => void;
-  onEditGiftIdea?: () => void;
-  onDeleteGiftIdea?: () => void;
   formatPrice: (price?: number) => string;
 }
 
@@ -203,4 +195,20 @@ export interface ExtendedGiftIdea extends GiftIdea {
     name: string;
   }>;
   group_name?: string;
+}
+
+/**
+ * Props pour le composant GiftIdeaFormModal
+ */
+export interface GiftIdeaFormModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  groupMembers: Array<{
+    id: string;
+    name: string;
+    email?: string;
+  }>;
+  onSuccess: () => void;
+  mode: 'create' | 'edit';
+  giftIdea?: ExtendedGiftIdea;
 }

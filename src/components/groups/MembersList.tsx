@@ -5,6 +5,7 @@ import { membershipService } from '../../services/api';
 import useAuth from '../../hooks/useAuth';
 import Button from '../common/forms/Button';
 import InvitationModal from './InvitationModal';
+import ConfirmationModal from '../common/modals/ConfirmationModal';
 import { MembersListProps, Member } from '../../types';
 
 const MembersList: React.FC<MembersListProps> = ({ groupId, isCurrentUserAdmin, groupName }) => {
@@ -18,6 +19,9 @@ const MembersList: React.FC<MembersListProps> = ({ groupId, isCurrentUserAdmin, 
   const [adminStatusDetermined, setAdminStatusDetermined] = useState<boolean>(isCurrentUserAdmin !== undefined);
   const [selectedMemberId, setSelectedMemberId] = useState<string | null>(null);
   const [isInvitationModalOpen, setIsInvitationModalOpen] = useState<boolean>(false);
+  const [isRemoveModalOpen, setIsRemoveModalOpen] = useState<boolean>(false);
+  const [memberToRemove, setMemberToRemove] = useState<string | null>(null);
+  const [isRemoving, setIsRemoving] = useState<boolean>(false);
 
   useEffect(() => {
     // Si le statut admin est déjà fourni par la prop, on le considère comme déterminé
@@ -73,22 +77,40 @@ const MembersList: React.FC<MembersListProps> = ({ groupId, isCurrentUserAdmin, 
     }
   };
 
+  const openRemoveModal = (membershipId: string) => {
+    setMemberToRemove(membershipId);
+    setIsRemoveModalOpen(true);
+  };
+
+  const closeRemoveModal = () => {
+    setIsRemoveModalOpen(false);
+    setMemberToRemove(null);
+  };
+
   const handleRemoveMember = async (membershipId: string) => {
-    if (window.confirm(t('groups.confirmRemoveMember'))) {
-      try {
-        await membershipService.removeMember(groupId, membershipId);
-        // Mettre à jour l'état local pour refléter le changement
-        setMembers(prevMembers =>
-          prevMembers.filter(member => member.id !== membershipId)
-        );
-        // Si nous supprimons le membre sélectionné, réinitialiser la sélection
-        if (selectedMemberId === membershipId) {
-          setSelectedMemberId(null);
-        }
-      } catch (err) {
-        console.error('Error removing member:', err);
-        setError(t('groups.errorRemovingMember'));
+    openRemoveModal(membershipId);
+  };
+
+  const confirmRemoveMember = async () => {
+    if (!memberToRemove || !groupId) return;
+
+    try {
+      setIsRemoving(true);
+      await membershipService.removeMember(groupId, memberToRemove);
+      // Mettre à jour l'état local pour refléter le changement
+      setMembers(prevMembers =>
+        prevMembers.filter(member => member.id !== memberToRemove)
+      );
+      // Si nous supprimons le membre sélectionné, réinitialiser la sélection
+      if (selectedMemberId === memberToRemove) {
+        setSelectedMemberId(null);
       }
+    } catch (err) {
+      console.error('Error removing member:', err);
+      setError(t('groups.errorRemovingMember'));
+    } finally {
+      setIsRemoving(false);
+      closeRemoveModal();
     }
   };
 
@@ -159,6 +181,17 @@ const MembersList: React.FC<MembersListProps> = ({ groupId, isCurrentUserAdmin, 
         groupName={groupName}
         isOpen={isInvitationModalOpen}
         onClose={closeInvitationModal}
+      />
+
+      <ConfirmationModal
+        isOpen={isRemoveModalOpen}
+        onClose={closeRemoveModal}
+        title={t('groups.removeMember')}
+        message={t('groups.confirmRemoveMember')}
+        onConfirm={confirmRemoveMember}
+        isLoading={isRemoving}
+        confirmVariant="danger"
+        confirmText={isRemoving ? t('common.deleting') : t('common.delete')}
       />
     </div>
   );

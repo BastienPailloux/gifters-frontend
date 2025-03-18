@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { giftIdeaService } from '../services/api';
+import { giftIdeaService, membershipService } from '../services/api';
 import Button from '../components/common/forms/Button';
 import PageHeader from '../components/common/layout/PageHeader';
 import GiftIdeaDetailCard from '../components/gift-ideas/GiftIdeaDetailCard';
+import { GiftIdeaFormModal } from '../components/gift-ideas/GiftIdeaFormModal';
 import useAuth from '../hooks/useAuth';
 import { GiftStatus, ExtendedGiftIdea } from '../types';
-import { toast } from '../utils/toast';
 import { FaEdit, FaTrash } from 'react-icons/fa';
+import ConfirmationModal from '../components/common/modals/ConfirmationModal';
 
 const GiftIdeaDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -20,8 +21,9 @@ const GiftIdeaDetails: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
-  // La modal d'édition sera implémentée dans une tâche future
-  // const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
+  const [groupMembers, setGroupMembers] = useState<Array<{ id: string; name: string; email?: string }>>([]);
 
   // Formatage du prix en euros
   const formatPrice = (price?: number) => {
@@ -40,6 +42,37 @@ const GiftIdeaDetails: React.FC = () => {
       try {
         const response = await giftIdeaService.getGiftIdea(id);
         setGiftIdea(response.giftIdea as ExtendedGiftIdea);
+
+        // Récupérer les membres du groupe pour la modal d'édition
+        if (response.giftIdea.group_id) {
+          try {
+            const groupResponse = await membershipService.getGroupMembers(response.giftIdea.group_id);
+
+            // Assurons-nous que tous les destinataires actuels sont disponibles comme options
+            const members = groupResponse.members || [];
+
+            // Si nous avons des destinataires dans l'idée cadeau
+            if (response.giftIdea.recipients && response.giftIdea.recipients.length > 0) {
+              // Créer un ensemble des IDs des membres déjà présents pour éviter les doublons
+              const existingMemberIds = new Set(members.map((m: { id: string }) => m.id));
+
+              // Ajouter les destinataires qui ne sont pas déjà dans la liste des membres
+              response.giftIdea.recipients.forEach((recipient: { id: string; name: string }) => {
+                if (!existingMemberIds.has(recipient.id)) {
+                  members.push({
+                    id: recipient.id,
+                    name: recipient.name,
+                    email: ''
+                  });
+                }
+              });
+            }
+
+            setGroupMembers(members);
+          } catch (error) {
+            console.error('Error fetching group members:', error);
+          }
+        }
       } catch (error) {
         console.error('Error fetching gift idea details:', error);
         setError(t('common.error') || 'Failed to load gift idea details');
@@ -60,7 +93,6 @@ const GiftIdeaDetails: React.FC = () => {
       setGiftIdea(response.giftIdea as ExtendedGiftIdea);
     } catch (error) {
       console.error('Error marking gift as buying:', error);
-      alert(t('giftIdeas.errorMarkingAsBuying'));
     }
   };
 
@@ -73,40 +105,60 @@ const GiftIdeaDetails: React.FC = () => {
       setGiftIdea(response.giftIdea as ExtendedGiftIdea);
     } catch (error) {
       console.error('Error marking gift as bought:', error);
-      alert(t('giftIdeas.errorMarkingAsBought'));
     }
   };
 
   // Gérer la suppression de l'idée cadeau
   const handleDeleteGiftIdea = async () => {
-    if (!id || !window.confirm(t('giftIdeas.confirmDelete'))) return;
+    if (!id) return;
 
     setIsDeleting(true);
     try {
       await giftIdeaService.deleteGiftIdea(id);
       // Si la suppression réussit, naviguer vers la page de groupe ou le dashboard
       navigate(-1);
-      // Notify successful deletion
-      toast.success(t('giftIdeas.deleteSuccess'));
     } catch (error) {
       console.error('Error deleting gift idea:', error);
-      toast.error(t('giftIdeas.deleteError'));
     } finally {
       setIsDeleting(false);
+      setIsDeleteModalOpen(false);
     }
   };
 
-  // Ouvrir la modal d'édition (à implémenter dans une tâche future)
+  // Ouvrir la modal de confirmation de suppression
+  const openDeleteModal = () => {
+    setIsDeleteModalOpen(true);
+  };
+
+  // Fermer la modal de confirmation de suppression
+  const closeDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+  };
+
+  // Ouvrir la modal d'édition
   const handleEditGiftIdea = () => {
-    // La modal d'édition sera implémentée dans une tâche future
-    // Pour l'instant, afficher juste une alerte
-    alert(t('giftIdeas.editFeatureComingSoon'));
-    // setIsEditModalOpen(true);
+    setIsEditModalOpen(true);
+  };
+
+  // Fermer la modal d'édition
+  const handleCloseEditModal = () => {
+    setIsEditModalOpen(false);
   };
 
   // Retourner à la liste des cadeaux du groupe
   const handleBackToGroup = () => {
     navigate(-1);
+  };
+
+  // Rafraîchir les détails de l'idée après édition
+  const handleGiftUpdated = async () => {
+    if (!id) return;
+    try {
+      const response = await giftIdeaService.getGiftIdea(id);
+      setGiftIdea(response.giftIdea as ExtendedGiftIdea);
+    } catch (error) {
+      console.error('Error refreshing gift details:', error);
+    }
   };
 
   // Vérifier si l'utilisateur peut modifier ou supprimer l'idée cadeau
@@ -166,21 +218,12 @@ const GiftIdeaDetails: React.FC = () => {
 
       <Button
         variant="danger"
-        onClick={handleDeleteGiftIdea}
+        onClick={openDeleteModal}
         disabled={isDeleting}
         className="flex items-center gap-1"
       >
-        {isDeleting ? (
-          <>
-            <span className="inline-block h-4 w-4 rounded-full border-2 border-t-transparent border-white animate-spin mr-2" />
-            {t('common.deleting')}
-          </>
-        ) : (
-          <>
-            <FaTrash className="h-4 w-4" />
-            {t('common.delete')}
-          </>
-        )}
+        <FaTrash className="h-4 w-4" />
+        {t('common.delete')}
       </Button>
     </div>
   ) : null;
@@ -206,15 +249,28 @@ const GiftIdeaDetails: React.FC = () => {
         formatPrice={formatPrice}
       />
 
-      {/* La modal d'édition sera implémentée dans une future tâche */}
-      {/* {isEditModalOpen && (
-        <GiftIdeaEditModal
+      {isEditModalOpen && giftIdea && (
+        <GiftIdeaFormModal
           isOpen={isEditModalOpen}
           onClose={handleCloseEditModal}
+          groupMembers={groupMembers}
+          onSuccess={handleGiftUpdated}
+          mode="edit"
           giftIdea={giftIdea}
-          onGiftIdeaUpdated={(updatedGiftIdea) => setGiftIdea(updatedGiftIdea)}
         />
-      )} */}
+      )}
+
+      {/* Modal de confirmation de suppression */}
+      <ConfirmationModal
+        isOpen={isDeleteModalOpen}
+        onClose={closeDeleteModal}
+        title={t('giftIdeas.confirmDeleteTitle')}
+        message={t('giftIdeas.confirmDeleteMessage')}
+        onConfirm={handleDeleteGiftIdea}
+        isLoading={isDeleting}
+        confirmVariant="danger"
+        confirmText={isDeleting ? t('common.deleting') : t('common.delete')}
+      />
     </div>
   );
 };
