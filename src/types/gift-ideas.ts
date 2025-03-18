@@ -187,7 +187,7 @@ export interface ApiGiftIdea {
 /**
  * Représente la réponse API pour la liste des idées cadeaux en cours d'achat
  */
-export interface ApiResponse {
+export interface ApiGiftIdeasResponse {
   giftIdeas: ApiGiftIdea[];
 }
 

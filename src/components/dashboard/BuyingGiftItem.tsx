@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import FlatButton from '../common/forms/FlatButton';
 import StatusTag from '../common/display/StatusTag';
 import { BuyingGiftItemProps, BuyingGift } from '../../types/gift-ideas';
@@ -13,6 +14,11 @@ const BuyingGiftItem: React.FC<BuyingGiftItemProps> = ({
   isProcessing = false
 }) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const handleViewGift = () => {
+    navigate(`/gift-ideas/${gift.id}`);
+  };
 
   return (
     <li className="bg-gray-50 p-3 rounded-md">
@@ -27,14 +33,13 @@ const BuyingGiftItem: React.FC<BuyingGiftItemProps> = ({
           <p className="text-sm text-gray-500 mt-1">
             {t('dashboard.for')} {gift.recipients && gift.recipients.length > 0
               ? gift.recipients.map(r => r.name).join(', ')
-              : gift.for_user_name} • {gift.group_name}
+              : gift.for_user_name}
           </p>
         </div>
       </div>
       <div className="mt-2 flex gap-4 items-center">
         <FlatButton
-          asLink
-          href={`/gift_ideas/${gift.id}`}
+          onClick={handleViewGift}
           size="small"
         >
           {t('dashboard.viewGift')}
