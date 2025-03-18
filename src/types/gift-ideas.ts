@@ -108,6 +108,8 @@ export interface GiftIdeaDetailCardProps {
   currentUser: User | null;
   onMarkAsBuying: () => void;
   onMarkAsBought: () => void;
+  onEditGiftIdea?: () => void;
+  onDeleteGiftIdea?: () => void;
   formatPrice: (price?: number) => string;
 }
 

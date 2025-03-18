@@ -4,6 +4,7 @@ import Card from '../common/display/Card';
 import Image from '../common/display/Image';
 import LabelValue from '../common/display/LabelValue';
 import Button from '../common/forms/Button';
+import { FaEdit, FaTrash } from 'react-icons/fa';
 import { GiftIdeaDetailCardProps } from '../../types';
 
 /**
@@ -15,9 +16,14 @@ const GiftIdeaDetailCard: React.FC<GiftIdeaDetailCardProps> = ({
   currentUser,
   onMarkAsBuying,
   onMarkAsBought,
+  onEditGiftIdea,
+  onDeleteGiftIdea,
   formatPrice
 }) => {
   const { t } = useTranslation();
+
+  // Vérifier si une action est en cours
+  const isDeleting = !onDeleteGiftIdea;
 
   // Vérifier si l'utilisateur peut interagir avec ce cadeau
   const canInteract = (): boolean => {
@@ -33,22 +39,77 @@ const GiftIdeaDetailCard: React.FC<GiftIdeaDetailCardProps> = ({
     return true;
   };
 
+  // Vérifier si l'utilisateur peut modifier ou supprimer l'idée cadeau
+  const canEditOrDelete = (): boolean => {
+    if (!giftIdea || !currentUser) return false;
+
+    // L'utilisateur peut modifier/supprimer s'il est le créateur de l'idée
+    const isCreator = giftIdea.created_by_id === currentUser.id;
+
+    // Ou s'il est l'acheteur actuel
+    const isBuyer = giftIdea.buyer_id === currentUser.id;
+
+    return isCreator || isBuyer;
+  };
+
   // Rendu des boutons d'action
   const renderActionButtons = () => {
-    if (!canInteract()) return null;
+    const canModify = canEditOrDelete();
+    const canBuyOrMark = canInteract();
+
+    if (!canModify && !canBuyOrMark) return null;
 
     return (
-      <div className="flex gap-2 mb-4">
-        {giftIdea.status === 'proposed' && (
-          <Button variant="primary" onClick={onMarkAsBuying}>
-            {t('giftIdeas.markAsBuying')}
-          </Button>
+      <div className="flex gap-2 mb-4 flex-wrap">
+        {canBuyOrMark && (
+          <>
+            {giftIdea.status === 'proposed' && (
+              <Button variant="primary" onClick={onMarkAsBuying}>
+                {t('giftIdeas.markAsBuying')}
+              </Button>
+            )}
+            {giftIdea.status === 'buying' && giftIdea.buyer?.id === currentUser?.id && (
+              <Button variant="primary" onClick={onMarkAsBought}>
+                {t('giftIdeas.markAsBought')}
+              </Button>
+            )}
+          </>
         )}
-        {giftIdea.status === 'buying' && giftIdea.buyer?.id === currentUser?.id && (
-          <Button variant="primary" onClick={onMarkAsBought}>
-            {t('giftIdeas.markAsBought')}
-          </Button>
+
+        {canModify && (
+          <>
+            {onEditGiftIdea && (
+              <Button
+                variant="outline"
+                onClick={onEditGiftIdea}
+                className="flex items-center gap-1"
+              >
+                <FaEdit className="h-4 w-4" />
+                {t('common.edit')}
+              </Button>
+            )}
+
+            <Button
+              variant="danger"
+              onClick={onDeleteGiftIdea}
+              disabled={isDeleting}
+              className="flex items-center gap-1"
+            >
+              {isDeleting ? (
+                <>
+                  <span className="inline-block h-4 w-4 rounded-full border-2 border-t-transparent border-white animate-spin mr-2" />
+                  {t('common.deleting')}
+                </>
+              ) : (
+                <>
+                  <FaTrash className="h-4 w-4" />
+                  {t('common.delete')}
+                </>
+              )}
+            </Button>
+          </>
         )}
+
         {giftIdea.link && (
           <a
             href={giftIdea.link}

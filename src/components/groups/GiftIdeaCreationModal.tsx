@@ -10,8 +10,8 @@ import {
   // TODO: SCRAPING_FEATURE - Import commenté temporairement mais conservé pour référence
   // GiftIdeaFromUrl,
   GiftIdeaManualInput,
-  GiftMetadata
-} from '../gift_ideas';
+} from '../gift-ideas';
+import { GiftMetadata } from '../../types';
 import { GiftIdeaCreationModalProps } from '../../types/groups';
 
 /**

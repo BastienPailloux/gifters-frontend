@@ -8,6 +8,7 @@ import StatusTag from '../components/common/display/StatusTag';
 import GiftIdeaDetailCard from '../components/gift-ideas/GiftIdeaDetailCard';
 import useAuth from '../hooks/useAuth';
 import { GiftStatus, ExtendedGiftIdea } from '../types';
+import { toast } from '../utils/toast';
 
 const GiftIdeaDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -18,6 +19,9 @@ const GiftIdeaDetails: React.FC = () => {
   const [giftIdea, setGiftIdea] = useState<ExtendedGiftIdea | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
+  // La modal d'édition sera implémentée dans une tâche future
+  // const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
 
   // Formatage du prix en euros
   const formatPrice = (price?: number) => {
@@ -73,6 +77,38 @@ const GiftIdeaDetails: React.FC = () => {
     }
   };
 
+  // Gérer la suppression de l'idée cadeau
+  const handleDeleteGiftIdea = async () => {
+    if (!id || !window.confirm(t('giftIdeas.confirmDelete'))) return;
+
+    setIsDeleting(true);
+    try {
+      await giftIdeaService.deleteGiftIdea(id);
+      // Si la suppression réussit, naviguer vers la page de groupe ou le dashboard
+      navigate(-1);
+      // Notify successful deletion
+      toast.success(t('giftIdeas.deleteSuccess'));
+    } catch (error) {
+      console.error('Error deleting gift idea:', error);
+      toast.error(t('giftIdeas.deleteError'));
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
+  // Ouvrir la modal d'édition (à implémenter dans une tâche future)
+  const handleEditGiftIdea = () => {
+    // La modal d'édition sera implémentée dans une tâche future
+    // Pour l'instant, afficher juste une alerte
+    alert(t('giftIdeas.editFeatureComingSoon'));
+    // setIsEditModalOpen(true);
+  };
+
+  // Fermer la modal d'édition (à implémenter dans une tâche future)
+  // const handleCloseEditModal = () => {
+  //   setIsEditModalOpen(false);
+  // };
+
   // Retourner à la liste des cadeaux du groupe
   const handleBackToGroup = () => {
     navigate(-1);
@@ -124,8 +160,20 @@ const GiftIdeaDetails: React.FC = () => {
         currentUser={user}
         onMarkAsBuying={handleMarkAsBuying}
         onMarkAsBought={handleMarkAsBought}
+        onEditGiftIdea={handleEditGiftIdea}
+        onDeleteGiftIdea={isDeleting ? undefined : handleDeleteGiftIdea}
         formatPrice={formatPrice}
       />
+
+      {/* La modal d'édition sera implémentée dans une future tâche */}
+      {/* {isEditModalOpen && (
+        <GiftIdeaEditModal
+          isOpen={isEditModalOpen}
+          onClose={handleCloseEditModal}
+          giftIdea={giftIdea}
+          onGiftIdeaUpdated={(updatedGiftIdea) => setGiftIdea(updatedGiftIdea)}
+        />
+      )} */}
     </div>
   );
 };
