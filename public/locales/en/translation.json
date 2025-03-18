@@ -268,10 +268,17 @@
   },
   "groups": {
     "myGroups": "My Groups",
+    "myGroupsDescription": "Manage your groups and invite people to join them",
     "noGroups": "You don't have any groups yet",
     "createGroup": "Create a Group",
+    "createNew": "Create a group",
+    "createNewSubtitle": "Create a group to share gifts with your loved ones",
     "join": "Join a Group",
     "details": "Group Details",
+    "memberCount": {
+      "singular": "1 member",
+      "plural": "{{count}} members"
+    },
     "upcomingEvents": "Upcoming Events",
     "noEvents": "No events scheduled",
     "createEvent": "Create Event",

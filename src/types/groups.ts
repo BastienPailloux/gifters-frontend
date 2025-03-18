@@ -12,6 +12,7 @@ export interface Group {
   created_at: string;
   updated_at: string;
   created_by_id: string;
+  members_count?: number;
   member_count?: number;
   created_by?: User;
   isAdmin?: boolean;
@@ -129,6 +130,27 @@ export interface InvitationModalProps {
 }
 
 /**
+ * Props pour le composant GroupFormModal
+ */
+export interface GroupFormModalProps {
+  /** Mode du formulaire: création ou édition */
+  mode: 'create' | 'edit';
+  /** Données du groupe à éditer (optionnel en mode création) */
+  group: {
+    id: string;
+    name: string;
+    description?: string;
+  };
+  /** Indique si le modal est ouvert */
+  isOpen: boolean;
+  /** Fonction appelée à la fermeture du modal */
+  onClose: () => void;
+  /** Fonction appelée après une création/modification réussie */
+  onSuccess: () => void;
+}
+
+/**
+ * @deprecated Utiliser GroupFormModalProps à la place
  * Props pour le composant GroupEditModal
  */
 export interface GroupEditModalProps {
@@ -192,6 +214,7 @@ export interface GroupDetailsData {
   id: string;
   name: string;
   description?: string;
+  members_count?: number;
   members?: {
     id: string;
     name: string;

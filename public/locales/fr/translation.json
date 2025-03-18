@@ -273,10 +273,17 @@
   },
   "groups": {
     "myGroups": "Mes Groupes",
+    "myGroupsDescription": "Gérez vos groupes et invitez des personnes à les rejoindre",
     "noGroups": "Vous n'avez pas encore de groupes",
     "createGroup": "Créer un Groupe",
+    "createNew": "Créer un groupe",
+    "createNewSubtitle": "Créez un groupe pour partager des cadeaux avec vos proches",
     "join": "Rejoindre un Groupe",
     "details": "Détails du Groupe",
+    "memberCount": {
+      "singular": "1 membre",
+      "plural": "{{count}} membres"
+    },
     "upcomingEvents": "Événements à venir",
     "noEvents": "Aucun événement programmé",
     "createEvent": "Créer un Événement",
