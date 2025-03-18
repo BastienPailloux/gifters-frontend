@@ -11,6 +11,7 @@ import GiftIdeaDetails from './pages/GiftIdeaDetails';
 import InvitationJoin from './pages/invitation/InvitationJoin';
 import InvitationInput from './pages/invitation/InvitationInput';
 import MyGifts from './pages/MyGifts';
+import MyGroups from './pages/MyGroups';
 import { ProtectedRouteProps, LayoutRouteProps } from './types';
 
 // Composant pour les routes protégées
@@ -77,6 +78,18 @@ const AppRoutes: React.FC = () => {
           <ProtectedRoute>
             <LayoutRoute>
               <MyGifts />
+            </LayoutRoute>
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Route pour la page Mes Groupes */}
+      <Route
+        path="/my-groups"
+        element={
+          <ProtectedRoute>
+            <LayoutRoute>
+              <MyGroups />
             </LayoutRoute>
           </ProtectedRoute>
         }
