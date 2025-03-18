@@ -11,7 +11,7 @@ import {
   BuyingGift,
   BuyingGiftsListProps,
   ApiGiftIdea,
-  ApiResponse
+  ApiGiftIdeasResponse
 } from '../../types/gift-ideas';
 
 /**
@@ -42,7 +42,7 @@ const BuyingGiftsList: React.FC<BuyingGiftsListProps> = ({ maxGifts = 5 }) => {
     loading,
     error,
     refetch: fetchGifts
-  } = useAsyncData<ApiResponse>(fetchUserGifts);
+  } = useAsyncData<ApiGiftIdeasResponse>(fetchUserGifts);
 
   // Marquer un cadeau comme acheté
   const handleMarkAsBought = async (giftId: string) => {
