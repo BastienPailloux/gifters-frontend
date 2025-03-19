@@ -142,12 +142,32 @@
       "termsLink": "Conditions d'utilisation",
       "orContinueWith": "Ou continuer avec"
     },
+    "forgotPassword": {
+      "title": "Mot de passe oublié",
+      "subtitle": "Entrez votre adresse e-mail pour recevoir un lien de réinitialisation",
+      "submit": "Envoyer le lien",
+      "successMessage": "Instructions envoyées à votre adresse e-mail",
+      "checkEmail": "Veuillez consulter votre boîte de réception pour suivre les instructions de réinitialisation",
+      "error": "Une erreur est survenue lors de la demande de réinitialisation du mot de passe"
+    },
+    "resetPassword": {
+      "title": "Réinitialiser votre mot de passe",
+      "subtitle": "Veuillez choisir un nouveau mot de passe",
+      "submit": "Réinitialiser le mot de passe",
+      "successMessage": "Votre mot de passe a été réinitialisé avec succès",
+      "redirecting": "Redirection vers la page de connexion...",
+      "noToken": "Aucun jeton de réinitialisation n'a été fourni",
+      "invalidLink": "Le lien de réinitialisation est invalide ou a expiré"
+    },
+    "backToLogin": "Retour à la connexion",
     "logout": "Se déconnecter",
     "fields": {
       "name": "Nom",
       "email": "Adresse e-mail",
       "password": "Mot de passe",
-      "confirmPassword": "Confirmer le mot de passe"
+      "confirmPassword": "Confirmer le mot de passe",
+      "newPassword": "Nouveau mot de passe",
+      "currentPassword": "Mot de passe actuel"
     },
     "errors": {
       "login": "Email ou mot de passe invalide",
@@ -155,9 +175,10 @@
       "googleLogin": "Impossible de se connecter avec Google",
       "logout": "Impossible de se déconnecter",
       "loadUser": "Impossible de charger les informations utilisateur",
-      "passwordMismatch": "Les mots de passe ne correspondent pas"
+      "passwordMismatch": "Les mots de passe ne correspondent pas",
+      "passwordReset": "Erreur lors de la réinitialisation du mot de passe"
     },
-    "forgotPassword": "Mot de passe oublié ?"
+    "forgotPasswordMessage": "Mot de passe oublié ?"
   },
   "dashboard": {
     "welcome": "Bienvenue sur votre tableau de bord",

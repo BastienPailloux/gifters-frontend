@@ -8,10 +8,15 @@ const AuthForm: React.FC<AuthFormProps> = ({
   linkText,
   linkUrl,
   error,
+  success,
+  successMessage,
   onSubmit,
   children,
   footer,
 }) => {
+  // Utiliser success ou successMessage selon celui qui est fourni
+  const successText = success || successMessage;
+
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -39,6 +44,16 @@ const AuthForm: React.FC<AuthFormProps> = ({
             <div className="flex">
               <div className="ml-3">
                 <h3 className="text-sm font-medium text-red-800">{error}</h3>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {successText && (
+          <div className="mb-4 rounded-md bg-green-50 p-4">
+            <div className="flex">
+              <div className="ml-3">
+                <h3 className="text-sm font-medium text-green-800">{successText}</h3>
               </div>
             </div>
           </div>

@@ -5,6 +5,8 @@ import Layout from './components/layout/Layout';
 import Home from './pages/Home';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
+import ForgotPassword from './pages/auth/ForgotPassword';
+import ResetPassword from './pages/auth/ResetPassword';
 import Dashboard from './pages/Dashboard';
 import GroupDetails from './pages/GroupDetails';
 import GiftIdeaDetails from './pages/GiftIdeaDetails';
@@ -45,6 +47,8 @@ const AppRoutes: React.FC = () => {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
 
       {/* Routes pour les invitations */}
       <Route path="/invitation/join" element={<InvitationJoin />} />

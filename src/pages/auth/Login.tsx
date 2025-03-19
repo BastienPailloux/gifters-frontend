@@ -78,10 +78,10 @@ const Login: React.FC = () => {
         <FlatButton
           variant="primary"
           asLink
-          href="/auth/forgot-password"
+          href="/forgot-password"
           size="small"
         >
-          {t('auth.forgotPassword')}
+          {t('auth.forgotPasswordMessage')}
         </FlatButton>
       </div>
 

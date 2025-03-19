@@ -9,6 +9,8 @@ export interface AuthFormProps {
   linkText?: string;
   linkUrl?: string;
   error?: string | null;
+  success?: string | null;
+  successMessage?: string | null;
   onSubmit: (e: React.FormEvent) => void;
   children: ReactNode;
   footer?: ReactNode;

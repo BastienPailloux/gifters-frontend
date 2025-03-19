@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { authService } from '../services/api';
 import { useTranslation } from 'react-i18next';
 import axios, { AxiosError } from 'axios';
-import { AuthState, LoginCredentials, RegisterData, ApiErrorResponse } from '../types/auth';
+import { AuthState, LoginCredentials, RegisterData, ApiErrorResponse, ResetPasswordData } from '../types/auth';
 
 // Hook personnalisé pour l'authentification
 const useAuth = () => {
@@ -131,6 +131,72 @@ const useAuth = () => {
     }
   }, []);
 
+  // Fonction pour demander la réinitialisation du mot de passe
+  const requestPasswordReset = useCallback(async (email: string) => {
+    setAuthState(prev => ({ ...prev, isLoading: true, error: null }));
+
+    try {
+      const response = await authService.requestPasswordReset(email);
+      setAuthState(prev => ({
+        ...prev,
+        isLoading: false,
+        error: null,
+      }));
+      return { success: true, message: response.message };
+    } catch (err: unknown) {
+      const error = err as AxiosError<ApiErrorResponse>;
+      let errorMessage = t('auth.errors.passwordReset');
+
+      if (axios.isAxiosError(error)) {
+        if (error.response?.data?.status?.message) {
+          errorMessage = error.response.data.status.message;
+        } else if (error.response?.data?.errors && error.response.data.errors.length > 0) {
+          errorMessage = error.response.data.errors.join(', ');
+        }
+      }
+
+      setAuthState(prev => ({
+        ...prev,
+        isLoading: false,
+        error: errorMessage,
+      }));
+      return { success: false, error: errorMessage };
+    }
+  }, [t]);
+
+  // Fonction pour réinitialiser le mot de passe
+  const resetPassword = useCallback(async (params: ResetPasswordData) => {
+    setAuthState(prev => ({ ...prev, isLoading: true, error: null }));
+
+    try {
+      const response = await authService.resetPassword(params);
+      setAuthState(prev => ({
+        ...prev,
+        isLoading: false,
+        error: null,
+      }));
+      return { success: true, message: response.message };
+    } catch (err: unknown) {
+      const error = err as AxiosError<ApiErrorResponse>;
+      let errorMessage = t('auth.errors.passwordReset');
+
+      if (axios.isAxiosError(error)) {
+        if (error.response?.data?.status?.message) {
+          errorMessage = error.response.data.status.message;
+        } else if (error.response?.data?.errors && error.response.data.errors.length > 0) {
+          errorMessage = error.response.data.errors.join(', ');
+        }
+      }
+
+      setAuthState(prev => ({
+        ...prev,
+        isLoading: false,
+        error: errorMessage,
+      }));
+      return { success: false, error: errorMessage };
+    }
+  }, [t]);
+
   // Fonction pour effacer les erreurs
   const clearError = useCallback(() => {
     setAuthState(prev => ({ ...prev, error: null }));
@@ -142,6 +208,8 @@ const useAuth = () => {
     register,
     logout,
     clearError,
+    requestPasswordReset,
+    resetPassword,
   };
 };
 
