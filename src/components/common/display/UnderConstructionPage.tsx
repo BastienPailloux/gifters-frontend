@@ -2,12 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import Button from '../forms/Button';
-
-interface UnderConstructionPageProps {
-  title?: string;
-  description?: string;
-  onBackClick?: () => void;
-}
+import { UnderConstructionPageProps } from '../../../types/ui';
 
 const UnderConstructionPage: React.FC<UnderConstructionPageProps> = ({
   title,

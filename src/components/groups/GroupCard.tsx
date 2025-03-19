@@ -1,12 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import Button from '../common/forms/Button';
-import { Group } from '../../types/groups';
-
-interface GroupCardProps {
-  group: Group;
-  onViewGroup: (groupId: string) => void;
-}
+import { GroupCardProps } from '../../types/groups';
 
 /**
  * Composant qui affiche les informations d'un groupe sous forme de carte

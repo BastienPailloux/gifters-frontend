@@ -234,3 +234,30 @@ export interface GroupEvent {
   title: string;
   date: string;
 }
+
+/**
+ * Props pour le composant GroupCard
+ */
+export interface GroupCardProps {
+  group: Group;
+  onViewGroup: (groupId: string) => void;
+}
+
+/**
+ * Props pour le composant AddGroupCard
+ */
+export interface AddGroupCardProps {
+  onClick: () => void;
+  className?: string;
+}
+
+/**
+ * Props pour le composant GroupsList
+ */
+export interface GroupsListProps {
+  groups: Group[];
+  onViewGroup: (groupId: string) => void;
+  isLoading?: boolean;
+  emptyMessage?: string;
+  className?: string;
+}

@@ -2,15 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import Card from '../common/display/Card';
 import GroupCard from './GroupCard';
-import { Group } from '../../types/groups';
-
-interface GroupsListProps {
-  groups: Group[];
-  onViewGroup: (groupId: string) => void;
-  isLoading?: boolean;
-  emptyMessage?: string;
-  className?: string;
-}
+import { GroupsListProps } from '../../types/groups';
 
 /**
  * Composant qui affiche une liste de groupes sous forme de carte

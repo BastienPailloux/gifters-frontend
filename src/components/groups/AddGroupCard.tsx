@@ -1,10 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-
-interface AddGroupCardProps {
-  onClick: () => void;
-  className?: string;
-}
+import { AddGroupCardProps } from '../../types/groups';
 
 /**
  * Composant qui affiche une carte "Ajouter un groupe"
