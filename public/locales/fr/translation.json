@@ -239,7 +239,11 @@
     "statusProposed": "Proposé",
     "statusBuying": "En cours d'achat",
     "statusBought": "Acheté",
-    "statusWishlist": "Liste de souhaits"
+    "statusWishlist": "Liste de souhaits",
+    "underConstruction": {
+      "title": "En Construction",
+      "description": "Cette fonctionnalité est actuellement en développement. Elle sera bientôt disponible !"
+    }
   },
   "validation": {
     "required": "Ce champ est requis",
@@ -439,5 +443,9 @@
     "addedOn": "Ajouté le {{date}}",
     "markedAsBuying": "Marqué comme 'En cours d'achat' le {{date}}",
     "markedAsBought": "Acheté le {{date}}"
+  },
+  "events": {
+    "title": "Gestion des Événements",
+    "underConstruction": "La gestion des événements est en cours de développement. Vous pourrez bientôt créer et gérer des événements pour vos groupes !"
   }
 }

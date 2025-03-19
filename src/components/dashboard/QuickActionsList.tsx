@@ -13,7 +13,7 @@ const QuickActionsList: React.FC<QuickActionsListProps> = ({ className = '' }) =
       title: t('dashboard.cards.gifts.title'),
       description: t('dashboard.cards.gifts.description'),
       actionLabel: t('dashboard.cards.gifts.action'),
-      route: '/my-gifts',
+      route: '/gifts',
       icon: <FaGift className="h-6 w-6" />
     },
     {

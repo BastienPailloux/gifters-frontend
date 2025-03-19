@@ -336,3 +336,10 @@ export interface ConfirmationModalProps {
    */
   size?: 'sm' | 'md' | 'lg' | 'xl';
 }
+
+/**
+ * Props pour le composant de page "en construction"
+ */
+export interface UnderConstructionPageProps extends PageProps {
+  onBackClick?: () => void;
+}
