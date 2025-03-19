@@ -61,6 +61,8 @@ export interface AuthContextType extends AuthState {
   register: (userData: RegisterData) => Promise<{ success: boolean; error?: string }>;
   logout: () => void;
   clearError: () => void;
+  requestPasswordReset?: (email: string) => Promise<{ success: boolean; message?: string; error?: string }>;
+  resetPassword?: (params: ResetPasswordData) => Promise<{ success: boolean; message?: string; error?: string }>;
 }
 
 /**
@@ -68,4 +70,13 @@ export interface AuthContextType extends AuthState {
  */
 export interface AuthProviderProps {
   children: ReactNode;
+}
+
+/**
+ * Données pour la réinitialisation du mot de passe
+ */
+export interface ResetPasswordData {
+  reset_password_token: string;
+  password: string;
+  password_confirmation: string;
 }

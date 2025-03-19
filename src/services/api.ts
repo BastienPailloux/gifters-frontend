@@ -84,6 +84,34 @@ export const authService = {
     }
   },
 
+  // Demander la réinitialisation du mot de passe
+  requestPasswordReset: async (email: string) => {
+    try {
+      const response = await api.post('/password', { user: { email } });
+      return {
+        success: true,
+        message: response.data?.message || 'Instructions sent to your email'
+      };
+    } catch (error) {
+      console.error('Error requesting password reset:', error);
+      throw error;
+    }
+  },
+
+  // Réinitialiser le mot de passe avec le token
+  resetPassword: async (params: { reset_password_token: string; password: string; password_confirmation: string }) => {
+    try {
+      const response = await api.put('/password', { user: params });
+      return {
+        success: true,
+        message: response.data?.message || 'Password successfully reset'
+      };
+    } catch (error) {
+      console.error('Error resetting password:', error);
+      throw error;
+    }
+  },
+
   // Récupérer l'utilisateur actuel
   getCurrentUser: () => {
     const userStr = localStorage.getItem('user');

@@ -142,12 +142,31 @@
       "termsLink": "Terms of Service",
       "orContinueWith": "Or continue with"
     },
+    "forgotPassword": {
+      "title": "Forgot password",
+      "subtitle": "Enter your email address to receive a reset link",
+      "submit": "Send reset link",
+      "successMessage": "Instructions sent to your email",
+      "checkEmail": "Please check your inbox for reset instructions"
+    },
+    "resetPassword": {
+      "title": "Reset your password",
+      "subtitle": "Please choose a new password",
+      "submit": "Reset password",
+      "successMessage": "Your password has been successfully reset",
+      "redirecting": "Redirecting to login page...",
+      "noToken": "No reset token provided",
+      "invalidLink": "Reset link is invalid or has expired"
+    },
+    "backToLogin": "Back to login",
     "logout": "Sign out",
     "fields": {
       "name": "Name",
       "email": "Email address",
       "password": "Password",
-      "confirmPassword": "Confirm password"
+      "confirmPassword": "Confirm password",
+      "newPassword": "New password",
+      "currentPassword": "Current password"
     },
     "errors": {
       "login": "Invalid email or password",
@@ -155,9 +174,10 @@
       "googleLogin": "Could not sign in with Google",
       "logout": "Could not sign out",
       "loadUser": "Could not load user information",
-      "passwordMismatch": "Passwords do not match"
+      "passwordMismatch": "Passwords do not match",
+      "passwordReset": "Error resetting password"
     },
-    "forgotPassword": "Forgot your password?"
+    "forgotPasswordMessage": "Forgot your password?"
   },
   "dashboard": {
     "welcome": "Welcome to your dashboard",
