@@ -8,6 +8,13 @@ export interface User {
   id: string;
   name: string;
   email: string;
+  birthday?: string;
+  phone_number?: string;
+  address?: string;
+  city?: string;
+  state?: string;
+  zip_code?: string;
+  country?: string;
   // Ajoutez d'autres propriétés au besoin
 }
 

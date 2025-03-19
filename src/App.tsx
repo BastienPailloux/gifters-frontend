@@ -13,6 +13,7 @@ import InvitationInput from './pages/invitation/InvitationInput';
 import MyGifts from './pages/MyGifts';
 import MyGroups from './pages/MyGroups';
 import Events from './pages/Events';
+import Profile from './pages/Profile';
 import { ProtectedRouteProps, LayoutRouteProps } from './types';
 
 // Composant pour les routes protégées
@@ -127,6 +128,30 @@ const AppRoutes: React.FC = () => {
           <ProtectedRoute>
             <LayoutRoute>
               <Events />
+            </LayoutRoute>
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Route pour la page de profil (utilisateur actuel) */}
+      <Route
+        path="/profile"
+        element={
+          <ProtectedRoute>
+            <LayoutRoute>
+              <Profile />
+            </LayoutRoute>
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Route pour la page de profil (autre utilisateur) */}
+      <Route
+        path="/profile/:id"
+        element={
+          <ProtectedRoute>
+            <LayoutRoute>
+              <Profile />
             </LayoutRoute>
           </ProtectedRoute>
         }

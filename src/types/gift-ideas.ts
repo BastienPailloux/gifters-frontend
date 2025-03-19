@@ -166,6 +166,7 @@ export interface CelebrationModalProps {
 export interface ApiGiftIdea {
   id: number | string;
   title: string;
+  description?: string;
   status: string;
   forUser?: { id: number | string; name: string } | string;
   forUserName?: string;
@@ -174,6 +175,8 @@ export interface ApiGiftIdea {
   for_user_name?: string;
   groupName?: string;
   group?: { id: number | string; name: string } | string;
+  link?: string;
+  image_url?: string;
 }
 
 /**

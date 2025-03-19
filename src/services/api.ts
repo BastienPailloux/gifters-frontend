@@ -61,8 +61,6 @@ export const authService = {
     // On envoie les données directement sans les imbriquer dans un objet 'user'
     const response = await api.post('/login', { user: credentials });
 
-    console.log('Login response:', response.data);
-
     // Stocker le token et les informations utilisateur dans le localStorage
     if (response.data && response.data.token) {
       localStorage.setItem('token', response.data.token);
@@ -391,6 +389,135 @@ export const metadataService = {
     const response = await api.post('/metadata/fetch', { url });
     return response.data;
   },
+};
+
+// Service pour les utilisateurs
+export const userService = {
+  // Récupérer les informations complètes du profil de l'utilisateur courant
+  getCurrentUserProfile: async () => {
+    try {
+      const currentUser = authService.getCurrentUser();
+      if (!currentUser || !currentUser.id) {
+        throw new Error('Current user not found');
+      }
+      const response = await api.get(`/users/${currentUser.id}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching current user profile:', error);
+      throw error;
+    }
+  },
+
+  // Mettre à jour le profil de l'utilisateur courant
+  updateProfile: async (profileData: {
+    name?: string;
+    email?: string;
+    password?: string;
+    password_confirmation?: string;
+    current_password?: string;
+    birthday?: string;
+    phone_number?: string;
+    address?: string;
+    city?: string;
+    state?: string;
+    zip_code?: string;
+    country?: string;
+  }) => {
+    try {
+      const currentUser = authService.getCurrentUser();
+      if (!currentUser || !currentUser.id) {
+        throw new Error('Current user not found');
+      }
+
+      const response = await api.put(`/users/${currentUser.id}`, { user: profileData });
+
+      // Mettre à jour les informations utilisateur dans le localStorage si nécessaire
+      if (response.data && response.data.user) {
+        const updatedUser = { ...currentUser, ...response.data.user };
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+      }
+
+      return response.data;
+    } catch (error) {
+      console.error('Error updating user profile:', error);
+      throw error;
+    }
+  },
+
+  // Récupérer les informations d'un autre utilisateur
+  getUserById: async (userId: string) => {
+    try {
+      const response = await api.get(`/users/${userId}`);
+      return response.data;
+    } catch (error) {
+      console.error(`Error fetching user ${userId}:`, error);
+      throw error;
+    }
+  },
+
+  // Récupérer la liste des IDs des utilisateurs qui partagent au moins un groupe avec l'utilisateur courant
+  getSharedUsers: async () => {
+    try {
+      const response = await api.get('/users/shared_users');
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching shared users:', error);
+      throw error;
+    }
+  },
+
+  // Récupérer les groupes partagés entre l'utilisateur courant et un autre utilisateur
+  getSharedGroups: async (userId: string) => {
+    try {
+      // Nous devons utiliser une approche différente car l'endpoint /users/shared-groups/:id n'existe pas
+      // On va d'abord récupérer les groupes de l'utilisateur courant
+      const myGroupsResponse = await api.get('/groups');
+      const myGroups = myGroupsResponse.data || [];
+
+      // Ensuite, nous filtrons les groupes pour trouver ceux qui ont l'utilisateur spécifié comme membre
+      const sharedGroups = [];
+
+      for (const group of myGroups) {
+        try {
+          // Récupérer les détails de chaque groupe, y compris les membres
+          const groupDetailsResponse = await api.get(`/groups/${group.id}`);
+          const groupDetails = groupDetailsResponse.data;
+
+          // Vérifier si l'utilisateur est membre de ce groupe
+          if (groupDetails.members && groupDetails.members.some((member: { id: string }) => member.id === userId)) {
+            sharedGroups.push(group);
+          }
+        } catch (e) {
+          console.error(`Error checking if user ${userId} is in group ${group.id}:`, e);
+        }
+      }
+
+      return { groups: sharedGroups };
+    } catch (error) {
+      console.error(`Error fetching shared groups with user ${userId}:`, error);
+      throw error;
+    }
+  },
+
+  // Récupérer les idées cadeaux pour un utilisateur spécifique (filtrées par statut)
+  getUserGiftIdeas: async (userId: string, statuses?: string[]) => {
+    try {
+      const params: { recipient_id: string; status?: string[] } = {
+        recipient_id: userId
+      };
+
+      // Ajouter les statuts à filtrer s'ils sont spécifiés
+      if (statuses && statuses.length > 0) {
+        params.status = statuses;
+      }
+
+      const response = await api.get('/gift_ideas', { params });
+      return response.data;
+    } catch (error) {
+      console.error(`Error fetching gift ideas for user ${userId}:`, error);
+      throw error;
+    }
+  }
 };
 
 export default api;

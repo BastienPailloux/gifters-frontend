@@ -447,5 +447,31 @@
   "events": {
     "title": "Gestion des Événements",
     "underConstruction": "La gestion des événements est en cours de développement. Vous pourrez bientôt créer et gérer des événements pour vos groupes !"
+  },
+  "profile": {
+    "yourProfile": "Votre profil",
+    "manageYourInfo": "Gérez vos informations personnelles",
+    "editProfile": "Modifier le profil",
+    "personalInfo": "Informations personnelles",
+    "address": "Adresse",
+    "birthday": "Date de naissance",
+    "phone": "Téléphone",
+    "street": "Rue",
+    "city": "Ville",
+    "state": "État/Région",
+    "zipCode": "Code postal",
+    "country": "Pays",
+    "changePassword": "Changer le mot de passe",
+    "currentPassword": "Mot de passe actuel",
+    "currentPasswordRequired": "Requis pour changer de mot de passe",
+    "newPassword": "Nouveau mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "userNotFound": "Utilisateur non trouvé",
+    "name": "Nom",
+    "email": "Adresse e-mail",
+    "viewOtherProfile": "Profil utilisateur",
+    "noAccess": "Vous n'avez pas accès à ce profil. Vous devez partager au moins un groupe avec cet utilisateur.",
+    "giftIdeasFor": "Idées de cadeaux pour {{name}}",
+    "noGiftIdeas": "Aucune idée de cadeau disponible pour le moment"
   }
 }
