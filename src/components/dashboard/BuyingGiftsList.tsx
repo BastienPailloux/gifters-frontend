@@ -185,7 +185,7 @@ const BuyingGiftsList: React.FC<BuyingGiftsListProps> = ({ maxGifts = 5 }) => {
       <div className="mt-4">
         <FlatButton
           asLink
-          href="/my-gifts"
+          href="/gifts"
           variant="primary"
           icon={<FaChevronRight className="h-3 w-3" />}
           iconPosition="right"
