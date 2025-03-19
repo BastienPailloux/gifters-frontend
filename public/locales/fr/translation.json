@@ -337,7 +337,10 @@
     "sendInvitation": "Envoyer l'invitation",
     "invitationSent": "Invitation envoyée avec succès !",
     "errorSendingInvitation": "Erreur lors de l'envoi de l'invitation. Veuillez réessayer.",
-    "errorGettingInvitationLink": "Erreur lors de la récupération du lien d'invitation. Un lien plus simple a été généré."
+    "errorGettingInvitationLink": "Erreur lors de la récupération du lien d'invitation. Un lien plus simple a été généré.",
+    "errorGettingGroups": "Erreur lors de la récupération des groupes. Veuillez réessayer.",
+    "errorUpdatingRole": "Erreur lors de la mise à jour du rôle. Veuillez réessayer.",
+    "errorRemovingMember": "Erreur lors de la suppression du membre. Veuillez réessayer."
   },
   "giftIdeas": {
     "title": "Idées de cadeaux",
@@ -386,10 +389,10 @@
     "group": "Groupe",
     "actions": "Actions",
     "markAsBuying": "Je vais l'acheter",
-    "markAsBought": "J'ai acheté",
+    "markAsBought": "Je l'ai acheté",
     "visitStore": "Visiter la boutique",
     "errorMarkingAsBuying": "Erreur lors du marquage comme \"Je vais l'acheter\"",
-    "errorMarkingAsBought": "Erreur lors du marquage comme \"J'ai acheté\"",
+    "errorMarkingAsBought": "Erreur lors du marquage comme \"Je l'ai acheté\"",
     "notFound": "Idée cadeau non trouvée",
     "imageLabel": "Image",
     "created": "Idée cadeau créée avec succès",
