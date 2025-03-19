@@ -42,7 +42,7 @@ const ForgotPassword: React.FC = () => {
       linkText={t('auth.backToLogin')}
       linkUrl="/login"
       error={error ? t('auth.forgotPassword.error') : null}
-      success={successMessage}
+      success={successMessage ? t('auth.forgotPassword.successMessage') : null}
       onSubmit={handleSubmit}
     >
       {!successMessage ? (

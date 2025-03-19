@@ -42,8 +42,17 @@ api.interceptors.response.use(
 export const authService = {
   // Inscription d'un nouvel utilisateur
   register: async (userData: { name: string; email: string; password: string; password_confirmation: string }) => {
+    // Récupération de la langue courante pour l'initialisation
+    const currentLanguage = localStorage.getItem('i18nextLng') || 'en';
+
+    // Ajout de la langue aux données d'inscription
+    const userDataWithLocale = {
+      ...userData,
+      locale: currentLanguage
+    };
+
     // On envoie les données directement sans les imbriquer dans un objet 'user'
-    const response = await api.post('/signup', { user: userData });
+    const response = await api.post('/signup', { user: userDataWithLocale });
 
     // Stocker le token et les informations utilisateur dans le localStorage
     if (response.data && response.data.token) {
@@ -87,7 +96,11 @@ export const authService = {
   // Demander la réinitialisation du mot de passe
   requestPasswordReset: async (email: string) => {
     try {
-      const response = await api.post('/password', { user: { email } });
+      // Plus besoin d'envoyer la locale car elle est déjà stockée dans la base de données
+      const response = await api.post('/password', {
+        user: { email }
+      });
+
       return {
         success: true,
         message: response.data?.message || 'Instructions sent to your email'
@@ -545,7 +558,30 @@ export const userService = {
       console.error(`Error fetching gift ideas for user ${userId}:`, error);
       throw error;
     }
-  }
+  },
+
+  // Mettre à jour la préférence de langue de l'utilisateur
+  updateLocale: async (locale: string) => {
+    try {
+      const currentUser = authService.getCurrentUser();
+      if (!currentUser || !currentUser.id) {
+        throw new Error('Current user not found');
+      }
+
+      const response = await api.patch(`/users/${currentUser.id}/update_locale`, { user: { locale } });
+
+      // Mettre à jour l'information dans le localStorage
+      if (response.data && response.data.data) {
+        const updatedUser = { ...currentUser, locale: response.data.data.locale };
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+      }
+
+      return response.data;
+    } catch (error) {
+      console.error('Error updating user locale:', error);
+      throw error;
+    }
+  },
 };
 
 export default api;

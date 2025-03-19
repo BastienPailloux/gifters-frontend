@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
 import { LanguageSwitcherProps } from '../../../types';
+import { userService, authService } from '../../../services/api';
 
 const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
   variant = 'dropdown',
@@ -22,8 +23,18 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
     setIsOpen(!isOpen);
   };
 
-  const changeLanguage = (langCode: string) => {
+  const changeLanguage = async (langCode: string) => {
     i18n.changeLanguage(langCode);
+
+    if (authService.isAuthenticated()) {
+      try {
+        await userService.updateLocale(langCode);
+        console.log(`User locale preference updated to ${langCode}`);
+      } catch (error) {
+        console.error('Error updating user locale preference:', error);
+      }
+    }
+
     setIsOpen(false);
   };
 
