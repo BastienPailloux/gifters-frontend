@@ -74,7 +74,7 @@ const AppRoutes: React.FC = () => {
 
       {/* Route pour la page Mes Cadeaux */}
       <Route
-        path="/my-gifts"
+        path="/gifts"
         element={
           <ProtectedRoute>
             <LayoutRoute>
@@ -86,7 +86,7 @@ const AppRoutes: React.FC = () => {
 
       {/* Route pour la page Mes Groupes */}
       <Route
-        path="/my-groups"
+        path="/groups"
         element={
           <ProtectedRoute>
             <LayoutRoute>
