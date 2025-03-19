@@ -147,7 +147,8 @@
       "subtitle": "Enter your email address to receive a reset link",
       "submit": "Send reset link",
       "successMessage": "Instructions sent to your email",
-      "checkEmail": "Please check your inbox for reset instructions"
+      "checkEmail": "Please check your inbox for reset instructions",
+      "error": "An error occurred while requesting a password reset"
     },
     "resetPassword": {
       "title": "Reset your password",

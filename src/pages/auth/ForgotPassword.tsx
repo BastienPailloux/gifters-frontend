@@ -8,11 +8,11 @@ import { Link } from 'react-router-dom';
 
 const ForgotPassword: React.FC = () => {
   const { t } = useTranslation();
-  const { requestPasswordReset, error, clearError } = useAuth();
+  const { requestPasswordReset, clearError } = useAuth();
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
-
+  const [error, setError] = useState<string | null>(null);
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     clearError();
@@ -26,6 +26,9 @@ const ForgotPassword: React.FC = () => {
           setSuccessMessage(result.message || t('auth.forgotPassword.successMessage'));
           setEmail(''); // Reset the email field
         }
+        if (result.error) {
+          setError(result.error);
+        }
       }
     } finally {
       setIsSubmitting(false);
@@ -38,7 +41,7 @@ const ForgotPassword: React.FC = () => {
       subtitle={t('auth.forgotPassword.subtitle')}
       linkText={t('auth.backToLogin')}
       linkUrl="/login"
-      error={error}
+      error={error ? t('auth.forgotPassword.error') : null}
       success={successMessage}
       onSubmit={handleSubmit}
     >
