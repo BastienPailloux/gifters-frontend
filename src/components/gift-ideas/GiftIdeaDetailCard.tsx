@@ -33,6 +33,17 @@ const GiftIdeaDetailCard: React.FC<GiftIdeaDetailCardProps> = ({
     return true;
   };
 
+  // Vérifier si l'utilisateur est le destinataire
+  const isRecipient = (): boolean => {
+    if (!giftIdea || !currentUser) return false;
+    return giftIdea.recipients.some((recipient) => recipient.id === currentUser.id);
+  };
+
+  // Vérifier si l'acheteur doit être affiché
+  const shouldShowBuyer = (): boolean => {
+    return Boolean(giftIdea?.buyer) && !isRecipient();
+  };
+
   // Rendu des boutons d'action
   const renderActionButtons = () => {
     const canBuyOrMark = canInteract();
@@ -100,7 +111,7 @@ const GiftIdeaDetailCard: React.FC<GiftIdeaDetailCardProps> = ({
                 value={giftIdea.created_by?.name || ''}
               />
 
-              {giftIdea.buyer && (
+              {shouldShowBuyer() && giftIdea.buyer && (
                 <LabelValue
                   label={t('giftIdeas.onGoingBuyer')}
                   value={giftIdea.buyer.name}
@@ -141,7 +152,7 @@ const GiftIdeaDetailCard: React.FC<GiftIdeaDetailCardProps> = ({
                 value={giftIdea.created_by?.name || ''}
               />
 
-              {giftIdea.buyer && (
+              {shouldShowBuyer() && giftIdea.buyer && (
                 <LabelValue
                   label={t('giftIdeas.onGoingBuyer')}
                   value={giftIdea.buyer.name}
