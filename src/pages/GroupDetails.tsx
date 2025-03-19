@@ -83,7 +83,7 @@ const GroupDetails: React.FC = () => {
 
       try {
         // Ne récupérer que les idées avec statut "proposed" ou "buying"
-        const result = await giftIdeaService.getGiftIdeasByGroup(id, ['proposed', 'buying']);
+        const result = await giftIdeaService.getGiftIdeasByGroup(id, ['proposed', 'buying'], true);
 
         // Mapper les données API en GiftIdea
         if (result && result.giftIdeas) {
@@ -157,7 +157,7 @@ const GroupDetails: React.FC = () => {
       const fetchGiftIdeas = async () => {
         try {
           // Ne récupérer que les idées avec statut "proposed" ou "buying"
-          const result = await giftIdeaService.getGiftIdeasByGroup(id, ['proposed', 'buying']);
+          const result = await giftIdeaService.getGiftIdeasByGroup(id, ['proposed', 'buying'], true);
 
           // Mapper les données API en GiftIdea
           if (result && result.giftIdeas) {

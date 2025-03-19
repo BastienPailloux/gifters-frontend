@@ -167,9 +167,12 @@ export const giftIdeaService = {
   },
 
   // Récupérer les idées de cadeaux pour un groupe spécifique
-  getGiftIdeasByGroup: async (groupId: string, statuses?: string[]) => {
+  getGiftIdeasByGroup: async (groupId: string, statuses?: string[], excludeOwnWishlist: boolean = false) => {
     try {
-      const params: { group_id: string; status?: string[] } = { group_id: groupId };
+      const params: { group_id: string; status?: string[]; exclude_own_wishlist?: string } = {
+        group_id: groupId,
+        exclude_own_wishlist: excludeOwnWishlist ? 'true' : undefined
+      };
 
       // Ajouter les statuts à filtrer s'ils sont spécifiés
       if (statuses && statuses.length > 0) {
