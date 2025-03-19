@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import ColorTag from '../common/display/ColorTag';
 import ClickableCard from '../common/display/ClickableCard';
 import FlatButton from '../common/forms/FlatButton';
@@ -15,6 +16,7 @@ const MemberItem: React.FC<MemberItemProps> = ({
   isActive = false
 }) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const handleChangeRole = () => {
     if (onChangeRole) {
@@ -28,9 +30,17 @@ const MemberItem: React.FC<MemberItemProps> = ({
     }
   };
 
+  const handleClick = () => {
+    if (onClick) {
+      onClick();
+    }
+    // Naviguer vers le profil du membre
+    navigate(`/profile/${member.user_id}`);
+  };
+
   return (
     <ClickableCard
-      onClick={onClick}
+      onClick={handleClick}
       isActive={isActive}
       className="mb-2"
       bodyClassName="p-2"

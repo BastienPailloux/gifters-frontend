@@ -28,6 +28,8 @@ const GroupsList: React.FC<GroupsListProps> = ({
     );
   }
 
+  console.log('groups', groups);
+
   return (
     <Card className={className}>
       <div className="p-4 divide-y divide-gray-200">

@@ -450,5 +450,31 @@
   "events": {
     "title": "Events Management",
     "underConstruction": "Event management is currently under development. You will soon be able to create and manage events for your groups!"
+  },
+  "profile": {
+    "yourProfile": "Your Profile",
+    "manageYourInfo": "Manage your personal information",
+    "editProfile": "Edit Profile",
+    "personalInfo": "Personal Information",
+    "address": "Address",
+    "birthday": "Birthday",
+    "phone": "Phone",
+    "street": "Street",
+    "city": "City",
+    "state": "State/Region",
+    "zipCode": "ZIP Code",
+    "country": "Country",
+    "changePassword": "Change Password",
+    "currentPassword": "Current Password",
+    "currentPasswordRequired": "Required to change password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "userNotFound": "User not found",
+    "name": "Name",
+    "email": "Email address",
+    "viewOtherProfile": "User profile",
+    "noAccess": "You don't have access to this profile. You need to share at least one group with this user.",
+    "giftIdeasFor": "Gift ideas for {{name}}",
+    "noGiftIdeas": "No gift ideas available at the moment"
   }
 }

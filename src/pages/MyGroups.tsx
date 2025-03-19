@@ -34,9 +34,24 @@ const MyGroups: React.FC = () => {
 
       // Appel à l'API pour récupérer les groupes
       const response = await groupService.getGroups();
+
+      // Gestion robuste de la réponse pour s'assurer que groups est toujours un tableau
+      let groupsData: Group[] = [];
+
       if (response) {
-        setGroups(response);
+        if (Array.isArray(response)) {
+          // Si la réponse est déjà un tableau
+          groupsData = response;
+        } else if (response.data && Array.isArray(response.data)) {
+          // Si les données sont dans response.data
+          groupsData = response.data;
+        } else if (response.groups && Array.isArray(response.groups)) {
+          // Si les données sont dans response.groups
+          groupsData = response.groups;
+        }
       }
+
+      setGroups(groupsData);
     } catch (err) {
       console.error('Error fetching groups:', err);
       setError(t('common.error'));

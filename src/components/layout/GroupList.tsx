@@ -21,10 +21,8 @@ const GroupList: React.FC<GroupListProps> = () => {
     const fetchGroups = async () => {
       try {
         setLoading(true);
-        console.log('Fetching groups...');
 
         const result = await groupService.getGroups();
-        console.log('Groups API response:', result);
 
         // Gestion améliorée de la réponse basée sur la structure de l'API
         let groupsData: SideMenuGroup[] = [];
@@ -40,7 +38,6 @@ const GroupList: React.FC<GroupListProps> = () => {
           groupsData = Array.isArray(result.groups) ? result.groups : [];
         }
 
-        console.log('Parsed groups data:', groupsData);
         setGroups(groupsData);
         setError(null);
       } catch (err) {
