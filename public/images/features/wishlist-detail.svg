@@ -1,0 +1,32 @@
+<svg width="800" height="500" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="500" fill="#EEF2FF" />
+  <rect x="50" y="50" width="700" height="400" rx="10" fill="white" stroke="#4F46E5" stroke-width="2" />
+
+  <!-- Header -->
+  <rect x="100" y="80" width="600" height="60" rx="5" fill="#F9FAFB" />
+  <text x="120" y="120" font-family="Arial" font-size="24" font-weight="bold" fill="#4F46E5">Ma Liste de Souhaits</text>
+
+  <!-- Item 1 -->
+  <rect x="100" y="160" width="600" height="80" rx="5" fill="#F9FAFB" />
+  <rect x="120" y="170" width="60" height="60" rx="5" fill="#EEF2FF" />
+  <rect x="200" y="175" width="300" height="20" rx="3" fill="#E0E7FF" />
+  <rect x="200" y="205" width="200" height="15" rx="3" fill="#E0E7FF" />
+  <rect x="550" y="180" width="120" height="40" rx="5" fill="#4F46E5" />
+  <text x="580" y="205" font-family="Arial" font-size="14" font-weight="bold" fill="white">Acheter</text>
+
+  <!-- Item 2 -->
+  <rect x="100" y="260" width="600" height="80" rx="5" fill="#F9FAFB" />
+  <rect x="120" y="270" width="60" height="60" rx="5" fill="#EEF2FF" />
+  <rect x="200" y="275" width="300" height="20" rx="3" fill="#E0E7FF" />
+  <rect x="200" y="305" width="200" height="15" rx="3" fill="#E0E7FF" />
+  <rect x="550" y="280" width="120" height="40" rx="5" fill="#4F46E5" />
+  <text x="580" y="305" font-family="Arial" font-size="14" font-weight="bold" fill="white">Acheter</text>
+
+  <!-- Item 3 -->
+  <rect x="100" y="360" width="600" height="80" rx="5" fill="#F9FAFB" />
+  <rect x="120" y="370" width="60" height="60" rx="5" fill="#EEF2FF" />
+  <rect x="200" y="375" width="300" height="20" rx="3" fill="#E0E7FF" />
+  <rect x="200" y="405" width="200" height="15" rx="3" fill="#E0E7FF" />
+  <rect x="550" y="380" width="120" height="40" rx="5" fill="#4F46E5" />
+  <text x="580" y="405" font-family="Arial" font-size="14" font-weight="bold" fill="white">Acheter</text>
+</svg>

@@ -1,14 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { User } from '../../types/auth';
 import { formatDate } from '../../utils/dateUtils';
-
-interface ProfileCardProps {
-  user: User;
-  isCurrentUser: boolean;
-  onEdit: () => void;
-  hidePersonalInfo?: boolean;
-}
+import { ProfileCardProps } from '../../types';
 
 const ProfileCard: React.FC<ProfileCardProps> = ({ user, isCurrentUser, onEdit, hidePersonalInfo = true }) => {
   const { t } = useTranslation();

@@ -51,7 +51,47 @@
         "description": "Decide who can see your lists and what information is shared."
       }
     },
-    "cta": "Explore all features"
+    "groups": {
+      "title": "Group Management",
+      "description": "Create and manage groups of friends and family to better organize your gifting experience.",
+      "detailedDescription": "Create and manage groups of friends and family to better organize your gifting experience.",
+      "imageAlt": "Screenshot of group management"
+    },
+    "wishLists": {
+      "title": "Wish Lists",
+      "description": "Easily create and share your wish lists with friends and family for any occasion.",
+      "detailedDescription": "Create and share your wish lists with friends and family for any occasion. Add items from any website with just one click. Add details and priorities. Receive exactly what you want and avoid duplicates thanks to our reservation system.",
+      "imageAlt": "Screenshot of wish list management"
+    },
+    "events": {
+      "title": "Event Planning",
+      "description": "Organize birthdays, holidays and special events with integrated gift coordination.",
+      "detailedDescription": "Plan birthdays, weddings and other special occasions. Send invitations, track responses and keep all information organized in one place.",
+      "imageAlt": "Screenshot of event planning"
+    },
+    "notifications": {
+      "title": "Smart Notifications",
+      "description": "Never miss an important date with customizable reminders for events and gift opportunities.",
+      "detailedDescription": "Never miss an important date with customizable reminders for events and gift opportunities.",
+      "imageAlt": "Screenshot of smart notifications"
+    },
+    "privacy": {
+      "title": "Privacy Controls",
+      "description": "Full control over what you share and with whom - your data stays private and secure.",
+      "detailedDescription": "Full control over what you share and with whom - your data stays private and secure.",
+      "imageAlt": "Screenshot of privacy controls"
+    },
+    "multiLanguage": {
+      "title": "Multi-Language Support",
+      "description": "Use Gifters in your preferred language with our growing list of supported languages.",
+      "detailedDescription": "Use Gifters in your preferred language with our growing list of supported languages.",
+      "imageAlt": "Screenshot of multi-language support"
+    },
+    "register": "Sign up for free",
+    "cta": "Ready to simplify your gift giving experience?",
+    "detailedTitle": "Discover in detail",
+    "finalCta": "Ready to organize your gifts and events in a simple and efficient way?",
+    "startNow": "Start now"
   },
   "testimonials": {
     "1": {
