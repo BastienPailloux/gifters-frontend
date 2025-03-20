@@ -539,5 +539,49 @@
     "noAccess": "You don't have access to this profile. You need to share at least one group with this user.",
     "giftIdeasFor": "Gift ideas for {{name}}",
     "noGiftIdeas": "No gift ideas available at the moment"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "We'd love to hear from you. Feel free to reach out with any questions or suggestions.",
+    "infoTitle": "Contact Information",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "formTitle": "Send Us a Message",
+    "successMessage": "Your message has been sent successfully. We'll get back to you as soon as possible.",
+    "mapPlaceholder": "Interactive map to be embedded here",
+    "faqTitle": "Frequently Asked Questions",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "subject": "Subject",
+      "message": "Message",
+      "send": "Send",
+      "sending": "Sending..."
+    },
+    "faq": {
+      "question1": "How do I create an account?",
+      "answer1": "You can create an account by clicking on \"Register\" in the main menu. Then fill out the form with your personal information.",
+      "question2": "How do I create a wishlist?",
+      "answer2": "Once logged in, go to the \"My Gifts\" section, then click on the \"My wishlist\" tab and on the \"Add a gift idea\" button.",
+      "question3": "How do I share my wishlist?",
+      "answer3": "All the gifts of your wishlist are shared with all the members of your groups.",
+      "question4": "Is the Gifters service free?",
+      "answer4": "Yes, all basic features of Gifters are free. We also offer premium features for the most demanding users."
+    },
+    "errors": {
+      "submission": "An error occurred while sending the message. Please try again."
+    }
+  },
+  "help": {
+    "features": {
+      "title": "Features Q&A",
+      "question1": "How do I create a group?",
+      "answer1": "To create a group, log into your account, go to the \"My Groups\" section and click on \"Create a Group\". Give your group a name, add a description and invite your friends or family.",
+      "question2": "How do I add members to my group?",
+      "answer2": "In the group details page, click on \"Invite Members\". You can invite people by email or by generating an invitation link that you can share.",
+      "question3": "How do I organize a gift exchange?",
+      "answer3": "In your group, go to the \"Events\" section and click on \"Organize a Gift Exchange\". Select the participants, set the rules (budget, exclusions) and start the draw. Each participant will receive a notification telling them who they need to buy a gift for."
+    }
   }
 }
