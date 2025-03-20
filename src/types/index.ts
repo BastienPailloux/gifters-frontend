@@ -55,3 +55,6 @@ export * from './contact';
 
 // Form types
 export * from './form';
+
+// Pricing types
+export * from './pricing';

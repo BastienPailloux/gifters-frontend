@@ -5,25 +5,36 @@ import Button from '../common/forms/Button';
 import ColorTag from '../common/display/ColorTag';
 import Title from '../common/typography/Title';
 import { PricingCardProps, PricingFeature } from '../../types';
+import { useTranslation } from 'react-i18next';
 
 const PricingCard: React.FC<PricingCardProps> = ({
   plan,
   onSelect,
   itemVariants,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <motion.div
       className={`flex-1 max-w-md mx-auto ${plan.popular ? 'lg:-mt-4 lg:mb-4' : ''}`}
       variants={itemVariants}
     >
       <Card
-        className={`h-full ${plan.popular ? 'border-primary-500 shadow-lg' : ''}`}
+        className={`h-full ${plan.popular ? 'border-primary-500 shadow-lg' : ''} ${plan.disabled ? 'opacity-70' : ''}`}
       >
         <div className="p-6 flex flex-col h-full">
           {plan.popular && (
             <ColorTag
               text={plan.popularText || 'Popular'}
               color="blue"
+              className="mb-4 self-start"
+            />
+          )}
+
+          {plan.disabled && (
+            <ColorTag
+              text={plan.ctaText}
+              color="gray"
               className="mb-4 self-start"
             />
           )}
@@ -57,12 +68,19 @@ const PricingCard: React.FC<PricingCardProps> = ({
 
           <div className="mt-auto">
             <Button
-              onClick={() => onSelect(plan.id)}
+              onClick={() => !plan.disabled && onSelect(plan.id)}
               variant={plan.popular ? 'primary' : 'ghost'}
               fullWidth
+              disabled={plan.disabled}
             >
               {plan.ctaText}
             </Button>
+
+            {plan.id === 'free' && (
+              <p className="text-center text-sm text-primary-600 font-medium mt-3">
+                {t('pricing.temporarilyUnlimited', 'Toutes les fonctionnalités sont temporairement illimitées !')}
+              </p>
+            )}
           </div>
         </div>
       </Card>
