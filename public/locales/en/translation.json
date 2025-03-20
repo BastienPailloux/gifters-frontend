@@ -51,7 +51,32 @@
         "description": "Decide who can see your lists and what information is shared."
       }
     },
-    "cta": "Explore all features"
+    "groups": {
+      "title": "Group Management",
+      "description": "Create and manage groups of friends and family to better organize your gifting experience."
+    },
+    "wishLists": {
+      "title": "Wish Lists",
+      "description": "Easily create and share your wish lists with friends and family for any occasion."
+    },
+    "events": {
+      "title": "Event Planning",
+      "description": "Organize birthdays, holidays and special events with integrated gift coordination."
+    },
+    "notifications": {
+      "title": "Smart Notifications",
+      "description": "Never miss an important date with customizable reminders for events and gift opportunities."
+    },
+    "privacy": {
+      "title": "Privacy Controls",
+      "description": "Full control over what you share and with whom - your data stays private and secure."
+    },
+    "multiLanguage": {
+      "title": "Multi-Language Support",
+      "description": "Use Gifters in your preferred language with our growing list of supported languages."
+    },
+    "register": "Sign up for free",
+    "cta": "Ready to simplify your gift giving experience?"
   },
   "testimonials": {
     "1": {
