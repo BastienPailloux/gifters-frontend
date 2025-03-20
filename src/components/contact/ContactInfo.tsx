@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaEnvelope } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import { Title } from '../common/typography';
 
 interface ContactInfoProps {
   className?: string;
@@ -34,9 +35,9 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ className }) => {
 
   return (
     <div className={className}>
-      <h2 className="text-2xl font-bold mb-6">{t('contact.infoTitle')}</h2>
+      <Title as="h3">{t('contact.infoTitle')}</Title>
 
-      <motion.div className="space-y-6" variants={containerVariants}>
+      <motion.div className="space-y-6 mt-6" variants={containerVariants}>
         <motion.div className="flex items-start space-x-4" variants={itemVariants}>
           <FaEnvelope className="text-primary mt-1 text-xl" />
           <div>

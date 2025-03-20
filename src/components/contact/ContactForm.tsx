@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Button, Input, TextArea } from '../common/forms';
+import { Title } from '../common/typography';
 
 interface ContactFormProps {
   className?: string;
@@ -57,18 +58,18 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
 
   return (
     <div className={className}>
-      <h2 className="text-2xl font-bold mb-6">{t('contact.formTitle')}</h2>
+      <Title as="h3">{t('contact.formTitle')}</Title>
 
       {submitted ? (
         <motion.div
-          className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded"
+          className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mt-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
           {t('contact.successMessage')}
         </motion.div>
       ) : (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="mt-6">
           <div className="mb-4">
             <Input
               label={t('contact.form.name')}

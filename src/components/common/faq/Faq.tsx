@@ -1,6 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
+import { Title } from '../typography';
+import Card from '../display/Card';
 
 export interface FaqItem {
   question: string;
@@ -15,6 +17,7 @@ interface FaqProps {
   className?: string;
   itemClassName?: string;
   translationPrefix?: string; // Préfixe pour les clés de traduction automatiques
+  titleSize?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 }
 
 const Faq: React.FC<FaqProps> = ({
@@ -23,7 +26,8 @@ const Faq: React.FC<FaqProps> = ({
   titleTranslationKey,
   className = '',
   itemClassName = '',
-  translationPrefix
+  translationPrefix,
+  titleSize = 'h2'
 }) => {
   const { t } = useTranslation();
 
@@ -70,11 +74,11 @@ const Faq: React.FC<FaqProps> = ({
   };
 
   return (
-    <div className={className}>
+    <Card className={className}>
       {(title || titleTranslationKey) && (
-        <h2 className="text-2xl font-bold mb-6">
+        <Title as={titleSize} className="mb-6">
           {titleTranslationKey ? t(titleTranslationKey) : title}
-        </h2>
+        </Title>
       )}
 
       <motion.div
@@ -98,7 +102,7 @@ const Faq: React.FC<FaqProps> = ({
           </motion.div>
         ))}
       </motion.div>
-    </div>
+    </Card>
   );
 };
 

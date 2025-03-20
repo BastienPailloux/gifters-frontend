@@ -1,5 +1,6 @@
 import React from 'react';
 import { Faq, FaqItem } from '../common/faq';
+import { Title } from '../common/typography';
 
 interface HelpFaqProps {
   className?: string;
@@ -38,21 +39,25 @@ const HelpFaq: React.FC<HelpFaqProps> = ({ className }) => {
   ];
 
   return (
-    <div className={className}>
-      {/* FAQ générale */}
-      <Faq
-        items={generalFaqItems}
-        title="Aide générale"
-        className="mb-12"
-      />
+    <div className={`${className} space-y-8`}>
+      <Title as="h1" centered>Centre d'aide</Title>
 
-      {/* FAQ sur les fonctionnalités */}
-      <Faq
-        items={featuresFaqItems}
-        titleTranslationKey="help.features.title"
-        translationPrefix="help.features"
-        className="mb-12"
-      />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* FAQ générale */}
+        <Faq
+          items={generalFaqItems}
+          title="Aide générale"
+          titleSize="h3"
+        />
+
+        {/* FAQ sur les fonctionnalités */}
+        <Faq
+          items={featuresFaqItems}
+          titleTranslationKey="help.features.title"
+          translationPrefix="help.features"
+          titleSize="h3"
+        />
+      </div>
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 
 import { Title, Subtitle } from '../components/common/typography';
 import { ContactForm, ContactInfo, ContactFaq } from '../components/contact';
+import Card from '../components/common/display/Card';
 
 const Contact: React.FC = () => {
   const { t } = useTranslation();
@@ -24,31 +25,35 @@ const Contact: React.FC = () => {
       <Title>{t('contact.title')}</Title>
       <Subtitle className="mb-12">{t('contact.subtitle')}</Subtitle>
 
-      <div className="flex flex-col md:flex-row gap-12 mb-16">
+      <div className="flex flex-col md:flex-row gap-8 mb-16">
         {/* Contact Form */}
         <motion.div
-          className="flex-1 bg-white rounded-lg shadow-md p-6"
+          className="flex-1"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          <ContactForm />
+          <Card>
+            <ContactForm />
+          </Card>
         </motion.div>
 
         {/* Contact Info */}
         <motion.div
-          className="flex-1 bg-white rounded-lg shadow-md p-6"
+          className="flex-1"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          <ContactInfo />
+          <Card>
+            <ContactInfo />
+          </Card>
         </motion.div>
       </div>
 
       {/* FAQ Section */}
       <motion.div
-        className="bg-white rounded-lg shadow-md p-6 mb-12"
+        className="mb-12"
         variants={containerVariants}
         initial="hidden"
         animate="visible"

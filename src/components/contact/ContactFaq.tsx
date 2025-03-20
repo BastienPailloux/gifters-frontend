@@ -41,6 +41,7 @@ const ContactFaq: React.FC<ContactFaqProps> = ({ className }) => {
       items={faqItems}
       titleTranslationKey="contact.faqTitle"
       className={className}
+      titleSize="h3"
       // Ou utiliser le préfixe de traduction
       // translationPrefix="contact.faq"
     />
