@@ -30,25 +30,44 @@ const InvitationModal: React.FC<InvitationModalProps> = ({
       try {
         // Vérifier s'il existe déjà des invitations actives pour ce groupe
         const invitations = await invitationService.getGroupInvitations(groupId);
+        console.log('invitations', invitations);
 
         if (invitations && invitations.length > 0) {
           // Utiliser le premier token d'invitation disponible
           setInvitationToken(invitations[0].token);
           setInvitationURL(`${window.location.origin}/invitation/join?token=${invitations[0].token}`);
         } else {
-          // Créer une nouvelle invitation générique avec l'email et le message en paramètres directs
+          // Créer une nouvelle invitation générique
+          try {
+            const newInvitation = await invitationService.createInvitation(groupId, {
+              email: 'share@example.com',
+              message: 'Shared invitation link'
+            });
+            setInvitationToken(newInvitation.token);
+            setInvitationURL(`${window.location.origin}/invitation/join?token=${newInvitation.token}`);
+          } catch (createErr) {
+            console.error('Error creating invitation token:', createErr);
+            setError(t('groups.errorCreatingInvitationLink'));
+            // Fallback en cas d'erreur
+            setInvitationURL(`${window.location.origin}/invitation/join?group=${groupId}`);
+          }
+        }
+      } catch (err) {
+        console.error('Error getting invitation token:', err);
+        // Pas d'erreur visible à l'utilisateur pour la récupération, on va essayer de créer une invitation
+        try {
           const newInvitation = await invitationService.createInvitation(groupId, {
             email: 'share@example.com',
             message: 'Shared invitation link'
           });
           setInvitationToken(newInvitation.token);
           setInvitationURL(`${window.location.origin}/invitation/join?token=${newInvitation.token}`);
+        } catch (createErr) {
+          console.error('Error creating invitation token after fetch error:', createErr);
+          setError(t('groups.errorCreatingInvitationLink'));
+          // Fallback en cas d'erreur
+          setInvitationURL(`${window.location.origin}/invitation/join?group=${groupId}`);
         }
-      } catch (err) {
-        console.error('Error getting invitation token:', err);
-        setError(t('groups.errorGettingInvitationLink'));
-        // Fallback à l'ancienne méthode en cas d'erreur
-        setInvitationURL(`${window.location.origin}/invitation/join?group=${groupId}`);
       }
     };
 

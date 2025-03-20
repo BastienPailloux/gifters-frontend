@@ -350,7 +350,7 @@
     "sendEmail": "Envoyer une invitation par email",
     "inviteLinkCopied": "Lien d'invitation copié dans le presse-papiers !",
     "inviteEmailSubject": "Rejoignez mon groupe sur Gifters",
-    "inviteEmailBody": "Bonjour,\n\nJe vous invite à rejoindre le groupe {{groupName}} sur Gifters. Cliquez sur le lien ci-dessous pour rejoindre :\n\n{{link}}\n\nCordialement",
+    "inviteEmailBody": "Bonjour,\n\nJe vous invite à rejoindre le groupe {{groupName}} sur Gifters. Cliquez sur le lien ci-dessous pour rejoindre :\n\n{{link}}",
     "inviteWhatsAppMessage": "Bonjour ! Je vous invite à rejoindre le groupe {{groupName}} sur Gifters. Cliquez sur ce lien pour rejoindre : {{link}}",
     "shareInvitationDescription": "Partagez ce lien d'invitation avec les personnes que vous souhaitez inviter dans le groupe.",
     "enterEmail": "Entrez l'adresse email du destinataire",
@@ -361,7 +361,8 @@
     "errorGettingInvitationLink": "Erreur lors de la récupération du lien d'invitation. Un lien plus simple a été généré.",
     "errorGettingGroups": "Erreur lors de la récupération des groupes. Veuillez réessayer.",
     "errorUpdatingRole": "Erreur lors de la mise à jour du rôle. Veuillez réessayer.",
-    "errorRemovingMember": "Erreur lors de la suppression du membre. Veuillez réessayer."
+    "errorRemovingMember": "Erreur lors de la suppression du membre. Veuillez réessayer.",
+    "errorCreatingInvitationLink": "Erreur lors de la création du lien d'invitation. Un lien plus simple a été généré."
   },
   "giftIdeas": {
     "title": "Idées de cadeaux",
