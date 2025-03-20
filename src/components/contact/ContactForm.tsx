@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Button, Input, TextArea } from '../common/forms';
 import { Title } from '../common/typography';
 import { ContactFormProps, ContactFormData } from '../../types';
+import { contactService } from '../../services/api';
 
 const ContactForm: React.FC<ContactFormProps> = ({
   className,
@@ -41,8 +42,13 @@ const ContactForm: React.FC<ContactFormProps> = ({
       if (onSubmit) {
         await onSubmit(formData);
       } else {
-        // Simuler une API call par défaut
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        // Envoyer le message à travers notre service API
+        await contactService.sendContactMessage({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message
+        });
       }
 
       setSubmitted(true);

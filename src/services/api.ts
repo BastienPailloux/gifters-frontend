@@ -587,4 +587,18 @@ export const userService = {
   },
 };
 
+// Service de contact
+export const contactService = {
+  // Envoyer un message de contact
+  sendContactMessage: async (contactData: { name: string; email: string; subject: string; message: string }) => {
+    try {
+      const response = await api.post('/contact', contactData);
+      return response.data;
+    } catch (error) {
+      console.error('Error sending contact message:', error);
+      throw error;
+    }
+  },
+};
+
 export default api;
