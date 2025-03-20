@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { Title, Subtitle } from '../components/common/typography';
 import { CallToAction } from '../components/common/cta';
 import { DetailedFeaturesSection } from '../components/features';
@@ -8,6 +9,7 @@ import { FeatureCardProps } from '../types';
 
 const Features: React.FC = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const features: Omit<FeatureCardProps, 'delay'>[] = [
     {
@@ -82,7 +84,7 @@ const Features: React.FC = () => {
         message={t('features.cta')}
         buttonText={t('features.register')}
         buttonProps={{
-          onClick: () => window.location.href = '/register'
+          onClick: () => navigate('/register')
         }}
         className="mt-12 mb-20"
         animated
@@ -99,7 +101,7 @@ const Features: React.FC = () => {
           message={t('features.finalCta')}
           buttonText={t('features.startNow')}
           buttonProps={{
-            onClick: () => window.location.href = '/register',
+            onClick: () => navigate('/register'),
             variant: 'secondary'
           }}
           className="bg-transparent"
