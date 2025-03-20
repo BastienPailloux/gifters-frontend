@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
-import SEOHelmetProvider from './components/common/seo/HelmetProvider';
 import Layout from './components/layout/Layout';
 import Home from './pages/Home';
 import Login from './pages/auth/Login';
@@ -178,13 +177,11 @@ const AppRoutes: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <SEOHelmetProvider>
-      <Router>
-        <AuthProvider>
-          <AppRoutes />
-        </AuthProvider>
-      </Router>
-    </SEOHelmetProvider>
+    <Router>
+      <AuthProvider>
+        <AppRoutes />
+      </AuthProvider>
+    </Router>
   );
 };
 

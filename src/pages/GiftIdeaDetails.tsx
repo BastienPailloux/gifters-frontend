@@ -7,9 +7,10 @@ import PageHeader from '../components/common/layout/PageHeader';
 import GiftIdeaDetailCard from '../components/gift-ideas/GiftIdeaDetailCard';
 import { GiftIdeaFormModal } from '../components/gift-ideas/GiftIdeaFormModal';
 import useAuth from '../hooks/useAuth';
-import { GiftStatus, ExtendedGiftIdea } from '../types';
+import { ExtendedGiftIdea } from '../types';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import ConfirmationModal from '../components/common/modals/ConfirmationModal';
+import { SEO } from '../components/common/seo';
 
 const GiftIdeaDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -24,22 +25,6 @@ const GiftIdeaDetails: React.FC = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
   const [groupMembers, setGroupMembers] = useState<Array<{ id: string; name: string; email?: string }>>([]);
-
-  // Fonction pour vérifier si le créateur est aussi un destinataire
-  const isCreatorAlsoRecipient = (): boolean => {
-    if (!giftIdea || !user) return false;
-
-    // Vérifie si l'utilisateur actuel est le créateur
-    const isCreator = giftIdea.created_by_id === user.id;
-
-    // Vérifie si l'utilisateur actuel est aussi un destinataire
-    const isRecipient = giftIdea.recipients?.some(
-      (recipient: { id: string }) => recipient.id === user.id
-    ) || false;
-
-    // Retourne true si les deux conditions sont remplies
-    return isCreator && isRecipient;
-  };
 
   // Formatage du prix en euros
   const formatPrice = (price?: number) => {
@@ -193,6 +178,7 @@ const GiftIdeaDetails: React.FC = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center py-10">
+        <SEO translationKey="seo.giftIdea" />
         <p className="text-lg">{t('common.loading')}</p>
       </div>
     );
@@ -201,6 +187,7 @@ const GiftIdeaDetails: React.FC = () => {
   if (error) {
     return (
       <div className="flex flex-col items-center py-10">
+        <SEO translationKey="seo.giftIdea" />
         <p className="text-lg text-red-600">{error}</p>
         <Button variant="outline" onClick={handleBackToGroup} className="mt-4">
           {t('common.back')}
@@ -212,6 +199,7 @@ const GiftIdeaDetails: React.FC = () => {
   if (!giftIdea) {
     return (
       <div className="flex flex-col items-center py-10">
+        <SEO translationKey="seo.giftIdea" />
         <p className="text-lg">{t('giftIdeas.notFound')}</p>
         <Button variant="outline" onClick={handleBackToGroup} className="mt-4">
           {t('common.back')}
@@ -220,42 +208,45 @@ const GiftIdeaDetails: React.FC = () => {
     );
   }
 
-  // Préparer les actions pour le PageHeader
-  const headerActions = canEditOrDelete() ? (
-    <div className="flex gap-2">
-      <Button
-        variant="outline"
-        onClick={handleEditGiftIdea}
-        className="flex items-center gap-1"
-      >
-        <FaEdit className="h-4 w-4" />
-        {t('common.edit')}
-      </Button>
-
-      <Button
-        variant="danger"
-        onClick={openDeleteModal}
-        disabled={isDeleting}
-        className="flex items-center gap-1"
-      >
-        <FaTrash className="h-4 w-4" />
-        {t('common.delete')}
-      </Button>
-    </div>
-  ) : null;
-
   return (
-    <div className="container mx-auto px-4 py-6">
-      <div className="flex items-center justify-between mb-6">
-        <PageHeader
+    <div className="container mx-auto px-4 py-6 max-w-7xl">
+      {giftIdea && (
+        <SEO
           title={giftIdea.title}
-          onBackClick={handleBackToGroup}
-          className="mb-0"
-          showBackButton={true}
-          status={isCreatorAlsoRecipient() ? 'wishlist' as GiftStatus : giftIdea.status as GiftStatus}
+          description={giftIdea.description || t('giftIdea.noDescription')}
+          image={giftIdea.image_url || undefined}
+          type="product"
         />
-        {headerActions}
-      </div>
+      )}
+
+      <PageHeader
+        title={loading ? t('common.loading') : (giftIdea?.title || t('giftIdea.notFound'))}
+        onBackClick={() => navigate(-1)}
+        actions={
+          canEditOrDelete() ? (
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                onClick={handleEditGiftIdea}
+                className="flex items-center gap-1"
+              >
+                <FaEdit className="h-4 w-4" />
+                {t('common.edit')}
+              </Button>
+
+              <Button
+                variant="danger"
+                onClick={openDeleteModal}
+                disabled={isDeleting}
+                className="flex items-center gap-1"
+              >
+                <FaTrash className="h-4 w-4" />
+                {t('common.delete')}
+              </Button>
+            </div>
+          ) : null
+        }
+      />
 
       <GiftIdeaDetailCard
         giftIdea={giftIdea}

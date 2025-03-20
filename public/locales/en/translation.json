@@ -592,15 +592,18 @@
     },
     "login": {
       "title": "Login",
-      "description": "Log in to your Gifters account to access your wishlists and groups."
+      "description": "Log in to your Gifters account to access your wishlists and groups.",
+      "keywords": "login, account, wishlists, groups, gifts"
     },
     "register": {
       "title": "Register",
-      "description": "Create a free Gifters account and start organizing your gifts and events today."
+      "description": "Create a free Gifters account and start organizing your gifts and events today.",
+      "keywords": "register, account, wishlists, groups, gifts"
     },
     "dashboard": {
       "title": "Dashboard",
-      "description": "Your personal Gifters space - manage your lists, groups and upcoming events."
+      "description": "Your personal Gifters space - manage your lists, groups and upcoming events.",
+      "keywords": "dashboard, lists, groups, events, gifts"
     },
     "features": {
       "title": "Features",
@@ -614,19 +617,23 @@
     },
     "myGifts": {
       "title": "My Gifts",
-      "description": "Manage your wishlists and gift ideas in your personal space."
+      "description": "Manage your wishlists and gift ideas in your personal space.",
+      "keywords": "my gifts, wishlists, gift ideas, personal space"
     },
     "myGroups": {
       "title": "My Groups",
-      "description": "Manage your groups of friends and family to share your lists and organize events."
+      "description": "Manage your groups of friends and family to share your lists and organize events.",
+      "keywords": "my groups, groups, lists, events, gifts"
     },
     "events": {
       "title": "Events",
-      "description": "Organize and manage your events and gift exchanges for all special occasions."
+      "description": "Organize and manage your events and gift exchanges for all special occasions.",
+      "keywords": "events, gift exchanges, special occasions, gifts"
     },
     "profile": {
       "title": "Profile",
-      "description": "Manage your personal information and preferences on Gifters."
+      "description": "Manage your personal information and preferences on Gifters.",
+      "keywords": "profile, personal information, preferences, Gifters"
     }
   }
 }
