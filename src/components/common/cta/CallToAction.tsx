@@ -2,16 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { twMerge } from 'tailwind-merge';
 import Button from '../forms/Button';
-import { ButtonProps } from '../../../types';
-
-export interface CallToActionProps {
-  message?: string;
-  buttonText: string;
-  buttonProps?: Omit<ButtonProps, 'children'>;
-  className?: string;
-  delay?: number;
-  animated?: boolean;
-}
+import { CallToActionProps } from '../../../types';
 
 const CallToAction: React.FC<CallToActionProps> = ({
   message,

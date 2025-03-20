@@ -1,15 +1,7 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { twMerge } from 'tailwind-merge';
-
-export interface SubtitleProps {
-  children: ReactNode;
-  className?: string;
-  centered?: boolean;
-  animated?: boolean;
-  delay?: number;
-  maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | 'full' | 'none';
-}
+import { SubtitleProps } from '../../../types';
 
 const Subtitle: React.FC<SubtitleProps> = ({
   children,

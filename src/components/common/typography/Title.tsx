@@ -1,15 +1,7 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { twMerge } from 'tailwind-merge';
-
-export interface TitleProps {
-  children: ReactNode;
-  className?: string;
-  centered?: boolean;
-  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-  animated?: boolean;
-  delay?: number;
-}
+import { TitleProps } from '../../../types';
 
 const Title: React.FC<TitleProps> = ({
   children,

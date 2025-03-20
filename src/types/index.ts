@@ -34,3 +34,12 @@ export * from './routes';
 
 // Features types
 export * from './features';
+
+// Typography types
+export * from './typography';
+
+// CTA types
+export * from './cta';
+
+// Profile types
+export * from './profile';

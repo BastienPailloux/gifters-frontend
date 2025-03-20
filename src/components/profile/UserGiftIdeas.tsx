@@ -1,14 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { ApiGiftIdea } from '../../types/gift-ideas';
 import GiftIdeaItem from '../gift-ideas/GiftIdeaItem';
-
-interface UserGiftIdeasProps {
-  userName: string;
-  giftIdeas: ApiGiftIdea[];
-  isLoading: boolean;
-}
+import { UserGiftIdeasProps } from '../../types';
 
 const UserGiftIdeas: React.FC<UserGiftIdeasProps> = ({ userName, giftIdeas, isLoading }) => {
   const { t } = useTranslation();

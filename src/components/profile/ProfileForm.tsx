@@ -1,29 +1,8 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { User } from '../../types/auth';
 import Input from '../common/forms/Input';
 import Button from '../common/forms/Button';
-
-interface ProfileFormData {
-  name: string;
-  email: string;
-  birthday: string;
-  phone_number: string;
-  address: string;
-  city: string;
-  state: string;
-  zip_code: string;
-  country: string;
-  current_password?: string;
-  password?: string;
-  password_confirmation?: string;
-}
-
-interface ProfileFormProps {
-  user: User;
-  onSubmit: (formData: ProfileFormData) => Promise<void>;
-  onCancel: () => void;
-}
+import { ProfileFormProps, ProfileFormData } from '../../types';
 
 const ProfileForm: React.FC<ProfileFormProps> = ({ user, onSubmit, onCancel }) => {
   const { t } = useTranslation();
