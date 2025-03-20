@@ -50,7 +50,9 @@ const AppRoutes: React.FC = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
-      <Route path="/features" element={<Features />} />
+
+      {/* Route publique avec Layout */}
+      <Route path="/features" element={<LayoutRoute><Features /></LayoutRoute>} />
 
       {/* Routes pour les invitations */}
       <Route path="/invitation/join" element={<InvitationJoin />} />
