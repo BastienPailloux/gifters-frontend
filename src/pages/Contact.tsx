@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Title, Subtitle } from '../components/common/typography';
 import { ContactForm, ContactInfo, ContactFaq } from '../components/contact';
 import Card from '../components/common/display/Card';
+import { SEO } from '../components/common/seo';
 
 const Contact: React.FC = () => {
   const { t } = useTranslation();
@@ -22,6 +23,8 @@ const Contact: React.FC = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <SEO translationKey="seo.contact" />
+
       <Title>{t('contact.title')}</Title>
       <Subtitle className="mb-12">{t('contact.subtitle')}</Subtitle>
 

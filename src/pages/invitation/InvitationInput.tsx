@@ -6,6 +6,7 @@ import Input from '../../components/common/forms/Input';
 import Button from '../../components/common/forms/Button';
 import BackButton from '../../components/common/navigation/BackButton';
 import { invitationService } from '../../services/api';
+import { SEO } from '../../components/common/seo';
 
 /**
  * Page pour entrer un code d'invitation ou un lien d'invitation
@@ -73,6 +74,7 @@ const InvitationInput: React.FC = () => {
 
   return (
     <div className="max-w-2xl mx-auto p-6">
+      <SEO translationKey="seo.invitation" />
       <div className="mb-6">
         <BackButton onClick={() => navigate(-1)} />
       </div>

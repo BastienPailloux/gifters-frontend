@@ -11,6 +11,7 @@ import GiftIdeaItem from '../components/gift-ideas/GiftIdeaItem';
 import { GiftIdeaFormModal } from '../components/gift-ideas/GiftIdeaFormModal';
 import { ApiGiftIdea } from '../types/gift-ideas';
 import { ToggleOption } from '../types/ui';
+import { SEO } from '../components/common/seo';
 
 /**
  * Page "Mes Cadeaux" qui affiche les différentes catégories de cadeaux
@@ -228,6 +229,7 @@ const MyGifts: React.FC = () => {
   if (isLoading) {
     return (
       <div className="p-4">
+        <SEO translationKey="seo.myGifts" />
         <PageHeader title={t('giftIdeas.title')} />
         <div className="flex justify-center items-center h-64">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
@@ -239,6 +241,7 @@ const MyGifts: React.FC = () => {
   if (error) {
     return (
       <div className="p-4">
+        <SEO translationKey="seo.myGifts" />
         <PageHeader title={t('giftIdeas.title')} />
         <div className="bg-red-50 p-4 rounded-md text-red-600">
           {error}
@@ -252,6 +255,7 @@ const MyGifts: React.FC = () => {
 
   return (
     <div className="p-4">
+      <SEO translationKey="seo.myGifts" />
       <PageHeader
         title={t('giftIdeas.title')}
         actions={

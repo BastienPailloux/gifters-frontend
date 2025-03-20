@@ -9,6 +9,7 @@ import { Group } from '../types/groups';
 import GroupsList from '../components/groups/GroupsList';
 import AddGroupCard from '../components/groups/AddGroupCard';
 import GroupFormModal from '../components/groups/GroupFormModal';
+import { SEO } from '../components/common/seo';
 
 /**
  * Page "Mes Groupes" qui affiche tous les groupes de l'utilisateur
@@ -86,6 +87,7 @@ const MyGroups: React.FC = () => {
   if (error) {
     return (
       <div className="p-4">
+        <SEO translationKey="seo.myGroups" />
         <PageHeader title={t('groups.myGroups')} />
         <div className="bg-red-50 p-4 rounded-md text-red-600">
           {error}
@@ -96,6 +98,7 @@ const MyGroups: React.FC = () => {
 
   return (
     <div className="p-4">
+      <SEO translationKey="seo.myGroups" />
       <PageHeader
         title={t('groups.myGroups')}
         description={t('groups.myGroupsDescription')}

@@ -6,6 +6,7 @@ import AuthForm from '../../components/auth/AuthForm';
 import Input from '../../components/common/forms/Input';
 import Button from '../../components/common/forms/Button';
 import Checkbox from '../../components/common/forms/Checkbox';
+import { SEO } from '../../components/common/seo';
 
 const Register: React.FC = () => {
   const { t } = useTranslation();
@@ -59,77 +60,80 @@ const Register: React.FC = () => {
   );
 
   return (
-    <AuthForm
-      title={t('auth.register.title')}
-      subtitle={t('auth.register.subtitle')}
-      linkText={t('auth.register.loginLink')}
-      linkUrl="/login"
-      error={passwordError || error}
-      onSubmit={handleSubmit}
-    >
-      <Input
-        id="name"
-        name="name"
-        type="text"
-        autoComplete="name"
-        required
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        label={t('auth.fields.name')}
-      />
-
-      <Input
-        id="email"
-        name="email"
-        type="email"
-        autoComplete="email"
-        required
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        label={t('auth.fields.email')}
-      />
-
-      <Input
-        id="password"
-        name="password"
-        type="password"
-        autoComplete="new-password"
-        required
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        label={t('auth.fields.password')}
-      />
-
-      <Input
-        id="confirmPassword"
-        name="confirmPassword"
-        type="password"
-        autoComplete="new-password"
-        required
-        value={confirmPassword}
-        onChange={(e) => setConfirmPassword(e.target.value)}
-        label={t('auth.fields.confirmPassword')}
-      />
-
-      <Checkbox
-        id="terms"
-        name="terms"
-        required
-        checked={acceptTerms}
-        onChange={(e) => setAcceptTerms(e.target.checked)}
-        label={renderTermsLabel()}
-      />
-
-      <Button
-        type="submit"
-        variant="primary"
-        fullWidth
-        isLoading={isSubmitting}
-        disabled={isSubmitting}
+    <>
+      <SEO translationKey="seo.register" />
+      <AuthForm
+        title={t('auth.register.title')}
+        subtitle={t('auth.register.subtitle')}
+        linkText={t('auth.register.loginLink')}
+        linkUrl="/login"
+        error={passwordError || error}
+        onSubmit={handleSubmit}
       >
-        {t('auth.register.submit')}
-      </Button>
-    </AuthForm>
+        <Input
+          id="name"
+          name="name"
+          type="text"
+          autoComplete="name"
+          required
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          label={t('auth.fields.name')}
+        />
+
+        <Input
+          id="email"
+          name="email"
+          type="email"
+          autoComplete="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          label={t('auth.fields.email')}
+        />
+
+        <Input
+          id="password"
+          name="password"
+          type="password"
+          autoComplete="new-password"
+          required
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          label={t('auth.fields.password')}
+        />
+
+        <Input
+          id="confirmPassword"
+          name="confirmPassword"
+          type="password"
+          autoComplete="new-password"
+          required
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          label={t('auth.fields.confirmPassword')}
+        />
+
+        <Checkbox
+          id="terms"
+          name="terms"
+          required
+          checked={acceptTerms}
+          onChange={(e) => setAcceptTerms(e.target.checked)}
+          label={renderTermsLabel()}
+        />
+
+        <Button
+          type="submit"
+          variant="primary"
+          fullWidth
+          isLoading={isSubmitting}
+          disabled={isSubmitting}
+        >
+          {t('auth.register.submit')}
+        </Button>
+      </AuthForm>
+    </>
   );
 };
 

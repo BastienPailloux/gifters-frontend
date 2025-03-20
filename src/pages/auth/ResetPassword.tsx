@@ -5,6 +5,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import AuthForm from '../../components/auth/AuthForm';
 import Input from '../../components/common/forms/Input';
 import Button from '../../components/common/forms/Button';
+import { SEO } from '../../components/common/seo';
 
 const ResetPassword: React.FC = () => {
   const { t } = useTranslation();
@@ -68,79 +69,85 @@ const ResetPassword: React.FC = () => {
   // Si aucun token n'est fourni, afficher un message d'erreur
   if (!token) {
     return (
-      <AuthForm
-        title={t('auth.resetPassword.title')}
-        subtitle={t('auth.resetPassword.noToken')}
-        linkText={t('auth.backToLogin')}
-        linkUrl="/login"
-        error={t('auth.resetPassword.invalidLink')}
-        onSubmit={(e) => e.preventDefault()}
-      >
-        <Button
-          type="button"
-          variant="primary"
-          fullWidth
-          onClick={() => navigate('/login')}
+      <>
+        <SEO translationKey="seo.resetPassword" />
+        <AuthForm
+          title={t('auth.resetPassword.title')}
+          subtitle={t('auth.resetPassword.noToken')}
+          linkText={t('auth.backToLogin')}
+          linkUrl="/login"
+          error={t('auth.resetPassword.invalidLink')}
+          onSubmit={(e) => e.preventDefault()}
         >
-          {t('auth.backToLogin')}
-        </Button>
-      </AuthForm>
+          <Button
+            type="button"
+            variant="primary"
+            fullWidth
+            onClick={() => navigate('/login')}
+          >
+            {t('auth.backToLogin')}
+          </Button>
+        </AuthForm>
+      </>
     );
   }
 
   return (
-    <AuthForm
-      title={t('auth.resetPassword.title')}
-      subtitle={t('auth.resetPassword.subtitle')}
-      linkText={t('auth.backToLogin')}
-      linkUrl="/login"
-      error={error}
-      successMessage={successMessage}
-      onSubmit={handleSubmit}
-    >
-      {!successMessage ? (
-        <>
-          <Input
-            id="password"
-            name="password"
-            type="password"
-            autoComplete="new-password"
-            required
-            value={formData.password}
-            onChange={handleInputChange}
-            label={t('auth.fields.newPassword')}
-          />
+    <>
+      <SEO translationKey="seo.resetPassword" />
+      <AuthForm
+        title={t('auth.resetPassword.title')}
+        subtitle={t('auth.resetPassword.subtitle')}
+        linkText={t('auth.backToLogin')}
+        linkUrl="/login"
+        error={error}
+        successMessage={successMessage}
+        onSubmit={handleSubmit}
+      >
+        {!successMessage ? (
+          <>
+            <Input
+              id="password"
+              name="password"
+              type="password"
+              autoComplete="new-password"
+              required
+              value={formData.password}
+              onChange={handleInputChange}
+              label={t('auth.fields.newPassword')}
+            />
 
-          <Input
-            id="passwordConfirmation"
-            name="passwordConfirmation"
-            type="password"
-            autoComplete="new-password"
-            required
-            value={formData.passwordConfirmation}
-            onChange={handleInputChange}
-            label={t('auth.fields.confirmPassword')}
-          />
+            <Input
+              id="passwordConfirmation"
+              name="passwordConfirmation"
+              type="password"
+              autoComplete="new-password"
+              required
+              value={formData.passwordConfirmation}
+              onChange={handleInputChange}
+              label={t('auth.fields.confirmPassword')}
+            />
 
-          <Button
-            type="submit"
-            variant="primary"
-            fullWidth
-            isLoading={isSubmitting}
-            disabled={isSubmitting}
-          >
-            {t('auth.resetPassword.submit')}
-          </Button>
-        </>
-      ) : (
-        <div className="mt-4">
-          <p className="text-center mb-4">{successMessage}</p>
-          <p className="text-center text-sm text-gray-500">
-            {t('auth.resetPassword.redirecting')}
-          </p>
-        </div>
-      )}
-    </AuthForm>
+            <Button
+              type="submit"
+              variant="primary"
+              fullWidth
+              isLoading={isSubmitting}
+              disabled={isSubmitting}
+            >
+              {t('auth.resetPassword.submit')}
+            </Button>
+          </>
+        ) : (
+          <div className="mt-4">
+            <p className="text-center mb-4">{successMessage}</p>
+            <p className="text-center text-sm text-gray-500">
+              {t('auth.resetPassword.redirecting')}
+            </p>
+          </div>
+        )}
+      </AuthForm>
+    </>
   );
 };
 

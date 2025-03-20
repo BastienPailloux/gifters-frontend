@@ -3,40 +3,12 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../contexts/AuthContext';
 import { userService } from '../services/api';
-import { User } from '../types/auth';
 import ProfileCard from '../components/profile/ProfileCard';
 import ProfileForm from '../components/profile/ProfileForm';
 import PageHeader from '../components/common/layout/PageHeader';
-import { ApiGiftIdea } from '../types/gift-ideas';
-import { Group } from '../types/groups';
 import UserGiftIdeas from '../components/profile/UserGiftIdeas';
-
-interface ProfilePageState {
-  user: User | null;
-  loading: boolean;
-  error: string | null;
-  isEditing: boolean;
-  hasAccess: boolean;
-  sharedGroups: Group[];
-  giftIdeas: ApiGiftIdea[];
-  loadingGiftIdeas: boolean;
-  sharedUserIds: string[];
-}
-
-interface ProfileFormData {
-  name: string;
-  email: string;
-  birthday: string;
-  phone_number: string;
-  address: string;
-  city: string;
-  state: string;
-  zip_code: string;
-  country: string;
-  current_password?: string;
-  password?: string;
-  password_confirmation?: string;
-}
+import { SEO } from '../components/common/seo';
+import { ProfileFormData, ProfilePageState } from '../types';
 
 const Profile: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -195,6 +167,7 @@ const Profile: React.FC = () => {
   if (state.loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
+        <SEO translationKey="seo.profile" />
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
@@ -203,6 +176,7 @@ const Profile: React.FC = () => {
   if (state.error && !state.hasAccess) {
     return (
       <div className="flex flex-col justify-center items-center min-h-screen">
+        <SEO translationKey="seo.profile" />
         <div className="text-red-600 mb-4">{state.error}</div>
         <button
           onClick={() => navigate(-1)}
@@ -217,6 +191,7 @@ const Profile: React.FC = () => {
   if (state.error) {
     return (
       <div className="flex justify-center items-center min-h-screen">
+        <SEO translationKey="seo.profile" />
         <div className="text-red-600">{state.error}</div>
       </div>
     );
@@ -225,6 +200,7 @@ const Profile: React.FC = () => {
   if (!state.user) {
     return (
       <div className="flex justify-center items-center min-h-screen">
+        <SEO translationKey="seo.profile" />
         <div className="text-gray-600">{t('profile.userNotFound')}</div>
       </div>
     );
@@ -234,6 +210,7 @@ const Profile: React.FC = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <SEO translationKey="seo.profile" />
       <PageHeader
         title={isCurrentUser ? t('profile.yourProfile') : state.user.name}
         description={isCurrentUser ? t('profile.manageYourInfo') : t('profile.viewOtherProfile')}

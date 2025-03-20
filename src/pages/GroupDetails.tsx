@@ -12,6 +12,7 @@ import { GiftIdeaFormModal } from '../components/gift-ideas/GiftIdeaFormModal';
 import useAuth from '../hooks/useAuth';
 import { GroupDetailsData, GroupEvent } from '../types/groups';
 import { ApiGiftIdea } from '../types/gift-ideas';
+import { SEO } from '../components/common/seo';
 
 /**
  * Adapte les membres du format simplifié de GroupDetailsData au format compatible avec GiftIdeaFormModal
@@ -243,16 +244,29 @@ const GroupDetails: React.FC = () => {
   if (loading || !adminStatusLoaded) {
     return (
       <div className="flex justify-center items-center h-full p-8">
+        <SEO translationKey="seo.groups" />
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
       </div>
     );
   }
 
-  if (error || !group) {
+  if (error) {
     return (
-      <div className="p-4">
+      <div className="p-8">
+        <SEO translationKey="seo.groups" />
         <div className="bg-red-50 p-4 rounded-md text-red-600">
-          {error || t('common.notFound')}
+          {error}
+        </div>
+      </div>
+    );
+  }
+
+  if (!group) {
+    return (
+      <div className="p-8">
+        <SEO translationKey="seo.groups" />
+        <div className="bg-yellow-50 p-4 rounded-md text-yellow-600">
+          {t('groups.groupNotFound') || 'Group not found'}
         </div>
       </div>
     );
@@ -273,6 +287,7 @@ const GroupDetails: React.FC = () => {
 
   return (
     <div className="p-4">
+      <SEO translationKey="seo.groups" title={`${group.name || t('groups.group')} | Gifters`} />
       <PageHeader
         title={group.name}
         description={getFormattedDescription()}

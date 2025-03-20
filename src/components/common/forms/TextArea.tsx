@@ -1,14 +1,6 @@
 import React from 'react';
 import { twMerge } from 'tailwind-merge';
-
-interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-  label?: string;
-  error?: string;
-  helperText?: string;
-  className?: string;
-  containerClassName?: string;
-  id?: string;
-}
+import { TextAreaProps } from '../../../types';
 
 const TextArea: React.FC<TextAreaProps> = ({
   label,
@@ -17,6 +9,8 @@ const TextArea: React.FC<TextAreaProps> = ({
   className,
   containerClassName,
   id,
+  rows = 4,
+  resizable = true,
   ...props
 }) => {
   // Generate a unique ID if not provided
@@ -30,10 +24,14 @@ const TextArea: React.FC<TextAreaProps> = ({
     ? 'border-red-300 text-red-900 focus:ring-red-500 focus:border-red-500'
     : 'border-gray-300 text-gray-900';
 
+  // Resizable classes
+  const resizeClasses = resizable ? '' : 'resize-none';
+
   // Combine all classes
   const textareaClasses = twMerge(
     baseTextAreaClasses,
     errorClasses,
+    resizeClasses,
     className
   );
 
@@ -46,6 +44,7 @@ const TextArea: React.FC<TextAreaProps> = ({
       )}
       <textarea
         id={textareaId}
+        rows={rows}
         className={textareaClasses}
         aria-invalid={!!error}
         aria-describedby={error ? `${textareaId}-error` : helperText ? `${textareaId}-helper` : undefined}

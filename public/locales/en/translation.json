@@ -583,5 +583,57 @@
       "question3": "How do I organize a gift exchange?",
       "answer3": "In your group, go to the \"Events\" section and click on \"Organize a Gift Exchange\". Select the participants, set the rules (budget, exclusions) and start the draw. Each participant will receive a notification telling them who they need to buy a gift for."
     }
+  },
+  "seo": {
+    "home": {
+      "title": "Home",
+      "description": "Create and share your wishlists, organize gift exchanges, and find gift inspiration with Gifters.",
+      "keywords": "wishlist, gifts, gift exchange, organization, sharing, family, friends"
+    },
+    "login": {
+      "title": "Login",
+      "description": "Log in to your Gifters account to access your wishlists and groups.",
+      "keywords": "login, account, wishlists, groups, gifts"
+    },
+    "register": {
+      "title": "Register",
+      "description": "Create a free Gifters account and start organizing your gifts and events today.",
+      "keywords": "register, account, wishlists, groups, gifts"
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "description": "Your personal Gifters space - manage your lists, groups and upcoming events.",
+      "keywords": "dashboard, lists, groups, events, gifts"
+    },
+    "features": {
+      "title": "Features",
+      "description": "Discover all Gifters features: wishlists, groups, gift exchanges and more.",
+      "keywords": "features, wishlists, groups, gift exchange, sharing, gifts"
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Have a question or suggestion? Contact us through our online form or find our contact information.",
+      "keywords": "contact, help, support, questions, form, assistance"
+    },
+    "myGifts": {
+      "title": "My Gifts",
+      "description": "Manage your wishlists and gift ideas in your personal space.",
+      "keywords": "my gifts, wishlists, gift ideas, personal space"
+    },
+    "myGroups": {
+      "title": "My Groups",
+      "description": "Manage your groups of friends and family to share your lists and organize events.",
+      "keywords": "my groups, groups, lists, events, gifts"
+    },
+    "events": {
+      "title": "Events",
+      "description": "Organize and manage your events and gift exchanges for all special occasions.",
+      "keywords": "events, gift exchanges, special occasions, gifts"
+    },
+    "profile": {
+      "title": "Profile",
+      "description": "Manage your personal information and preferences on Gifters.",
+      "keywords": "profile, personal information, preferences, Gifters"
+    }
   }
 }
