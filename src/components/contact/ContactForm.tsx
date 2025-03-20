@@ -3,22 +3,20 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Button, Input, TextArea } from '../common/forms';
 import { Title } from '../common/typography';
+import { ContactFormProps, ContactFormData } from '../../types';
 
-interface ContactFormProps {
-  className?: string;
-}
-
-interface FormData {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-}
-
-const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
+const ContactForm: React.FC<ContactFormProps> = ({
+  className,
+  onSubmit,
+  title,
+  description,
+  submitButtonText,
+  successMessage,
+  errorMessage
+}) => {
   const { t } = useTranslation();
 
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',
     subject: '',
@@ -27,6 +25,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -36,11 +35,18 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError(null);
 
     try {
-      // Simuler une API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      if (onSubmit) {
+        await onSubmit(formData);
+      } else {
+        // Simuler une API call par défaut
+        await new Promise(resolve => setTimeout(resolve, 1500));
+      }
+
       setSubmitted(true);
+
       // Reset form
       setFormData({
         name: '',
@@ -48,9 +54,10 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
         subject: '',
         message: ''
       });
-    } catch {
+    } catch (err) {
       // Gérer les erreurs ici
-      console.error('Error submitting form');
+      console.error('Error submitting form', err);
+      setError(errorMessage || t('contact.errorMessage'));
     } finally {
       setIsSubmitting(false);
     }
@@ -58,7 +65,11 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
 
   return (
     <div className={className}>
-      <Title as="h3">{t('contact.formTitle')}</Title>
+      <Title as="h3">{title || t('contact.formTitle')}</Title>
+
+      {description && (
+        <p className="text-gray-600 mt-2">{description}</p>
+      )}
 
       {submitted ? (
         <motion.div
@@ -66,10 +77,16 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          {t('contact.successMessage')}
+          {successMessage || t('contact.successMessage')}
         </motion.div>
       ) : (
         <form onSubmit={handleSubmit} className="mt-6">
+          {error && (
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+              {error}
+            </div>
+          )}
+
           <div className="mb-4">
             <Input
               label={t('contact.form.name')}
@@ -121,7 +138,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
             isLoading={isSubmitting}
             disabled={isSubmitting}
           >
-            {isSubmitting ? t('contact.form.sending') : t('contact.form.send')}
+            {isSubmitting ? t('contact.form.sending') : submitButtonText || t('contact.form.send')}
           </Button>
         </form>
       )}

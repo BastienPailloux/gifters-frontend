@@ -1,23 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import useMetaTags from '../../../hooks/useMetaTags';
-
-export interface SEOProps {
-  title?: string; // Optionnel si translationKey est fourni
-  description?: string;
-  keywords?: string[];
-  image?: string;
-  url?: string;
-  type?: 'website' | 'article' | 'product';
-  author?: string;
-  twitterUsername?: string;
-  publishedTime?: string;
-  modifiedTime?: string;
-  noIndex?: boolean;
-  noFollow?: boolean;
-  canonicalUrl?: string;
-  translationKey?: string; // Si fourni, utilisera cette clé pour les traductions au lieu des valeurs directes
-}
+import { SEOProps } from '../../../types';
 
 /**
  * Composant SEO qui utilise le hook useMetaTags pour mettre à jour les métadonnées de la page

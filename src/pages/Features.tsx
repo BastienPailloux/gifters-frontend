@@ -6,7 +6,7 @@ import { Title, Subtitle } from '../components/common/typography';
 import { CallToAction } from '../components/common/cta';
 import { DetailedFeaturesSection } from '../components/features';
 import FeaturesGrid from '../components/features/FeaturesGrid';
-import { FeatureCardProps } from '../types';
+import { FeatureCardProps, DetailedFeature } from '../types';
 import { SEO } from '../components/common/seo';
 
 const Features: React.FC = () => {
@@ -24,9 +24,10 @@ const Features: React.FC = () => {
   return (
     <div className="container mx-auto px-4 py-12 max-w-7xl">
       <SEO
-        title="Fonctionnalités | Gifters"
-        description="Découvrez toutes les fonctionnalités de Gifters : listes de souhaits, groupes, tirage au sort et plus encore."
-        keywords={["fonctionnalités", "listes de souhaits", "groupes", "tirage au sort", "partage", "cadeaux"]}
+        translationKey="features.seo"
+        title={t('features.seo.title', 'Fonctionnalités | Gifters')}
+        description={t('features.seo.description', 'Découvrez toutes les fonctionnalités de Gifters : listes de souhaits, groupes, tirage au sort et plus encore.')}
+        keywords={t('features.seo.keywords', 'fonctionnalités, listes de souhaits, groupes, tirage au sort, partage, cadeaux').split(',')}
         image="/images/features/features-cover.jpg"
         type="website"
       />
@@ -107,15 +108,6 @@ const getFeatures = (t: TFunction): Omit<FeatureCardProps, 'delay'>[] => [
     icon: 'globe' as const
   }
 ];
-
-// Interface pour les detailed features
-interface DetailedFeature {
-  id: string;
-  title: string;
-  description: string;
-  imageSrc: string;
-  imageAlt: string;
-}
 
 // Fonction pour obtenir les detailed features
 const getDetailedFeatures = (t: TFunction): DetailedFeature[] => [

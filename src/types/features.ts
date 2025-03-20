@@ -4,7 +4,8 @@ import { ButtonProps } from './ui';
  * Interface pour les icônes de fonctionnalités
  */
 export interface FeatureIconProps {
-  icon: 'users' | 'gift' | 'calendar' | 'bell' | 'shield' | 'globe';
+  name: 'gift' | 'users' | 'calendar' | 'bell' | 'shield' | 'globe' | 'check' | 'star' | 'heart';
+  size?: number;
   className?: string;
 }
 
@@ -14,7 +15,7 @@ export interface FeatureIconProps {
 export interface FeatureCardProps {
   title: string;
   description: string;
-  icon: 'users' | 'gift' | 'calendar' | 'bell' | 'shield' | 'globe';
+  icon: FeatureIconProps['name'];
   buttonText?: string;
   buttonProps?: Omit<ButtonProps, 'children'>;
   delay?: number;
@@ -27,27 +28,40 @@ export interface FeatureCardProps {
 export interface FeaturesGridProps {
   features: Omit<FeatureCardProps, 'delay'>[];
   className?: string;
+  animated?: boolean;
 }
 
 /**
  * Interface pour les fonctionnalités détaillées
  */
-export interface DetailedFeatureProps {
+export interface DetailedFeature {
+  id: string;
   title: string;
   description: string;
   imageSrc: string;
   imageAlt: string;
-  reverse?: boolean;
-  className?: string;
-  animated?: boolean;
 }
 
 /**
  * Interface pour la section de fonctionnalités détaillées
  */
+export interface DetailedFeatureProps {
+  id: string;
+  title: string;
+  description: string;
+  imageSrc: string;
+  imageAlt: string;
+  reversed?: boolean;
+  className?: string;
+  animated?: boolean;
+}
+
+/**
+ * Interface pour la section détaillée de fonctionnalités
+ */
 export interface DetailedFeaturesSectionProps {
-  sectionTitle?: string;
-  features: (Omit<DetailedFeatureProps, 'animated'> & { id: string })[];
+  sectionTitle: string;
+  features: DetailedFeature[];
   className?: string;
   animated?: boolean;
 }

@@ -1,27 +1,5 @@
 import { useEffect } from 'react';
-
-interface MetaTagsOptions {
-  title?: string;
-  description?: string;
-  keywords?: string[] | string;
-  ogTitle?: string;
-  ogDescription?: string;
-  ogImage?: string;
-  ogType?: string;
-  ogSiteName?: string;
-  ogUrl?: string;
-  twitterCard?: string;
-  twitterTitle?: string;
-  twitterDescription?: string;
-  twitterImage?: string;
-  twitterCreator?: string;
-  canonical?: string;
-  lang?: string;
-  robots?: string;
-  author?: string;
-  publishedTime?: string;
-  modifiedTime?: string;
-}
+import { MetaTagsOptions } from '../types';
 
 /**
  * Hook personnalisé qui injecte et met à jour directement les métadonnées dans le head du document

@@ -3,41 +3,12 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../contexts/AuthContext';
 import { userService } from '../services/api';
-import { User } from '../types/auth';
 import ProfileCard from '../components/profile/ProfileCard';
 import ProfileForm from '../components/profile/ProfileForm';
 import PageHeader from '../components/common/layout/PageHeader';
-import { ApiGiftIdea } from '../types/gift-ideas';
-import { Group } from '../types/groups';
 import UserGiftIdeas from '../components/profile/UserGiftIdeas';
 import { SEO } from '../components/common/seo';
-
-interface ProfilePageState {
-  user: User | null;
-  loading: boolean;
-  error: string | null;
-  isEditing: boolean;
-  hasAccess: boolean;
-  sharedGroups: Group[];
-  giftIdeas: ApiGiftIdea[];
-  loadingGiftIdeas: boolean;
-  sharedUserIds: string[];
-}
-
-interface ProfileFormData {
-  name: string;
-  email: string;
-  birthday: string;
-  phone_number: string;
-  address: string;
-  city: string;
-  state: string;
-  zip_code: string;
-  country: string;
-  current_password?: string;
-  password?: string;
-  password_confirmation?: string;
-}
+import { ProfileFormData, ProfilePageState } from '../types';
 
 const Profile: React.FC = () => {
   const { id } = useParams<{ id: string }>();

@@ -43,3 +43,15 @@ export * from './cta';
 
 // Profile types
 export * from './profile';
+
+// SEO types
+export * from './seo';
+
+// FAQ types
+export * from './faq';
+
+// Contact types
+export * from './contact';
+
+// Form types
+export * from './form';

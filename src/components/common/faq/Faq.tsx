@@ -3,31 +3,13 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Title } from '../typography';
 import Card from '../display/Card';
-
-export interface FaqItem {
-  question: string;
-  answer: string;
-  translationKey?: string; // Si fourni, utilisera cette clé au lieu des valeurs question/answer
-}
-
-interface FaqProps {
-  items: FaqItem[];
-  title?: string;
-  titleTranslationKey?: string;
-  className?: string;
-  itemClassName?: string;
-  translationPrefix?: string; // Préfixe pour les clés de traduction automatiques
-  titleSize?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-}
+import { FaqItem, FaqProps } from '../../../types';
 
 const Faq: React.FC<FaqProps> = ({
   items,
   title,
-  titleTranslationKey,
   className = '',
-  itemClassName = '',
-  translationPrefix,
-  titleSize = 'h2'
+  description,
 }) => {
   const { t } = useTranslation();
 
@@ -53,32 +35,16 @@ const Faq: React.FC<FaqProps> = ({
     }
   };
 
-  // Fonction pour obtenir le texte à partir de la clé de traduction ou du texte brut
-  const getText = (text: string, key?: string, index?: number, type?: 'question' | 'answer') => {
-    if (key) {
-      return t(key);
-    }
-
-    // Si un préfixe de traduction est fourni, essayer d'utiliser les clés automatiques
-    if (translationPrefix && index !== undefined && type) {
-      const autoKey = `${translationPrefix}.${type}${index + 1}`;
-      const translated = t(autoKey);
-      // Si la traduction existe (n'est pas égale à la clé), l'utiliser
-      if (translated !== autoKey) {
-        return translated;
-      }
-    }
-
-    // Utiliser le texte brut par défaut
-    return text;
-  };
-
   return (
     <Card className={className}>
-      {(title || titleTranslationKey) && (
-        <Title as={titleSize} className="mb-6">
-          {titleTranslationKey ? t(titleTranslationKey) : title}
+      {title && (
+        <Title as="h2" className="mb-6">
+          {title}
         </Title>
+      )}
+
+      {description && (
+        <p className="text-gray-600 mb-6">{description}</p>
       )}
 
       <motion.div
@@ -89,16 +55,16 @@ const Faq: React.FC<FaqProps> = ({
       >
         {items.map((item, index) => (
           <motion.div
-            key={index}
-            className={`border-b border-gray-200 pb-4 last:border-0 ${itemClassName}`}
+            key={item.id || index}
+            className="border-b border-gray-200 pb-4 last:border-0"
             variants={itemVariants}
           >
             <h3 className="font-semibold text-lg mb-2">
-              {getText(item.question, item.translationKey ? `${item.translationKey}.question` : undefined, index, 'question')}
+              {item.question}
             </h3>
-            <p className="text-gray-600">
-              {getText(item.answer, item.translationKey ? `${item.translationKey}.answer` : undefined, index, 'answer')}
-            </p>
+            <div className="text-gray-600">
+              {item.answer}
+            </div>
           </motion.div>
         ))}
       </motion.div>
