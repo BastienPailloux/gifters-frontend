@@ -31,3 +31,6 @@ export * from './layout';
 
 // Routes types
 export * from './routes';
+
+// Features types
+export * from './features';

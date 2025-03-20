@@ -1,11 +1,7 @@
 import React from 'react';
 import { twMerge } from 'tailwind-merge';
-import FeatureCard, { FeatureCardProps } from './FeatureCard';
-
-export interface FeaturesGridProps {
-  features: Omit<FeatureCardProps, 'delay'>[];
-  className?: string;
-}
+import { FeaturesGridProps } from '../../types';
+import FeatureCard from './FeatureCard';
 
 const FeaturesGrid: React.FC<FeaturesGridProps> = ({ features, className }) => {
   return (

@@ -4,7 +4,7 @@ import { Title, Subtitle } from '../components/common/typography';
 import { CallToAction } from '../components/common/cta';
 import { DetailedFeaturesSection } from '../components/features';
 import FeaturesGrid from '../components/features/FeaturesGrid';
-import { FeatureCardProps } from '../components/features/FeatureCard';
+import { FeatureCardProps } from '../types';
 
 const Features: React.FC = () => {
   const { t } = useTranslation();

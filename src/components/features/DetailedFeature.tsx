@@ -1,17 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { twMerge } from 'tailwind-merge';
+import { DetailedFeatureProps } from '../../types';
 import { Title, Subtitle } from '../common/typography';
-
-export interface DetailedFeatureProps {
-  title: string;
-  description: string;
-  imageSrc: string;
-  imageAlt: string;
-  reverse?: boolean;
-  className?: string;
-  animated?: boolean;
-}
 
 const DetailedFeature: React.FC<DetailedFeatureProps> = ({
   title,

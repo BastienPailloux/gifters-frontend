@@ -1,19 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { twMerge } from 'tailwind-merge';
-import { ButtonProps } from '../../types';
+import { FeatureCardProps } from '../../types';
 import Button from '../common/forms/Button';
 import FeatureIcon from './FeatureIcon';
-
-export interface FeatureCardProps {
-  title: string;
-  description: string;
-  icon: 'users' | 'gift' | 'calendar' | 'bell' | 'shield' | 'globe';
-  buttonText?: string;
-  buttonProps?: Omit<ButtonProps, 'children'>;
-  delay?: number;
-  className?: string;
-}
 
 const FeatureCard: React.FC<FeatureCardProps> = ({
   title,

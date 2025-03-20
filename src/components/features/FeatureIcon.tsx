@@ -1,9 +1,5 @@
 import React from 'react';
-
-export interface FeatureIconProps {
-  icon: 'users' | 'gift' | 'calendar' | 'bell' | 'shield' | 'globe';
-  className?: string;
-}
+import { FeatureIconProps } from '../../types';
 
 const FeatureIcon: React.FC<FeatureIconProps> = ({ icon, className = '' }) => {
   const iconComponents = {

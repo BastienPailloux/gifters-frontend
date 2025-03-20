@@ -1,15 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { twMerge } from 'tailwind-merge';
-import DetailedFeature, { DetailedFeatureProps } from './DetailedFeature';
+import { DetailedFeaturesSectionProps } from '../../types';
+import DetailedFeature from './DetailedFeature';
 import { Title } from '../common/typography';
-
-export interface DetailedFeaturesSectionProps {
-  sectionTitle?: string;
-  features: (Omit<DetailedFeatureProps, 'animated'> & { id: string })[];
-  className?: string;
-  animated?: boolean;
-}
 
 const DetailedFeaturesSection: React.FC<DetailedFeaturesSectionProps> = ({
   sectionTitle,
