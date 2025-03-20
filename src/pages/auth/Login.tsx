@@ -7,6 +7,7 @@ import Input from '../../components/common/forms/Input';
 import Button from '../../components/common/forms/Button';
 import Checkbox from '../../components/common/forms/Checkbox';
 import FlatButton from '../../components/common/forms/FlatButton';
+import { SEO } from '../../components/common/seo';
 
 const Login: React.FC = () => {
   const { t } = useTranslation();
@@ -35,67 +36,70 @@ const Login: React.FC = () => {
   };
 
   return (
-    <AuthForm
-      title={t('auth.login.title')}
-      subtitle={t('auth.login.subtitle')}
-      linkText={t('auth.login.registerLink')}
-      linkUrl="/register"
-      error={error}
-      onSubmit={handleSubmit}
-    >
-      <Input
-        id="email"
-        name="email"
-        type="email"
-        autoComplete="email"
-        required
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        label={t('auth.fields.email')}
-      />
-
-      <Input
-        id="password"
-        name="password"
-        type="password"
-        autoComplete="current-password"
-        required
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        label={t('auth.fields.password')}
-      />
-
-      <div className="flex items-center justify-between">
-        <Checkbox
-          id="remember-me"
-          name="remember-me"
-          checked={rememberMe}
-          onChange={(e) => setRememberMe(e.target.checked)}
-          label={t('auth.login.rememberMe')}
-          containerClassName="mb-0"
+    <>
+      <SEO translationKey="seo.login" />
+      <AuthForm
+        title={t('auth.login.title')}
+        subtitle={t('auth.login.subtitle')}
+        linkText={t('auth.login.registerLink')}
+        linkUrl="/register"
+        error={error}
+        onSubmit={handleSubmit}
+      >
+        <Input
+          id="email"
+          name="email"
+          type="email"
+          autoComplete="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          label={t('auth.fields.email')}
         />
 
-        <FlatButton
+        <Input
+          id="password"
+          name="password"
+          type="password"
+          autoComplete="current-password"
+          required
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          label={t('auth.fields.password')}
+        />
+
+        <div className="flex items-center justify-between">
+          <Checkbox
+            id="remember-me"
+            name="remember-me"
+            checked={rememberMe}
+            onChange={(e) => setRememberMe(e.target.checked)}
+            label={t('auth.login.rememberMe')}
+            containerClassName="mb-0"
+          />
+
+          <FlatButton
+            variant="primary"
+            asLink
+            href="/forgot-password"
+            size="small"
+          >
+            {t('auth.forgotPasswordMessage')}
+          </FlatButton>
+        </div>
+
+        <Button
+          type="submit"
           variant="primary"
-          asLink
-          href="/forgot-password"
-          size="small"
+          fullWidth
+          isLoading={isSubmitting}
+          disabled={isSubmitting}
         >
-          {t('auth.forgotPasswordMessage')}
-        </FlatButton>
-      </div>
+          {t('auth.login.submit')}
+        </Button>
 
-      <Button
-        type="submit"
-        variant="primary"
-        fullWidth
-        isLoading={isSubmitting}
-        disabled={isSubmitting}
-      >
-        {t('auth.login.submit')}
-      </Button>
-
-    </AuthForm>
+      </AuthForm>
+    </>
   );
 };
 

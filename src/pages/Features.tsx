@@ -6,6 +6,7 @@ import { CallToAction } from '../components/common/cta';
 import { DetailedFeaturesSection } from '../components/features';
 import FeaturesGrid from '../components/features/FeaturesGrid';
 import { FeatureCardProps } from '../types';
+import { SEO } from '../components/common/seo';
 
 const Features: React.FC = () => {
   const { t } = useTranslation();
@@ -70,6 +71,8 @@ const Features: React.FC = () => {
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-7xl">
+      <SEO translationKey="seo.features" />
+
       <div className="text-center mb-12">
         <Title as="h1" centered animated>
           {t('features.title')}

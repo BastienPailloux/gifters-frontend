@@ -582,5 +582,50 @@
       "question3": "Comment organiser un tirage au sort ?",
       "answer3": "Dans votre groupe, allez dans la section \"Événements\" et cliquez sur \"Organiser un tirage au sort\". Sélectionnez les participants, définissez les règles (budget, exclusions) et lancez le tirage. Chaque participant recevra une notification lui indiquant qui il doit gâter."
     }
+  },
+  "seo": {
+    "home": {
+      "title": "Accueil",
+      "description": "Créez et partagez vos listes de souhaits, organisez des tirages au sort et trouvez l'inspiration pour vos cadeaux avec Gifters.",
+      "keywords": "liste de souhaits, cadeaux, tirage au sort, organisation, partage, famille, amis"
+    },
+    "login": {
+      "title": "Connexion",
+      "description": "Connectez-vous à votre compte Gifters pour accéder à vos listes de souhaits et à vos groupes."
+    },
+    "register": {
+      "title": "Inscription",
+      "description": "Créez un compte Gifters gratuitement et commencez à organiser vos cadeaux et événements dès aujourd'hui."
+    },
+    "dashboard": {
+      "title": "Tableau de bord",
+      "description": "Votre espace personnel Gifters - gérez vos listes, vos groupes et vos événements à venir."
+    },
+    "features": {
+      "title": "Fonctionnalités",
+      "description": "Découvrez toutes les fonctionnalités de Gifters : listes de souhaits, groupes, tirage au sort et plus encore.",
+      "keywords": "fonctionnalités, listes de souhaits, groupes, tirage au sort, partage, cadeaux"
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Une question ou suggestion ? Contactez-nous via notre formulaire en ligne ou retrouvez nos coordonnées.",
+      "keywords": "contact, aide, support, questions, formulaire, assistance"
+    },
+    "myGifts": {
+      "title": "Mes cadeaux",
+      "description": "Gérez vos listes de souhaits et vos idées cadeaux dans votre espace personnel."
+    },
+    "myGroups": {
+      "title": "Mes groupes",
+      "description": "Gérez vos groupes d'amis et de famille pour partager vos listes et organiser des événements."
+    },
+    "events": {
+      "title": "Événements",
+      "description": "Organisez et gérez vos événements et tirages au sort pour toutes les occasions spéciales."
+    },
+    "profile": {
+      "title": "Profil",
+      "description": "Gérez vos informations personnelles et vos préférences sur Gifters."
+    }
   }
 }
