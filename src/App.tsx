@@ -17,6 +17,7 @@ import MyGroups from './pages/MyGroups';
 import Events from './pages/Events';
 import Profile from './pages/Profile';
 import Features from './pages/Features';
+import Contact from './pages/Contact';
 import { ProtectedRouteProps, LayoutRouteProps } from './types';
 
 // Composant pour les routes protégées
@@ -51,8 +52,9 @@ const AppRoutes: React.FC = () => {
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
 
-      {/* Route publique avec Layout */}
+      {/* Routes publiques avec Layout */}
       <Route path="/features" element={<LayoutRoute><Features /></LayoutRoute>} />
+      <Route path="/contact" element={<LayoutRoute><Contact /></LayoutRoute>} />
 
       {/* Routes pour les invitations */}
       <Route path="/invitation/join" element={<InvitationJoin />} />

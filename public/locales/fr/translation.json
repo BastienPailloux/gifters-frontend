@@ -538,5 +538,49 @@
     "noAccess": "Vous n'avez pas accès à ce profil. Vous devez partager au moins un groupe avec cet utilisateur.",
     "giftIdeasFor": "Idées de cadeaux pour {{name}}",
     "noGiftIdeas": "Aucune idée de cadeau disponible pour le moment"
+  },
+  "contact": {
+    "title": "Contactez-nous",
+    "subtitle": "Nous sommes à votre écoute. N'hésitez pas à nous contacter pour toute question ou suggestion.",
+    "infoTitle": "Informations de contact",
+    "email": "Email",
+    "phone": "Téléphone",
+    "address": "Adresse",
+    "formTitle": "Envoyez-nous un message",
+    "successMessage": "Votre message a été envoyé avec succès. Nous vous répondrons dès que possible.",
+    "mapPlaceholder": "Carte interactive à intégrer ici",
+    "faqTitle": "Questions fréquentes",
+    "form": {
+      "name": "Nom",
+      "email": "Email",
+      "subject": "Sujet",
+      "message": "Message",
+      "send": "Envoyer",
+      "sending": "Envoi en cours..."
+    },
+    "faq": {
+      "question1": "Comment créer un compte ?",
+      "answer1": "Vous pouvez créer un compte en cliquant sur \"S'inscrire\" dans le menu principal. Remplissez ensuite le formulaire avec vos informations personnelles.",
+      "question2": "Comment créer une liste de souhaits ?",
+      "answer2": "Une fois connecté, accédez à la section \"Mes cadeaux\" puis cliquez sur l'onglet \"Ma liste de souhaits\" puis sur \"Ajouter une idée cadeau\".",
+      "question3": "Comment partager ma liste de souhaits ?",
+      "answer3": "Tous les cadeaux de votre liste de souhaits sont partagés avec tous les membres de vos groupes.",
+      "question4": "Le service Gifters est-il gratuit ?",
+      "answer4": "Oui, toutes les fonctionnalités de base de Gifters sont gratuites. Nous proposons également des fonctionnalités premium pour les utilisateurs les plus exigeants."
+    },
+    "errors": {
+      "submission": "Une erreur est survenue lors de l'envoi du message. Veuillez réessayer."
+    }
+  },
+  "help": {
+    "features": {
+      "title": "Questions sur les fonctionnalités",
+      "question1": "Comment créer un groupe ?",
+      "answer1": "Pour créer un groupe, connectez-vous à votre compte, allez dans la section \"Mes groupes\" et cliquez sur \"Créer un groupe\". Donnez un nom à votre groupe, ajoutez une description et invitez vos amis ou votre famille.",
+      "question2": "Comment ajouter des membres à mon groupe ?",
+      "answer2": "Dans la page de détails du groupe, cliquez sur \"Inviter des membres\". Vous pouvez inviter des personnes par email ou en générant un lien d'invitation que vous pouvez partager.",
+      "question3": "Comment organiser un tirage au sort ?",
+      "answer3": "Dans votre groupe, allez dans la section \"Événements\" et cliquez sur \"Organiser un tirage au sort\". Sélectionnez les participants, définissez les règles (budget, exclusions) et lancez le tirage. Chaque participant recevra une notification lui indiquant qui il doit gâter."
+    }
   }
 }
