@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Title, Subtitle } from '../components/common/typography';
 import { CallToAction } from '../components/common/cta';
+import { DetailedFeaturesSection } from '../components/features';
 import FeaturesGrid from '../components/features/FeaturesGrid';
 import { FeatureCardProps } from '../components/features/FeatureCard';
 
@@ -41,6 +42,30 @@ const Features: React.FC = () => {
     }
   ];
 
+  const detailedFeatures = [
+    {
+      id: 'wishlists',
+      title: t('features.wishLists.title'),
+      description: t('features.wishLists.detailedDescription'),
+      imageSrc: '/images/features/wishlist-detail.svg',
+      imageAlt: t('features.wishLists.imageAlt')
+    },
+    {
+      id: 'groups',
+      title: t('features.groups.title'),
+      description: t('features.groups.detailedDescription'),
+      imageSrc: '/images/features/groups-detail.svg',
+      imageAlt: t('features.groups.imageAlt')
+    },
+    {
+      id: 'events',
+      title: t('features.events.title'),
+      description: t('features.events.detailedDescription'),
+      imageSrc: '/images/features/events-detail.svg',
+      imageAlt: t('features.events.imageAlt')
+    }
+  ];
+
   return (
     <div className="container mx-auto px-4 py-12 max-w-7xl">
       <div className="text-center mb-12">
@@ -59,9 +84,28 @@ const Features: React.FC = () => {
         buttonProps={{
           onClick: () => window.location.href = '/register'
         }}
-        className="mt-12"
+        className="mt-12 mb-20"
         animated
       />
+
+      <DetailedFeaturesSection
+        sectionTitle={t('features.detailedTitle')}
+        features={detailedFeatures}
+        animated
+      />
+
+      <div className="bg-primary-50 rounded-lg p-8 mt-20">
+        <CallToAction
+          message={t('features.finalCta')}
+          buttonText={t('features.startNow')}
+          buttonProps={{
+            onClick: () => window.location.href = '/register',
+            variant: 'secondary'
+          }}
+          className="bg-transparent"
+          animated
+        />
+      </div>
     </div>
   );
 };

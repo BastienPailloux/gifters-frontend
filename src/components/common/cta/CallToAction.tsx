@@ -23,12 +23,12 @@ const CallToAction: React.FC<CallToActionProps> = ({
 }) => {
   const content = (
     <div className={twMerge('text-center', className)}>
-      {message && <p className="text-lg text-gray-600 mb-6">{message}</p>}
+      {message && <p className="text-lg text-gray-600 font-semibold mb-6">{message}</p>}
       <Button
-        variant="primary"
+        variant="secondary"
         size="lg"
         {...buttonProps}
-        className={twMerge('mx-auto', buttonProps?.className)}
+        className={twMerge('mx-auto font-bold', buttonProps?.className)}
       >
         {buttonText}
       </Button>

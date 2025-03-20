@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface FeatureIconProps {
+export interface FeatureIconProps {
   icon: 'users' | 'gift' | 'calendar' | 'bell' | 'shield' | 'globe';
   className?: string;
 }
