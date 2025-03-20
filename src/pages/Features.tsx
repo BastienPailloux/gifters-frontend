@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { motion } from 'framer-motion';
-import Button from '../components/common/forms/Button';
+import { Title, Subtitle } from '../components/common/typography';
+import { CallToAction } from '../components/common/cta';
 import FeaturesGrid from '../components/features/FeaturesGrid';
 import { FeatureCardProps } from '../components/features/FeatureCard';
 
@@ -44,41 +44,24 @@ const Features: React.FC = () => {
   return (
     <div className="container mx-auto px-4 py-12 max-w-7xl">
       <div className="text-center mb-12">
-        <motion.h1
-          className="text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl mb-4"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
+        <Title as="h1" centered animated>
           {t('features.title')}
-        </motion.h1>
-        <motion.p
-          className="text-xl text-gray-600 max-w-2xl mx-auto"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
+        </Title>
+        <Subtitle centered animated maxWidth="2xl">
           {t('features.subtitle')}
-        </motion.p>
+        </Subtitle>
       </div>
       <FeaturesGrid features={features} className="mb-16" />
 
-      <motion.div
-        className="text-center mt-12"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.8 }}
-      >
-        <p className="text-lg text-gray-600 mb-6">{t('features.cta')}</p>
-        <Button
-          variant="primary"
-          size="lg"
-          onClick={() => window.location.href = '/register'}
-          className="mx-auto"
-        >
-          {t('features.register')}
-        </Button>
-      </motion.div>
+      <CallToAction
+        message={t('features.cta')}
+        buttonText={t('features.register')}
+        buttonProps={{
+          onClick: () => window.location.href = '/register'
+        }}
+        className="mt-12"
+        animated
+      />
     </div>
   );
 };
