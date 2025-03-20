@@ -1,11 +1,13 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
+import { FaEnvelope } from 'react-icons/fa';
 
 import { Title, Subtitle } from '../components/common/typography';
 import { ContactForm, ContactInfo, ContactFaq } from '../components/contact';
 import Card from '../components/common/display/Card';
 import { SEO } from '../components/common/seo';
+import { ContactInfoItem } from '../types';
 
 const Contact: React.FC = () => {
   const { t } = useTranslation();
@@ -20,6 +22,16 @@ const Contact: React.FC = () => {
       }
     }
   };
+
+  // Informations de contact
+  const contactInfoItems: ContactInfoItem[] = [
+    {
+      id: 'email',
+      icon: <FaEnvelope className="text-primary-500 mt-1 text-xl" />,
+      title: t('contact.email'),
+      content: 'contact@gifters.fr'
+    }
+  ];
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -49,20 +61,15 @@ const Contact: React.FC = () => {
           animate="visible"
         >
           <Card>
-            <ContactInfo />
+            <ContactInfo items={contactInfoItems} />
           </Card>
         </motion.div>
       </div>
 
       {/* FAQ Section */}
-      <motion.div
-        className="mb-12"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
+      <div className="my-16">
         <ContactFaq />
-      </motion.div>
+      </div>
     </div>
   );
 };

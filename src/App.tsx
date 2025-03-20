@@ -18,6 +18,7 @@ import Events from './pages/Events';
 import Profile from './pages/Profile';
 import Features from './pages/Features';
 import Contact from './pages/Contact';
+import Pricing from './pages/Pricing';
 import { ProtectedRouteProps, LayoutRouteProps } from './types';
 
 // Composant pour les routes protégées
@@ -54,6 +55,7 @@ const AppRoutes: React.FC = () => {
 
       {/* Routes publiques avec Layout */}
       <Route path="/features" element={<LayoutRoute><Features /></LayoutRoute>} />
+      <Route path="/pricing" element={<LayoutRoute><Pricing /></LayoutRoute>} />
       <Route path="/contact" element={<LayoutRoute><Contact /></LayoutRoute>} />
 
       {/* Routes pour les invitations */}

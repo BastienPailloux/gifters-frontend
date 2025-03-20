@@ -634,5 +634,58 @@
       "description": "Gérez vos informations personnelles et vos préférences sur Gifters.",
       "keywords": "profil, informations personnelles, préférences, Gifters"
     }
+  },
+  "pricing": {
+    "seo": {
+      "title": "Tarifs | Gifters",
+      "description": "Découvrez nos différentes formules tarifaires pour Gifters - gratuites et premium.",
+      "keywords": "tarifs, abonnement, gratuit, premium, gifters"
+    },
+    "title": "Tarifs simples et transparents",
+    "subtitle": "Choisissez le plan qui correspond à vos besoins",
+    "free": "Gratuit",
+    "mostPopular": "Le plus populaire",
+    "specialOffer": "Vous avez besoin d'une solution pour votre entreprise?",
+    "contactUs": "Contactez-nous",
+    "plans": {
+      "period": {
+        "month": "mois",
+        "year": "an"
+      },
+      "free": {
+        "name": "Gratuit",
+        "description": "Parfait pour débuter et découvrir Gifters",
+        "cta": "Commencer gratuitement"
+      },
+      "standard": {
+        "name": "Standard",
+        "description": "Idéal pour les familles et petits groupes d'amis",
+        "cta": "Essayer gratuitement pendant 30 jours"
+      },
+      "premium": {
+        "name": "Premium",
+        "description": "Pour les grands groupes et utilisateurs fréquents",
+        "cta": "Démarrer l'essai gratuit"
+      }
+    },
+    "features": {
+      "wishLists": "Listes de souhaits illimitées",
+      "groups": "{{count}} groupes",
+      "members": "{{count}} membres par groupe",
+      "giftIdeas": "{{count}} idées cadeaux",
+      "support": "Support prioritaire",
+      "noAds": "Sans publicités"
+    },
+    "faq": {
+      "title": "Questions fréquentes",
+      "q1": "Puis-je changer de plan à tout moment ?",
+      "a1": "Oui, vous pouvez passer à un plan supérieur ou inférieur à tout moment. Le changement sera effectif à la prochaine période de facturation.",
+      "q2": "Offrez-vous des remises pour un abonnement annuel ?",
+      "a2": "Oui, en optant pour un abonnement annuel, vous bénéficiez de deux mois gratuits (soit 17% de réduction).",
+      "q3": "Comment fonctionne l'essai gratuit ?",
+      "a3": "Nos essais gratuits durent 30 jours et vous donnent accès à toutes les fonctionnalités du plan choisi. Aucune carte de crédit n'est requise pour l'essai.",
+      "q4": "Y a-t-il des frais supplémentaires ?",
+      "a4": "Non, nos tarifs sont transparents. Il n'y a pas de frais cachés ou supplémentaires."
+    }
   }
 }
