@@ -17,12 +17,23 @@ const Header: React.FC<HeaderProps> = ({ onLogout }) => {
   };
 
   const handleLogout = async () => {
-    if (onLogout) {
-      onLogout();
-    } else {
-      await logout();
+    try {
+      // S'assurer que la déconnexion est complète avant de naviguer
+      if (onLogout) {
+        await onLogout();
+      } else {
+        await logout();
+      }
+
+      // Force un délai court pour s'assurer que l'état d'authentification est mis à jour
+      setTimeout(() => {
+        navigate('/', { replace: true });
+      }, 100);
+    } catch (error) {
+      console.error('Erreur lors de la déconnexion:', error);
+      // Même en cas d'erreur, naviguer vers la page d'accueil
+      navigate('/', { replace: true });
     }
-    navigate('/login');
   };
 
   // Navigation items based on authentication status
