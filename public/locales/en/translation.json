@@ -361,6 +361,7 @@
     "invitationSent": "Invitation sent successfully!",
     "errorSendingInvitation": "Error sending invitation. Please try again.",
     "errorGettingInvitationLink": "Error getting invitation link. A simpler link has been generated.",
+    "errorCreatingInvitationLink": "Error creating invitation link. A simpler link has been generated.",
     "errorGettingGroups": "Error getting groups. Please try again."
   },
   "giftIdeas": {

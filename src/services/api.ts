@@ -322,7 +322,10 @@ export const invitationService = {
   // Récupérer toutes les invitations d'un groupe
   getGroupInvitations: async (groupId: string) => {
     const response = await api.get(`/groups/${groupId}/invitations`);
-    return response.data;
+    console.log('response', response);
+
+    // Retourner les invitations depuis le nouveau format de réponse
+    return response.data.invitations || [];
   },
 
   // Créer une nouvelle invitation
