@@ -633,6 +633,65 @@
       "title": "Profil",
       "description": "Gérez vos informations personnelles et vos préférences sur Gifters.",
       "keywords": "profil, informations personnelles, préférences, Gifters"
+    },
+    "pricing": {
+      "title": "Tarifs",
+      "description": "Découvrez nos différents plans tarifaires pour Gifters - gratuits et premium.",
+      "keywords": "tarifs, abonnement, gratuit, premium, Gifters"
     }
+  },
+  "pricing": {
+    "seo": {
+      "title": "Tarifs | Gifters",
+      "description": "Découvrez nos différents plans tarifaires pour Gifters - gratuits et premium.",
+      "keywords": "tarifs, abonnement, gratuit, premium, Gifters"
+    },
+    "title": "Tarifs simples et transparents",
+    "subtitle": "Choisissez le plan qui correspond à vos besoins",
+    "free": "Gratuit",
+    "mostPopular": "Le plus populaire",
+    "specialOffer": "Besoin d'une solution pour votre entreprise ?",
+    "contactUs": "Contactez-nous",
+    "plans": {
+      "period": {
+        "month": "mois",
+        "year": "année"
+      },
+      "free": {
+        "name": "Gratuit",
+        "description": "Parfait pour commencer et découvrir Gifters",
+        "cta": "Commencer gratuitement"
+      },
+      "standard": {
+        "name": "Standard",
+        "description": "Idéal pour les familles et les petits groupes d'amis",
+        "cta": "Essayer gratuitement pendant 30 jours"
+      },
+      "premium": {
+        "name": "Premium",
+        "description": "Pour les grands groupes et les utilisateurs fréquents",
+        "cta": "Commencer le essai gratuit"
+      }
+    },
+    "features": {
+      "wishLists": "Liste de souhaits illimitées",
+      "groups": "{{count}} groupes",
+      "members": "{{count}} membres par groupe",
+      "giftIdeas": "{{count}} idées cadeaux",
+      "support": "Support prioritaire",
+      "noAds": "Pas de publicités"
+    },
+    "faq": {
+      "title": "Questions fréquentes",
+      "q1": "Puis-je changer de plan à tout moment ?",
+      "a1": "Oui, vous pouvez mettre à jour ou réduire votre plan à tout moment. Le changement prendra effet à votre prochaine date de facturation.",
+      "q2": "Offrez-vous des remises pour les abonnements annuels ?",
+      "a2": "Oui, en choisissant un abonnement annuel, vous obtenez deux mois gratuits (ce qui représente 17% de réduction).",
+      "q3": "Comment fonctionne l'essai gratuit ?",
+      "a3": "Nos essais gratuits durent 30 jours et vous donnent accès à toutes les fonctionnalités du plan choisi. Aucune carte de crédit n'est requise pour l'essai.",
+      "q4": "Y a-t-il des frais supplémentaires ?",
+      "a4": "Non, notre tarification est transparente. Il n'y a pas de frais cachés ou supplémentaires."
+    },
+    "temporarilyUnlimited": "Toutes les fonctionnalités sont temporairement illimitées !"
   }
 }

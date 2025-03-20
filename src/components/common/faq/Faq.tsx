@@ -1,17 +1,18 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Title } from '../typography';
 import Card from '../display/Card';
-import { FaqItem, FaqProps } from '../../../types';
+import FaqAccordion from './FaqAccordion';
+import { FaqProps } from '../../../types';
 
 const Faq: React.FC<FaqProps> = ({
   items,
   title,
   className = '',
   description,
+  itemClassName = '',
 }) => {
-  const { t } = useTranslation();
+  const [openItems, setOpenItems] = useState<Record<string | number, boolean>>({});
 
   // Animation variants
   const containerVariants = {
@@ -35,40 +36,51 @@ const Faq: React.FC<FaqProps> = ({
     }
   };
 
+  const toggleAccordion = (id: string | number) => {
+    setOpenItems(prev => ({
+      ...prev,
+      [id]: !prev[id]
+    }));
+  };
+
   return (
-    <Card className={className}>
+    <div>
       {title && (
-        <Title as="h2" className="mb-6">
+        <Title as="h2" centered className="mb-6">
           {title}
         </Title>
       )}
 
-      {description && (
-        <p className="text-gray-600 mb-6">{description}</p>
-      )}
+      <Card className={className}>
+        {description && (
+          <p className="text-gray-600 mb-6">{description}</p>
+        )}
 
-      <motion.div
-        className="space-y-6"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {items.map((item, index) => (
-          <motion.div
-            key={item.id || index}
-            className="border-b border-gray-200 pb-4 last:border-0"
-            variants={itemVariants}
-          >
-            <h3 className="font-semibold text-lg mb-2">
-              {item.question}
-            </h3>
-            <div className="text-gray-600">
-              {item.answer}
-            </div>
-          </motion.div>
-        ))}
-      </motion.div>
-    </Card>
+        <motion.div
+          className="divide-y divide-gray-200"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          {items.map((item, index) => {
+            const id = item.id || index;
+            return (
+              <motion.div
+                key={id}
+                variants={itemVariants}
+              >
+                <FaqAccordion
+                  faqItem={item}
+                  isOpen={!!openItems[id]}
+                  toggleAccordion={() => toggleAccordion(id)}
+                  className={itemClassName}
+                />
+              </motion.div>
+            );
+          })}
+        </motion.div>
+      </Card>
+    </div>
   );
 };
 

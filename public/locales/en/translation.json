@@ -635,5 +635,59 @@
       "description": "Manage your personal information and preferences on Gifters.",
       "keywords": "profile, personal information, preferences, Gifters"
     }
+  },
+  "pricing": {
+    "seo": {
+      "title": "Pricing | Gifters",
+      "description": "Discover our different pricing plans for Gifters - free and premium options.",
+      "keywords": "pricing, subscription, free, premium, gifters"
+    },
+    "title": "Simple and transparent pricing",
+    "subtitle": "Choose the plan that fits your needs",
+    "free": "Free",
+    "mostPopular": "Most popular",
+    "specialOffer": "Need a solution for your business?",
+    "contactUs": "Contact us",
+    "plans": {
+      "period": {
+        "month": "month",
+        "year": "year"
+      },
+      "free": {
+        "name": "Free",
+        "description": "Perfect for getting started and discovering Gifters",
+        "cta": "Start for free"
+      },
+      "standard": {
+        "name": "Standard",
+        "description": "Ideal for families and small groups of friends",
+        "cta": "Try free for 30 days"
+      },
+      "premium": {
+        "name": "Premium",
+        "description": "For large groups and frequent users",
+        "cta": "Start free trial"
+      }
+    },
+    "features": {
+      "wishLists": "Unlimited wishlists",
+      "groups": "{{count}} groups",
+      "members": "{{count}} members per group",
+      "giftIdeas": "{{count}} gift ideas",
+      "support": "Priority support",
+      "noAds": "No advertisements"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "q1": "Can I change plans at any time?",
+      "a1": "Yes, you can upgrade or downgrade your plan at any time. The change will take effect on your next billing cycle.",
+      "q2": "Do you offer discounts for annual subscriptions?",
+      "a2": "Yes, by choosing an annual subscription, you get two months free (that's 17% off).",
+      "q3": "How does the free trial work?",
+      "a3": "Our free trials last 30 days and give you access to all features of the chosen plan. No credit card is required for the trial.",
+      "q4": "Are there any additional fees?",
+      "a4": "No, our pricing is transparent. There are no hidden or additional fees."
+    },
+    "temporarilyUnlimited": "All features are temporarily unlimited!"
   }
 }
