@@ -50,6 +50,9 @@ const Footer: React.FC<FooterProps> = () => {
                   {t('footer.company.careers')}
                 </a>
               </li>
+              <li>
+                <Link to="/terms" className="text-gray-400 hover:text-white">{t('footer.company.terms')}</Link>
+              </li>
             </ul>
           </div>
 

@@ -20,6 +20,7 @@ const Features = lazy(() => import('../pages/Features'));
 const Contact = lazy(() => import('../pages/Contact'));
 const Pricing = lazy(() => import('../pages/Pricing'));
 const About = lazy(() => import('../pages/About'));
+const TermsAndConditions = lazy(() => import('../pages/TermsAndConditions'));
 
 /**
  * Configuration des routes publiques sans layout
@@ -41,6 +42,7 @@ export const publicLayoutRoutes: RouteConfig[] = [
   { path: '/pricing', component: Pricing, layout: true },
   { path: '/contact', component: Contact, layout: true },
   { path: '/about', component: About, layout: true },
+  { path: '/terms', component: TermsAndConditions, layout: true },
 ];
 
 /**
