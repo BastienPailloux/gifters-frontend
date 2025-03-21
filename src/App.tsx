@@ -20,6 +20,7 @@ import Features from './pages/Features';
 import Contact from './pages/Contact';
 import Pricing from './pages/Pricing';
 import About from './pages/About';
+import ScrollToTop from './components/common/navigation/ScrollToTop';
 import { ProtectedRouteProps, LayoutRouteProps } from './types';
 
 // Composant pour les routes protégées
@@ -183,6 +184,7 @@ const App: React.FC = () => {
   return (
     <Router>
       <AuthProvider>
+        <ScrollToTop />
         <AppRoutes />
       </AuthProvider>
     </Router>
