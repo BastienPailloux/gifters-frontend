@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { FooterProps } from '../../types';
+import { NewsletterSubscriptionForm } from '../../components/newsletter';
 
 const Footer: React.FC<FooterProps> = () => {
   const { t } = useTranslation();
@@ -70,12 +71,6 @@ const Footer: React.FC<FooterProps> = () => {
               <li>
                 <Link to="/pricing" className="text-gray-400 hover:text-white">{t('footer.product.pricing')}</Link>
               </li>
-              <li>
-                <Link to="/security" className="text-gray-400 hover:text-white">{t('footer.product.security')}</Link>
-              </li>
-              <li>
-                <Link to="/enterprise" className="text-gray-400 hover:text-white">{t('footer.product.enterprise')}</Link>
-              </li>
             </ul>
           </div>
 
@@ -83,29 +78,10 @@ const Footer: React.FC<FooterProps> = () => {
           <div className="col-span-1">
             <h3 className="text-lg font-semibold text-white mb-4">{t('footer.newsletter.title')}</h3>
             <p className="text-gray-400 mb-4">{t('footer.newsletter.description')}</p>
-            <form className="space-y-2">
-              <div>
-                <label htmlFor="email-address" className="sr-only">{t('footer.newsletter.placeholder')}</label>
-                <input
-                  id="email-address"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  className="w-full px-4 py-2 text-base text-gray-900 placeholder-gray-500 bg-white border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  placeholder={t('footer.newsletter.placeholder')}
-                />
-              </div>
-              <div>
-                <button
-                  type="submit"
-                  className="w-full px-4 py-2 text-base font-medium text-white bg-primary-500 border border-transparent rounded-md hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
-                >
-                  {t('footer.newsletter.button')}
-                </button>
-              </div>
-              <p className="text-xs text-gray-500 mt-2">{t('footer.newsletter.privacy')}</p>
-            </form>
+            <NewsletterSubscriptionForm
+              listId={import.meta.env.VITE_BREVO_LIST_ID}
+              redirectUrl={window.location.origin}
+            />
           </div>
         </div>
 

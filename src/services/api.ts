@@ -601,4 +601,35 @@ export const contactService = {
   },
 };
 
+// Service de newsletter
+export const newsletterService = {
+  // S'abonner à la newsletter
+  subscribe: async (newsletterData: { email: string; list_id?: string; redirect_url?: string }) => {
+    try {
+      const response = await api.post('/newsletter/subscribe', { newsletter: newsletterData });
+      return response.data;
+    } catch (error) {
+      console.error('Error subscribing to newsletter:', error);
+      throw error;
+    }
+  },
+
+  // Se désabonner de la newsletter
+  unsubscribe: async (email: string, list_id?: string) => {
+    try {
+      const params: { email: string; list_id?: string } = { email };
+
+      if (list_id) {
+        params.list_id = list_id;
+      }
+
+      const response = await api.delete('/newsletter/unsubscribe', { params });
+      return response.data;
+    } catch (error) {
+      console.error('Error unsubscribing from newsletter:', error);
+      throw error;
+    }
+  }
+};
+
 export default api;

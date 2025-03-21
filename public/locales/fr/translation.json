@@ -693,5 +693,49 @@
       "a4": "Non, notre tarification est transparente. Il n'y a pas de frais cachés ou supplémentaires."
     },
     "temporarilyUnlimited": "Toutes les fonctionnalités sont temporairement illimitées !"
+  },
+  "newsletter": {
+    "emailLabel": "Adresse email pour la newsletter",
+    "subscriptionSuccess": "Vous êtes désormais abonné à notre newsletter !",
+    "unsubscriptionSuccess": "Vous avez bien été désabonné de notre newsletter.",
+    "errors": {
+      "generic": "Une erreur est survenue lors de l'abonnement à la newsletter.",
+      "invalid_email": "Veuillez entrer une adresse email valide.",
+      "already_subscribed": "Cette adresse email est déjà abonnée à notre newsletter.",
+      "unsubscribe_error": "Une erreur est survenue lors du désabonnement."
+    }
+  },
+  "about": {
+    "title": "À propos de Gifters",
+    "subtitle": "Découvrez notre histoire et notre mission pour faciliter l'organisation de cadeaux",
+    "seo": {
+      "title": "À propos | Gifters",
+      "description": "Découvrez l'histoire de Gifters, notre mission et notre équipe dédiée.",
+      "keywords": "à propos, équipe, mission, vision, gifters"
+    },
+    "ourStory": {
+      "title": "Notre histoire",
+      "paragraph1": "Gifters est né d'une expérience personnelle : la difficulté d'organiser des cadeaux en groupe sans doublons ou sans oublier personne.",
+      "paragraph2": "Lancé en 2025, notre plateforme vise à simplifier la coordination des cadeaux pour les anniversaires, fêtes et occasions spéciales."
+    },
+    "mission": {
+      "title": "Notre mission",
+      "paragraph1": "Faciliter l'organisation des cadeaux de groupe pour que chaque occasion soit mémorable sans le stress des détails logistiques.",
+      "paragraph2": "Nous croyons que la générosité doit être simple et agréable, libérée des contraintes administratives et financières."
+    },
+    "team": {
+      "title": "Notre équipe",
+      "paragraph1": "Nous sommes une équipe passionnée d'entrepreneurs et de développeurs partageant la même vision : rendre les célébrations plus joyeuses et moins stressantes.",
+      "paragraph2": "Notre diversité est notre force - des profils différents unis par la volonté de créer une solution utile au quotidien."
+    },
+    "values": {
+      "title": "Nos valeurs",
+      "paragraph1": "Simplicité, transparence et convivialité sont au cœur de notre approche.",
+      "paragraph2": "Nous développons Gifters avec le souci constant de l'expérience utilisateur et de la protection des données personnelles."
+    },
+    "contact": {
+      "description": "Vous avez des questions, des suggestions ou souhaitez rejoindre l'aventure ? N'hésitez pas à nous contacter.",
+      "button": "Nous contacter"
+    }
   }
 }
