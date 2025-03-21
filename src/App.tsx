@@ -19,6 +19,7 @@ import Profile from './pages/Profile';
 import Features from './pages/Features';
 import Contact from './pages/Contact';
 import Pricing from './pages/Pricing';
+import About from './pages/About';
 import { ProtectedRouteProps, LayoutRouteProps } from './types';
 
 // Composant pour les routes protégées
@@ -57,6 +58,7 @@ const AppRoutes: React.FC = () => {
       <Route path="/features" element={<LayoutRoute><Features /></LayoutRoute>} />
       <Route path="/pricing" element={<LayoutRoute><Pricing /></LayoutRoute>} />
       <Route path="/contact" element={<LayoutRoute><Contact /></LayoutRoute>} />
+      <Route path="/about" element={<LayoutRoute><About /></LayoutRoute>} />
 
       {/* Routes pour les invitations */}
       <Route path="/invitation/join" element={<InvitationJoin />} />
