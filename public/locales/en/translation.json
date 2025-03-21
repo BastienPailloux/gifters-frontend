@@ -131,7 +131,8 @@
       "about": "About",
       "careers": "Careers",
       "press": "Press",
-      "blog": "Blog"
+      "blog": "Blog",
+      "terms": "Terms of Use"
     },
     "product": {
       "title": "Product",
@@ -733,6 +734,57 @@
     "contact": {
       "description": "Have questions, suggestions or want to join the adventure? Don't hesitate to contact us.",
       "button": "Contact Us"
+    }
+  },
+  "termsAndConditions": {
+    "seo": {
+      "title": "Terms and Conditions - Gifters",
+      "description": "View Gifters' terms and conditions. Learn more about your rights and obligations as a user of the platform.",
+      "keywords": "terms, conditions, use, rules, gifters"
+    },
+    "title": "Terms and Conditions",
+    "subtitle": "Last updated: March 2025",
+    "introduction": {
+      "title": "Introduction",
+      "content": "Welcome to Gifters. These terms and conditions govern your use of our website and mobile application, accessible via www.gifters.fr. By using our platform, you agree to these terms in their entirety. If you disagree with these terms, please do not use our platform."
+    },
+    "definitions": {
+      "title": "Definitions",
+      "contentIntro": "In these terms and conditions, the following terms have the meanings indicated below:",
+      "platform": "Platform",
+      "platformDef": "the Gifters website and mobile application.",
+      "user": "User",
+      "userDef": "any person who accesses the platform and creates an account.",
+      "content": "Content",
+      "contentDef": "all text, images, videos, and other materials published on the platform."
+    },
+    "account": {
+      "title": "User Account",
+      "content1": "To use certain features of our platform, you must create an account. You are responsible for maintaining the confidentiality of your account and password, and for restricting access to your computer. You agree to accept responsibility for all activities that occur under your account or password.",
+      "content2": "Gifters reserves the right to refuse service, terminate accounts, remove or edit content at its sole discretion."
+    },
+    "userContent": {
+      "title": "User Content",
+      "content1": "By posting content on our platform, you warrant that:",
+      "point1": "You own the content or have the right to post it.",
+      "point2": "The content does not infringe upon the intellectual property rights, privacy, or other rights of any third party.",
+      "point3": "The content is not illegal, abusive, threatening, defamatory, or otherwise objectionable."
+    },
+    "intellectualProperty": {
+      "title": "Intellectual Property",
+      "content": "The content, features, and availability of the platform are the property of Gifters and are protected by international copyright, trademark, patent, trade secret, and other intellectual property laws."
+    },
+    "limitation": {
+      "title": "Limitation of Liability",
+      "content": "Gifters will not be liable for any direct, indirect, incidental, special, or consequential damages resulting from the use of or inability to use the platform or associated services."
+    },
+    "changes": {
+      "title": "Changes to Terms",
+      "content": "Gifters reserves the right to modify these terms at any time. Users will be informed of significant changes. Continued use of the platform after such changes constitutes your acceptance of the new terms."
+    },
+    "contact": {
+      "title": "Contact",
+      "content": "If you have any questions regarding these terms, please contact us at support@gifters.fr."
     }
   }
 }
