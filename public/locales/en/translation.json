@@ -694,6 +694,7 @@
     "emailLabel": "Email address for newsletter",
     "subscriptionSuccess": "You are now subscribed to our newsletter!",
     "unsubscriptionSuccess": "You have been successfully unsubscribed from our newsletter.",
+    "subscribe": "I would like to receive the newsletter",
     "errors": {
       "generic": "An error occurred while subscribing to the newsletter.",
       "invalid_email": "Please enter a valid email address.",

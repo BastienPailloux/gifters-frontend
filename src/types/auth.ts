@@ -15,6 +15,7 @@ export interface User {
   state?: string;
   zip_code?: string;
   country?: string;
+  newsletter_subscription?: boolean;
   // Ajoutez d'autres propriétés au besoin
 }
 
@@ -41,6 +42,7 @@ export interface RegisterData {
   email: string;
   password: string;
   password_confirmation: string;
+  newsletter_subscription?: boolean;
 }
 
 /**

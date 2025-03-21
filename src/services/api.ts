@@ -41,7 +41,7 @@ api.interceptors.response.use(
 // Service d'authentification
 export const authService = {
   // Inscription d'un nouvel utilisateur
-  register: async (userData: { name: string; email: string; password: string; password_confirmation: string }) => {
+  register: async (userData: { name: string; email: string; password: string; password_confirmation: string; newsletter_subscription?: boolean }) => {
     // Récupération de la langue courante pour l'initialisation
     const currentLanguage = localStorage.getItem('i18nextLng') || 'en';
 
@@ -466,6 +466,7 @@ export const userService = {
     state?: string;
     zip_code?: string;
     country?: string;
+    newsletter_subscription?: boolean;
   }) => {
     try {
       const currentUser = authService.getCurrentUser();
