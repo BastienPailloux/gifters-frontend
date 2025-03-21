@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Input from '../common/forms/Input';
 import Button from '../common/forms/Button';
+import Checkbox from '../common/forms/Checkbox';
 import { ProfileFormProps, ProfileFormData } from '../../types';
 
 const ProfileForm: React.FC<ProfileFormProps> = ({ user, onSubmit, onCancel }) => {
@@ -18,16 +19,17 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ user, onSubmit, onCancel }) =
     country: user.country || '',
     current_password: '',
     password: '',
-    password_confirmation: ''
+    password_confirmation: '',
+    newsletter_subscription: user.newsletter_subscription || false
   });
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: type === 'checkbox' ? checked : value
     }));
   };
 
@@ -142,6 +144,17 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ user, onSubmit, onCancel }) =
             />
           </div>
         </div>
+      </div>
+
+      {/* Newsletter */}
+      <div className="mb-8">
+        <Checkbox
+          id="newsletter_subscription"
+          name="newsletter_subscription"
+          checked={formData.newsletter_subscription}
+          onChange={handleChange}
+          label={t('newsletter.subscribe', 'Je souhaite recevoir la newsletter')}
+        />
       </div>
 
       {/* Séparateur */}

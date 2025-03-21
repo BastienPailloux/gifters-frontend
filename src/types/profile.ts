@@ -37,6 +37,7 @@ export interface ProfileFormData {
   current_password?: string;
   password?: string;
   password_confirmation?: string;
+  newsletter_subscription?: boolean;
 }
 
 /**

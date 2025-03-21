@@ -18,6 +18,7 @@ const Register: React.FC = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [acceptTerms, setAcceptTerms] = useState(false);
+  const [newsletterSubscription, setNewsletterSubscription] = useState(false);
   const [passwordError, setPasswordError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -40,7 +41,8 @@ const Register: React.FC = () => {
         name,
         email,
         password,
-        password_confirmation: confirmPassword
+        password_confirmation: confirmPassword,
+        newsletter_subscription: newsletterSubscription
       });
       if (result.success) {
         navigate('/dashboard');
@@ -121,6 +123,14 @@ const Register: React.FC = () => {
           checked={acceptTerms}
           onChange={(e) => setAcceptTerms(e.target.checked)}
           label={renderTermsLabel()}
+        />
+
+        <Checkbox
+          id="newsletter"
+          name="newsletter"
+          checked={newsletterSubscription}
+          onChange={(e) => setNewsletterSubscription(e.target.checked)}
+          label={t('newsletter.subscribe')}
         />
 
         <Button
