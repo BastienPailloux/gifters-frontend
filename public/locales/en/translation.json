@@ -689,5 +689,49 @@
       "a4": "No, our pricing is transparent. There are no hidden or additional fees."
     },
     "temporarilyUnlimited": "All features are temporarily unlimited!"
+  },
+  "newsletter": {
+    "emailLabel": "Email address for newsletter",
+    "subscriptionSuccess": "You are now subscribed to our newsletter!",
+    "unsubscriptionSuccess": "You have been successfully unsubscribed from our newsletter.",
+    "errors": {
+      "generic": "An error occurred while subscribing to the newsletter.",
+      "invalid_email": "Please enter a valid email address.",
+      "already_subscribed": "This email address is already subscribed to our newsletter.",
+      "unsubscribe_error": "An error occurred while unsubscribing."
+    }
+  },
+  "about": {
+    "title": "About Gifters",
+    "subtitle": "Discover our story and mission to simplify gift organization",
+    "seo": {
+      "title": "About | Gifters",
+      "description": "Discover the story of Gifters, our mission and our dedicated team.",
+      "keywords": "about, team, mission, vision, gifters"
+    },
+    "ourStory": {
+      "title": "Our Story",
+      "paragraph1": "Gifters was born from a personal experience: the difficulty of organizing group gifts without duplicates or forgetting anyone.",
+      "paragraph2": "Launched in 2025, our platform aims to simplify gift coordination for birthdays, holidays and special occasions."
+    },
+    "mission": {
+      "title": "Our Mission",
+      "paragraph1": "Facilitate group gift organization so that every occasion is memorable without the stress of logistical details.",
+      "paragraph2": "We believe that generosity should be simple and enjoyable, free from administrative and financial constraints."
+    },
+    "team": {
+      "title": "Our Team",
+      "paragraph1": "We are a passionate team of entrepreneurs and developers sharing the same vision: making celebrations more joyful and less stressful.",
+      "paragraph2": "Our diversity is our strength - different profiles united by the desire to create a useful everyday solution."
+    },
+    "values": {
+      "title": "Our Values",
+      "paragraph1": "Simplicity, transparency and friendliness are at the heart of our approach.",
+      "paragraph2": "We develop Gifters with a constant concern for user experience and personal data protection."
+    },
+    "contact": {
+      "description": "Have questions, suggestions or want to join the adventure? Don't hesitate to contact us.",
+      "button": "Contact Us"
+    }
   }
 }
