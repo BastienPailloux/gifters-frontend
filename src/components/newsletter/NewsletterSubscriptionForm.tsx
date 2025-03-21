@@ -4,16 +4,7 @@ import { Button, Input } from '../common/forms';
 import { FiSend } from 'react-icons/fi';
 import { newsletterService } from '../../services/api';
 import { AxiosError } from 'axios';
-
-interface NewsletterSubscriptionFormProps {
-  className?: string;
-  buttonText?: string;
-  placeholderText?: string;
-  successMessage?: string;
-  errorMessage?: string;
-  redirectUrl?: string;
-  listId?: string;
-}
+import { NewsletterSubscriptionFormProps } from '../../types/newsletter';
 
 /**
  * Composant de formulaire d'abonnement à la newsletter qui utilise l'API backend

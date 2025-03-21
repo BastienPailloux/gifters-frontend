@@ -1,14 +1,8 @@
 import React from 'react';
-import { motion, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Card from '../common/display/Card';
 import { Title } from '../common/typography';
-
-interface AboutCardProps {
-  title: string;
-  paragraphs: string[];
-  className?: string;
-  variants?: Variants;
-}
+import { AboutCardProps } from '../../types/about';
 
 const AboutCard: React.FC<AboutCardProps> = ({
   title,

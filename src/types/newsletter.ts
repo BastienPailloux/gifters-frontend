@@ -6,4 +6,10 @@ export interface NewsletterSubscriptionFormProps {
   className?: string;
   showTitle?: boolean;
   onSuccess?: () => void;
+  buttonText?: string;
+  placeholderText?: string;
+  successMessage?: string;
+  errorMessage?: string;
+  redirectUrl?: string;
+  listId?: string;
 }

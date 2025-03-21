@@ -3,10 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Faq } from '../common/faq';
 import { FaqItem } from '../../types';
-
-interface PricingFAQProps {
-  className?: string;
-}
+import { PricingFAQProps } from '../../types/pricing';
 
 const PricingFAQ: React.FC<PricingFAQProps> = ({ className = '' }) => {
   const { t } = useTranslation();

@@ -1,32 +1,27 @@
 import React from 'react';
-import { SocialIconProps } from './SocialIcons';
+import { SocialIconComponentProps } from './SocialIcons';
 import { SocialIcons } from './socialIconsMap';
+import { SocialLinksProps, SocialNetwork } from '../../types/social';
 
-// Type pour un réseau social
-export interface SocialNetwork {
-  /** Nom unique du réseau social (doit correspondre à une clé dans SocialIcons) */
-  name: string;
-  /** URL vers laquelle l'utilisateur sera redirigé */
-  url: string;
+// Étendre l'interface SocialNetwork pour inclure les propriétés spécifiques à ce composant
+interface ExtendedSocialNetwork extends SocialNetwork {
   /** Libellé d'accessibilité pour le lien */
-  ariaLabel: string;
+  ariaLabel?: string;
   /** Props optionnelles pour personnaliser l'icône */
-  iconProps?: SocialIconProps;
+  iconProps?: SocialIconComponentProps;
 }
 
-// Props du composant
-interface SocialLinksProps {
-  /** Liste des réseaux sociaux à afficher */
-  networks: SocialNetwork[];
-  /** Classes supplémentaires pour le conteneur */
-  className?: string;
+// Étendre l'interface SocialLinksProps pour inclure les propriétés spécifiques à ce composant
+interface ExtendedSocialLinksProps extends SocialLinksProps {
   /** Couleur du texte (text-) */
   textColor?: string;
   /** Couleur de survol (hover:text-) */
   hoverColor?: string;
+  /** Liste des réseaux sociaux à afficher */
+  networks: ExtendedSocialNetwork[];
 }
 
-const SocialLinks: React.FC<SocialLinksProps> = ({
+const SocialLinks: React.FC<ExtendedSocialLinksProps> = ({
   networks,
   className = '',
   textColor = 'text-gray-400',
@@ -53,9 +48,9 @@ const SocialLinks: React.FC<SocialLinksProps> = ({
             target="_blank"
             rel="noopener noreferrer"
             className={`${textColor} ${hoverColor}`}
-            aria-label={network.ariaLabel}
+            aria-label={network.ariaLabel || network.name}
           >
-            <span className="sr-only">{network.ariaLabel}</span>
+            <span className="sr-only">{network.ariaLabel || network.name}</span>
             <IconComponent {...network.iconProps} />
           </a>
         );
