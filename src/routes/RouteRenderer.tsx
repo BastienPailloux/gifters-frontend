@@ -2,13 +2,9 @@ import React, { Suspense } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import Layout from '../components/layout/Layout';
-import { RouteConfig } from './routeConfig';
+import { RouteConfig, ProtectedRouteProps } from '../types/routes';
 
 // Composant pour les routes protégées
-interface ProtectedRouteProps {
-  children: React.ReactNode;
-}
-
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const { isAuthenticated, isLoading } = useAuth();
 

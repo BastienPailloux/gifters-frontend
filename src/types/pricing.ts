@@ -48,3 +48,10 @@ export interface PricingPlansProps {
   freeText: string;
   popularText: string;
 }
+
+/**
+ * Propriétés pour le composant PricingFAQ
+ */
+export interface PricingFAQProps {
+  className?: string;
+}

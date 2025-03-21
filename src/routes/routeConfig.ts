@@ -1,15 +1,5 @@
-import { lazy, LazyExoticComponent, ComponentType } from 'react';
-
-/**
- * Type pour les configurations de route
- */
-export interface RouteConfig {
-  path: string;
-  component: ComponentType<Record<string, unknown>> | LazyExoticComponent<ComponentType<Record<string, unknown>>>;
-  layout?: boolean;
-  protected?: boolean;
-  children?: RouteConfig[];
-}
+import { lazy } from 'react';
+import { RouteConfig } from '../types/routes';
 
 // Importations paresseuses pour améliorer les performances
 const Home = lazy(() => import('../pages/Home'));
