@@ -9,8 +9,8 @@ import Button from '../components/common/forms/Button';
 import ToggleSelect from '../components/common/forms/ToggleSelect';
 import GiftIdeaItem from '../components/gift-ideas/GiftIdeaItem';
 import { GiftIdeaFormModal } from '../components/gift-ideas/GiftIdeaFormModal';
-import { ApiGiftIdea } from '../types/gift-ideas';
-import { ToggleOption } from '../types/ui';
+import { ApiGiftIdea, ToggleOption } from '../types';
+import { CategoryType } from '../types/routes';
 import { SEO } from '../components/common/seo';
 
 /**
@@ -24,9 +24,6 @@ const MyGifts: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { user } = useAuth();
-
-  // Types de catégories disponibles
-  type CategoryType = 'wishlist' | 'suggestions' | 'buying' | 'bought';
 
   // Catégorie sélectionnée
   const [selectedCategory, setSelectedCategory] = useState<CategoryType>('wishlist');

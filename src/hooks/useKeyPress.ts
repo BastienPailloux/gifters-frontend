@@ -1,11 +1,5 @@
 import { useEffect, useCallback, RefObject } from 'react';
-
-/**
- * Type pour définir les gestionnaires de touches
- */
-type KeyHandlers = {
-  [key: string]: () => void;
-};
+import { KeyHandlers } from '../types/hooks';
 
 /**
  * Hook pour détecter l'appui sur des touches spécifiques

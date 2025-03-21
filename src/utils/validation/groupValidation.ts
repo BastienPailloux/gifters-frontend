@@ -2,22 +2,11 @@
  * Validations liées aux groupes
  */
 
+import { ValidationResult, TranslationOptions } from '../../types/validation';
+
 // Constantes pour la validation
 export const MIN_GROUP_NAME_LENGTH = 3;
 export const MAX_GROUP_NAME_LENGTH = 50;
-
-/**
- * Interface pour le résultat d'une validation
- */
-export interface ValidationResult {
-  isValid: boolean;
-  errorMessage?: string;
-}
-
-/**
- * Options pour les messages de traduction
- */
-export type TranslationOptions = Record<string, string | number>;
 
 /**
  * Valide le nom d'un groupe
