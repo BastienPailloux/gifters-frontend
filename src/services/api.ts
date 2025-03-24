@@ -77,31 +77,21 @@ export const authService = {
 
   // Connexion d'un utilisateur
   login: async (credentials: { email: string; password: string }) => {
-    console.log('Tentative de connexion avec :', { email: credentials.email, password: '******' });
 
     try {
       // On envoie les données directement sans les imbriquer dans un objet 'user'
       const response = await api.post('/login', { user: credentials });
 
-      console.log('Réponse de connexion reçue avec statut :', response.status);
-      console.log('Structure de la réponse :', JSON.stringify(response.data, null, 2));
-
       // Stocker le token et les informations utilisateur dans le localStorage
       if (response.data && response.data.token) {
-        console.log('Token trouvé dans response.data.token');
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user));
       } else if (response.data.data && response.data.data.token) {
-        console.log('Token trouvé dans response.data.data.token');
         localStorage.setItem('token', response.data.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.data.user));
       } else {
         console.error('ERREUR : Aucun token trouvé dans la réponse', response.data);
       }
-
-      // Vérifier si le token a été correctement stocké
-      const storedToken = localStorage.getItem('token');
-      console.log('Token stocké après connexion :', storedToken ? 'Présent' : 'Absent');
 
       return response.data;
     } catch (error) {
@@ -351,7 +341,6 @@ export const invitationService = {
   // Récupérer toutes les invitations d'un groupe
   getGroupInvitations: async (groupId: string) => {
     const response = await api.get(`/groups/${groupId}/invitations`);
-    console.log('response', response);
 
     // Retourner les invitations depuis le nouveau format de réponse
     return response.data.invitations || [];

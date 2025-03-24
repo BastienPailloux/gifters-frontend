@@ -31,7 +31,6 @@ const InvitationModal: React.FC<InvitationModalProps> = ({
       try {
         // Vérifier s'il existe déjà des invitations actives pour ce groupe
         const invitations = await invitationService.getGroupInvitations(groupId);
-        console.log('invitations', invitations);
 
         if (invitations && invitations.length > 0) {
           // Utiliser le premier token d'invitation disponible

@@ -51,9 +51,6 @@ const SEO: React.FC<SEOProps> = ({
   if (noFollow) robotsContent.push('nofollow');
   const robots = robotsContent.length > 0 ? robotsContent.join(', ') : 'index, follow';
 
-  // Log pour débogage (à supprimer en production)
-  console.log('SEO data:', fullTitle, pageDescription, pageKeywords);
-
   // Utiliser notre hook personnalisé pour mettre à jour les métadonnées
   useMetaTags({
     title: fullTitle,
