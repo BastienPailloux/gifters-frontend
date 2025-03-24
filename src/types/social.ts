@@ -19,6 +19,7 @@ export interface SocialNetwork {
   url: string;
   icon: ReactNode;
   label?: string;
+  ariaLabel?: string;
 }
 
 /**

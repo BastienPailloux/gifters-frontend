@@ -1,4 +1,3 @@
-import React from 'react';
 import Card from '../common/display/Card';
 import Button from '../common/forms/Button';
 import { GroupItemsListProps } from '../../types/groups';

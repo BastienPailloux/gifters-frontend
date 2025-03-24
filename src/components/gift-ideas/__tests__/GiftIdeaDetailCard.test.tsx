@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import GiftIdeaDetailCard from '../GiftIdeaDetailCard';
 
@@ -30,6 +29,7 @@ describe('GiftIdeaDetailCard Component', () => {
       { id: 'user2', name: 'Jane Smith' },
     ],
     group_name: 'Test Group',
+    group_id: 'group1',
   };
 
   const mockCurrentUser = {

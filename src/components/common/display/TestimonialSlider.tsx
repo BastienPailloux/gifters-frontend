@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Testimonial from './Testimonial';
-import { TestimonialSliderProps } from '../../../types';
+import { TestimonialSliderProps } from '../../../types/ui';
 
 const TestimonialSlider: React.FC<TestimonialSliderProps> = ({
   testimonials,
