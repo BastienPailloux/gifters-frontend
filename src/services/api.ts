@@ -11,12 +11,52 @@ const api = axios.create({
   },
 });
 
+// Fonction pour analyser et afficher les informations du token JWT
+const decodeJWT = (token: string) => {
+  try {
+    const parts = token.split('.');
+    if (parts.length !== 3) {
+      console.error('Format JWT invalide, devrait avoir 3 parties');
+      return null;
+    }
+
+    // Décoder le payload (deuxième partie)
+    const payload = JSON.parse(atob(parts[1]));
+
+    // Afficher les informations importantes
+    console.log('PAYLOAD TOKEN:', {
+      sub: payload.sub,
+      exp: payload.exp ? new Date(payload.exp * 1000).toISOString() : 'Non défini',
+      iat: payload.iat ? new Date(payload.iat * 1000).toISOString() : 'Non défini',
+      isExpired: payload.exp ? (payload.exp * 1000 < Date.now()) : 'Non vérifiable',
+      jti: payload.jti,
+      // Autres claims spécifiques à votre application
+      user_id: payload.user_id,
+      email: payload.email,
+      name: payload.name,
+      scp: payload.scp
+    });
+
+    return payload;
+  } catch (error) {
+    console.error('Erreur lors du décodage du token:', error);
+    return null;
+  }
+};
+
 // Intercepteur pour ajouter le token d'authentification à chaque requête
 api.interceptors.request.use(
   (config) => {
+    // Log pour déboguer l'URL complète
+    console.log('REQUEST URL:', `${config.baseURL || ''}${config.url || ''}`);
+
     const token = localStorage.getItem('token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
+      console.log('TOKEN ENVOYÉ:', token.substring(0, 20) + '...');
+
+      // Analyser le token pour vérifier s'il est valide
+      decodeJWT(token);
     }
     return config;
   },
