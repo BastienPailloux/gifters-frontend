@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import TestimonialSlider from '../TestimonialSlider';
-import { TestimonialProps } from '../Testimonial';
+import { TestimonialProps } from '../../../../types/ui';
 
 // Mock des intervalles pour les tests
 jest.useFakeTimers();

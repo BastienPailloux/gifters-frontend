@@ -29,7 +29,11 @@ export interface MetaTagsOptions {
 }
 
 /**
- * Props pour le composant SEO
+ * Types pour les composants SEO
+ */
+
+/**
+ * Propriétés pour le composant SEO
  */
 export interface SEOProps {
   title?: string;
@@ -37,7 +41,7 @@ export interface SEOProps {
   keywords?: string[];
   image?: string;
   url?: string;
-  type?: 'website' | 'article' | 'product';
+  type?: string;
   author?: string;
   twitterUsername?: string;
   publishedTime?: string;

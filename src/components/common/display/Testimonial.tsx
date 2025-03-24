@@ -1,5 +1,5 @@
 import React from 'react';
-import { TestimonialProps } from '../../../types';
+import { TestimonialProps } from '../../../types/ui';
 
 const Testimonial: React.FC<TestimonialProps> = ({
   content,

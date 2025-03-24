@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import useMetaTags from '../../../hooks/useMetaTags';
-import { SEOProps } from '../../../types';
+import { SEOProps } from '../../../types/seo';
 
 /**
  * Composant SEO qui utilise le hook useMetaTags pour mettre à jour les métadonnées de la page
