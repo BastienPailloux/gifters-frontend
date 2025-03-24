@@ -347,12 +347,30 @@ export const invitationService = {
   },
 
   // Créer une nouvelle invitation
-  createInvitation: async (groupId: string, invitationData: { email: string; message?: string }) => {
-    // Envoyer email et message comme paramètres directs au lieu de les encapsuler dans un objet invitation
-    const response = await api.post(`/groups/${groupId}/invitations`, {
-      email: invitationData.email,
-      message: invitationData.message || '',
-      invitation: { role: 'member' } // Garder l'objet invitation pour le paramètre role
+  createInvitation: async (groupId: string, invitationData?: {
+    role?: string;
+  }) => {
+    try {
+      const response = await api.post(`/groups/${groupId}/invitations`, {
+        invitation: invitationData || { role: 'member' }
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error creating invitation:', error);
+      throw error;
+    }
+  },
+
+  // Envoyer un email avec une invitation existante
+  sendInvitationEmail: async (groupId: string, data: {
+    email: string;
+    message?: string;
+    role?: string;
+  }) => {
+    const response = await api.post(`/groups/${groupId}/invitations/send_email`, {
+      email: data.email,
+      message: data.message || '',
+      invitation: { role: data.role || 'member' }
     });
     return response.data;
   },
