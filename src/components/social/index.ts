@@ -1,5 +1,5 @@
 export { default as SocialLinks } from './SocialLinks';
-export type { SocialNetwork } from './SocialLinks';
+export type { SocialNetwork } from '../../types/social';
 
 export {
   SocialIcon,
@@ -10,6 +10,6 @@ export {
   GitHubIcon,
   YouTubeIcon
 } from './SocialIcons';
-export type { SocialIconProps } from './SocialIcons';
+export type { SocialIconComponentProps as SocialIconProps } from './SocialIcons';
 
 export { SocialIcons } from './socialIconsMap';

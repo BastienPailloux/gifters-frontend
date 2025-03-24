@@ -30,7 +30,7 @@ const DetailedFeaturesSection: React.FC<DetailedFeaturesSectionProps> = ({
             <DetailedFeature
               key={feature.id}
               {...feature}
-              reverse={index % 2 !== 0}
+              reversed={index % 2 !== 0}
               animated={animated}
             />
           ))}

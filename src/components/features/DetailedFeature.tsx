@@ -9,14 +9,14 @@ const DetailedFeature: React.FC<DetailedFeatureProps> = ({
   description,
   imageSrc,
   imageAlt,
-  reverse = false,
+  reversed = false,
   className = '',
   animated = false,
 }) => {
   const content = (
     <div className={twMerge(
       'flex flex-col md:flex-row items-center gap-8 md:gap-16 py-8',
-      reverse && 'md:flex-row-reverse',
+      reversed && 'md:flex-row-reverse',
       className
     )}>
       {/* Text content */}

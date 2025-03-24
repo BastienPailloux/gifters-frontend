@@ -5,11 +5,11 @@ import {
   InstagramIcon,
   GitHubIcon,
   YouTubeIcon,
-  SocialIconProps
+  SocialIconComponentProps
 } from './SocialIcons';
 
 // Mapping des noms d'icônes avec leurs composants
-export const SocialIcons: Record<string, React.FC<SocialIconProps>> = {
+export const SocialIcons: Record<string, React.FC<SocialIconComponentProps>> = {
   linkedin: LinkedInIcon,
   twitter: TwitterIcon,
   facebook: FacebookIcon,
