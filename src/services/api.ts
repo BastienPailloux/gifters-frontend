@@ -29,10 +29,35 @@ api.interceptors.response.use(
   (error) => {
     // Si l'erreur est 401 Unauthorized, déconnecter l'utilisateur
     if (error.response && error.response.status === 401) {
+      // LOGS DE DÉBOGAGE
+      console.log('=== ERREUR 401 UNAUTHORIZED ===');
+      console.log('URL de la requête :', error.config.url);
+      console.log('Méthode :', error.config.method?.toUpperCase());
+      console.log('Headers :', error.config.headers);
+      console.log('Token dans localStorage :', localStorage.getItem('token') ? 'Présent' : 'Absent');
+
+      // On garde une trace du token pour le déboguer
+      const token = localStorage.getItem('token');
+
+      // Supprimer les données d'authentification
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      // Rediriger vers la page de connexion si nécessaire
-      window.location.href = '/login';
+
+      // Afficher une alerte pour indiquer le problème et laisser le temps de voir les logs
+      if (token) {
+        alert('Erreur d\'authentification (401): Le token a été rejeté. Vérifiez la console pour plus de détails.');
+
+        // Utiliser un setTimeout pour retarder la redirection
+        setTimeout(() => {
+          // Commenter cette ligne pour complètement empêcher la redirection
+          window.location.href = '/login';
+        }, 5000); // 5 secondes pour consulter les logs
+      } else {
+        // Si pas de token, rediriger quand même mais avec un délai plus court
+        setTimeout(() => {
+          window.location.href = '/login';
+        }, 1000);
+      }
     }
     return Promise.reject(error);
   }
@@ -67,18 +92,37 @@ export const authService = {
 
   // Connexion d'un utilisateur
   login: async (credentials: { email: string; password: string }) => {
-    // On envoie les données directement sans les imbriquer dans un objet 'user'
-    const response = await api.post('/login', { user: credentials });
+    console.log('Tentative de connexion avec :', { email: credentials.email, password: '******' });
 
-    // Stocker le token et les informations utilisateur dans le localStorage
-    if (response.data && response.data.token) {
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('user', JSON.stringify(response.data.user));
-    } else if (response.data.data && response.data.data.token) {
-      localStorage.setItem('token', response.data.data.token);
-      localStorage.setItem('user', JSON.stringify(response.data.data.user));
+    try {
+      // On envoie les données directement sans les imbriquer dans un objet 'user'
+      const response = await api.post('/login', { user: credentials });
+
+      console.log('Réponse de connexion reçue avec statut :', response.status);
+      console.log('Structure de la réponse :', JSON.stringify(response.data, null, 2));
+
+      // Stocker le token et les informations utilisateur dans le localStorage
+      if (response.data && response.data.token) {
+        console.log('Token trouvé dans response.data.token');
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('user', JSON.stringify(response.data.user));
+      } else if (response.data.data && response.data.data.token) {
+        console.log('Token trouvé dans response.data.data.token');
+        localStorage.setItem('token', response.data.data.token);
+        localStorage.setItem('user', JSON.stringify(response.data.data.user));
+      } else {
+        console.error('ERREUR : Aucun token trouvé dans la réponse', response.data);
+      }
+
+      // Vérifier si le token a été correctement stocké
+      const storedToken = localStorage.getItem('token');
+      console.log('Token stocké après connexion :', storedToken ? 'Présent' : 'Absent');
+
+      return response.data;
+    } catch (error) {
+      console.error('Erreur pendant la connexion :', error);
+      throw error; // Relancer l'erreur pour que useAuth puisse la gérer
     }
-    return response.data;
   },
 
   // Déconnexion
