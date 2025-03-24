@@ -14,7 +14,8 @@ const Footer: React.FC<FooterProps> = () => {
     {
       name: 'linkedin',
       url: 'https://www.linkedin.com/company/gifters-fr/',
-      ariaLabel: 'LinkedIn'
+      ariaLabel: 'LinkedIn',
+      icon: <span className="sr-only">LinkedIn</span>
     }
   ];
 

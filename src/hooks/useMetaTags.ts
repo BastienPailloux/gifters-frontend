@@ -97,8 +97,6 @@ const useMetaTags = (options: MetaTagsOptions) => {
       document.querySelector(`link[rel="alternate"]`)?.setAttribute('hreflang', options.lang);
     }
 
-    console.log('Métadonnées mises à jour pour:', options.title);
-
     // Nettoyage optionnel lors du démontage (si nécessaire)
     return () => {
       // Pas de nettoyage spécifique pour l'instant

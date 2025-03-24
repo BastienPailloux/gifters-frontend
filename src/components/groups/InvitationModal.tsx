@@ -19,31 +19,28 @@ const InvitationModal: React.FC<InvitationModalProps> = ({
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
-  const [invitationToken, setInvitationToken] = useState<string | null>(null);
   const [invitationURL, setInvitationURL] = useState<string>('');
 
-  // Récupérer ou créer un token d'invitation pour le partage
+  // Récupérer un token d'invitation pour le partage
   useEffect(() => {
     if (!isOpen || !groupId) return;
 
     const fetchInvitationToken = async () => {
       try {
+        setIsLoading(true);
         // Vérifier s'il existe déjà des invitations actives pour ce groupe
         const invitations = await invitationService.getGroupInvitations(groupId);
-        console.log('invitations', invitations);
 
         if (invitations && invitations.length > 0) {
           // Utiliser le premier token d'invitation disponible
-          setInvitationToken(invitations[0].token);
           setInvitationURL(`${window.location.origin}/invitation/join?token=${invitations[0].token}`);
         } else {
           // Créer une nouvelle invitation générique
           try {
+            // Utiliser la méthode standard createInvitation qui ne nécessite pas d'email valide
             const newInvitation = await invitationService.createInvitation(groupId, {
-              email: 'share@example.com',
-              message: 'Shared invitation link'
+              role: 'member'
             });
-            setInvitationToken(newInvitation.token);
             setInvitationURL(`${window.location.origin}/invitation/join?token=${newInvitation.token}`);
           } catch (createErr) {
             console.error('Error creating invitation token:', createErr);
@@ -54,20 +51,9 @@ const InvitationModal: React.FC<InvitationModalProps> = ({
         }
       } catch (err) {
         console.error('Error getting invitation token:', err);
-        // Pas d'erreur visible à l'utilisateur pour la récupération, on va essayer de créer une invitation
-        try {
-          const newInvitation = await invitationService.createInvitation(groupId, {
-            email: 'share@example.com',
-            message: 'Shared invitation link'
-          });
-          setInvitationToken(newInvitation.token);
-          setInvitationURL(`${window.location.origin}/invitation/join?token=${newInvitation.token}`);
-        } catch (createErr) {
-          console.error('Error creating invitation token after fetch error:', createErr);
-          setError(t('groups.errorCreatingInvitationLink'));
-          // Fallback en cas d'erreur
-          setInvitationURL(`${window.location.origin}/invitation/join?group=${groupId}`);
-        }
+        setError(t('groups.errorCreatingInvitationLink'));
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -101,7 +87,13 @@ const InvitationModal: React.FC<InvitationModalProps> = ({
     setSuccess(null);
 
     try {
-      await invitationService.createInvitation(groupId, { email, message });
+      // Utiliser la nouvelle API pour envoyer un email avec une invitation existante
+      await invitationService.sendInvitationEmail(groupId, {
+        email,
+        message,
+        role: 'member'
+      });
+
       setSuccess(t('groups.invitationSent'));
       setEmail('');
       setMessage('');
@@ -153,6 +145,16 @@ const InvitationModal: React.FC<InvitationModalProps> = ({
       {success && (
         <div className="mb-4 p-3 bg-green-50 text-green-700 rounded-md">
           {success}
+        </div>
+      )}
+
+      {isLoading && (
+        <div className="mb-4 p-3 bg-blue-50 text-blue-700 rounded-md flex items-center justify-center">
+          <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-blue-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          {t('common.loading')}
         </div>
       )}
 

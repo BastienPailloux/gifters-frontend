@@ -16,7 +16,15 @@ api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+      // Vérifier si le token a un format valide
+      if (token.split('.').length === 3) {
+        config.headers['Authorization'] = `Bearer ${token.trim()}`;
+
+        // Nettoyer tout en-tête d'autorisation dupliqué potentiel
+        if (config.headers['authorization']) {
+          delete config.headers['authorization'];
+        }
+      }
     }
     return config;
   },
@@ -29,9 +37,11 @@ api.interceptors.response.use(
   (error) => {
     // Si l'erreur est 401 Unauthorized, déconnecter l'utilisateur
     if (error.response && error.response.status === 401) {
+      // Supprimer les données d'authentification
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      // Rediriger vers la page de connexion si nécessaire
+
+      // Rediriger vers la page de login
       window.location.href = '/login';
     }
     return Promise.reject(error);
@@ -67,18 +77,27 @@ export const authService = {
 
   // Connexion d'un utilisateur
   login: async (credentials: { email: string; password: string }) => {
-    // On envoie les données directement sans les imbriquer dans un objet 'user'
-    const response = await api.post('/login', { user: credentials });
 
-    // Stocker le token et les informations utilisateur dans le localStorage
-    if (response.data && response.data.token) {
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('user', JSON.stringify(response.data.user));
-    } else if (response.data.data && response.data.data.token) {
-      localStorage.setItem('token', response.data.data.token);
-      localStorage.setItem('user', JSON.stringify(response.data.data.user));
+    try {
+      // On envoie les données directement sans les imbriquer dans un objet 'user'
+      const response = await api.post('/login', { user: credentials });
+
+      // Stocker le token et les informations utilisateur dans le localStorage
+      if (response.data && response.data.token) {
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('user', JSON.stringify(response.data.user));
+      } else if (response.data.data && response.data.data.token) {
+        localStorage.setItem('token', response.data.data.token);
+        localStorage.setItem('user', JSON.stringify(response.data.data.user));
+      } else {
+        console.error('ERREUR : Aucun token trouvé dans la réponse', response.data);
+      }
+
+      return response.data;
+    } catch (error) {
+      console.error('Erreur pendant la connexion :', error);
+      throw error; // Relancer l'erreur pour que useAuth puisse la gérer
     }
-    return response.data;
   },
 
   // Déconnexion
@@ -322,19 +341,36 @@ export const invitationService = {
   // Récupérer toutes les invitations d'un groupe
   getGroupInvitations: async (groupId: string) => {
     const response = await api.get(`/groups/${groupId}/invitations`);
-    console.log('response', response);
 
     // Retourner les invitations depuis le nouveau format de réponse
     return response.data.invitations || [];
   },
 
   // Créer une nouvelle invitation
-  createInvitation: async (groupId: string, invitationData: { email: string; message?: string }) => {
-    // Envoyer email et message comme paramètres directs au lieu de les encapsuler dans un objet invitation
-    const response = await api.post(`/groups/${groupId}/invitations`, {
-      email: invitationData.email,
-      message: invitationData.message || '',
-      invitation: { role: 'member' } // Garder l'objet invitation pour le paramètre role
+  createInvitation: async (groupId: string, invitationData?: {
+    role?: string;
+  }) => {
+    try {
+      const response = await api.post(`/groups/${groupId}/invitations`, {
+        invitation: invitationData || { role: 'member' }
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error creating invitation:', error);
+      throw error;
+    }
+  },
+
+  // Envoyer un email avec une invitation existante
+  sendInvitationEmail: async (groupId: string, data: {
+    email: string;
+    message?: string;
+    role?: string;
+  }) => {
+    const response = await api.post(`/groups/${groupId}/invitations/send_email`, {
+      email: data.email,
+      message: data.message || '',
+      invitation: { role: data.role || 'member' }
     });
     return response.data;
   },
