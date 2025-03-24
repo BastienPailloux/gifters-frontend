@@ -1,0 +1,25 @@
+{
+  "name": "gifters-frontend",
+  "description": "Frontend React application for Gifters",
+  "website": "",
+  "repository": "https://github.com/BastienPailloux/gifters-frontend",
+  "stack": "scalingo-20",
+  "buildpacks": [
+    {
+      "url": "https://github.com/Scalingo/nodejs-buildpack"
+    }
+  ],
+  "scripts": {
+    "postdeploy": "npm run build"
+  },
+  "env": {
+    "NPM_CONFIG_PRODUCTION": {
+      "description": "Set to false to install devDependencies",
+      "value": "false"
+    },
+    "NODE_ENV": {
+      "description": "Environment for Node.js application",
+      "value": "production"
+    }
+  }
+}
