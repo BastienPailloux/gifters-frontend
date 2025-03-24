@@ -11,52 +11,20 @@ const api = axios.create({
   },
 });
 
-// Fonction pour analyser et afficher les informations du token JWT
-const decodeJWT = (token: string) => {
-  try {
-    const parts = token.split('.');
-    if (parts.length !== 3) {
-      console.error('Format JWT invalide, devrait avoir 3 parties');
-      return null;
-    }
-
-    // Décoder le payload (deuxième partie)
-    const payload = JSON.parse(atob(parts[1]));
-
-    // Afficher les informations importantes
-    console.log('PAYLOAD TOKEN:', {
-      sub: payload.sub,
-      exp: payload.exp ? new Date(payload.exp * 1000).toISOString() : 'Non défini',
-      iat: payload.iat ? new Date(payload.iat * 1000).toISOString() : 'Non défini',
-      isExpired: payload.exp ? (payload.exp * 1000 < Date.now()) : 'Non vérifiable',
-      jti: payload.jti,
-      // Autres claims spécifiques à votre application
-      user_id: payload.user_id,
-      email: payload.email,
-      name: payload.name,
-      scp: payload.scp
-    });
-
-    return payload;
-  } catch (error) {
-    console.error('Erreur lors du décodage du token:', error);
-    return null;
-  }
-};
-
 // Intercepteur pour ajouter le token d'authentification à chaque requête
 api.interceptors.request.use(
   (config) => {
-    // Log pour déboguer l'URL complète
-    console.log('REQUEST URL:', `${config.baseURL || ''}${config.url || ''}`);
-
     const token = localStorage.getItem('token');
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-      console.log('TOKEN ENVOYÉ:', token.substring(0, 20) + '...');
+      // Vérifier si le token a un format valide
+      if (token.split('.').length === 3) {
+        config.headers['Authorization'] = `Bearer ${token.trim()}`;
 
-      // Analyser le token pour vérifier s'il est valide
-      decodeJWT(token);
+        // Nettoyer tout en-tête d'autorisation dupliqué potentiel
+        if (config.headers['authorization']) {
+          delete config.headers['authorization'];
+        }
+      }
     }
     return config;
   },
@@ -69,35 +37,12 @@ api.interceptors.response.use(
   (error) => {
     // Si l'erreur est 401 Unauthorized, déconnecter l'utilisateur
     if (error.response && error.response.status === 401) {
-      // LOGS DE DÉBOGAGE
-      console.log('=== ERREUR 401 UNAUTHORIZED ===');
-      console.log('URL de la requête :', error.config.url);
-      console.log('Méthode :', error.config.method?.toUpperCase());
-      console.log('Headers :', error.config.headers);
-      console.log('Token dans localStorage :', localStorage.getItem('token') ? 'Présent' : 'Absent');
-
-      // On garde une trace du token pour le déboguer
-      const token = localStorage.getItem('token');
-
       // Supprimer les données d'authentification
       localStorage.removeItem('token');
       localStorage.removeItem('user');
 
-      // Afficher une alerte pour indiquer le problème et laisser le temps de voir les logs
-      if (token) {
-        alert('Erreur d\'authentification (401): Le token a été rejeté. Vérifiez la console pour plus de détails.');
-
-        // Utiliser un setTimeout pour retarder la redirection
-        setTimeout(() => {
-          // Commenter cette ligne pour complètement empêcher la redirection
-          window.location.href = '/login';
-        }, 5000); // 5 secondes pour consulter les logs
-      } else {
-        // Si pas de token, rediriger quand même mais avec un délai plus court
-        setTimeout(() => {
-          window.location.href = '/login';
-        }, 1000);
-      }
+      // Rediriger vers la page de login
+      window.location.href = '/login';
     }
     return Promise.reject(error);
   }
