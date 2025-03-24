@@ -13,7 +13,7 @@ const TestimonialSlider: React.FC<TestimonialSliderProps> = ({
   const [desktopIndex, setDesktopIndex] = useState(0);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const [touchEndX, setTouchEndX] = useState<number | null>(null);
-  const autoPlayTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const autoPlayTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Gestion du défilement automatique
   useEffect(() => {
