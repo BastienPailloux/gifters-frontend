@@ -19,7 +19,8 @@ const InvitationModal: React.FC<InvitationModalProps> = ({
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
-  const [invitationToken, setInvitationToken] = useState<string | null>(null);
+  // State invitationToken non utilisé mais défini par l'API
+  // const [invitationToken, setInvitationToken] = useState<string | null>(null);
   const [invitationURL, setInvitationURL] = useState<string>('');
 
   // Récupérer ou créer un token d'invitation pour le partage
@@ -34,7 +35,7 @@ const InvitationModal: React.FC<InvitationModalProps> = ({
 
         if (invitations && invitations.length > 0) {
           // Utiliser le premier token d'invitation disponible
-          setInvitationToken(invitations[0].token);
+          // setInvitationToken(invitations[0].token);
           setInvitationURL(`${window.location.origin}/invitation/join?token=${invitations[0].token}`);
         } else {
           // Créer une nouvelle invitation générique
@@ -43,7 +44,7 @@ const InvitationModal: React.FC<InvitationModalProps> = ({
               email: 'share@example.com',
               message: 'Shared invitation link'
             });
-            setInvitationToken(newInvitation.token);
+            // setInvitationToken(newInvitation.token);
             setInvitationURL(`${window.location.origin}/invitation/join?token=${newInvitation.token}`);
           } catch (createErr) {
             console.error('Error creating invitation token:', createErr);
@@ -60,7 +61,7 @@ const InvitationModal: React.FC<InvitationModalProps> = ({
             email: 'share@example.com',
             message: 'Shared invitation link'
           });
-          setInvitationToken(newInvitation.token);
+          // setInvitationToken(newInvitation.token);
           setInvitationURL(`${window.location.origin}/invitation/join?token=${newInvitation.token}`);
         } catch (createErr) {
           console.error('Error creating invitation token after fetch error:', createErr);
