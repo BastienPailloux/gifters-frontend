@@ -10,7 +10,7 @@
     }
   ],
   "scripts": {
-    "postdeploy": "npm run build"
+    "predeploy": "npm run build"
   },
   "env": {
     "NPM_CONFIG_PRODUCTION": {
