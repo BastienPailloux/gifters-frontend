@@ -51,7 +51,7 @@ const GiftIdeaManualInput: React.FC<GiftIdeaManualInputProps> = ({
         placeholder="https://example.com/product"
         label={t('giftIdeas.urlLabel')}
         helperText={t('giftIdeas.urlHelperText')}
-        required={true}
+        required={false}
         pattern="https?://.+"
         error={giftData.link && !giftData.link.match(/^https?:\/\/.+/) ? t('giftIdeas.invalidUrl') : undefined}
       />
