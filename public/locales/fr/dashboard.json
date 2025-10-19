@@ -37,6 +37,11 @@
       "title": "Mon Profil",
       "description": "Mettez à jour vos informations personnelles et préférences",
       "action": "Modifier le profil"
+    },
+    "children": {
+      "title": "Mes Comptes Managés",
+      "description": "Gérez les comptes que vous supervisez",
+      "action": "Voir les comptes"
     }
   }
 }

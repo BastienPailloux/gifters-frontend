@@ -16,7 +16,7 @@ import { Child, ChildrenListState } from '../../types/children';
  * Page "Mes Comptes Managés" qui affiche tous les comptes children de l'utilisateur
  * Permet de créer, éditer et supprimer des comptes managés
  */
-const ChildrenList: React.FC = () => {
+const MyChildren: React.FC = () => {
   const { t } = useTranslation('profile');
   const { user } = useAuth();
 
@@ -126,7 +126,7 @@ const ChildrenList: React.FC = () => {
   if (state.error) {
     return (
       <div className="p-4">
-        <SEO translationKey="profile" />
+        <SEO translationKey="children" />
         <PageHeader title={t('profile:children.myChildren')} />
         <div className="bg-red-50 p-4 rounded-md text-red-600">
           {state.error}
@@ -137,7 +137,7 @@ const ChildrenList: React.FC = () => {
 
   return (
     <div className="p-4">
-      <SEO translationKey="profile" />
+      <SEO translationKey="children" />
       <PageHeader
         title={t('profile:children.myChildren')}
         description={t('profile:children.myChildrenDescription')}
@@ -185,12 +185,12 @@ const ChildrenList: React.FC = () => {
       )}
 
       {/* Modal pour créer un nouveau child */}
-      <ChildFormModal
+      {/* <ChildFormModal
         isOpen={isCreateModalOpen}
         onClose={() => setIsCreateModalOpen(false)}
         onSuccess={handleChildCreated}
         mode="create"
-      />
+      /> */}
 
       {/* Modal pour éditer un child */}
       {selectedChild && (
@@ -225,4 +225,4 @@ const ChildrenList: React.FC = () => {
   );
 };
 
-export default ChildrenList;
+export default MyChildren;

@@ -37,6 +37,11 @@
       "title": "My Profile",
       "description": "Update your personal information and preferences",
       "action": "Edit profile"
+    },
+    "children": {
+      "title": "My Managed Accounts",
+      "description": "Manage the accounts you supervise",
+      "action": "View accounts"
     }
   }
 }
