@@ -12,7 +12,7 @@ const StatusTag: React.FC<StatusTagProps> = ({
   className,
   size
 }) => {
-  const { t } = useTranslation(); // Utilise 'common' par défaut
+  const { t } = useTranslation(['common']); // Utilise 'common' par défaut
 
   // Mapper les statuts aux couleurs
   const getStatusColor = (status: GiftStatus) => {
@@ -32,7 +32,7 @@ const StatusTag: React.FC<StatusTagProps> = ({
 
   // Obtenir le texte traduit pour le statut
   const getStatusText = (status: GiftStatus) => {
-    return t(`giftIdeas.status${status.charAt(0).toUpperCase() + status.slice(1)}`);
+    return t(`common:status${status.charAt(0).toUpperCase() + status.slice(1)}`);
   };
 
   // Convertir les tailles du format sm/md/lg vers small/medium/large

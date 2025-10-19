@@ -56,12 +56,12 @@ const GiftIdeaDetailCard: React.FC<GiftIdeaDetailCardProps> = ({
           <>
             {giftIdea.status === 'proposed' && (
               <Button variant="primary" onClick={onMarkAsBuying}>
-                {t('giftIdeas.markAsBuying')}
+                {t('gifts:giftIdeas.markAsBuying')}
               </Button>
             )}
             {giftIdea.status === 'buying' && giftIdea.buyer?.id === currentUser?.id && (
               <Button variant="primary" onClick={onMarkAsBought}>
-                {t('giftIdeas.markAsBought')}
+                {t('gifts:giftIdeas.markAsBought')}
               </Button>
             )}
           </>
@@ -69,7 +69,7 @@ const GiftIdeaDetailCard: React.FC<GiftIdeaDetailCardProps> = ({
 
         {giftIdea.link && (
           <Button variant="outline" onClick={() => window.open(giftIdea.link, '_blank')}>
-            {t('giftIdeas.visitStore')}
+            {t('gifts:giftIdeas.visitStore')}
           </Button>
         )}
       </div>
@@ -83,7 +83,7 @@ const GiftIdeaDetailCard: React.FC<GiftIdeaDetailCardProps> = ({
     >
       {/* En-tête avec les boutons d'action */}
       <div className="p-4 border-b border-gray-200 flex flex-col sm:flex-row justify-between">
-        <h2 className="text-lg font-medium text-gray-900">{t('giftIdeas.details')}</h2>
+        <h2 className="text-lg font-medium text-gray-900">{t('gifts:giftIdeas.details')}</h2>
         {renderActionButtons()}
       </div>
 
@@ -107,13 +107,13 @@ const GiftIdeaDetailCard: React.FC<GiftIdeaDetailCardProps> = ({
 
             <div className="mt-auto">
               <LabelValue
-                label={t('giftIdeas.proposedBy')}
+                label={t('gifts:giftIdeas.proposedBy')}
                 value={giftIdea.created_by?.name || ''}
               />
 
               {shouldShowBuyer() && giftIdea.buyer && (
                 <LabelValue
-                  label={t('giftIdeas.onGoingBuyer')}
+                  label={t('gifts:giftIdeas.onGoingBuyer')}
                   value={giftIdea.buyer.name}
                 />
               )}
@@ -124,14 +124,14 @@ const GiftIdeaDetailCard: React.FC<GiftIdeaDetailCardProps> = ({
         {/* Colonne d'informations (ou colonne unique si pas d'image) */}
         <div>
           <LabelValue
-            label={t('giftIdeas.for')}
+            label={t('gifts:giftIdeas.for')}
             value={giftIdea.recipients.map((recipient) => recipient.name).join(', ')}
             isImportant
           />
 
           {giftIdea.price !== undefined && (
             <LabelValue
-              label={t('giftIdeas.priceLabel')}
+              label={t('gifts:giftIdeas.priceLabel')}
               value={formatPrice(giftIdea.price)}
               isImportant
             />
@@ -139,7 +139,7 @@ const GiftIdeaDetailCard: React.FC<GiftIdeaDetailCardProps> = ({
 
           {giftIdea.description && (
             <LabelValue
-              label={t('giftIdeas.descriptionLabel')}
+              label={t('gifts:giftIdeas.descriptionLabel')}
               value={<p className="whitespace-pre-wrap">{giftIdea.description}</p>}
             />
           )}
@@ -148,13 +148,13 @@ const GiftIdeaDetailCard: React.FC<GiftIdeaDetailCardProps> = ({
           {!giftIdea.image_url && (
             <>
               <LabelValue
-                label={t('giftIdeas.proposedBy')}
+                label={t('gifts:giftIdeas.proposedBy')}
                 value={giftIdea.created_by?.name || ''}
               />
 
               {shouldShowBuyer() && giftIdea.buyer && (
                 <LabelValue
-                  label={t('giftIdeas.onGoingBuyer')}
+                  label={t('gifts:giftIdeas.onGoingBuyer')}
                   value={giftIdea.buyer.name}
                 />
               )}

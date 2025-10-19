@@ -28,7 +28,7 @@ const BackButton: React.FC<BackButtonProps> = ({
       <svg className="mr-1 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
       </svg>
-      {label || t('common.back') || 'Back'}
+      {label || t('common:back') || 'Back'}
     </button>
   );
 };

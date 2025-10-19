@@ -11,7 +11,7 @@ import { LayoutProps } from '../../types';
 const Layout: React.FC<LayoutProps> = ({ children, forceSideMenu }) => {
   const { isAuthenticated } = useAuth();
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(true);
-  const { t } = useTranslation();
+  const { t } = useTranslation(['navigation', 'common']);
   const location = useLocation();
 
   const toggleSideMenu = () => {
@@ -41,8 +41,8 @@ const Layout: React.FC<LayoutProps> = ({ children, forceSideMenu }) => {
               <button
                 onClick={toggleSideMenu}
                 className="flex items-center justify-center h-10 w-6 bg-primary-500 text-white rounded-r-md focus:outline-none hover:bg-primary-600 transition-colors z-10 border-t border-r border-b border-primary-600"
-                aria-label={isSideMenuOpen ? t('sidemenu.collapse') : t('sidemenu.expand')}
-                title={isSideMenuOpen ? t('sidemenu.collapse') : t('sidemenu.expand')}
+                aria-label={isSideMenuOpen ? t('navigation:sidemenu.collapse') : t('navigation:sidemenu.expand')}
+                title={isSideMenuOpen ? t('navigation:sidemenu.collapse') : t('navigation:sidemenu.expand')}
                 style={{
                   marginLeft: '-1px',
                   boxShadow: '2px 0 5px rgba(0,0,0,0.1)'

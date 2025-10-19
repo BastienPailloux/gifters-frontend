@@ -16,13 +16,13 @@ const GiftIdeaManualInput: React.FC<GiftIdeaManualInputProps> = ({
         type="text"
         value={giftData.title || ''}
         onChange={(e) => onChange('title', e.target.value)}
-        label={t('giftIdeas.titleLabel')}
+        label={t('gifts:giftIdeas.titleLabel')}
         required
       />
 
       <div className="space-y-2">
         <label htmlFor="gift-description" className="block text-sm font-medium text-gray-700">
-          {t('giftIdeas.descriptionLabel')}
+          {t('gifts:giftIdeas.descriptionLabel')}
         </label>
         <textarea
           id="gift-description"
@@ -40,7 +40,7 @@ const GiftIdeaManualInput: React.FC<GiftIdeaManualInputProps> = ({
         step="0.01"
         value={giftData.price || ''}
         onChange={(e) => onChange('price', parseFloat(e.target.value) || 0)}
-        label={t('giftIdeas.priceLabel')}
+        label={t('gifts:giftIdeas.priceLabel')}
       />
 
       <Input
@@ -49,11 +49,11 @@ const GiftIdeaManualInput: React.FC<GiftIdeaManualInputProps> = ({
         value={giftData.link || ''}
         onChange={(e) => onChange('link', e.target.value)}
         placeholder="https://example.com/product"
-        label={t('giftIdeas.urlLabel')}
-        helperText={t('giftIdeas.urlHelperText')}
+        label={t('gifts:giftIdeas.urlLabel')}
+        helperText={t('gifts:giftIdeas.urlHelperText')}
         required={false}
         pattern="https?://.+"
-        error={giftData.link && !giftData.link.match(/^https?:\/\/.+/) ? t('giftIdeas.invalidUrl') : undefined}
+        error={giftData.link && !giftData.link.match(/^https?:\/\/.+/) ? t('gifts:giftIdeas.invalidUrl') : undefined}
       />
 
       <Input
@@ -62,13 +62,13 @@ const GiftIdeaManualInput: React.FC<GiftIdeaManualInputProps> = ({
         value={giftData.imageUrl || ''}
         onChange={(e) => onChange('imageUrl', e.target.value)}
         placeholder="https://example.com/image.jpg"
-        label={t('giftIdeas.imageUrlLabel')}
+        label={t('gifts:giftIdeas.imageUrlLabel')}
       />
 
       {giftData.imageUrl && (
         <div className="mt-4">
           <p className="text-sm font-medium text-gray-700 mb-2">
-            {t('giftIdeas.previewLabel')}
+            {t('gifts:giftIdeas.previewLabel')}
           </p>
           <img
             src={giftData.imageUrl}

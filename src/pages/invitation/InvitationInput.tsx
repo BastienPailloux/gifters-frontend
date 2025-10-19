@@ -62,11 +62,11 @@ const InvitationInput: React.FC = () => {
         // Rediriger vers la page d'invitation avec le token extrait
         navigate(`/invitation/join?token=${token}`);
       } else {
-        setError(t('invitation.invalidInvitation'));
+        setError(t('invitation:invalidInvitation'));
       }
     } catch (err) {
       console.error('Error checking invitation:', err);
-      setError(t('invitation.errorCheckingInvitation'));
+      setError(t('invitation:errorCheckingInvitation'));
     } finally {
       setIsLoading(false);
     }
@@ -74,24 +74,24 @@ const InvitationInput: React.FC = () => {
 
   return (
     <div className="max-w-2xl mx-auto p-6">
-      <SEO translationKey="seo.invitation" />
+      <SEO translationKey="invitation" />
       <div className="mb-6">
         <BackButton onClick={() => navigate(-1)} />
       </div>
 
       <Card>
-        <h1 className="text-2xl font-bold mb-6">{t('invitation.joinGroup')}</h1>
+        <h1 className="text-2xl font-bold mb-6">{t('invitation:joinGroup')}</h1>
 
         <p className="text-gray-600 mb-6">
-          {t('invitation.enterInvitationDescription')}
+          {t('invitation:enterInvitationDescription')}
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <Input
-            label={t('invitation.invitationCode')}
+            label={t('invitation:invitationCode')}
             value={invitationInput}
             onChange={(e) => setInvitationInput(e.target.value)}
-            placeholder={t('invitation.invitationPlaceholder')}
+            placeholder={t('invitation:invitationPlaceholder')}
             error={error}
             fullWidth
             required
@@ -104,7 +104,7 @@ const InvitationInput: React.FC = () => {
               isLoading={isLoading}
               disabled={!invitationInput.trim() || isLoading}
             >
-              {t('invitation.proceed')}
+              {t('invitation:proceed')}
             </Button>
           </div>
         </form>

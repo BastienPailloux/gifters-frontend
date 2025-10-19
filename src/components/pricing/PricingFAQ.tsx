@@ -11,23 +11,23 @@ const PricingFAQ: React.FC<PricingFAQProps> = ({ className = '' }) => {
   const pricingFaqItems: FaqItem[] = [
     {
       id: 'pricing-faq-1',
-      question: t('pricing.faq.q1'),
-      answer: t('pricing.faq.a1')
+      question: t('marketing:pricing.faq.q1'),
+      answer: t('marketing:pricing.faq.a1')
     },
     {
       id: 'pricing-faq-2',
-      question: t('pricing.faq.q2'),
-      answer: t('pricing.faq.a2')
+      question: t('marketing:pricing.faq.q2'),
+      answer: t('marketing:pricing.faq.a2')
     },
     {
       id: 'pricing-faq-3',
-      question: t('pricing.faq.q3'),
-      answer: t('pricing.faq.a3')
+      question: t('marketing:pricing.faq.q3'),
+      answer: t('marketing:pricing.faq.a3')
     },
     {
       id: 'pricing-faq-4',
-      question: t('pricing.faq.q4'),
-      answer: t('pricing.faq.a4')
+      question: t('marketing:pricing.faq.q4'),
+      answer: t('marketing:pricing.faq.a4')
     }
   ];
 
@@ -39,7 +39,7 @@ const PricingFAQ: React.FC<PricingFAQProps> = ({ className = '' }) => {
       transition={{ delay: 0.5 }}
     >
       <Faq
-        title={t('pricing.faq.title')}
+        title={t('marketing:pricing.faq.title')}
         items={pricingFaqItems}
         className="bg-white rounded-lg shadow-md overflow-hidden"
         itemClassName="border-b border-gray-200 last:border-b-0"

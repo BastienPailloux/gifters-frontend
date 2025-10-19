@@ -53,5 +53,15 @@
     "title": "Tarifs",
     "description": "Découvrez nos différents plans tarifaires pour Gifters - gratuits et premium.",
     "keywords": "tarifs, abonnement, gratuit, premium, Gifters"
+  },
+  "about": {
+    "title": "À propos | Gifters",
+    "description": "Découvrez l'histoire de Gifters, notre mission et notre équipe dédiée.",
+    "keywords": "à propos, équipe, mission, vision, gifters"
+  },
+  "termsAndConditions": {
+    "title": "Conditions Générales d'Utilisation - Gifters",
+    "description": "Consultez les conditions générales d'utilisation de Gifters. Apprenez-en plus sur vos droits et obligations en tant qu'utilisateur de la plateforme.",
+    "keywords": "conditions, CGU, termes, utilisation, règles, gifters"
   }
 }

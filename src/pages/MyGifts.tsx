@@ -30,10 +30,10 @@ const MyGifts: React.FC = () => {
 
   // Options pour le toggle select
   const categoryOptions: ToggleOption<CategoryType>[] = [
-    { value: 'wishlist', label: t('myGifts.myWishlist') },
-    { value: 'suggestions', label: t('myGifts.mySuggestions') },
-    { value: 'buying', label: t('myGifts.buyingGifts') },
-    { value: 'bought', label: t('myGifts.boughtGifts') },
+    { value: 'wishlist', label: t('gifts:myGifts.myWishlist') },
+    { value: 'suggestions', label: t('gifts:myGifts.mySuggestions') },
+    { value: 'buying', label: t('gifts:myGifts.buyingGifts') },
+    { value: 'bought', label: t('gifts:myGifts.boughtGifts') },
   ];
 
   // États pour stocker les différentes catégories de cadeaux
@@ -131,7 +131,7 @@ const MyGifts: React.FC = () => {
 
     } catch (err) {
       console.error('Error fetching gifts:', err);
-      setError(t('common.error'));
+      setError(t('common:error'));
     } finally {
       setIsLoading(false);
     }
@@ -192,33 +192,33 @@ const MyGifts: React.FC = () => {
     switch (selectedCategory) {
       case 'wishlist':
         return {
-          title: t('myGifts.myWishlist'),
+          title: t('gifts:myGifts.myWishlist'),
           gifts: myWishlist,
-          emptyMessage: t('myGifts.noWishlist')
+          emptyMessage: t('gifts:myGifts.noWishlist')
         };
       case 'suggestions':
         return {
-          title: t('myGifts.mySuggestions'),
+          title: t('gifts:myGifts.mySuggestions'),
           gifts: mySuggestions,
-          emptyMessage: t('myGifts.noSuggestions')
+          emptyMessage: t('gifts:myGifts.noSuggestions')
         };
       case 'buying':
         return {
-          title: t('myGifts.buyingGifts'),
+          title: t('gifts:myGifts.buyingGifts'),
           gifts: buyingGifts,
-          emptyMessage: t('myGifts.noBuyingGifts')
+          emptyMessage: t('gifts:myGifts.noBuyingGifts')
         };
       case 'bought':
         return {
-          title: t('myGifts.boughtGifts'),
+          title: t('gifts:myGifts.boughtGifts'),
           gifts: boughtGifts,
-          emptyMessage: t('myGifts.noBoughtGifts')
+          emptyMessage: t('gifts:myGifts.noBoughtGifts')
         };
       default:
         return {
-          title: t('myGifts.myWishlist'),
+          title: t('gifts:myGifts.myWishlist'),
           gifts: myWishlist,
-          emptyMessage: t('myGifts.noWishlist')
+          emptyMessage: t('gifts:myGifts.noWishlist')
         };
     }
   };
@@ -226,8 +226,8 @@ const MyGifts: React.FC = () => {
   if (isLoading) {
     return (
       <div className="p-4">
-        <SEO translationKey="seo.myGifts" />
-        <PageHeader title={t('giftIdeas.title')} />
+        <SEO translationKey="myGifts" />
+        <PageHeader title={t('gifts:giftIdeas.title')} />
         <div className="flex justify-center items-center h-64">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
         </div>
@@ -238,8 +238,8 @@ const MyGifts: React.FC = () => {
   if (error) {
     return (
       <div className="p-4">
-        <SEO translationKey="seo.myGifts" />
-        <PageHeader title={t('giftIdeas.title')} />
+        <SEO translationKey="myGifts" />
+        <PageHeader title={t('gifts:giftIdeas.title')} />
         <div className="bg-red-50 p-4 rounded-md text-red-600">
           {error}
         </div>
@@ -252,12 +252,12 @@ const MyGifts: React.FC = () => {
 
   return (
     <div className="p-4">
-      <SEO translationKey="seo.myGifts" />
+      <SEO translationKey="myGifts" />
       <PageHeader
-        title={t('giftIdeas.title')}
+        title={t('gifts:giftIdeas.title')}
         actions={
           <Button variant="primary" onClick={handleAddGift}>
-            {t('giftIdeas.addGiftIdea')}
+            {t('gifts:giftIdeas.addGiftIdea')}
           </Button>
         }
       />

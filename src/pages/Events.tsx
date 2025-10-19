@@ -4,14 +4,14 @@ import UnderConstructionPage from '../components/common/display/UnderConstructio
 import { SEO } from '../components/common/seo';
 
 const Events: React.FC = () => {
-  const { t } = useTranslation('events');
+  const { t } = useTranslation(['events']);
 
   return (
     <>
-      <SEO translationKey="seo.events" />
+      <SEO translationKey="events" />
       <UnderConstructionPage
-        title={t('events.title', 'Gestion des Événements')}
-        description={t('events.underConstruction', 'La gestion des événements est en cours de développement. Vous pourrez bientôt créer et gérer des événements pour vos groupes !')}
+        title={t('events:title', 'Gestion des Événements')}
+        description={t('events:underConstruction', 'La gestion des événements est en cours de développement. Vous pourrez bientôt créer et gérer des événements pour vos groupes !')}
       />
     </>
   );

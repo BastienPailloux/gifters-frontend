@@ -48,5 +48,15 @@
     "title": "Profile",
     "description": "Manage your personal information and preferences on Gifters.",
     "keywords": "profile, personal information, preferences, Gifters"
+  },
+  "about": {
+    "title": "About | Gifters",
+    "description": "Discover the story of Gifters, our mission and our dedicated team.",
+    "keywords": "about, team, mission, vision, gifters"
+  },
+  "termsAndConditions": {
+    "title": "Terms and Conditions - Gifters",
+    "description": "View Gifters' terms and conditions. Learn more about your rights and obligations as a user of the platform.",
+    "keywords": "terms, conditions, use, rules, gifters"
   }
 }

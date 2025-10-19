@@ -63,7 +63,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
     } catch (err) {
       // Gérer les erreurs ici
       console.error('Error submitting form', err);
-      setError(errorMessage || t('contact.errorMessage'));
+      setError(errorMessage || t('contact:errorMessage'));
     } finally {
       setIsSubmitting(false);
     }
@@ -71,7 +71,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
 
   return (
     <div className={className}>
-      <Title as="h3">{title || t('contact.formTitle')}</Title>
+      <Title as="h3">{title || t('contact:formTitle')}</Title>
 
       {description && (
         <p className="text-gray-600 mt-2">{description}</p>
@@ -83,7 +83,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          {successMessage || t('contact.successMessage')}
+          {successMessage || t('contact:successMessage')}
         </motion.div>
       ) : (
         <form onSubmit={handleSubmit} className="mt-6">
@@ -95,7 +95,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
 
           <div className="mb-4">
             <Input
-              label={t('contact.form.name')}
+              label={t('contact:form.name')}
               type="text"
               name="name"
               value={formData.name}
@@ -106,7 +106,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
 
           <div className="mb-4">
             <Input
-              label={t('contact.form.email')}
+              label={t('contact:form.email')}
               type="email"
               name="email"
               value={formData.email}
@@ -117,7 +117,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
 
           <div className="mb-4">
             <Input
-              label={t('contact.form.subject')}
+              label={t('contact:form.subject')}
               type="text"
               name="subject"
               value={formData.subject}
@@ -128,7 +128,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
 
           <div className="mb-6">
             <TextArea
-              label={t('contact.form.message')}
+              label={t('contact:form.message')}
               name="message"
               value={formData.message}
               onChange={handleChange}
@@ -144,7 +144,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
             isLoading={isSubmitting}
             disabled={isSubmitting}
           >
-            {isSubmitting ? t('contact.form.sending') : submitButtonText || t('contact.form.send')}
+            {isSubmitting ? t('contact:form.sending') : submitButtonText || t('contact:form.send')}
           </Button>
         </form>
       )}

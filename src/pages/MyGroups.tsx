@@ -55,7 +55,7 @@ const MyGroups: React.FC = () => {
       setGroups(groupsData);
     } catch (err) {
       console.error('Error fetching groups:', err);
-      setError(t('common.error'));
+      setError(t('common:error'));
     } finally {
       setIsLoading(false);
     }
@@ -87,8 +87,8 @@ const MyGroups: React.FC = () => {
   if (error) {
     return (
       <div className="p-4">
-        <SEO translationKey="seo.myGroups" />
-        <PageHeader title={t('groups.myGroups')} />
+        <SEO translationKey="myGroups" />
+        <PageHeader title={t('groups:myGroups')} />
         <div className="bg-red-50 p-4 rounded-md text-red-600">
           {error}
         </div>
@@ -98,16 +98,16 @@ const MyGroups: React.FC = () => {
 
   return (
     <div className="p-4">
-      <SEO translationKey="seo.myGroups" />
+      <SEO translationKey="myGroups" />
       <PageHeader
-        title={t('groups.myGroups')}
-        description={t('groups.myGroupsDescription')}
+        title={t('groups:myGroups')}
+        description={t('groups:myGroupsDescription')}
         actions={
           <Button
             variant="primary"
             onClick={handleCreateGroup}
           >
-            {t('groups.createNew')}
+            {t('groups:createNew')}
           </Button>
         }
       />
@@ -116,7 +116,7 @@ const MyGroups: React.FC = () => {
         groups={groups}
         onViewGroup={handleViewGroup}
         isLoading={isLoading}
-        emptyMessage={t('groups.noGroups')}
+        emptyMessage={t('groups:noGroups')}
       />
 
       <div className="mt-6">

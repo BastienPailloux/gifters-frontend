@@ -7,7 +7,7 @@ import { SEO } from '../components/common/seo';
 const Home: React.FC = () => {
   return (
     <Layout>
-      <SEO translationKey="seo.home" />
+      <SEO translationKey="home" />
       <Hero />
       <Features />
     </Layout>

@@ -78,7 +78,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
 
             {plan.id === 'free' && (
               <p className="text-center text-sm text-red-600 font-medium mt-3">
-                {t('pricing.temporarilyUnlimited', 'Toutes les fonctionnalités sont temporairement illimitées !')}
+                {t('marketing:pricing.temporarilyUnlimited', 'Toutes les fonctionnalités sont temporairement illimitées !')}
               </p>
             )}
           </div>

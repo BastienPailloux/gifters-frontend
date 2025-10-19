@@ -37,11 +37,11 @@ const Login: React.FC = () => {
 
   return (
     <>
-      <SEO translationKey="seo.login" />
+      <SEO translationKey="login" />
       <AuthForm
-        title={t('auth.login.title')}
-        subtitle={t('auth.login.subtitle')}
-        linkText={t('auth.login.registerLink')}
+        title={t('auth:login.title')}
+        subtitle={t('auth:login.subtitle')}
+        linkText={t('auth:login.registerLink')}
         linkUrl="/register"
         error={error}
         onSubmit={handleSubmit}
@@ -54,7 +54,7 @@ const Login: React.FC = () => {
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          label={t('auth.fields.email')}
+          label={t('auth:fields.email')}
         />
 
         <Input
@@ -65,7 +65,7 @@ const Login: React.FC = () => {
           required
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          label={t('auth.fields.password')}
+          label={t('auth:fields.password')}
         />
 
         <div className="flex items-center justify-between">
@@ -74,7 +74,7 @@ const Login: React.FC = () => {
             name="remember-me"
             checked={rememberMe}
             onChange={(e) => setRememberMe(e.target.checked)}
-            label={t('auth.login.rememberMe')}
+            label={t('auth:login.rememberMe')}
             containerClassName="mb-0"
           />
 
@@ -84,7 +84,7 @@ const Login: React.FC = () => {
             href="/forgot-password"
             size="small"
           >
-            {t('auth.forgotPasswordMessage')}
+            {t('auth:forgotPasswordMessage')}
           </FlatButton>
         </div>
 
@@ -95,7 +95,7 @@ const Login: React.FC = () => {
           isLoading={isSubmitting}
           disabled={isSubmitting}
         >
-          {t('auth.login.submit')}
+          {t('auth:login.submit')}
         </Button>
 
       </AuthForm>

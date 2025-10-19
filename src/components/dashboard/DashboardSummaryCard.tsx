@@ -10,8 +10,8 @@ const DashboardSummaryCard: React.FC<DashboardSummaryCardProps> = ({ user }) => 
 
   return (
     <Card
-      title={t('dashboard.welcome') + (user?.name ? `, ${user.name}` : '')}
-      subtitle={t('dashboard.summary')}
+      title={t('dashboard:welcome') + (user?.name ? `, ${user.name}` : '')}
+      subtitle={t('dashboard:summary')}
       className="mb-6"
     >
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

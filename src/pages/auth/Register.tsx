@@ -9,7 +9,7 @@ import Checkbox from '../../components/common/forms/Checkbox';
 import { SEO } from '../../components/common/seo';
 
 const Register: React.FC = () => {
-  const { t } = useTranslation('auth');
+  const { t } = useTranslation(['auth', 'contact']);
   const { register, error, clearError } = useAuth();
   const navigate = useNavigate();
 
@@ -30,7 +30,7 @@ const Register: React.FC = () => {
 
     // Vérifier que les mots de passe correspondent
     if (password !== confirmPassword) {
-      setPasswordError(t('auth.errors.passwordMismatch'));
+      setPasswordError(t('auth:errors.passwordMismatch'));
       return;
     }
 
@@ -54,20 +54,20 @@ const Register: React.FC = () => {
 
   const renderTermsLabel = () => (
     <>
-      {t('auth.register.acceptTerms')}{' '}
+      {t('auth:register.acceptTerms')}{' '}
       <a href="/terms" className="font-medium text-primary-600 hover:text-primary-500">
-        {t('auth.register.termsLink')}
+        {t('auth:register.termsLink')}
       </a>
     </>
   );
 
   return (
     <>
-      <SEO translationKey="seo.register" />
+      <SEO translationKey="register" />
       <AuthForm
-        title={t('auth.register.title')}
-        subtitle={t('auth.register.subtitle')}
-        linkText={t('auth.register.loginLink')}
+        title={t('auth:register.title')}
+        subtitle={t('auth:register.subtitle')}
+        linkText={t('auth:register.loginLink')}
         linkUrl="/login"
         error={passwordError || error}
         onSubmit={handleSubmit}
@@ -80,7 +80,7 @@ const Register: React.FC = () => {
           required
           value={name}
           onChange={(e) => setName(e.target.value)}
-          label={t('auth.fields.name')}
+          label={t('auth:fields.name')}
         />
 
         <Input
@@ -91,7 +91,7 @@ const Register: React.FC = () => {
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          label={t('auth.fields.email')}
+          label={t('auth:fields.email')}
         />
 
         <Input
@@ -102,7 +102,7 @@ const Register: React.FC = () => {
           required
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          label={t('auth.fields.password')}
+          label={t('auth:fields.password')}
         />
 
         <Input
@@ -113,7 +113,7 @@ const Register: React.FC = () => {
           required
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
-          label={t('auth.fields.confirmPassword')}
+          label={t('auth:fields.confirmPassword')}
         />
 
         <Checkbox
@@ -130,7 +130,7 @@ const Register: React.FC = () => {
           name="newsletter"
           checked={newsletterSubscription}
           onChange={(e) => setNewsletterSubscription(e.target.checked)}
-          label={t('newsletter.subscribe')}
+          label={t('contact:newsletter.subscribe')}
         />
 
         <Button
@@ -140,7 +140,7 @@ const Register: React.FC = () => {
           isLoading={isSubmitting}
           disabled={isSubmitting}
         >
-          {t('auth.register.submit')}
+          {t('auth:register.submit')}
         </Button>
       </AuthForm>
     </>

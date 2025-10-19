@@ -6,7 +6,7 @@ import GroupItem from './GroupItem';
 import { SideMenuGroup, GroupListProps } from '../../types';
 
 const GroupList: React.FC<GroupListProps> = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(['navigation', 'common']);
   const location = useLocation();
   const [groups, setGroups] = useState<SideMenuGroup[]>([]);
   const [loading, setLoading] = useState(true);
@@ -42,7 +42,7 @@ const GroupList: React.FC<GroupListProps> = () => {
         setError(null);
       } catch (err) {
         console.error('Error fetching groups:', err);
-        setError(t('common.error') || 'Failed to load groups');
+        setError(t('common:error') || 'Failed to load groups');
       } finally {
         setLoading(false);
       }
@@ -69,7 +69,7 @@ const GroupList: React.FC<GroupListProps> = () => {
 
       {/* Group list */}
       {!loading && !error && groups.length === 0 && (
-        <p className="text-gray-500 mb-4">{t('sidemenu.noGroups')}</p>
+        <p className="text-gray-500 mb-4">{t('navigation:sidemenu.noGroups')}</p>
       )}
 
       <nav className="space-y-1">

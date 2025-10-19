@@ -25,7 +25,7 @@ const UpcomingEventItem: React.FC<UpcomingEventItemProps> = ({ event }) => {
       <div className="flex justify-between items-start">
         <div>
           <span className="text-sm font-medium text-gray-900">
-            {event.type === 'birthday' ? t('dashboard.birthday') : t('dashboard.christmas')}
+            {event.type === 'birthday' ? t('dashboard:birthday') : t('dashboard:christmas')}
             {event.type === 'birthday' && event.personName ? `: ${event.personName}` : ''}
           </span>
           <p className="text-sm text-gray-500">
@@ -33,7 +33,7 @@ const UpcomingEventItem: React.FC<UpcomingEventItemProps> = ({ event }) => {
           </p>
         </div>
         <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${daysLeft <= 7 ? 'bg-red-100 text-red-800' : 'bg-blue-100 text-blue-800'}`}>
-          {daysLeft} {t('dashboard.daysLeft')}
+          {daysLeft} {t('dashboard:daysLeft')}
         </span>
       </div>
     </li>

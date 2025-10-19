@@ -31,8 +31,8 @@ const AddGroupCard: React.FC<AddGroupCardProps> = ({ onClick, className = '' }) 
             />
           </svg>
         </div>
-        <p className="mt-2 text-sm font-medium text-gray-900">{t('groups.createNew')}</p>
-        <p className="mt-1 text-xs text-gray-500">{t('groups.createNewSubtitle')}</p>
+        <p className="mt-2 text-sm font-medium text-gray-900">{t('groups:createNew')}</p>
+        <p className="mt-1 text-xs text-gray-500">{t('groups:createNewSubtitle')}</p>
       </div>
     </div>
   );

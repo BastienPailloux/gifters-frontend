@@ -27,8 +27,8 @@ const GiftIdeaItem: React.FC<GiftIdeaItemProps> = ({ gift, onViewGift, hideStatu
         </div>
         <p className="text-sm text-gray-500">
           {gift.recipients && gift.recipients.length > 0
-            ? `${t('giftIdeas.for')} ${gift.recipients.map(r => r.name).join(', ')}`
-            : gift.for_user_name && `${t('giftIdeas.for')} ${gift.for_user_name}`}
+            ? `${t('gifts:giftIdeas.for')} ${gift.recipients.map(r => r.name).join(', ')}`
+            : gift.for_user_name && `${t('gifts:giftIdeas.for')} ${gift.for_user_name}`}
           {gift.price ? ` • ${formatPrice(Number(gift.price))}` : ''}
         </p>
       </div>
@@ -37,7 +37,7 @@ const GiftIdeaItem: React.FC<GiftIdeaItemProps> = ({ gift, onViewGift, hideStatu
         size="sm"
         onClick={() => onViewGift(gift.id)}
       >
-        {t('common.view')}
+        {t('common:view')}
       </Button>
     </div>
   );

@@ -36,7 +36,7 @@ const GiftIdeaFromUrl: React.FC<GiftIdeaFromUrlProps> = ({
     try {
       // Vérification simple du format URL
       if (!url.startsWith('http')) {
-        throw new Error(t('giftIdeas.invalidUrl'));
+        throw new Error(t('gifts:giftIdeas.invalidUrl'));
       }
 
       // Appel à l'API pour récupérer les métadonnées
@@ -63,12 +63,12 @@ const GiftIdeaFromUrl: React.FC<GiftIdeaFromUrlProps> = ({
         } else if (error instanceof Error) {
           setUrlError(error.message);
         } else {
-          setUrlError(t('giftIdeas.metadataError'));
+          setUrlError(t('gifts:giftIdeas.metadataError'));
         }
       } else if (error instanceof Error) {
         setUrlError(error.message);
       } else {
-        setUrlError(t('giftIdeas.metadataError'));
+        setUrlError(t('gifts:giftIdeas.metadataError'));
       }
     } finally {
       setIsLoading(false);
@@ -86,7 +86,7 @@ const GiftIdeaFromUrl: React.FC<GiftIdeaFromUrlProps> = ({
           onChange={(e) => setUrl(e.target.value)}
           placeholder="https://example.com/produit"
           disabled={isLoading}
-          label={t('giftIdeas.urlLabel')}
+          label={t('gifts:giftIdeas.urlLabel')}
           error={urlError || undefined}
           fullWidth={true}
         />
@@ -98,7 +98,7 @@ const GiftIdeaFromUrl: React.FC<GiftIdeaFromUrlProps> = ({
             disabled={!url || isLoading}
             className="mb-4"
           >
-            {isLoading ? t('common.loading') : t('giftIdeas.fetchMetadata')}
+            {isLoading ? t('common:loading') : t('gifts:giftIdeas.fetchMetadata')}
           </Button>
         </div>
       </div>
@@ -106,7 +106,7 @@ const GiftIdeaFromUrl: React.FC<GiftIdeaFromUrlProps> = ({
       {metadataFetched && (
         <div className="mt-4 pt-4 border-t border-gray-200">
           <h3 className="text-sm font-medium text-gray-700 mb-3">
-            {t('giftIdeas.editFetchedMetadata')}
+            {t('gifts:giftIdeas.editFetchedMetadata')}
           </h3>
           <GiftIdeaManualInput
             giftData={giftData}

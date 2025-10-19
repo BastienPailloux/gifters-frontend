@@ -65,7 +65,7 @@ const GroupDetails: React.FC = () => {
       setError(null);
     } catch (err) {
       console.error('Error fetching group details:', err);
-      setError(t('common.error') || 'Failed to load group details');
+      setError(t('common:error') || 'Failed to load group details');
     } finally {
       setLoading(false);
       setAdminStatusLoaded(true);
@@ -90,7 +90,7 @@ const GroupDetails: React.FC = () => {
         if (result && result.giftIdeas) {
           const mappedGifts = result.giftIdeas.map((gift: ApiGiftIdea): ApiGiftIdea => {
             // Déterminer le nom du destinataire
-            let recipientName = t('common.unknownUser');
+            let recipientName = t('common:unknownUser');
             if (gift.forUser && typeof gift.forUser === 'object' && gift.forUser.name) {
               recipientName = gift.forUser.name;
             } else if (gift.forUserName) {
@@ -164,7 +164,7 @@ const GroupDetails: React.FC = () => {
           if (result && result.giftIdeas) {
             const mappedGifts = result.giftIdeas.map((gift: ApiGiftIdea): ApiGiftIdea => {
               // Déterminer le nom du destinataire
-              let recipientName = t('common.unknownUser');
+              let recipientName = t('common:unknownUser');
               if (gift.forUser && typeof gift.forUser === 'object' && gift.forUser.name) {
                 recipientName = gift.forUser.name;
               } else if (gift.forUserName) {
@@ -208,7 +208,7 @@ const GroupDetails: React.FC = () => {
         size="sm"
         onClick={() => handleViewEvent(event.id)}
       >
-        {t('common.view') || 'View'}
+        {t('common:view') || 'View'}
       </Button>
     </div>
   );
@@ -228,14 +228,14 @@ const GroupDetails: React.FC = () => {
         variant="primary"
         onClick={handleViewMembers}
       >
-        {showMembers ? t('groups.hideMembers') : t('groups.viewMembers')}
+        {showMembers ? t('groups:hideMembers') : t('groups:viewMembers')}
       </Button>
       {isUserAdmin && (
         <Button
           variant="outline"
           onClick={handleEditGroup}
         >
-          {t('common.edit') || 'Edit'}
+          {t('common:edit') || 'Edit'}
         </Button>
       )}
     </>
@@ -244,7 +244,7 @@ const GroupDetails: React.FC = () => {
   if (loading || !adminStatusLoaded) {
     return (
       <div className="flex justify-center items-center h-full p-8">
-        <SEO translationKey="seo.groups" />
+        <SEO translationKey="groups" />
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
       </div>
     );
@@ -253,7 +253,7 @@ const GroupDetails: React.FC = () => {
   if (error) {
     return (
       <div className="p-8">
-        <SEO translationKey="seo.groups" />
+        <SEO translationKey="groups" />
         <div className="bg-red-50 p-4 rounded-md text-red-600">
           {error}
         </div>
@@ -264,9 +264,9 @@ const GroupDetails: React.FC = () => {
   if (!group) {
     return (
       <div className="p-8">
-        <SEO translationKey="seo.groups" />
+        <SEO translationKey="groups" />
         <div className="bg-yellow-50 p-4 rounded-md text-yellow-600">
-          {t('groups.groupNotFound') || 'Group not found'}
+          {t('groups:groupNotFound') || 'Group not found'}
         </div>
       </div>
     );
@@ -277,8 +277,8 @@ const GroupDetails: React.FC = () => {
     const memberCount = group.members_count || (group.members?.length || 0);
     const baseDescription = group.description || '';
     const memberCountText = memberCount === 1
-      ? t('groups.memberCount.singular', { count: 1 })
-      : t('groups.memberCount.plural', { count: memberCount });
+      ? t('groups:memberCount.singular', { count: 1 })
+      : t('groups:memberCount.plural', { count: memberCount });
 
     return baseDescription
       ? `${baseDescription} · ${memberCountText}`
@@ -287,7 +287,7 @@ const GroupDetails: React.FC = () => {
 
   return (
     <div className="p-4">
-      <SEO translationKey="seo.groups" title={`${group.name || t('groups.group')} | Gifters`} />
+      <SEO translationKey="groups" title={`${group.name || t('groups:group')} | Gifters`} />
       <PageHeader
         title={group.name}
         description={getFormattedDescription()}
@@ -299,20 +299,20 @@ const GroupDetails: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Événements à venir */}
         <GroupItemsList
-          title={t('groups.upcomingEvents') || 'Upcoming Events'}
+          title={t('groups:upcomingEvents') || 'Upcoming Events'}
           items={group.events}
-          emptyMessage={t('groups.noEvents') || 'No events scheduled.'}
-          actionLabel={t('groups.createEvent') || 'Create Event'}
+          emptyMessage={t('groups:noEvents') || 'No events scheduled.'}
+          actionLabel={t('groups:createEvent') || 'Create Event'}
           onAction={handleCreateEvent}
           renderItem={renderEvent}
         />
 
         {/* Liste des idées de cadeaux */}
         <GroupItemsList
-          title={t('giftIdeas.title') || 'Gift Ideas'}
+          title={t('gifts:giftIdeas.title') || 'Gift Ideas'}
           items={giftIdeas}
-          emptyMessage={t('giftIdeas.noGiftIdeas') || 'No gift ideas have been shared yet.'}
-          actionLabel={t('giftIdeas.addGiftIdea') || 'Add Gift Idea'}
+          emptyMessage={t('gifts:giftIdeas.noGiftIdeas') || 'No gift ideas have been shared yet.'}
+          actionLabel={t('gifts:giftIdeas.addGiftIdea') || 'Add Gift Idea'}
           onAction={handleAddGiftIdea}
           renderItem={renderGiftIdea}
         />

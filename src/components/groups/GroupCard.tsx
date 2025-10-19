@@ -25,8 +25,8 @@ const GroupCard: React.FC<GroupCardProps> = ({ group, onViewGroup }) => {
               : 1;
 
             return memberCount === 1
-              ? t('groups.memberCount.singular', { count: 1 })
-              : t('groups.memberCount.plural', { count: memberCount });
+              ? t('groups:memberCount.singular', { count: 1 })
+              : t('groups:memberCount.plural', { count: memberCount });
           })()}
         </p>
       </div>
@@ -35,7 +35,7 @@ const GroupCard: React.FC<GroupCardProps> = ({ group, onViewGroup }) => {
         size="sm"
         onClick={() => onViewGroup(group.id)}
       >
-        {t('common.view')}
+        {t('common:view')}
       </Button>
     </div>
   );

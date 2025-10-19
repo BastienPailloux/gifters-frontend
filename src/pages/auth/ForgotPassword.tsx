@@ -24,7 +24,7 @@ const ForgotPassword: React.FC = () => {
       if (requestPasswordReset) {
         const result = await requestPasswordReset(email);
         if (result.success) {
-          setSuccessMessage(result.message || t('auth.forgotPassword.successMessage'));
+          setSuccessMessage(result.message || t('auth:forgotPassword.successMessage'));
           setEmail(''); // Reset the email field
         }
         if (result.error) {
@@ -38,14 +38,14 @@ const ForgotPassword: React.FC = () => {
 
   return (
     <>
-      <SEO translationKey="seo.forgotPassword" />
+      <SEO translationKey="forgotPassword" />
       <AuthForm
-        title={t('auth.forgotPassword.title')}
-        subtitle={t('auth.forgotPassword.subtitle')}
-        linkText={t('auth.backToLogin')}
+        title={t('auth:forgotPassword.title')}
+        subtitle={t('auth:forgotPassword.subtitle')}
+        linkText={t('auth:backToLogin')}
         linkUrl="/login"
-        error={error ? t('auth.forgotPassword.error') : null}
-        success={successMessage ? t('auth.forgotPassword.successMessage') : null}
+        error={error ? t('auth:forgotPassword.error') : null}
+        success={successMessage ? t('auth:forgotPassword.successMessage') : null}
         onSubmit={handleSubmit}
       >
         {!successMessage ? (
@@ -58,7 +58,7 @@ const ForgotPassword: React.FC = () => {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              label={t('auth.fields.email')}
+              label={t('auth:fields.email')}
             />
 
             <Button
@@ -68,17 +68,17 @@ const ForgotPassword: React.FC = () => {
               isLoading={isSubmitting}
               disabled={isSubmitting}
             >
-              {t('auth.forgotPassword.submit')}
+              {t('auth:forgotPassword.submit')}
             </Button>
           </>
         ) : (
           <div className="mt-4">
-            <p className="text-center mb-4">{t('auth.forgotPassword.checkEmail')}</p>
+            <p className="text-center mb-4">{t('auth:forgotPassword.checkEmail')}</p>
             <Link
               to="/login"
               className="block text-center text-primary-600 hover:text-primary-500"
             >
-              {t('auth.backToLogin')}
+              {t('auth:backToLogin')}
             </Link>
           </div>
         )}

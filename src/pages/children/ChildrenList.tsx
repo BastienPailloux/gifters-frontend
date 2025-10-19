@@ -116,7 +116,7 @@ const ChildrenList: React.FC = () => {
       fetchChildren();
     } catch (err) {
       console.error('Error deleting child:', err);
-      setState(prev => ({ ...prev, error: t('children.deleteError') }));
+      setState(prev => ({ ...prev, error: t('profile:children.deleteError') }));
     } finally {
       setIsDeleting(false);
     }
@@ -126,8 +126,8 @@ const ChildrenList: React.FC = () => {
   if (state.error) {
     return (
       <div className="p-4">
-        <SEO translationKey="seo.profile" />
-        <PageHeader title={t('children.myChildren')} />
+        <SEO translationKey="profile" />
+        <PageHeader title={t('profile:children.myChildren')} />
         <div className="bg-red-50 p-4 rounded-md text-red-600">
           {state.error}
         </div>
@@ -137,16 +137,16 @@ const ChildrenList: React.FC = () => {
 
   return (
     <div className="p-4">
-      <SEO translationKey="seo.profile" />
+      <SEO translationKey="profile" />
       <PageHeader
-        title={t('children.myChildren')}
-        description={t('children.myChildrenDescription')}
+        title={t('profile:children.myChildren')}
+        description={t('profile:children.myChildrenDescription')}
         actions={
           <Button
             variant="primary"
             onClick={handleCreateChild}
           >
-            {t('children.addChild')}
+            {t('profile:children.addChild')}
           </Button>
         }
       />
@@ -163,7 +163,7 @@ const ChildrenList: React.FC = () => {
             <div className="p-4 divide-y divide-gray-200">
               {state.children.length === 0 ? (
                 <p className="text-gray-500 p-4 text-center">
-                  {t('children.noChildren')}
+                  {t('profile:children.noChildren')}
                 </p>
               ) : (
                 state.children.map(child => (
@@ -214,8 +214,8 @@ const ChildrenList: React.FC = () => {
           setSelectedChild(null);
         }}
         onConfirm={handleConfirmDelete}
-        title={t('children.deleteChild')}
-        message={`${t('children.confirmDelete')}\n\n${t('children.deleteWarning')}`}
+        title={t('profile:children.deleteChild')}
+        message={`${t('profile:children.confirmDelete')}\n\n${t('profile:children.deleteWarning')}`}
         confirmText={t('common:confirmDelete')}
         cancelText={t('common:cancel')}
         isLoading={isDeleting}

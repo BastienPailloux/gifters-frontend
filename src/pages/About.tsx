@@ -15,29 +15,29 @@ const About: React.FC = () => {
     {
       title: t('about.ourStory.title'),
       paragraphs: [
-        t('about.ourStory.paragraph1'),
-        t('about.ourStory.paragraph2')
+        t('marketing:about.ourStory.paragraph1'),
+        t('marketing:about.ourStory.paragraph2')
       ]
     },
     {
-      title: t('about.mission.title'),
+      title: t('marketing:about.mission.title'),
       paragraphs: [
-        t('about.mission.paragraph1'),
-        t('about.mission.paragraph2')
+        t('marketing:about.mission.paragraph1'),
+        t('marketing:about.mission.paragraph2')
       ]
     },
     {
-      title: t('about.team.title'),
+      title: t('marketing:about.team.title'),
       paragraphs: [
-        t('about.team.paragraph1'),
-        t('about.team.paragraph2')
+        t('marketing:about.team.paragraph1'),
+        t('marketing:about.team.paragraph2')
       ]
     },
     {
-      title: t('about.values.title'),
+      title: t('marketing:about.values.title'),
       paragraphs: [
-        t('about.values.paragraph1'),
-        t('about.values.paragraph2')
+        t('marketing:about.values.paragraph1'),
+        t('marketing:about.values.paragraph2')
       ]
     }
   ];
@@ -45,19 +45,19 @@ const About: React.FC = () => {
   return (
     <div className="container mx-auto px-4 py-12 max-w-7xl">
       <SEO
-        translationKey="about.seo"
-        title={t('about.seo.title')}
-        description={t('about.seo.description')}
-        keywords={t('about.seo.keywords').split(',')}
+        translationKey="about"
+        title={t('marketing:about.title')}
+        description={t('marketing:about.description')}
+        keywords={t('marketing:about.keywords').split(',')}
         type="website"
       />
 
       <div className="text-center mb-16">
         <Title as="h1" centered animated>
-          {t('about.title')}
+          {t('marketing:about.title')}
         </Title>
         <Subtitle centered animated maxWidth="2xl">
-          {t('about.subtitle')}
+          {t('marketing:about.subtitle')}
         </Subtitle>
       </div>
 
@@ -66,8 +66,8 @@ const About: React.FC = () => {
       {/* Contactez-nous */}
       <div className="bg-primary-50 rounded-lg p-8 my-16">
         <CallToAction
-          message={t('about.contact.description')}
-          buttonText={t('about.contact.button')}
+          message={t('marketing:about.contact.description')}
+          buttonText={t('marketing:about.contact.button')}
           buttonProps={{
             onClick: () => navigate('/contact'),
             variant: 'secondary'

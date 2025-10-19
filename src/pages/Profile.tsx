@@ -73,7 +73,7 @@ const Profile: React.FC = () => {
             ...prev,
             loading: false,
             hasAccess: false,
-            error: t('profile.noAccess')
+            error: t('profile:noAccess')
           }));
           return;
         }
@@ -96,7 +96,7 @@ const Profile: React.FC = () => {
         } else {
           setState(prev => ({
             ...prev,
-            error: t('common.error'),
+            error: t('common:error'),
             loading: false
           }));
         }
@@ -158,7 +158,7 @@ const Profile: React.FC = () => {
       } else {
         setState(prev => ({
           ...prev,
-          error: t('common.error')
+          error: t('common:error')
         }));
       }
     }
@@ -167,7 +167,7 @@ const Profile: React.FC = () => {
   if (state.loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <SEO translationKey="seo.profile" />
+        <SEO translationKey="profile" />
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
@@ -176,13 +176,13 @@ const Profile: React.FC = () => {
   if (state.error && !state.hasAccess) {
     return (
       <div className="flex flex-col justify-center items-center min-h-screen">
-        <SEO translationKey="seo.profile" />
+        <SEO translationKey="profile" />
         <div className="text-red-600 mb-4">{state.error}</div>
         <button
           onClick={() => navigate(-1)}
           className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
         >
-          {t('common.back')}
+          {t('common:back')}
         </button>
       </div>
     );
@@ -191,7 +191,7 @@ const Profile: React.FC = () => {
   if (state.error) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <SEO translationKey="seo.profile" />
+        <SEO translationKey="profile" />
         <div className="text-red-600">{state.error}</div>
       </div>
     );
@@ -200,8 +200,8 @@ const Profile: React.FC = () => {
   if (!state.user) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <SEO translationKey="seo.profile" />
-        <div className="text-gray-600">{t('profile.userNotFound')}</div>
+        <SEO translationKey="profile" />
+        <div className="text-gray-600">{t('profile:userNotFound')}</div>
       </div>
     );
   }
@@ -210,10 +210,10 @@ const Profile: React.FC = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <SEO translationKey="seo.profile" />
+      <SEO translationKey="profile" />
       <PageHeader
-        title={isCurrentUser ? t('profile.yourProfile') : state.user.name}
-        description={isCurrentUser ? t('profile.manageYourInfo') : t('profile.viewOtherProfile')}
+        title={isCurrentUser ? t('profile:yourProfile') : state.user.name}
+        description={isCurrentUser ? t('profile:manageYourInfo') : t('profile:viewOtherProfile')}
         showBackButton
         onBackClick={() => window.history.back()}
       />

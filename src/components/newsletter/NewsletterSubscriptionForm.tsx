@@ -18,7 +18,7 @@ const NewsletterSubscriptionForm: React.FC<NewsletterSubscriptionFormProps> = ({
   redirectUrl,
   listId
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('contact');
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
@@ -52,7 +52,7 @@ const NewsletterSubscriptionForm: React.FC<NewsletterSubscriptionFormProps> = ({
         errorResponseMessage = error.response.data.error;
       }
 
-      setErrorDetails(errorResponseMessage || errorMessage || t('newsletter.errors.generic', 'Une erreur est survenue lors de l\'abonnement à la newsletter.'));
+      setErrorDetails(errorResponseMessage || errorMessage || t('contact:newsletter.errors.generic', 'Une erreur est survenue lors de l\'abonnement à la newsletter.'));
     } finally {
       setIsSubmitting(false);
     }
@@ -62,7 +62,7 @@ const NewsletterSubscriptionForm: React.FC<NewsletterSubscriptionFormProps> = ({
     <div className={className}>
       {submitStatus === 'success' ? (
         <div className="text-green-600 mb-4">
-          {successMessage || t('newsletter.subscriptionSuccess', 'Vous êtes désormais abonné à notre newsletter !')}
+          {successMessage || t('contact:newsletter.subscriptionSuccess', 'Vous êtes désormais abonné à notre newsletter !')}
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-2">
@@ -71,9 +71,9 @@ const NewsletterSubscriptionForm: React.FC<NewsletterSubscriptionFormProps> = ({
             name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder={placeholderText || t('footer.newsletter.placeholder', 'Entrez votre email')}
+            placeholder={placeholderText || t('contact:footer.newsletter.placeholder', 'Entrez votre email')}
             required
-            aria-label={t('newsletter.emailLabel', 'Adresse email pour la newsletter')}
+            aria-label={t('contact:newsletter.emailLabel', 'Adresse email pour la newsletter')}
             error={submitStatus === 'error' ? errorDetails : undefined}
             endIcon={<FiSend className="text-gray-400" />}
             className="focus:bg-white transition-colors duration-200"
@@ -86,11 +86,11 @@ const NewsletterSubscriptionForm: React.FC<NewsletterSubscriptionFormProps> = ({
             isLoading={isSubmitting}
             disabled={isSubmitting}
           >
-            {buttonText || t('footer.newsletter.button', 'S\'abonner')}
+            {buttonText || t('contact:footer.newsletter.button', 'S\'abonner')}
           </Button>
 
           <p className="text-xs text-gray-500 mt-2">
-            {t('footer.newsletter.privacy', 'Nous respectons votre vie privée. Désabonnez-vous à tout moment.')}
+            {t('contact:footer.newsletter.privacy', 'Nous respectons votre vie privée. Désabonnez-vous à tout moment.')}
           </p>
         </form>
       )}

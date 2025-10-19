@@ -17,7 +17,7 @@ const GroupCreationForm: React.FC<GroupCreationFormProps> = ({
   inputOnly = false,
   refetchOnCreate = true,
 }) => {
-  const { t } = useTranslation(['navigation', 'validation']);
+  const { t } = useTranslation(['common', 'navigation', 'validation']);
   const [isCreatingGroup, setIsCreatingGroup] = useState(inputOnly);
   const [newGroupName, setNewGroupName] = useState('');
   const [isCreating, setIsCreating] = useState(false);
@@ -61,11 +61,11 @@ const GroupCreationForm: React.FC<GroupCreationFormProps> = ({
         .catch((error) => {
           console.error("Erreur lors de la création du groupe:", error);
           setIsCreating(false);
-          setError(t('common.error') || 'Une erreur est survenue');
+          setError(t('common:error') || 'Une erreur est survenue');
         });
     } else {
       // Afficher l'erreur de validation
-      setError(validation.errorMessage || t('validation.invalid') || 'Nom de groupe invalide');
+      setError(validation.errorMessage || t('validation:validation.invalid') || 'Nom de groupe invalide');
     }
   }, [newGroupName, onGroupCreated, inputOnly, refetchOnCreate, t]);
 
@@ -106,7 +106,7 @@ const GroupCreationForm: React.FC<GroupCreationFormProps> = ({
           <div className="transition-all duration-200 ease-in-out transform-gpu"
                data-testid="group-input-container"
                role="form"
-               aria-label={t('sidemenu.createGroupFormLabel') || "Formulaire de création de groupe"}>
+               aria-label={t('navigation:sidemenu.createGroupFormLabel') || "Formulaire de création de groupe"}>
             <input
               ref={inputRef}
               type="text"
@@ -115,7 +115,7 @@ const GroupCreationForm: React.FC<GroupCreationFormProps> = ({
               className={`w-full px-4 py-2 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 ${
                 error ? 'border-red-500' : ''
               }`}
-              placeholder={t('sidemenu.groupNamePlaceholder') || 'Enter group name...'}
+              placeholder={t('navigation:sidemenu.groupNamePlaceholder') || 'Enter group name...'}
               disabled={isCreating}
               data-testid="group-name-input"
               aria-invalid={error ? 'true' : 'false'}
@@ -138,7 +138,7 @@ const GroupCreationForm: React.FC<GroupCreationFormProps> = ({
                 aria-atomic="true"
               >
                 <div className="animate-spin h-4 w-4 border-2 border-primary-500 rounded-full border-t-transparent"></div>
-                <span className="sr-only">{t('common.loading') || 'Chargement en cours'}</span>
+                <span className="sr-only">{t('common:loading') || 'Chargement en cours'}</span>
               </div>
             )}
           </div>
@@ -148,12 +148,12 @@ const GroupCreationForm: React.FC<GroupCreationFormProps> = ({
             className="flex items-center px-4 py-2 text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 w-full transition-all duration-200 ease-in-out"
             disabled={isCreating}
             data-testid="create-group-button"
-            aria-label={t('sidemenu.createGroup') || 'Créer un groupe'}
+            aria-label={t('navigation:sidemenu.createGroup') || 'Créer un groupe'}
           >
             <svg className="mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
               <path fillRule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clipRule="evenodd" />
             </svg>
-            {buttonText || t('sidemenu.createGroup')}
+            {buttonText || t('navigation:sidemenu.createGroup')}
           </button>
         ) : null}
       </div>

@@ -29,17 +29,17 @@ const Footer: React.FC<FooterProps> = () => {
               <span className="text-2xl font-bold text-white">Gifters</span>
             </Link>
             <p className="text-gray-400 mb-4">
-              {t('hero.description')}
+              {t('marketing:hero.description')}
             </p>
             <SocialLinks networks={socialNetworks} />
           </div>
 
           {/* Company */}
           <div className="col-span-1">
-            <h3 className="text-lg font-semibold text-white mb-4">{t('footer.company.title')}</h3>
+            <h3 className="text-lg font-semibold text-white mb-4">{t('navigation:footer.company.title')}</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/about" className="text-gray-400 hover:text-white">{t('footer.company.about')}</Link>
+                <Link to="/about" className="text-gray-400 hover:text-white">{t('navigation:footer.company.about')}</Link>
               </li>
               <li>
                 <a
@@ -48,32 +48,32 @@ const Footer: React.FC<FooterProps> = () => {
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white"
                 >
-                  {t('footer.company.careers')}
+                  {t('navigation:footer.company.careers')}
                 </a>
               </li>
               <li>
-                <Link to="/terms" className="text-gray-400 hover:text-white">{t('footer.company.terms')}</Link>
+                <Link to="/terms" className="text-gray-400 hover:text-white">{t('navigation:footer.company.terms')}</Link>
               </li>
             </ul>
           </div>
 
           {/* Product */}
           <div className="col-span-1">
-            <h3 className="text-lg font-semibold text-white mb-4">{t('footer.product.title')}</h3>
+            <h3 className="text-lg font-semibold text-white mb-4">{t('navigation:footer.product.title')}</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/features" className="text-gray-400 hover:text-white">{t('footer.product.features')}</Link>
+                <Link to="/features" className="text-gray-400 hover:text-white">{t('navigation:footer.product.features')}</Link>
               </li>
               <li>
-                <Link to="/pricing" className="text-gray-400 hover:text-white">{t('footer.product.pricing')}</Link>
+                <Link to="/pricing" className="text-gray-400 hover:text-white">{t('navigation:footer.product.pricing')}</Link>
               </li>
             </ul>
           </div>
 
           {/* Newsletter */}
           <div className="col-span-1">
-            <h3 className="text-lg font-semibold text-white mb-4">{t('footer.newsletter.title')}</h3>
-            <p className="text-gray-400 mb-4">{t('footer.newsletter.description')}</p>
+            <h3 className="text-lg font-semibold text-white mb-4">{t('navigation:footer.newsletter.title')}</h3>
+            <p className="text-gray-400 mb-4">{t('navigation:footer.newsletter.description')}</p>
             <NewsletterSubscriptionForm
               listId={import.meta.env.VITE_BREVO_LIST_ID}
               redirectUrl={window.location.origin}
@@ -84,7 +84,7 @@ const Footer: React.FC<FooterProps> = () => {
         {/* Copyright */}
         <div className="mt-12 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-center md:text-left">
-            {t('footer.copyright').replace('2025', currentYear.toString())}
+            {t('navigation:footer.copyright').replace('2025', currentYear.toString())}
           </p>
         </div>
       </div>
