@@ -8,7 +8,7 @@ import { PricingPlans, PricingFAQ } from '../components/pricing';
 import { PricingPlan } from '../types';
 
 const Pricing: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('marketing');
   const navigate = useNavigate();
 
   // Plans tarifaires

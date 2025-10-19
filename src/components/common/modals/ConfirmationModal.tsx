@@ -19,7 +19,7 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
   confirmVariant = 'danger',
   size = 'sm'
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(); // Utilise 'common' par défaut
 
   // Valeurs par défaut pour les textes
   const defaultTitle = t('common.confirmation.title');

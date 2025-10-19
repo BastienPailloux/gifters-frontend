@@ -9,7 +9,7 @@ import ConfirmationModal from '../common/modals/ConfirmationModal';
 import { MembersListProps, Member } from '../../types';
 
 const MembersList: React.FC<MembersListProps> = ({ groupId, isCurrentUserAdmin, groupName }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('groups');
   const { user } = useAuth();
 
   const [members, setMembers] = useState<Member[]>([]);

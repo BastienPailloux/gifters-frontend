@@ -12,7 +12,7 @@ const StatusTag: React.FC<StatusTagProps> = ({
   className,
   size
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(); // Utilise 'common' par défaut
 
   // Mapper les statuts aux couleurs
   const getStatusColor = (status: GiftStatus) => {

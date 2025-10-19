@@ -7,7 +7,7 @@ import LanguageSwitcher from '../common/navigation/LanguageSwitcher';
 import { HeaderProps } from '../../types';
 
 const Header: React.FC<HeaderProps> = ({ onLogout }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(['navigation', 'auth']);
   const { isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);

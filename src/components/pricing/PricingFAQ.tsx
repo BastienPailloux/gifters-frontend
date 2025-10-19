@@ -6,7 +6,7 @@ import { FaqItem } from '../../types';
 import { PricingFAQProps } from '../../types/pricing';
 
 const PricingFAQ: React.FC<PricingFAQProps> = ({ className = '' }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('marketing');
 
   const pricingFaqItems: FaqItem[] = [
     {

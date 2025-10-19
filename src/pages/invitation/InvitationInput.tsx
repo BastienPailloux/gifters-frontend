@@ -12,7 +12,7 @@ import { SEO } from '../../components/common/seo';
  * Page pour entrer un code d'invitation ou un lien d'invitation
  */
 const InvitationInput: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('invitation');
   const navigate = useNavigate();
 
   const [invitationInput, setInvitationInput] = useState<string>('');

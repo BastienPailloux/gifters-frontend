@@ -5,7 +5,7 @@ import { Faq } from '../common/faq';
 import { ContactFaqProps, FaqItem } from '../../types';
 
 const ContactFaq: React.FC<ContactFaqProps> = ({ className, faqs, title, description }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('contact');
 
   // FAQ items (utilisés uniquement si aucune donnée n'est passée via props)
   const defaultFaqItems: FaqItem[] = [

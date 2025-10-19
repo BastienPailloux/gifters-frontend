@@ -15,7 +15,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
   successMessage,
   errorMessage
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('contact');
 
   const [formData, setFormData] = useState<ContactFormData>({
     name: '',

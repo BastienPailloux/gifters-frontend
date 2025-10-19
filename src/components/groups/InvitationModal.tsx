@@ -12,7 +12,7 @@ const InvitationModal: React.FC<InvitationModalProps> = ({
   isOpen,
   onClose,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(['groups', 'invitation']);
   const [activeTab, setActiveTab] = useState<'share' | 'email'>('share');
   const [email, setEmail] = useState<string>('');
   const [message, setMessage] = useState<string>('');

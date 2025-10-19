@@ -4,7 +4,7 @@ import UnderConstructionPage from '../components/common/display/UnderConstructio
 import { SEO } from '../components/common/seo';
 
 const Events: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('events');
 
   return (
     <>

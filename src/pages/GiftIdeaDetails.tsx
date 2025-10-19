@@ -14,7 +14,7 @@ import { SEO } from '../components/common/seo';
 
 const GiftIdeaDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { t } = useTranslation();
+  const { t } = useTranslation('gifts');
   const navigate = useNavigate();
   const { user } = useAuth();
 

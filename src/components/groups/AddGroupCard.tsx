@@ -7,7 +7,7 @@ import { AddGroupCardProps } from '../../types/groups';
  * Affiche un design distinctif avec une icône + et des textes explicatifs
  */
 const AddGroupCard: React.FC<AddGroupCardProps> = ({ onClick, className = '' }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('groups');
 
   return (
     <div

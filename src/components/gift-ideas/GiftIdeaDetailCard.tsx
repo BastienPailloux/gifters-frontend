@@ -17,7 +17,7 @@ const GiftIdeaDetailCard: React.FC<GiftIdeaDetailCardProps> = ({
   onMarkAsBought,
   formatPrice
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('gifts');
 
   // Vérifier si l'utilisateur peut interagir avec ce cadeau
   const canInteract = (): boolean => {

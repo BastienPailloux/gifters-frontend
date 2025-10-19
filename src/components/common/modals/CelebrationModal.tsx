@@ -13,7 +13,7 @@ const CelebrationModal: React.FC<CelebrationModalProps> = ({
   giftTitle = '',
   recipientName = ''
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(); // Utilise 'common' par défaut
   const contentRef = useRef<HTMLDivElement>(null);
 
   // Fermer automatiquement la modal après 5 secondes

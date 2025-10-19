@@ -18,7 +18,7 @@ const RecipientSelector: React.FC<RecipientSelectorProps> = ({
   label,
   errorMessage = '',
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('gifts');
   const [showAll, setShowAll] = useState(false);
 
   const displayedRecipients = showAll

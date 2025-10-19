@@ -14,7 +14,7 @@ const Modal: React.FC<ModalProps> = ({
   hideCloseButton = false,
   closeOnOutsideClick = true
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(); // Utilise 'common' par défaut
 
   if (!isOpen) return null;
 

@@ -624,6 +624,64 @@ export const userService = {
   },
 };
 
+// Service pour les comptes managés (children)
+export const childrenService = {
+  // Récupérer tous les comptes children de l'utilisateur courant
+  getChildren: async () => {
+    try {
+      const response = await api.get('/children');
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching children:', error);
+      throw error;
+    }
+  },
+
+  // Récupérer un compte child spécifique
+  getChild: async (childId: string) => {
+    try {
+      const response = await api.get(`/children/${childId}`);
+      return response.data;
+    } catch (error) {
+      console.error(`Error fetching child ${childId}:`, error);
+      throw error;
+    }
+  },
+
+  // Créer un nouveau compte child
+  createChild: async (childData: { name: string; birthday?: string; gender?: string }) => {
+    try {
+      const response = await api.post('/children', { user: childData });
+      return response.data;
+    } catch (error) {
+      console.error('Error creating child:', error);
+      throw error;
+    }
+  },
+
+  // Mettre à jour un compte child
+  updateChild: async (childId: string, childData: { name?: string; birthday?: string; gender?: string }) => {
+    try {
+      const response = await api.put(`/children/${childId}`, { user: childData });
+      return response.data;
+    } catch (error) {
+      console.error(`Error updating child ${childId}:`, error);
+      throw error;
+    }
+  },
+
+  // Supprimer un compte child
+  deleteChild: async (childId: string) => {
+    try {
+      const response = await api.delete(`/children/${childId}`);
+      return response.data;
+    } catch (error) {
+      console.error(`Error deleting child ${childId}:`, error);
+      throw error;
+    }
+  },
+};
+
 // Service de contact
 export const contactService = {
   // Envoyer un message de contact

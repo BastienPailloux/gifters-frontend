@@ -12,7 +12,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
   onSelect,
   itemVariants,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('marketing');
 
   return (
     <motion.div

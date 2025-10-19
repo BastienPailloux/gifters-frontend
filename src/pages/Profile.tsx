@@ -12,7 +12,7 @@ import { ProfileFormData, ProfilePageState } from '../types';
 
 const Profile: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { t } = useTranslation();
+  const { t } = useTranslation('profile');
   const { user: currentUser } = useAuth();
   const navigate = useNavigate();
 

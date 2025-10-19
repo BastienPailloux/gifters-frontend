@@ -1,0 +1,49 @@
+{
+  "loading": "Loading...",
+  "error": "An error occurred",
+  "retry": "Retry",
+  "next": "Next",
+  "previous": "Previous",
+  "dismiss": "Dismiss",
+  "processing": "Processing...",
+  "defaultGroup": "Default Group",
+  "unknownUser": "Unknown User",
+  "close": "Close",
+  "back": "Back",
+  "create": "Create",
+  "edit": "Edit",
+  "view": "View",
+  "email": "Email",
+  "optional": "optional",
+  "message": "Message",
+  "sending": "Sending...",
+  "copy": "Copy",
+  "or": "or",
+  "backToHome": "Back to Home",
+  "save": "Save",
+  "saving": "Saving...",
+  "cancel": "Cancel",
+  "delete": "Delete",
+  "deleting": "Deleting...",
+  "confirmDelete": "Yes, delete",
+  "confirmation": {
+    "title": "Confirm action",
+    "message": "Are you sure you want to perform this action?",
+    "confirm": "Confirm",
+    "cancel": "Cancel"
+  },
+  "confirmDeleteGiftIdea": "Are you sure you want to delete this gift idea?",
+  "statusProposed": "Proposed",
+  "statusBuying": "Buying",
+  "statusBought": "Bought",
+  "statusWishlist": "Wishlist",
+  "underConstruction": {
+    "title": "Under Construction",
+    "description": "This feature is currently under development. It will be available soon!"
+  },
+  "celebration": {
+    "congratulations": "Congratulations!",
+    "giftMarkedAsBought": "You have marked \"{{giftTitle}}\" as bought for {{recipientName}}.",
+    "genericSuccess": "The gift has been successfully marked as bought!"
+  }
+}

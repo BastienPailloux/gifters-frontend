@@ -44,6 +44,9 @@ export * from './cta';
 // Profile types
 export * from './profile';
 
+// Children types
+export * from './children';
+
 // SEO types
 export * from './seo';
 

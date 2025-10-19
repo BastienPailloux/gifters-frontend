@@ -15,7 +15,7 @@ const MemberItem: React.FC<MemberItemProps> = ({
   onClick,
   isActive = false
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('groups');
   const navigate = useNavigate();
 
   const handleChangeRole = () => {

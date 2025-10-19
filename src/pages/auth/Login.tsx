@@ -10,7 +10,7 @@ import FlatButton from '../../components/common/forms/FlatButton';
 import { SEO } from '../../components/common/seo';
 
 const Login: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('auth');
   const { login, error, clearError } = useAuth();
   const navigate = useNavigate();
 

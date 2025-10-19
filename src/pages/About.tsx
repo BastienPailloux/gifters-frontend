@@ -7,7 +7,7 @@ import { CallToAction } from '../components/common/cta';
 import { AboutCardGrid } from '../components/about';
 
 const About: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('marketing');
   const navigate = useNavigate();
 
   // Données des cartes

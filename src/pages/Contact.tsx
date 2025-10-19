@@ -10,7 +10,7 @@ import { SEO } from '../components/common/seo';
 import { ContactInfoItem } from '../types';
 
 const Contact: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('contact');
 
   // Animation variants
   const containerVariants = {

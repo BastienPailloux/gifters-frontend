@@ -16,7 +16,7 @@ import { SEO } from '../components/common/seo';
  * et inclut un élément pour ajouter rapidement un nouveau groupe
  */
 const MyGroups: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('groups');
   const navigate = useNavigate();
   const { user } = useAuth();
 

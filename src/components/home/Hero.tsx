@@ -6,7 +6,7 @@ import VideoPlayer from '../common/display/VideoPlayer';
 import TestimonialSlider from '../common/display/TestimonialSlider';
 
 const Hero: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('marketing');
 
   // Données de témoignages depuis les traductions
   const testimonials = [

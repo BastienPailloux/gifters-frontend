@@ -14,7 +14,7 @@ import { SEO } from '../../components/common/seo';
  * - Utilisateur sans compte
  */
 const InvitationJoin: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('invitation');
   const [searchParams] = useSearchParams();
   const groupId = searchParams.get('group');
   const token = searchParams.get('token');

@@ -9,7 +9,7 @@ const BackButton: React.FC<BackButtonProps> = ({
   label
 }) => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t } = useTranslation(); // Utilise 'common' par défaut
 
   const handleClick = () => {
     if (onClick) {

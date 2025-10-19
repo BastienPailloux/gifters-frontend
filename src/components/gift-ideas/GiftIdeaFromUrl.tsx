@@ -21,7 +21,7 @@ const GiftIdeaFromUrl: React.FC<GiftIdeaFromUrlProps> = ({
   giftData,
   onChange
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('gifts');
   const [url, setUrl] = useState('');
   const [urlError, setUrlError] = useState<string | null>(null);
   const [metadataFetched, setMetadataFetched] = useState(false);

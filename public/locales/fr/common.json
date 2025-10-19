@@ -1,0 +1,49 @@
+{
+  "loading": "Chargement...",
+  "error": "Une erreur est survenue",
+  "retry": "Réessayer",
+  "next": "Suivant",
+  "previous": "Précédent",
+  "dismiss": "Fermer",
+  "processing": "Traitement en cours...",
+  "defaultGroup": "Groupe par défaut",
+  "unknownUser": "Utilisateur inconnu",
+  "close": "Fermer",
+  "back": "Retour",
+  "create": "Créer",
+  "edit": "Modifier",
+  "view": "Voir",
+  "email": "Email",
+  "optional": "optionnel",
+  "message": "Message",
+  "sending": "Envoi en cours...",
+  "copy": "Copier",
+  "or": "ou",
+  "backToHome": "Retour à l'accueil",
+  "save": "Enregistrer",
+  "saving": "Enregistrement...",
+  "cancel": "Annuler",
+  "delete": "Supprimer",
+  "deleting": "Suppression...",
+  "confirmDelete": "Oui, supprimer",
+  "confirmation": {
+    "title": "Confirmer l'action",
+    "message": "Êtes-vous sûr de vouloir effectuer cette action ?",
+    "confirm": "Confirmer",
+    "cancel": "Annuler"
+  },
+  "confirmDeleteGiftIdea": "Êtes-vous sûr de vouloir supprimer cette idée cadeau ?",
+  "statusProposed": "Proposé",
+  "statusBuying": "En cours d'achat",
+  "statusBought": "Acheté",
+  "statusWishlist": "Liste de souhaits",
+  "underConstruction": {
+    "title": "En Construction",
+    "description": "Cette fonctionnalité est actuellement en développement. Elle sera bientôt disponible !"
+  },
+  "celebration": {
+    "congratulations": "Félicitations !",
+    "giftMarkedAsBought": "Vous avez marqué \"{{giftTitle}}\" comme acheté pour {{recipientName}}.",
+    "genericSuccess": "Le cadeau a été marqué comme acheté avec succès !"
+  }
+}

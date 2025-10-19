@@ -8,7 +8,7 @@ import { GroupCardProps } from '../../types/groups';
  * Utilisé principalement dans la page MyGroups
  */
 const GroupCard: React.FC<GroupCardProps> = ({ group, onViewGroup }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('groups');
 
   return (
     <div className="flex items-center justify-between py-3 hover:bg-gray-50 rounded-md px-3 transition-colors duration-200">

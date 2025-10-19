@@ -5,7 +5,7 @@ import { fr, enUS } from 'date-fns/locale';
 import { UpcomingEventItemProps } from '../../types';
 
 const UpcomingEventItem: React.FC<UpcomingEventItemProps> = ({ event }) => {
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation('dashboard');
 
   // Formatage de date avec support multilingue
   const formatDate = (date: Date | string) => {

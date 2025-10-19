@@ -6,7 +6,7 @@ import { NewsletterSubscriptionForm } from '../../components/newsletter';
 import { SocialLinks, SocialNetwork } from '../../components/social';
 
 const Footer: React.FC<FooterProps> = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(['navigation', 'marketing']);
   const currentYear = new Date().getFullYear();
 
   // Configuration des réseaux sociaux à afficher (seulement LinkedIn)

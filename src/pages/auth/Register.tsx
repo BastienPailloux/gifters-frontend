@@ -9,7 +9,7 @@ import Checkbox from '../../components/common/forms/Checkbox';
 import { SEO } from '../../components/common/seo';
 
 const Register: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('auth');
   const { register, error, clearError } = useAuth();
   const navigate = useNavigate();
 

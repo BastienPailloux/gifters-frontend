@@ -18,7 +18,7 @@ import {
  * Composant qui affiche une liste des cadeaux en cours d'achat
  */
 const BuyingGiftsList: React.FC<BuyingGiftsListProps> = ({ maxGifts = 5 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('dashboard');
   const { user } = useAuth();
   const [actionError, setActionError] = useState<string | null>(null);
   const [processingGiftId, setProcessingGiftId] = useState<string | null>(null);

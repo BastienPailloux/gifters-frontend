@@ -15,7 +15,7 @@ export const GiftIdeaFormModal: React.FC<GiftIdeaFormModalProps> = ({
   mode,
   giftIdea
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(['gifts', 'validation']);
   const [giftData, setGiftData] = useState<GiftMetadata>({
     title: '',
     description: '',

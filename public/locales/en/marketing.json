@@ -1,0 +1,204 @@
+{
+  "hero": {
+    "title": "Simplify your gift and event management",
+    "description": "Create wishlists, organize events, and find inspiration for perfect gifts. Gifters connects people through memorable sharing moments.",
+    "cta": {
+      "primary": "Start for free",
+      "secondary": "Learn more"
+    },
+    "testimonials": {
+      "title": "What our users say",
+      "subtitle": "Discover how Gifters transforms the gift experience"
+    }
+  },
+  "features": {
+    "title": "Key Features",
+    "subtitle": "Everything you need to manage your gifts and events",
+    "items": {
+      "wishlists": {
+        "title": "Wishlists",
+        "description": "Easily create and share wishlists for any occasion. Add items from any website with just one click."
+      },
+      "events": {
+        "title": "Event Management",
+        "description": "Organize birthdays, weddings, and other celebrations. Send invitations and track responses in real-time."
+      },
+      "inspiration": {
+        "title": "Gift Ideas",
+        "description": "Discover personalized suggestions based on your loved ones' interests and preferences."
+      },
+      "reminders": {
+        "title": "Smart Reminders",
+        "description": "Never miss a birthday or special occasion again with our customizable notifications."
+      },
+      "groups": {
+        "title": "Group Gifting",
+        "description": "Easily organize collective gifts and track everyone's contributions."
+      },
+      "privacy": {
+        "title": "Privacy Controls",
+        "description": "Decide who can see your lists and what information is shared."
+      }
+    },
+    "groups": {
+      "title": "Group Management",
+      "description": "Create and manage groups of friends and family to better organize your gifting experience.",
+      "detailedDescription": "Create and manage groups of friends and family to better organize your gifting experience.",
+      "imageAlt": "Screenshot of group management"
+    },
+    "wishLists": {
+      "title": "Wish Lists",
+      "description": "Easily create and share your wish lists with friends and family for any occasion.",
+      "detailedDescription": "Create and share your wish lists with friends and family for any occasion. Add items from any website with just one click. Add details and priorities. Receive exactly what you want and avoid duplicates thanks to our reservation system.",
+      "imageAlt": "Screenshot of wish list management"
+    },
+    "events": {
+      "title": "Event Planning",
+      "description": "Organize birthdays, holidays and special events with integrated gift coordination.",
+      "detailedDescription": "Plan birthdays, weddings and other special occasions. Send invitations, track responses and keep all information organized in one place.",
+      "imageAlt": "Screenshot of event planning"
+    },
+    "notifications": {
+      "title": "Smart Notifications",
+      "description": "Never miss an important date with customizable reminders for events and gift opportunities.",
+      "detailedDescription": "Never miss an important date with customizable reminders for events and gift opportunities.",
+      "imageAlt": "Screenshot of smart notifications"
+    },
+    "privacy": {
+      "title": "Privacy Controls",
+      "description": "Full control over what you share and with whom - your data stays private and secure.",
+      "detailedDescription": "Full control over what you share and with whom - your data stays private and secure.",
+      "imageAlt": "Screenshot of privacy controls"
+    },
+    "multiLanguage": {
+      "title": "Multi-Language Support",
+      "description": "Use Gifters in your preferred language with our growing list of supported languages.",
+      "detailedDescription": "Use Gifters in your preferred language with our growing list of supported languages.",
+      "imageAlt": "Screenshot of multi-language support"
+    },
+    "register": "Sign up for free",
+    "cta": "Ready to simplify your gift giving experience?",
+    "detailedTitle": "Discover in detail",
+    "finalCta": "Ready to organize your gifts and events in a simple and efficient way?",
+    "startNow": "Start now"
+  },
+  "testimonials": {
+    "1": {
+      "content": "Gifters has completely transformed how we organize birthdays in our family. No more duplicate gifts and everyone finds something they really like!",
+      "author": {
+        "name": "Marie Dupont",
+        "title": "Mother"
+      }
+    },
+    "2": {
+      "content": "I used Gifters for my wedding and it was amazing! Our guests loved being able to choose from our wishlist and we received exactly what we needed.",
+      "author": {
+        "name": "Thomas Martin",
+        "title": "Newlywed",
+        "company": "Architect"
+      }
+    },
+    "3": {
+      "content": "As an event organizer, I recommend Gifters to all my clients. The platform is intuitive and the customer service is exceptional.",
+      "author": {
+        "name": "Sophie Leclerc",
+        "title": "Event Organizer",
+        "company": "EventPro"
+      }
+    },
+    "4": {
+      "content": "Gifters saved me for the holidays! No more racking my brain to find ideas, everything is centralized and easy to use.",
+      "author": {
+        "name": "Lucas Bernard",
+        "title": "Student"
+      }
+    }
+  },
+  "pricing": {
+    "seo": {
+      "title": "Pricing | Gifters",
+      "description": "Discover our different pricing plans for Gifters - free and premium options.",
+      "keywords": "pricing, subscription, free, premium, gifters"
+    },
+    "title": "Simple and transparent pricing",
+    "subtitle": "Choose the plan that fits your needs",
+    "free": "Free",
+    "mostPopular": "Most popular",
+    "specialOffer": "Need a solution for your business?",
+    "contactUs": "Contact us",
+    "plans": {
+      "period": {
+        "month": "month",
+        "year": "year"
+      },
+      "free": {
+        "name": "Free",
+        "description": "Perfect for getting started and discovering Gifters",
+        "cta": "Start for free"
+      },
+      "standard": {
+        "name": "Standard",
+        "description": "Ideal for families and small groups of friends",
+        "cta": "Try free for 30 days"
+      },
+      "premium": {
+        "name": "Premium",
+        "description": "For large groups and frequent users",
+        "cta": "Start free trial"
+      }
+    },
+    "features": {
+      "wishLists": "Unlimited wishlists",
+      "groups": "{{count}} groups",
+      "members": "{{count}} members per group",
+      "giftIdeas": "{{count}} gift ideas",
+      "support": "Priority support",
+      "noAds": "No advertisements"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "q1": "Can I change plans at any time?",
+      "a1": "Yes, you can upgrade or downgrade your plan at any time. The change will take effect on your next billing cycle.",
+      "q2": "Do you offer discounts for annual subscriptions?",
+      "a2": "Yes, by choosing an annual subscription, you get two months free (that's 17% off).",
+      "q3": "How does the free trial work?",
+      "a3": "Our free trials last 30 days and give you access to all features of the chosen plan. No credit card is required for the trial.",
+      "q4": "Are there any additional fees?",
+      "a4": "No, our pricing is transparent. There are no hidden or additional fees."
+    },
+    "temporarilyUnlimited": "All features are temporarily unlimited!"
+  },
+  "about": {
+    "title": "About Gifters",
+    "subtitle": "Discover our story and mission to simplify gift organization",
+    "seo": {
+      "title": "About | Gifters",
+      "description": "Discover the story of Gifters, our mission and our dedicated team.",
+      "keywords": "about, team, mission, vision, gifters"
+    },
+    "ourStory": {
+      "title": "Our Story",
+      "paragraph1": "Gifters was born from a personal experience: the difficulty of organizing group gifts without duplicates or forgetting anyone.",
+      "paragraph2": "Launched in 2025, our platform aims to simplify gift coordination for birthdays, holidays and special occasions."
+    },
+    "mission": {
+      "title": "Our Mission",
+      "paragraph1": "Facilitate group gift organization so that every occasion is memorable without the stress of logistical details.",
+      "paragraph2": "We believe that generosity should be simple and enjoyable, free from administrative and financial constraints."
+    },
+    "team": {
+      "title": "Our Team",
+      "paragraph1": "We are a passionate team of entrepreneurs and developers sharing the same vision: making celebrations more joyful and less stressful.",
+      "paragraph2": "Our diversity is our strength - different profiles united by the desire to create a useful everyday solution."
+    },
+    "values": {
+      "title": "Our Values",
+      "paragraph1": "Simplicity, transparency and friendliness are at the heart of our approach.",
+      "paragraph2": "We develop Gifters with a constant concern for user experience and personal data protection."
+    },
+    "contact": {
+      "description": "Have questions, suggestions or want to join the adventure? Don't hesitate to contact us.",
+      "button": "Contact Us"
+    }
+  }
+}

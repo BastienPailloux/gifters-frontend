@@ -18,7 +18,7 @@ const GroupFormModal: React.FC<GroupFormModalProps> = ({
   onClose,
   onSuccess,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(['groups', 'validation']);
   const navigate = useNavigate();
   const isCreateMode = mode === 'create';
 

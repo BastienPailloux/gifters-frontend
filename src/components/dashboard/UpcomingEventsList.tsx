@@ -5,7 +5,7 @@ import { FaChevronRight, FaTools } from 'react-icons/fa';
 import { UpcomingEventsListProps } from '../../types';
 
 const UpcomingEventsList: React.FC<UpcomingEventsListProps> = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('dashboard');
 
   return (
     <div>

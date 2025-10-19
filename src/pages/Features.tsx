@@ -10,7 +10,7 @@ import { FeatureCardProps, DetailedFeature } from '../types';
 import { SEO } from '../components/common/seo';
 
 const Features: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('marketing');
   const navigate = useNavigate();
 
   return (

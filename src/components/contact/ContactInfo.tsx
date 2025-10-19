@@ -6,7 +6,7 @@ import { Title } from '../common/typography';
 import { ContactInfoProps, ContactInfoItem } from '../../types';
 
 const ContactInfo: React.FC<ContactInfoProps> = ({ className, items, title, description }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('contact');
 
   // Animation variants
   const containerVariants = {

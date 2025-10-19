@@ -15,7 +15,7 @@ const GroupsList: React.FC<GroupsListProps> = ({
   emptyMessage,
   className = ''
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('groups');
   const defaultEmptyMessage = t('groups.noGroups');
 
   if (isLoading) {

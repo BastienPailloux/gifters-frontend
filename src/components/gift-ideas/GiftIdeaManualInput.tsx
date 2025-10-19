@@ -7,7 +7,7 @@ const GiftIdeaManualInput: React.FC<GiftIdeaManualInputProps> = ({
   giftData,
   onChange
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('gifts');
 
   return (
     <div className="space-y-4">

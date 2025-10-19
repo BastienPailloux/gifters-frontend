@@ -6,7 +6,7 @@ import GroupCreationForm from '../common/forms/GroupCreationForm';
 import { SideMenuProps } from '../../types';
 
 const SideMenu: React.FC<SideMenuProps> = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('navigation');
   const [groupListKey, setGroupListKey] = useState(0);
 
   // Fonction pour rafraîchir la liste des groupes

@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { SEO } from '../../components/common/seo';
 
 const ForgotPassword: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('auth');
   const { requestPasswordReset, clearError } = useAuth();
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);

@@ -9,7 +9,7 @@ const UnderConstructionPage: React.FC<UnderConstructionPageProps> = ({
   description,
   onBackClick
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(); // Utilise 'common' par défaut
   const navigate = useNavigate();
 
   const handleBackClick = () => {

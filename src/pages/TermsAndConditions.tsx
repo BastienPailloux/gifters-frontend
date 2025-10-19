@@ -7,7 +7,7 @@ import { SEO } from '../components/common/seo';
  * Page des conditions générales d'utilisation
  */
 const TermsAndConditions: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('legal');
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-4xl">

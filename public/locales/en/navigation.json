@@ -1,0 +1,64 @@
+{
+  "header": {
+    "features": "Features",
+    "pricing": "Pricing",
+    "about": "About",
+    "contact": "Contact",
+    "login": "Login",
+    "signup": "Sign Up",
+    "dashboard": "Dashboard",
+    "groups": "My Groups",
+    "gifts": "My Gifts"
+  },
+  "footer": {
+    "company": {
+      "title": "Company",
+      "about": "About",
+      "careers": "Careers",
+      "press": "Press",
+      "blog": "Blog",
+      "terms": "Terms of Use"
+    },
+    "product": {
+      "title": "Product",
+      "features": "Features",
+      "pricing": "Pricing",
+      "security": "Security",
+      "enterprise": "Enterprise"
+    },
+    "resources": {
+      "title": "Resources",
+      "docs": "Documentation",
+      "guides": "Guides",
+      "api": "API",
+      "status": "Status"
+    },
+    "legal": {
+      "title": "Legal",
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "cookies": "Cookies"
+    },
+    "copyright": "© 2025 Gifters. All rights reserved.",
+    "language": "Language",
+    "newsletter": {
+      "title": "Subscribe to our newsletter",
+      "description": "The latest news, articles, and resources, sent to your inbox monthly.",
+      "placeholder": "Enter your email",
+      "button": "Subscribe",
+      "privacy": "We care about your data. Unsubscribe at any time."
+    }
+  },
+  "sidemenu": {
+    "groups": "My Groups",
+    "noGroups": "You don't have any groups yet",
+    "home": "Home",
+    "createGroup": "Create a group",
+    "joinGroup": "Join a group",
+    "collapse": "Collapse sidebar",
+    "expand": "Expand sidebar",
+    "groupNamePlaceholder": "Enter group name...",
+    "createGroupFormLabel": "Group creation form",
+    "newGroup": "New group"
+  }
+}

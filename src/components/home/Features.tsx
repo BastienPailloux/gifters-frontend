@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import Card from '../common/display/Card';
 
 const Features: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('marketing');
 
   const features = [
     {

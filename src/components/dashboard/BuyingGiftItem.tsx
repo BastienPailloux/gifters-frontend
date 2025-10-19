@@ -13,7 +13,7 @@ const BuyingGiftItem: React.FC<BuyingGiftItemProps> = ({
   onMarkAsBought,
   isProcessing = false
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('dashboard');
   const navigate = useNavigate();
 
   const handleViewGift = () => {

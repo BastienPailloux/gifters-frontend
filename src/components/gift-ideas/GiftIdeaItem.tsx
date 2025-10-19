@@ -10,7 +10,7 @@ import { GiftStatus } from '../../types/ui';
  * Peut être utilisé dans différentes pages (Groupes, Mes Cadeaux, etc.)
  */
 const GiftIdeaItem: React.FC<GiftIdeaItemProps> = ({ gift, onViewGift, hideStatus = false }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('gifts');
 
   // Formatage du prix pour l'affichage
   const formatPrice = (price?: number): string => {

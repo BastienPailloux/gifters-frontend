@@ -1,0 +1,64 @@
+{
+  "header": {
+    "features": "Fonctionnalités",
+    "pricing": "Tarifs",
+    "about": "À propos",
+    "contact": "Contact",
+    "login": "Connexion",
+    "signup": "S'inscrire",
+    "dashboard": "Tableau de bord",
+    "groups": "Mes Groupes",
+    "gifts": "Mes Cadeaux"
+  },
+  "footer": {
+    "company": {
+      "title": "Entreprise",
+      "about": "À propos",
+      "careers": "Carrières",
+      "press": "Presse",
+      "blog": "Blog",
+      "terms": "Conditions d'utilisation"
+    },
+    "product": {
+      "title": "Produit",
+      "features": "Fonctionnalités",
+      "pricing": "Tarifs",
+      "security": "Sécurité",
+      "enterprise": "Entreprises"
+    },
+    "resources": {
+      "title": "Ressources",
+      "docs": "Documentation",
+      "guides": "Guides",
+      "api": "API",
+      "status": "Statut"
+    },
+    "legal": {
+      "title": "Mentions légales",
+      "privacy": "Confidentialité",
+      "terms": "Conditions d'utilisation",
+      "cookies": "Cookies"
+    },
+    "copyright": "© 2025 Gifters. Tous droits réservés.",
+    "language": "Langue",
+    "newsletter": {
+      "title": "Abonnez-vous à notre newsletter",
+      "description": "Les dernières nouvelles, articles et ressources, envoyés chaque mois dans votre boîte de réception.",
+      "placeholder": "Entrez votre email",
+      "button": "S'abonner",
+      "privacy": "Nous respectons votre vie privée. Désabonnez-vous à tout moment."
+    }
+  },
+  "sidemenu": {
+    "groups": "Mes Groupes",
+    "home": "Accueil",
+    "noGroups": "Vous n'avez pas encore de groupes",
+    "createGroup": "Créer un groupe",
+    "joinGroup": "Rejoindre un groupe",
+    "collapse": "Réduire le menu",
+    "expand": "Développer le menu",
+    "groupNamePlaceholder": "Nom du groupe...",
+    "createGroupFormLabel": "Formulaire de création de groupe",
+    "newGroup": "Nouveau groupe"
+  }
+}

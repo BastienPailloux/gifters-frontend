@@ -8,7 +8,7 @@ import Button from '../../components/common/forms/Button';
 import { SEO } from '../../components/common/seo';
 
 const ResetPassword: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('auth');
   const { resetPassword, error, clearError } = useAuth();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();

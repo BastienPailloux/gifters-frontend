@@ -21,7 +21,7 @@ import { SEO } from '../components/common/seo';
  * - Cadeaux achetés par l'utilisateur
  */
 const MyGifts: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('gifts');
   const navigate = useNavigate();
   const { user } = useAuth();
 

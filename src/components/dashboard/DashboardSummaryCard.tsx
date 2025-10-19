@@ -6,7 +6,7 @@ import BuyingGiftsList from './BuyingGiftsList';
 import { DashboardSummaryCardProps } from '../../types/dashboard';
 
 const DashboardSummaryCard: React.FC<DashboardSummaryCardProps> = ({ user }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('dashboard');
 
   return (
     <Card

@@ -27,7 +27,7 @@ const adaptMembersToFullFormat = (simplifiedMembers: GroupDetailsData['members']
 
 const GroupDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { t } = useTranslation();
+  const { t } = useTranslation('groups');
   const navigate = useNavigate();
   const { user } = useAuth();
 
