@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Modal from '../common/modals/Modal';
 import Button from '../common/forms/Button';
@@ -14,6 +14,28 @@ const ChildFormModal: React.FC<ChildFormModalProps> = ({ isOpen, onClose, onSucc
   });
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Pré-remplir le formulaire quand on édite un child
+  useEffect(() => {
+    if (isOpen) {
+      if (mode === 'edit' && child) {
+        setFormData({
+          name: child.name || '',
+          birthday: child.birthday ? child.birthday.split('T')[0] : '',
+          gender: child.gender || ''
+        });
+      } else {
+        // Réinitialiser le formulaire en mode création
+        setFormData({
+          name: '',
+          birthday: '',
+          gender: ''
+        });
+      }
+      // Réinitialiser les erreurs
+      setErrors({});
+    }
+  }, [isOpen, mode, child]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;

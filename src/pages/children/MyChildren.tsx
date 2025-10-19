@@ -186,6 +186,7 @@ const MyChildren: React.FC = () => {
 
       {/* Modal pour créer un nouveau child */}
       <ChildFormModal
+        name={''}
         isOpen={isCreateModalOpen}
         onClose={() => setIsCreateModalOpen(false)}
         onSuccess={handleChildCreated}
@@ -195,6 +196,9 @@ const MyChildren: React.FC = () => {
       {/* Modal pour éditer un child */}
       {selectedChild && (
         <ChildFormModal
+          name={selectedChild?.name || ''}
+          birthday={selectedChild?.birthday || ''}
+          gender={selectedChild?.gender || ''}
           isOpen={isEditModalOpen}
           onClose={() => {
             setIsEditModalOpen(false);
