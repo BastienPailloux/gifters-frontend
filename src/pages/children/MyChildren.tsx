@@ -185,12 +185,12 @@ const MyChildren: React.FC = () => {
       )}
 
       {/* Modal pour créer un nouveau child */}
-      {/* <ChildFormModal
+      <ChildFormModal
         isOpen={isCreateModalOpen}
         onClose={() => setIsCreateModalOpen(false)}
         onSuccess={handleChildCreated}
         mode="create"
-      /> */}
+      />
 
       {/* Modal pour éditer un child */}
       {selectedChild && (

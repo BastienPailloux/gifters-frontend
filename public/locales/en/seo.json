@@ -58,5 +58,10 @@
     "title": "Terms and Conditions - Gifters",
     "description": "View Gifters' terms and conditions. Learn more about your rights and obligations as a user of the platform.",
     "keywords": "terms, conditions, use, rules, gifters"
+  },
+  "children": {
+    "title": "My Managed Accounts",
+    "description": "Manage your managed accounts to share your lists and organize events.",
+    "keywords": "my managed accounts, managed accounts, lists, events, gifts"
   }
 }

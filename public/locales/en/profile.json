@@ -5,6 +5,13 @@
   "personalInfo": "Personal Information",
   "address": "Address",
   "birthday": "Birthday",
+  "gender": "Gender",
+  "genders": {
+    "notSpecified": "Not specified",
+    "male": "Male",
+    "female": "Female",
+    "other": "Other"
+  },
   "phone": "Phone",
   "street": "Street",
   "city": "City",

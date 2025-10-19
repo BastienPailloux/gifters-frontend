@@ -56,3 +56,14 @@ export interface ChildrenListState {
   loading: boolean;
   error: string | null;
 }
+
+/**
+ * Interface pour les props du composant ChildFormModal
+ */
+export interface ChildFormModalProps extends CreateChildData {
+  isOpen: boolean;
+  onClose: () => void;
+  onSuccess: () => void;
+  mode: 'create' | 'edit';
+  child?: Child;
+}

@@ -5,6 +5,13 @@
   "personalInfo": "Informations personnelles",
   "address": "Adresse",
   "birthday": "Date de naissance",
+  "gender": "Sexe",
+  "genders": {
+    "notSpecified": "Non spécifié",
+    "male": "Masculin",
+    "female": "Féminin",
+    "other": "Autre"
+  },
   "phone": "Téléphone",
   "street": "Rue",
   "city": "Ville",
@@ -33,8 +40,7 @@
     "deleteChild": "Supprimer le compte",
     "confirmDelete": "Êtes-vous sûr de vouloir supprimer ce compte ?",
     "deleteWarning": "Cette action est irréversible. Toutes les données associées seront définitivement supprimées.",
-    "viewGroups": "Voir les groupes",
-    "viewGifts": "Voir les cadeaux",
+    "viewGifts": "Voir ses cadeaux",
     "createSuccess": "Compte créé avec succès",
     "updateSuccess": "Compte mis à jour avec succès",
     "deleteSuccess": "Compte supprimé avec succès",

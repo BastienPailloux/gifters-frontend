@@ -1,28 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Modal from '../common/modals/Modal';
 import Button from '../common/forms/Button';
 import Input from '../common/forms/Input';
-import { Child, CreateChildData } from '../../types/children';
+import { ChildFormModalProps, CreateChildData } from '../../types/children';
 
-interface ChildFormModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onSuccess: () => void;
-  mode: 'create' | 'edit';
-  child?: Child;
-}
-
-/**
- * Modal pour créer ou éditer un compte child
- */
-const ChildFormModal: React.FC<ChildFormModalProps> = ({
-  isOpen,
-  onClose,
-  onSuccess,
-  mode,
-  child
-}) => {
+const ChildFormModal: React.FC<ChildFormModalProps> = ({ isOpen, onClose, onSuccess, mode, child }) => {
   const { t } = useTranslation('profile');
   const [formData, setFormData] = useState<CreateChildData>({
     name: '',
@@ -31,25 +14,6 @@ const ChildFormModal: React.FC<ChildFormModalProps> = ({
   });
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  // Initialiser le formulaire avec les données du child en mode édition
-  useEffect(() => {
-    if (mode === 'edit' && child) {
-      setFormData({
-        name: child.name || '',
-        birthday: child.birthday || '',
-        gender: child.gender || ''
-      });
-    } else {
-      // Réinitialiser le formulaire en mode création
-      setFormData({
-        name: '',
-        birthday: '',
-        gender: ''
-      });
-    }
-    setErrors({});
-  }, [mode, child, isOpen]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -94,7 +58,7 @@ const ChildFormModal: React.FC<ChildFormModalProps> = ({
       onClose();
     } catch (error) {
       console.error('Error saving child:', error);
-      setErrors({ submit: mode === 'create' ? t('children.createError') : t('children.updateError') });
+      setErrors({ submit: mode === 'create' ? t('profile:children.createError') : t('profile:children.updateError') });
     } finally {
       setIsSubmitting(false);
     }
@@ -109,30 +73,30 @@ const ChildFormModal: React.FC<ChildFormModalProps> = ({
           </div>
         )}
 
-        <InputField
-          label={t('name')}
+        <Input
+          label={t('profile:name')}
           name="name"
           type="text"
           value={formData.name}
           onChange={handleChange}
           error={errors.name}
           required
-          placeholder={t('name')}
+          placeholder={t('profile:name')}
         />
 
-        <InputField
-          label={t('birthday')}
+        <Input
+          label={t('profile:birthday')}
           name="birthday"
           type="date"
           value={formData.birthday}
           onChange={handleChange}
           error={errors.birthday}
-          placeholder={t('birthday')}
+          placeholder={t('profile:birthday')}
         />
 
         <div>
           <label htmlFor="gender" className="block text-sm font-medium text-gray-700 mb-1">
-            {t('children.gender')}
+            {t('profile:gender')}
           </label>
           <select
             id="gender"
@@ -141,10 +105,10 @@ const ChildFormModal: React.FC<ChildFormModalProps> = ({
             onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
           >
-            <option value="">{t('children.notSpecified')}</option>
-            <option value="male">{t('children.male')}</option>
-            <option value="female">{t('children.female')}</option>
-            <option value="other">{t('children.other')}</option>
+            <option value="">{t('profile:genders.notSpecified')}</option>
+            <option value="male">{t('profile:genders.male')}</option>
+            <option value="female">{t('profile:genders.female')}</option>
+            <option value="other">{t('profile:genders.other')}</option>
           </select>
         </div>
 
