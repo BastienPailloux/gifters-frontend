@@ -18,6 +18,27 @@ export interface SideMenuGroup {
 }
 
 /**
+ * Représentation d'un enfant avec ses groupes
+ */
+export interface ChildWithGroups {
+  id: string | number;
+  name: string;
+  account_type: string;
+  groups: SideMenuGroup[];
+}
+
+/**
+ * Réponse hiérarchique des groupes avec les enfants managés
+ */
+export interface HierarchicalGroupsResponse {
+  id: string | number;
+  name: string;
+  account_type: string;
+  groups: SideMenuGroup[];
+  children: ChildWithGroups[];
+}
+
+/**
  * Props pour le composant GroupItem dans le menu latéral
  */
 export interface SideMenuGroupItemProps {
@@ -32,6 +53,7 @@ export interface SideMenuGroupItemProps {
  */
 export interface GroupListProps {
   onGroupCreated?: () => void;
+  onDataLoaded?: (data: { children: ChildWithGroups[] }) => void;
 }
 
 /**

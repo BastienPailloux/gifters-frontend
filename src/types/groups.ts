@@ -90,6 +90,8 @@ export interface GroupCreationFormProps {
   inputOnly?: boolean;
   /** Indique si le composant doit refetch les données après création (au lieu de recharger la page) */
   refetchOnCreate?: boolean;
+  /** ID de l'enfant pour lequel créer le groupe (optionnel, si non fourni, le groupe est créé pour l'utilisateur courant) */
+  childId?: string;
 }
 
 /**

@@ -59,6 +59,8 @@
     "expand": "Expand sidebar",
     "groupNamePlaceholder": "Enter group name...",
     "createGroupFormLabel": "Group creation form",
-    "newGroup": "New group"
+    "newGroup": "New group",
+    "myGroups": "My groups",
+    "managedAccounts": "Managed accounts"
   }
 }

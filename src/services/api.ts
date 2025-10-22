@@ -162,9 +162,11 @@ export const authService = {
 // Service pour les groupes
 export const groupService = {
   // Récupérer tous les groupes de l'utilisateur
-  getGroups: async () => {
+  // Si withChildren=true, retourne une structure hiérarchique avec les groupes des enfants managés
+  getGroups: async (withChildren: boolean = false) => {
     try {
-      const response = await api.get('/groups');
+      const params = withChildren ? { with_children: 'true' } : {};
+      const response = await api.get('/groups', { params });
       return response.data;
     } catch (error) {
       console.error('Error in getGroups API call:', error);
@@ -179,8 +181,10 @@ export const groupService = {
   },
 
   // Créer un nouveau groupe
-  createGroup: async (groupData: { name: string; description: string }) => {
-    const response = await api.post('/groups', { group: groupData });
+  // Si userId est fourni, le groupe est créé pour cet utilisateur (enfant managé)
+  createGroup: async (groupData: { name: string; description: string }, userId?: string) => {
+    const url = userId ? `/groups?user_id=${userId}` : '/groups';
+    const response = await api.post(url, { group: groupData });
     return response.data;
   },
 

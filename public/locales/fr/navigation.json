@@ -59,6 +59,8 @@
     "expand": "Développer le menu",
     "groupNamePlaceholder": "Nom du groupe...",
     "createGroupFormLabel": "Formulaire de création de groupe",
-    "newGroup": "Nouveau groupe"
+    "newGroup": "Nouveau groupe",
+    "myGroups": "Mes groupes",
+    "managedAccounts": "Comptes managés"
   }
 }

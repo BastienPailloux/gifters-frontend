@@ -16,6 +16,7 @@ const GroupCreationForm: React.FC<GroupCreationFormProps> = ({
   buttonText,
   inputOnly = false,
   refetchOnCreate = true,
+  childId,
 }) => {
   const { t } = useTranslation(['common', 'navigation', 'validation']);
   const [isCreatingGroup, setIsCreatingGroup] = useState(inputOnly);
@@ -37,7 +38,7 @@ const GroupCreationForm: React.FC<GroupCreationFormProps> = ({
       groupService.createGroup({
         name: groupName,
         description: ''
-      })
+      }, childId)
         .then(() => {
           setIsCreatingGroup(false);
           setNewGroupName('');
@@ -67,7 +68,7 @@ const GroupCreationForm: React.FC<GroupCreationFormProps> = ({
       // Afficher l'erreur de validation
       setError(validation.errorMessage || t('validation:validation.invalid') || 'Nom de groupe invalide');
     }
-  }, [newGroupName, onGroupCreated, inputOnly, refetchOnCreate, t]);
+  }, [newGroupName, onGroupCreated, inputOnly, refetchOnCreate, childId, t]);
 
   // Fonction pour annuler la création de groupe
   const cancelGroupCreation = useCallback(() => {

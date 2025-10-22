@@ -2,12 +2,14 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import GroupList from './GroupList';
-import GroupCreationForm from '../common/forms/GroupCreationForm';
-import { SideMenuProps } from '../../types';
+import ChildGroupSection from './ChildGroupSection';
+import GroupCreationForm from '../../common/forms/GroupCreationForm';
+import { SideMenuProps, ChildWithGroups } from '../../../types';
 
 const SideMenu: React.FC<SideMenuProps> = () => {
   const { t } = useTranslation('navigation');
   const [groupListKey, setGroupListKey] = useState(0);
+  const [children, setChildren] = useState<ChildWithGroups[]>([]);
 
   // Fonction pour rafraîchir la liste des groupes
   const refreshGroupList = useCallback(() => {
@@ -18,6 +20,11 @@ const SideMenu: React.FC<SideMenuProps> = () => {
   const handleGroupCreated = useCallback(() => {
     refreshGroupList();
   }, [refreshGroupList]);
+
+  // Gestionnaire appelé quand GroupList a chargé les données
+  const handleDataLoaded = useCallback((data: { children: ChildWithGroups[] }) => {
+    setChildren(data.children);
+  }, []);
 
   // Configuration des écouteurs d'événements pour les changements de groupe
   useEffect(() => {
@@ -46,7 +53,7 @@ const SideMenu: React.FC<SideMenuProps> = () => {
         <h2 className="text-lg font-medium text-gray-900 mb-4">{t('navigation:sidemenu.groups')}</h2>
 
         {/* Utilisation du composant GroupList */}
-        <GroupList key={groupListKey} />
+        <GroupList key={groupListKey} onDataLoaded={handleDataLoaded} />
 
         <div className="mt-6 space-y-2">
           {/* Utilisation du composant GroupCreationForm */}
@@ -66,6 +73,20 @@ const SideMenu: React.FC<SideMenuProps> = () => {
             {t('navigation:sidemenu.joinGroup')}
           </Link>
         </div>
+
+        {/* Section des comptes managés */}
+        {children.length > 0 && (
+          <div className="border-t border-gray-200 pt-6 mt-6">
+            <h2 className="text-lg font-medium text-gray-900 mb-4">{t('navigation:sidemenu.managedAccounts')}</h2>
+            {children.map((child) => (
+              <ChildGroupSection
+                key={child.id}
+                child={child}
+                onGroupCreated={handleGroupCreated}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

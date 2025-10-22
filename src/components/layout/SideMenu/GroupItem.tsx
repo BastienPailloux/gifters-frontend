@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { SideMenuGroupItemProps } from '../../types';
+import { SideMenuGroupItemProps } from '../../../types';
 
 const GroupItem: React.FC<SideMenuGroupItemProps> = ({ id, name, isActive = false }) => {
   return (
@@ -8,8 +8,8 @@ const GroupItem: React.FC<SideMenuGroupItemProps> = ({ id, name, isActive = fals
       to={`/groups/${id}`}
       className={`flex items-center px-2 py-2 text-sm font-medium rounded-md ${
         isActive
-          ? 'bg-primary-100 text-primary-900'
-          : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+          ? 'bg-primary-200 text-primary-900'
+          : 'text-gray-700 hover:bg-primary-200 hover:text-primary-900'
       }`}
     >
       <div
