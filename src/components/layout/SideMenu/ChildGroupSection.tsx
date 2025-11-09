@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import GroupItem from './GroupItem';
 import InlineGroupCreationInput from '../../common/forms/InlineGroupCreationInput';
@@ -18,6 +18,7 @@ interface ChildGroupSectionProps {
 const ChildGroupSection: React.FC<ChildGroupSectionProps> = ({ child, onGroupCreated }) => {
   const { t } = useTranslation('navigation');
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Obtenir l'ID du groupe actif à partir de l'URL
   const currentGroupId = location.pathname.startsWith('/groups/')
@@ -29,10 +30,18 @@ const ChildGroupSection: React.FC<ChildGroupSectionProps> = ({ child, onGroupCre
     onGroupCreated();
   }, [onGroupCreated]);
 
+  // Gestionnaire de clic sur le nom de l'enfant pour accéder à son profil
+  const handleChildClick = () => {
+    navigate(`/profile/${child.id}`);
+  };
+
   return (
     <div className="mb-6 bg-gray-50 p-4 rounded-md hover:bg-primary-100 transition-colors duration-200">
-      {/* Sous-titre avec le nom de l'enfant */}
-      <div className="flex items-center mb-3 px-2">
+      {/* Sous-titre avec le nom de l'enfant - cliquable pour accéder au profil */}
+      <div
+        className="flex items-center mb-3 px-2 cursor-pointer hover:bg-primary-200 rounded-md py-1 -mx-1 transition-colors duration-150"
+        onClick={handleChildClick}
+      >
         <div className="flex-shrink-0 w-6 h-6 rounded-full bg-primary-100 flex items-center justify-center mr-2">
           <svg className="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />

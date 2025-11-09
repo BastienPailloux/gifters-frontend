@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Button from '../common/forms/Button';
 import { Child } from '../../types/children';
@@ -15,6 +16,11 @@ interface ChildCardProps {
  */
 const ChildCard: React.FC<ChildCardProps> = ({ child, onEdit, onDelete }) => {
   const { t } = useTranslation('profile');
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate(`/profile/${child.id}`);
+  };
 
   const handleEdit = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -31,7 +37,10 @@ const ChildCard: React.FC<ChildCardProps> = ({ child, onEdit, onDelete }) => {
   };
 
   return (
-    <div className="flex items-center justify-between py-4 hover:bg-gray-50 rounded-md px-3 transition-colors duration-200">
+    <div
+      className="flex items-center justify-between py-4 hover:bg-gray-50 rounded-md px-3 transition-colors duration-200 cursor-pointer"
+      onClick={handleCardClick}
+    >
       <div className="flex-1">
         <div className="flex items-center gap-2 mb-1">
           <Avatar name={child.name} size="sm" />
