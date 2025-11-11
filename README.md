@@ -10,8 +10,9 @@
 
 ## ✨ Features
 
-- 📋 Create and manage wishlists - ONGOING
-- 👪 Organize groups for special occasions - ONGOING
+- 📋 Create and manage wishlists - DONE
+- 👪 Organize groups for special occasions - DONE
+- 👶 Managed accounts (children/dependents) - DONE
 - 🎂 Track birthdays and events - ONGOING
 - 💝 Discover and reserve gift ideas for your loved ones - ONGOING
 - 🔐 User authentication and authorization
