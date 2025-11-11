@@ -62,15 +62,21 @@ const MembersList: React.FC<MembersListProps> = ({ groupId, isCurrentUserAdmin, 
     fetchMembers();
   }, [groupId, user, t, isCurrentUserAdmin]);
 
-  const handleChangeRole = async (membershipId: string, newRole: 'member' | 'admin') => {
+  const handleChangeRole = async (userId: string, newRole: 'member' | 'admin') => {
     try {
-      await membershipService.updateMemberRole(groupId, membershipId, newRole);
+      // Trouver le membre pour obtenir son membershipId
+      const member = members.find(m => String(m.id) === String(userId));
+      if (!member || !member.membershipId) {
+        throw new Error('Membership ID not found');
+      }
+
+      await membershipService.updateMemberRole(groupId, member.membershipId, newRole);
       // Mettre à jour l'état local pour refléter le changement
       setMembers(prevMembers =>
-        prevMembers.map(member =>
-          member.id === membershipId
-            ? { ...member, role: newRole }
-            : member
+        prevMembers.map(m =>
+          m.id === userId
+            ? { ...m, role: newRole }
+            : m
         )
       );
     } catch (err) {
@@ -99,22 +105,21 @@ const MembersList: React.FC<MembersListProps> = ({ groupId, isCurrentUserAdmin, 
     try {
       setIsRemoving(true);
 
-      // Trouver le membre qu'on veut retirer
       const memberBeingRemoved = members.find(m => m.id === memberToRemove);
 
-      // Si c'est l'utilisateur lui-même, utiliser leaveGroup au lieu de removeMember
       if (memberBeingRemoved && user && String(memberBeingRemoved.id) === user.id) {
         await groupService.leaveGroup(groupId);
-        // Rediriger vers la page des groupes après avoir quitté
         navigate('/groups');
       } else {
-        // Sinon, utiliser la méthode classique de suppression de membre
-        await membershipService.removeMember(groupId, memberToRemove);
-        // Mettre à jour l'état local pour refléter le changement
+        const memberToDelete = members.find(m => m.id === memberToRemove);
+        if (!memberToDelete || !memberToDelete.membershipId) {
+          throw new Error('Membership ID not found');
+        }
+
+        await membershipService.removeMember(groupId, memberToDelete.membershipId);
         setMembers(prevMembers =>
           prevMembers.filter(member => member.id !== memberToRemove)
         );
-        // Si nous supprimons le membre sélectionné, réinitialiser la sélection
         if (selectedMemberId === memberToRemove) {
           setSelectedMemberId(null);
         }

@@ -40,10 +40,10 @@ const LeaveGroupModal: React.FC<LeaveGroupModalProps> = ({
     if (!user || !isOpen) return;
 
     // Filtrer les enfants qui sont membres du groupe
-    // Ce sont des comptes managés dont le parent_id correspond à l'utilisateur actuel
+    // Ce sont des comptes managés dont le parentId correspond à l'utilisateur actuel
     const childMembers = groupMembers
       .filter(member => {
-        return member.account_type === 'managed' && member.parent_id === Number(user.id);
+        return member.accountType === 'managed' && member.parentId === Number(user.id);
       })
       .map(member => ({
         id: String(member.id),

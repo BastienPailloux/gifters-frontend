@@ -408,7 +408,8 @@ export const membershipService = {
   getGroupMembers: async (groupId: string) => {
     try {
       const response = await api.get(`/groups/${groupId}/memberships`);
-      return response.data;
+      const data = Array.isArray(response.data) ? response.data : response.data.memberships || response.data;
+      return data;
     } catch (error) {
       console.error(`Error fetching members for group ${groupId}:`, error);
       throw error;

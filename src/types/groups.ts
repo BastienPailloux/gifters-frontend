@@ -33,16 +33,15 @@ export interface Group {
  */
 export interface Member {
   id: string;
+  membershipId: string; // ID du membership pour les actions REST (update, delete)
   name: string;
   email: string;
   role: 'member' | 'admin';
-  account_type?: 'standard' | 'managed';
-  parent_id?: number;
-  group_id?: string;
+  accountType?: 'standard' | 'managed';
+  parentId?: number;
   avatar?: string;
   isAdmin?: boolean;
-  membership_id?: string;
-  joined_at?: string;
+  joinedAt?: string;
 }
 
 /**
