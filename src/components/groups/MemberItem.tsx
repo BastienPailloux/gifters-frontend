@@ -15,7 +15,7 @@ const MemberItem: React.FC<MemberItemProps> = ({
   onClick,
   isActive = false
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('groups');
   const navigate = useNavigate();
 
   const handleChangeRole = () => {
@@ -60,7 +60,7 @@ const MemberItem: React.FC<MemberItemProps> = ({
 
         <div className="flex items-center">
           <ColorTag
-            text={member.role === 'admin' ? t('groups.roleAdmin') : t('groups.roleMember')}
+            text={member.role === 'admin' ? t('groups:roleAdmin') : t('groups:roleMember')}
             color={member.role === 'admin' ? 'purple' : 'blue'}
           />
 
@@ -72,9 +72,9 @@ const MemberItem: React.FC<MemberItemProps> = ({
                   variant="primary"
                   size="small"
                   className="mr-3"
-                  aria-label={member.role === 'admin' ? t('groups.makeUserMember') : t('groups.makeUserAdmin')}
+                  aria-label={member.role === 'admin' ? t('groups:makeUserMember') : t('groups:makeUserAdmin')}
                 >
-                  {member.role === 'admin' ? t('groups.downgradeRole') : t('groups.upgradeRole')}
+                  {member.role === 'admin' ? t('groups:downgradeRole') : t('groups:upgradeRole')}
                 </FlatButton>
               )}
 
@@ -83,9 +83,9 @@ const MemberItem: React.FC<MemberItemProps> = ({
                   onClick={handleRemove}
                   variant="danger"
                   size="small"
-                  aria-label={t('groups.removeMember')}
+                  aria-label={t('groups:removeMember')}
                 >
-                  {t('groups.remove')}
+                  {t('groups:remove')}
                 </FlatButton>
               )}
             </div>

@@ -1,0 +1,23 @@
+{
+  "joinGroup": "Join a group",
+  "joinGroupTitle": "Invitation to join a group",
+  "missingParameters": "Missing invitation parameters",
+  "errorTitle": "Invitation Error",
+  "errorFetchingDetails": "Error retrieving group details",
+  "errorAccepting": "Error accepting invitation",
+  "genericError": "An error occurred with this invitation",
+  "youAreInvitedTo": "You are invited to join the group",
+  "acceptInvitation": "Accept invitation",
+  "alreadyMember": "You are already a member of this group",
+  "needAccount": "You need to be logged in to join this group",
+  "invitationPlaceholder": "Enter invitation code or paste link",
+  "invitationCode": "Invitation code",
+  "invalidInput": "Please enter a valid invitation code",
+  "invalidInvitation": "Invalid or expired invitation",
+  "errorCheckingInvitation": "Error checking invitation",
+  "enterInvitationDescription": "Enter the invitation code or paste the invitation link you received to join a group.",
+  "proceed": "Continue",
+  "selectWhoJoins": "Select who will join the group",
+  "selectMultipleUsers": "You can select yourself and/or your managed accounts.",
+  "pleaseSelectAtLeastOne": "Please select at least one account to join the group."
+}

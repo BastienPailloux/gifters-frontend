@@ -6,44 +6,44 @@ import VideoPlayer from '../common/display/VideoPlayer';
 import TestimonialSlider from '../common/display/TestimonialSlider';
 
 const Hero: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('marketing');
 
   // Données de témoignages depuis les traductions
   const testimonials = [
     {
-      content: t('testimonials.1.content'),
+      content: t('marketing:testimonials.1.content'),
       author: {
-        name: t('testimonials.1.author.name'),
-        title: t('testimonials.1.author.title'),
+        name: t('marketing:testimonials.1.author.name'),
+        title: t('marketing:testimonials.1.author.title'),
         avatarUrl: "https://randomuser.me/api/portraits/women/44.jpg"
       },
       rating: 5
     },
     {
-      content: t('testimonials.2.content'),
+      content: t('marketing:testimonials.2.content'),
       author: {
-        name: t('testimonials.2.author.name'),
-        title: t('testimonials.2.author.title'),
-        company: t('testimonials.2.author.company'),
+        name: t('marketing:testimonials.2.author.name'),
+        title: t('marketing:testimonials.2.author.title'),
+        company: t('marketing:testimonials.2.author.company'),
         avatarUrl: "https://randomuser.me/api/portraits/men/32.jpg"
       },
       rating: 5
     },
     {
-      content: t('testimonials.3.content'),
+      content: t('marketing:testimonials.3.content'),
       author: {
-        name: t('testimonials.3.author.name'),
-        title: t('testimonials.3.author.title'),
-        company: t('testimonials.3.author.company'),
+        name: t('marketing:testimonials.3.author.name'),
+        title: t('marketing:testimonials.3.author.title'),
+        company: t('marketing:testimonials.3.author.company'),
         avatarUrl: "https://randomuser.me/api/portraits/women/68.jpg"
       },
       rating: 4
     },
     {
-      content: t('testimonials.4.content'),
+      content: t('marketing:testimonials.4.content'),
       author: {
-        name: t('testimonials.4.author.name'),
-        title: t('testimonials.4.author.title'),
+        name: t('marketing:testimonials.4.author.name'),
+        title: t('marketing:testimonials.4.author.title'),
         avatarUrl: "https://randomuser.me/api/portraits/men/55.jpg"
       },
       rating: 5
@@ -57,20 +57,20 @@ const Hero: React.FC = () => {
           {/* Contenu textuel */}
           <div className="max-w-xl">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              {t('hero.title')}
+              {t('marketing:hero.title')}
             </h1>
             <p className="text-xl text-gray-600 mb-8">
-              {t('hero.description')}
+              {t('marketing:hero.description')}
             </p>
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
               <Link to="/signup">
                 <Button variant="primary" size="lg">
-                  {t('hero.cta.primary')}
+                  {t('marketing:hero.cta.primary')}
                 </Button>
               </Link>
               <Link to="/features">
                 <Button variant="outline" size="lg">
-                  {t('hero.cta.secondary')}
+                  {t('marketing:hero.cta.secondary')}
                 </Button>
               </Link>
             </div>
@@ -95,10 +95,10 @@ const Hero: React.FC = () => {
         {/* Témoignages clients */}
         <div className="mt-16 pt-8 border-t border-gray-200">
           <h2 className="text-2xl font-bold text-center text-gray-900 mb-2">
-            {t('hero.testimonials.title')}
+            {t('marketing:hero.testimonials.title')}
           </h2>
           <p className="text-center text-gray-500 mb-8">
-            {t('hero.testimonials.subtitle')}
+            {t('marketing:hero.testimonials.subtitle')}
           </p>
           <TestimonialSlider
             testimonials={testimonials}

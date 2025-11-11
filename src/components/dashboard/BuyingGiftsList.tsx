@@ -18,7 +18,7 @@ import {
  * Composant qui affiche une liste des cadeaux en cours d'achat
  */
 const BuyingGiftsList: React.FC<BuyingGiftsListProps> = ({ maxGifts = 5 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('dashboard');
   const { user } = useAuth();
   const [actionError, setActionError] = useState<string | null>(null);
   const [processingGiftId, setProcessingGiftId] = useState<string | null>(null);
@@ -82,7 +82,7 @@ const BuyingGiftsList: React.FC<BuyingGiftsListProps> = ({ maxGifts = 5 }) => {
     const mappedGifts = response.giftIdeas.map((gift: ApiGiftIdea): BuyingGift => {
 
       // Déterminer le nom de l'utilisateur avec une logique plus robuste
-      let recipientName = t('common.unknownUser');
+      let recipientName = t('common:unknownUser');
       if (gift.forUser && typeof gift.forUser === 'object' && gift.forUser.name) {
         recipientName = gift.forUser.name;
       } else if (gift.forUserName) {
@@ -93,7 +93,7 @@ const BuyingGiftsList: React.FC<BuyingGiftsListProps> = ({ maxGifts = 5 }) => {
       }
 
       // Déterminer le nom du groupe avec une logique plus robuste
-      let groupName = t('common.defaultGroup');
+      let groupName = t('common:defaultGroup');
       if (gift.groupName) {
         groupName = gift.groupName;
       } else if (gift.group && typeof gift.group === 'object' && gift.group.name) {
@@ -138,12 +138,12 @@ const BuyingGiftsList: React.FC<BuyingGiftsListProps> = ({ maxGifts = 5 }) => {
   if (error) {
     return (
       <div>
-        <p className="text-red-500">{t('dashboard.errors.loadingGifts')}</p>
+        <p className="text-red-500">{t('dashboard:errors.loadingGifts')}</p>
         <button
           className="mt-2 text-primary-600 hover:text-primary-800 text-sm font-medium"
           onClick={fetchGifts}
         >
-          {t('common.retry')}
+          {t('common:retry')}
         </button>
       </div>
     );
@@ -152,7 +152,7 @@ const BuyingGiftsList: React.FC<BuyingGiftsListProps> = ({ maxGifts = 5 }) => {
   return (
     <div>
       <h3 className="text-md font-medium text-gray-900 mb-4">
-        {t('dashboard.buyingGifts')}
+        {t('dashboard:buyingGifts')}
       </h3>
 
       {actionError && (
@@ -162,7 +162,7 @@ const BuyingGiftsList: React.FC<BuyingGiftsListProps> = ({ maxGifts = 5 }) => {
             className="ml-2 underline"
             onClick={() => setActionError(null)}
           >
-            {t('common.dismiss')}
+            {t('common:dismiss')}
           </button>
         </div>
       )}
@@ -179,7 +179,7 @@ const BuyingGiftsList: React.FC<BuyingGiftsListProps> = ({ maxGifts = 5 }) => {
           ))}
         </ul>
       ) : (
-        <p className="text-gray-500">{t('dashboard.noBuyingGifts')}</p>
+        <p className="text-gray-500">{t('dashboard:noBuyingGifts')}</p>
       )}
 
       <div className="mt-4">
@@ -190,7 +190,7 @@ const BuyingGiftsList: React.FC<BuyingGiftsListProps> = ({ maxGifts = 5 }) => {
           icon={<FaChevronRight className="h-3 w-3" />}
           iconPosition="right"
         >
-          {t('dashboard.viewAllGifts')}
+          {t('dashboard:viewAllGifts')}
         </FlatButton>
       </div>
 

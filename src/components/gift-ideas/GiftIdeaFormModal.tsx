@@ -15,7 +15,7 @@ export const GiftIdeaFormModal: React.FC<GiftIdeaFormModalProps> = ({
   mode,
   giftIdea
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('gifts');
   const [giftData, setGiftData] = useState<GiftMetadata>({
     title: '',
     description: '',
@@ -127,7 +127,7 @@ export const GiftIdeaFormModal: React.FC<GiftIdeaFormModalProps> = ({
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title={mode === 'create' ? t('giftIdeas.create') : t('giftIdeas.edit')}
+      title={mode === 'create' ? t('gifts:giftIdeas.create') : t('gifts:giftIdeas.edit')}
       size="lg"
     >
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -145,8 +145,8 @@ export const GiftIdeaFormModal: React.FC<GiftIdeaFormModalProps> = ({
             }))}
             selectedIds={selectedRecipients}
             onChange={setSelectedRecipients}
-            label={t('giftIdeas.selectRecipients')}
-            errorMessage={selectedRecipients.length === 0 ? t('giftIdeas.recipientRequired') : ''}
+            label={t('gifts:giftIdeas.selectRecipients')}
+            errorMessage={selectedRecipients.length === 0 ? t('gifts:giftIdeas.recipientRequired') : ''}
           />
         </div>
 
@@ -157,7 +157,7 @@ export const GiftIdeaFormModal: React.FC<GiftIdeaFormModalProps> = ({
             onClick={onClose}
             disabled={isSubmitting}
           >
-            {t('common.cancel')}
+            {t('common:cancel')}
           </Button>
           <Button
             type="submit"
@@ -165,7 +165,7 @@ export const GiftIdeaFormModal: React.FC<GiftIdeaFormModalProps> = ({
             disabled={isSubmitting || selectedRecipients.length === 0 || !giftData.title}
             isLoading={isSubmitting}
           >
-            {mode === 'create' ? t('common.create') : t('common.save')}
+            {mode === 'create' ? t('common:create') : t('common:save')}
           </Button>
         </div>
       </form>

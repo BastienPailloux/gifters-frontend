@@ -30,8 +30,23 @@ i18n
     },
 
     // Espaces de noms (namespaces)
-    ns: ['translation'],
-    defaultNS: 'translation',
+    ns: [
+      'common',
+      'navigation',
+      'auth',
+      'dashboard',
+      'groups',
+      'gifts',
+      'invitation',
+      'profile',
+      'events',
+      'contact',
+      'marketing',
+      'legal',
+      'seo',
+      'validation',
+    ],
+    defaultNS: 'common',
   });
 
 export default i18n;

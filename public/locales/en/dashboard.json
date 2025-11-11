@@ -1,0 +1,47 @@
+{
+  "welcome": "Welcome to your dashboard",
+  "summary": "Find here a summary of your upcoming events and gifts you're buying.",
+  "personalInfo": "Your personal information",
+  "noName": "No name provided",
+  "upcomingEvents": "Upcoming events",
+  "birthday": "Birthday",
+  "christmas": "Christmas",
+  "daysLeft": "days left",
+  "noUpcomingEvents": "No upcoming events",
+  "viewAllEvents": "View all events",
+  "buyingGifts": "Gifts you're buying",
+  "noBuyingGifts": "No gifts in progress",
+  "for": "For",
+  "viewGift": "View gift",
+  "markAsBought": "Mark as bought",
+  "viewAllGifts": "View all gifts",
+  "quickActions": "Quick actions",
+  "errors": {
+    "loadingData": "Error loading data",
+    "loadingEvents": "Error loading events",
+    "loadingGifts": "Error loading gifts",
+    "markingGift": "Error marking gift as bought"
+  },
+  "cards": {
+    "gifts": {
+      "title": "My Gifts",
+      "description": "Manage your wishlists and gift ideas",
+      "action": "View gifts"
+    },
+    "events": {
+      "title": "My Events",
+      "description": "Organize and track your upcoming events",
+      "action": "View events"
+    },
+    "profile": {
+      "title": "My Profile",
+      "description": "Update your personal information and preferences",
+      "action": "Edit profile"
+    },
+    "children": {
+      "title": "My Managed Accounts",
+      "description": "Manage the accounts you supervise",
+      "action": "View accounts"
+    }
+  }
+}

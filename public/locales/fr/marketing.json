@@ -1,0 +1,194 @@
+{
+  "hero": {
+    "title": "Simplifiez la gestion de vos cadeaux et événements",
+    "description": "Créez des listes de souhaits, organisez des événements et trouvez l'inspiration pour des cadeaux parfaits. Gifters connecte les gens à travers des moments de partage mémorables.",
+    "cta": {
+      "primary": "Commencer gratuitement",
+      "secondary": "En savoir plus"
+    },
+    "testimonials": {
+      "title": "Ce que nos utilisateurs disent",
+      "subtitle": "Découvrez comment Gifters transforme l'expérience des cadeaux"
+    }
+  },
+  "features": {
+    "title": "Fonctionnalités Clés",
+    "subtitle": "Tout ce dont vous avez besoin pour gérer vos cadeaux et événements",
+    "items": {
+      "wishlists": {
+        "title": "Listes de souhaits",
+        "description": "Créez et partagez facilement des listes de souhaits pour toute occasion. Ajoutez des articles de n'importe quel site web en un seul clic."
+      },
+      "events": {
+        "title": "Gestion d'événements",
+        "description": "Organisez des anniversaires, des mariages et d'autres célébrations. Envoyez des invitations et suivez les réponses en temps réel."
+      },
+      "inspiration": {
+        "title": "Idées cadeaux",
+        "description": "Découvrez des suggestions personnalisées basées sur les intérêts et préférences de vos proches."
+      },
+      "reminders": {
+        "title": "Rappels intelligents",
+        "description": "Ne manquez plus jamais un anniversaire ou une occasion spéciale grâce à nos notifications personnalisables."
+      },
+      "groups": {
+        "title": "Cadeaux de groupe",
+        "description": "Organisez facilement des cadeaux collectifs et suivez les contributions de chacun."
+      },
+      "privacy": {
+        "title": "Contrôles de confidentialité",
+        "description": "Décidez qui peut voir vos listes et quelles informations sont partagées."
+      }
+    },
+    "groups": {
+      "title": "Gestion de groupes",
+      "description": "Créez et gérez des groupes d'amis et de famille pour mieux organiser votre expérience de cadeaux.",
+      "detailedDescription": "Créez et gérez des groupes d'amis et de famille pour mieux organiser votre expérience de cadeaux.",
+      "imageAlt": "Capture d'écran de la gestion de groupes"
+    },
+    "wishLists": {
+      "title": "Listes de souhaits",
+      "description": "Créez et partagez facilement vos listes de souhaits avec vos amis et votre famille pour toute occasion.",
+      "detailedDescription": "Créez et partagez vos listes de souhaits avec vos proches. Ajoutez des éléments de n'importe quel site web, ajoutez des détails et des priorités. Recevez exactement ce que vous désirez et évitez les doublons grâce à notre système de réservation.",
+      "imageAlt": "Capture d'écran de la gestion de listes de souhaits"
+    },
+    "events": {
+      "title": "Planification d'événements",
+      "description": "Organisez des anniversaires, des fêtes et des événements spéciaux avec une coordination intégrée des cadeaux.",
+      "detailedDescription": "Planifiez des anniversaires, des mariages et d'autres occasions spéciales. Envoyez des invitations, suivez les réponses et gardez toutes les informations organisées au même endroit.",
+      "imageAlt": "Capture d'écran de la planification d'événements"
+    },
+    "notifications": {
+      "title": "Notifications intelligentes",
+      "description": "Ne manquez jamais une date importante grâce à des rappels personnalisables pour les événements et les opportunités de cadeaux.",
+      "detailedDescription": "Ne manquez plus un important date avec des rappels personnalisables pour les événements et les opportunités de cadeaux.",
+      "imageAlt": "Capture d'écran des notifications intelligentes"
+    },
+    "privacy": {
+      "title": "Contrôles de confidentialité",
+      "description": "Contrôle total sur ce que vous partagez et avec qui - vos données restent privées et sécurisées.",
+      "detailedDescription": "Contrôle total sur ce que vous partagez et avec qui - vos données restent privées et sécurisées.",
+      "imageAlt": "Capture d'écran des contrôles de confidentialité"
+    },
+    "multiLanguage": {
+      "title": "Support multilingue",
+      "description": "Utilisez Gifters dans votre langue préférée avec notre liste croissante de langues prises en charge.",
+      "detailedDescription": "Utilisez Gifters dans votre langue préférée avec notre liste croissante de langues prises en charge.",
+      "imageAlt": "Capture d'écran du support multilingue"
+    },
+    "register": "S'inscrire gratuitement",
+    "cta": "Prêt à simplifier votre expérience d'offrir des cadeaux ?",
+    "detailedTitle": "Découvrez en détail",
+    "finalCta": "Prêt à organiser vos cadeaux et événements de manière simple et efficace ?",
+    "startNow": "Commencer maintenant"
+  },
+  "testimonials": {
+    "1": {
+      "content": "Gifters a complètement transformé la façon dont nous organisons les anniversaires dans notre famille. Plus de cadeaux en double et tout le monde trouve quelque chose qui lui plaît vraiment !",
+      "author": {
+        "name": "Marie Dupont",
+        "title": "Mère de famille"
+      }
+    },
+    "2": {
+      "content": "J'ai utilisé Gifters pour mon mariage et c'était incroyable ! Nos invités ont adoré pouvoir choisir parmi notre liste de souhaits et nous avons reçu exactement ce dont nous avions besoin.",
+      "author": {
+        "name": "Thomas Martin",
+        "title": "Jeune marié",
+        "company": "Architecte"
+      }
+    },
+    "3": {
+      "content": "En tant qu'organisatrice d'événements, je recommande Gifters à tous mes clients. La plateforme est intuitive et le service client est exceptionnel.",
+      "author": {
+        "name": "Sophie Leclerc",
+        "title": "Organisatrice d'événements",
+        "company": "EventPro"
+      }
+    },
+    "4": {
+      "content": "Gifters m'a sauvé pour les fêtes de fin d'année ! Plus besoin de se casser la tête pour trouver des idées, tout est centralisé et facile à utiliser.",
+      "author": {
+        "name": "Lucas Bernard",
+        "title": "Étudiant"
+      }
+    }
+  },
+  "pricing": {
+    "title": "Tarifs simples et transparents",
+    "subtitle": "Choisissez le plan qui correspond à vos besoins",
+    "free": "Gratuit",
+    "mostPopular": "Le plus populaire",
+    "specialOffer": "Besoin d'une solution pour votre entreprise ?",
+    "contactUs": "Contactez-nous",
+    "plans": {
+      "period": {
+        "month": "mois",
+        "year": "année"
+      },
+      "free": {
+        "name": "Gratuit",
+        "description": "Parfait pour commencer et découvrir Gifters",
+        "cta": "Commencer gratuitement"
+      },
+      "standard": {
+        "name": "Standard",
+        "description": "Idéal pour les familles et les petits groupes d'amis",
+        "cta": "Essayer gratuitement pendant 30 jours"
+      },
+      "premium": {
+        "name": "Premium",
+        "description": "Pour les grands groupes et les utilisateurs fréquents",
+        "cta": "Commencer le essai gratuit"
+      }
+    },
+    "features": {
+      "wishLists": "Liste de souhaits illimitées",
+      "groups": "{{count}} groupes",
+      "members": "{{count}} membres par groupe",
+      "giftIdeas": "{{count}} idées cadeaux",
+      "support": "Support prioritaire",
+      "noAds": "Pas de publicités"
+    },
+    "faq": {
+      "title": "Questions fréquentes",
+      "q1": "Puis-je changer de plan à tout moment ?",
+      "a1": "Oui, vous pouvez mettre à jour ou réduire votre plan à tout moment. Le changement prendra effet à votre prochaine date de facturation.",
+      "q2": "Offrez-vous des remises pour les abonnements annuels ?",
+      "a2": "Oui, en choisissant un abonnement annuel, vous obtenez deux mois gratuits (ce qui représente 17% de réduction).",
+      "q3": "Comment fonctionne l'essai gratuit ?",
+      "a3": "Nos essais gratuits durent 30 jours et vous donnent accès à toutes les fonctionnalités du plan choisi. Aucune carte de crédit n'est requise pour l'essai.",
+      "q4": "Y a-t-il des frais supplémentaires ?",
+      "a4": "Non, notre tarification est transparente. Il n'y a pas de frais cachés ou supplémentaires."
+    },
+    "temporarilyUnlimited": "Toutes les fonctionnalités sont temporairement illimitées !"
+  },
+  "about": {
+    "title": "À propos de Gifters",
+    "subtitle": "Découvrez notre histoire et notre mission pour faciliter l'organisation de cadeaux",
+    "ourStory": {
+      "title": "Notre histoire",
+      "paragraph1": "Gifters est né d'une expérience personnelle : la difficulté d'organiser des cadeaux en groupe sans doublons ou sans oublier personne.",
+      "paragraph2": "Lancé en 2025, notre plateforme vise à simplifier la coordination des cadeaux pour les anniversaires, fêtes et occasions spéciales."
+    },
+    "mission": {
+      "title": "Notre mission",
+      "paragraph1": "Faciliter l'organisation des cadeaux de groupe pour que chaque occasion soit mémorable sans le stress des détails logistiques.",
+      "paragraph2": "Nous croyons que la générosité doit être simple et agréable, libérée des contraintes administratives et financières."
+    },
+    "team": {
+      "title": "Notre équipe",
+      "paragraph1": "Nous sommes une équipe passionnée d'entrepreneurs et de développeurs partageant la même vision : rendre les célébrations plus joyeuses et moins stressantes.",
+      "paragraph2": "Notre diversité est notre force - des profils différents unis par la volonté de créer une solution utile au quotidien."
+    },
+    "values": {
+      "title": "Nos valeurs",
+      "paragraph1": "Simplicité, transparence et convivialité sont au cœur de notre approche.",
+      "paragraph2": "Nous développons Gifters avec le souci constant de l'expérience utilisateur et de la protection des données personnelles."
+    },
+    "contact": {
+      "description": "Vous avez des questions, des suggestions ou souhaitez rejoindre l'aventure ? N'hésitez pas à nous contacter.",
+      "button": "Nous contacter"
+    }
+  }
+}

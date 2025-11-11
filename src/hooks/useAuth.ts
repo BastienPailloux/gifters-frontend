@@ -6,7 +6,7 @@ import { AuthState, LoginCredentials, RegisterData, ApiErrorResponse, ResetPassw
 
 // Hook personnalisé pour l'authentification
 const useAuth = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('auth');
   const [authState, setAuthState] = useState<AuthState>({
     user: null,
     isAuthenticated: false,
@@ -33,7 +33,7 @@ const useAuth = () => {
           user: null,
           isAuthenticated: false,
           isLoading: false,
-          error: t('auth.errors.loadUser'),
+          error: t('auth:errors.loadUser'),
         });
       }
     };
@@ -56,7 +56,7 @@ const useAuth = () => {
       return { success: true };
     } catch (err: unknown) {
       const error = err as AxiosError<ApiErrorResponse>;
-      let errorMessage = t('auth.errors.login');
+      let errorMessage = t('auth:errors.login');
 
       if (axios.isAxiosError(error)) {
         if (error.response?.data?.status?.message) {
@@ -90,7 +90,7 @@ const useAuth = () => {
       return { success: true };
     } catch (err: unknown) {
       const error = err as AxiosError<ApiErrorResponse>;
-      let errorMessage = t('auth.errors.register');
+      let errorMessage = t('auth:errors.register');
 
       if (axios.isAxiosError(error)) {
         if (error.response?.data?.status?.message) {
@@ -145,7 +145,7 @@ const useAuth = () => {
       return { success: true, message: response.message };
     } catch (err: unknown) {
       const error = err as AxiosError<ApiErrorResponse>;
-      let errorMessage = t('auth.errors.passwordReset');
+      let errorMessage = t('auth:errors.passwordReset');
 
       if (axios.isAxiosError(error)) {
         if (error.response?.data?.status?.message) {
@@ -178,7 +178,7 @@ const useAuth = () => {
       return { success: true, message: response.message };
     } catch (err: unknown) {
       const error = err as AxiosError<ApiErrorResponse>;
-      let errorMessage = t('auth.errors.passwordReset');
+      let errorMessage = t('auth:errors.passwordReset');
 
       if (axios.isAxiosError(error)) {
         if (error.response?.data?.status?.message) {

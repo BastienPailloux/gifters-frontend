@@ -1,0 +1,47 @@
+{
+  "welcome": "Bienvenue sur votre tableau de bord",
+  "summary": "Retrouvez ici un résumé de vos prochains événements et vos cadeaux en cours.",
+  "personalInfo": "Vos informations personnelles",
+  "noName": "Aucun nom fourni",
+  "upcomingEvents": "Prochains événements",
+  "birthday": "Anniversaire",
+  "christmas": "Noël",
+  "daysLeft": "jours restants",
+  "noUpcomingEvents": "Aucun événement à venir",
+  "viewAllEvents": "Voir tous les événements",
+  "buyingGifts": "Cadeaux en cours d'achat",
+  "noBuyingGifts": "Aucun cadeau en cours d'achat",
+  "for": "Pour",
+  "viewGift": "Voir le cadeau",
+  "markAsBought": "Marquer comme acheté",
+  "viewAllGifts": "Voir tous les cadeaux",
+  "quickActions": "Actions rapides",
+  "errors": {
+    "loadingData": "Erreur lors du chargement des données",
+    "loadingEvents": "Erreur lors du chargement des événements",
+    "loadingGifts": "Erreur lors du chargement des cadeaux",
+    "markingGift": "Erreur lors du marquage du cadeau comme acheté"
+  },
+  "cards": {
+    "gifts": {
+      "title": "Mes Cadeaux",
+      "description": "Gérez vos listes de souhaits et idées de cadeaux",
+      "action": "Voir les cadeaux"
+    },
+    "events": {
+      "title": "Mes Événements",
+      "description": "Organisez et suivez vos événements à venir",
+      "action": "Voir les événements"
+    },
+    "profile": {
+      "title": "Mon Profil",
+      "description": "Mettez à jour vos informations personnelles et préférences",
+      "action": "Modifier le profil"
+    },
+    "children": {
+      "title": "Mes Comptes Managés",
+      "description": "Gérez les comptes que vous supervisez",
+      "action": "Voir les comptes"
+    }
+  }
+}

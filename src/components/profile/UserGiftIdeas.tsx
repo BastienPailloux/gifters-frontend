@@ -5,7 +5,7 @@ import GiftIdeaItem from '../gift-ideas/GiftIdeaItem';
 import { UserGiftIdeasProps } from '../../types';
 
 const UserGiftIdeas: React.FC<UserGiftIdeasProps> = ({ userName, giftIdeas, isLoading }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('profile');
   const navigate = useNavigate();
 
   const handleViewGift = (giftId: string | number) => {
@@ -31,7 +31,7 @@ const UserGiftIdeas: React.FC<UserGiftIdeasProps> = ({ userName, giftIdeas, isLo
   return (
     <div className="bg-white rounded-lg shadow-md p-6">
       <h2 className="text-2xl font-bold text-gray-900 mb-6">
-        {t('profile.giftIdeasFor', { name: userName })}
+        {t('profile:giftIdeasFor', { name: userName })}
       </h2>
 
       {giftIdeas.length > 0 ? (
@@ -46,7 +46,7 @@ const UserGiftIdeas: React.FC<UserGiftIdeasProps> = ({ userName, giftIdeas, isLo
           ))}
         </div>
       ) : (
-        <p className="text-gray-600">{t('profile.noGiftIdeas')}</p>
+        <p className="text-gray-600">{t('profile:noGiftIdeas')}</p>
       )}
     </div>
   );

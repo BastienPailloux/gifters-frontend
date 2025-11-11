@@ -6,7 +6,7 @@ import { Title } from '../common/typography';
 import { ContactInfoProps, ContactInfoItem } from '../../types';
 
 const ContactInfo: React.FC<ContactInfoProps> = ({ className, items, title, description }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('contact');
 
   // Animation variants
   const containerVariants = {
@@ -35,7 +35,7 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ className, items, title, desc
     {
       id: 1,
       icon: <FaEnvelope className="text-primary mt-1 text-xl" />,
-      title: t('contact.email'),
+      title: t('contact:email'),
       content: 'contact@gifters.fr'
     }
   ];
@@ -44,7 +44,7 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ className, items, title, desc
 
   return (
     <div className={className}>
-      <Title as="h3">{title || t('contact.infoTitle')}</Title>
+      <Title as="h3">{title || t('contact:infoTitle')}</Title>
 
       {description && (
         <p className="text-gray-600 mt-2">{description}</p>
@@ -68,7 +68,7 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ className, items, title, desc
               <p className="text-gray-600">{item.content}</p>
               {item.link && (
                 <a href={item.link} className="text-primary-600 hover:underline block mt-1">
-                  {t('common.visitLink')}
+                  {t('common:visitLink')}
                 </a>
               )}
             </div>

@@ -8,7 +8,7 @@ import Button from '../../components/common/forms/Button';
 import { SEO } from '../../components/common/seo';
 
 const ResetPassword: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('auth');
   const { resetPassword, error, clearError } = useAuth();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -52,7 +52,7 @@ const ResetPassword: React.FC = () => {
         });
 
         if (result.success) {
-          setSuccessMessage(result.message || t('auth.resetPassword.successMessage'));
+          setSuccessMessage(result.message || t('auth:resetPassword.successMessage'));
           setFormData({ password: '', passwordConfirmation: '' });
 
           // Rediriger vers la page de connexion après 3 secondes
@@ -70,13 +70,13 @@ const ResetPassword: React.FC = () => {
   if (!token) {
     return (
       <>
-        <SEO translationKey="seo.resetPassword" />
+        <SEO translationKey="resetPassword" />
         <AuthForm
-          title={t('auth.resetPassword.title')}
-          subtitle={t('auth.resetPassword.noToken')}
-          linkText={t('auth.backToLogin')}
+          title={t('auth:resetPassword.title')}
+          subtitle={t('auth:resetPassword.noToken')}
+          linkText={t('auth:backToLogin')}
           linkUrl="/login"
-          error={t('auth.resetPassword.invalidLink')}
+          error={t('auth:resetPassword.invalidLink')}
           onSubmit={(e) => e.preventDefault()}
         >
           <Button
@@ -85,7 +85,7 @@ const ResetPassword: React.FC = () => {
             fullWidth
             onClick={() => navigate('/login')}
           >
-            {t('auth.backToLogin')}
+            {t('auth:backToLogin')}
           </Button>
         </AuthForm>
       </>
@@ -94,11 +94,11 @@ const ResetPassword: React.FC = () => {
 
   return (
     <>
-      <SEO translationKey="seo.resetPassword" />
+      <SEO translationKey="resetPassword" />
       <AuthForm
-        title={t('auth.resetPassword.title')}
-        subtitle={t('auth.resetPassword.subtitle')}
-        linkText={t('auth.backToLogin')}
+        title={t('auth:resetPassword.title')}
+        subtitle={t('auth:resetPassword.subtitle')}
+        linkText={t('auth:backToLogin')}
         linkUrl="/login"
         error={error}
         successMessage={successMessage}
@@ -114,7 +114,7 @@ const ResetPassword: React.FC = () => {
               required
               value={formData.password}
               onChange={handleInputChange}
-              label={t('auth.fields.newPassword')}
+              label={t('auth:fields.newPassword')}
             />
 
             <Input
@@ -125,7 +125,7 @@ const ResetPassword: React.FC = () => {
               required
               value={formData.passwordConfirmation}
               onChange={handleInputChange}
-              label={t('auth.fields.confirmPassword')}
+              label={t('auth:fields.confirmPassword')}
             />
 
             <Button
@@ -135,14 +135,14 @@ const ResetPassword: React.FC = () => {
               isLoading={isSubmitting}
               disabled={isSubmitting}
             >
-              {t('auth.resetPassword.submit')}
+              {t('auth:resetPassword.submit')}
             </Button>
           </>
         ) : (
           <div className="mt-4">
             <p className="text-center mb-4">{successMessage}</p>
             <p className="text-center text-sm text-gray-500">
-              {t('auth.resetPassword.redirecting')}
+              {t('auth:resetPassword.redirecting')}
             </p>
           </div>
         )}

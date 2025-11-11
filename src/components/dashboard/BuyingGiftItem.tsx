@@ -13,7 +13,7 @@ const BuyingGiftItem: React.FC<BuyingGiftItemProps> = ({
   onMarkAsBought,
   isProcessing = false
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('dashboard');
   const navigate = useNavigate();
 
   const handleViewGift = () => {
@@ -31,7 +31,7 @@ const BuyingGiftItem: React.FC<BuyingGiftItemProps> = ({
             <StatusTag status={gift.status} size="sm" />
           </div>
           <p className="text-sm text-gray-500 mt-1">
-            {t('dashboard.for')} {gift.recipients && gift.recipients.length > 0
+            {t('dashboard:for')} {gift.recipients && gift.recipients.length > 0
               ? gift.recipients.map(r => r.name).join(', ')
               : gift.for_user_name}
           </p>
@@ -42,7 +42,7 @@ const BuyingGiftItem: React.FC<BuyingGiftItemProps> = ({
           onClick={handleViewGift}
           size="small"
         >
-          {t('dashboard.viewGift')}
+          {t('dashboard:viewGift')}
         </FlatButton>
         <FlatButton
           variant="secondary"
@@ -53,10 +53,10 @@ const BuyingGiftItem: React.FC<BuyingGiftItemProps> = ({
           {isProcessing ? (
             <>
               <span className="inline-block h-4 w-4 rounded-full border-2 border-t-transparent border-white animate-spin mr-2" />
-              {t('common.processing')}
+              {t('common:processing')}
             </>
           ) : (
-            t('dashboard.markAsBought')
+            t('dashboard:markAsBought')
           )}
         </FlatButton>
       </div>

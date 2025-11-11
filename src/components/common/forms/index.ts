@@ -6,3 +6,6 @@ export { default as Checkbox } from './Checkbox';
 export { default as ToggleSelect } from './ToggleSelect';
 export { default as FlatButton } from './FlatButton';
 export { default as RecipientSelector } from './RecipientSelector';
+export { default as IconButton } from './IconButton';
+export { default as IconLinkButton } from './IconLinkButton';
+export { default as InlineGroupCreationInput } from './InlineGroupCreationInput';

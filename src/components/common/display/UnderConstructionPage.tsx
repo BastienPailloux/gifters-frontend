@@ -9,7 +9,7 @@ const UnderConstructionPage: React.FC<UnderConstructionPageProps> = ({
   description,
   onBackClick
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(); // Utilise 'common' par défaut
   const navigate = useNavigate();
 
   const handleBackClick = () => {
@@ -45,12 +45,12 @@ const UnderConstructionPage: React.FC<UnderConstructionPageProps> = ({
 
         {/* Titre */}
         <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
-          {title || t('common.underConstruction.title', 'En Construction')}
+          {title || t('common:underConstruction.title', 'En Construction')}
         </h2>
 
         {/* Description */}
         <p className="mt-2 text-sm text-gray-600">
-          {description || t('common.underConstruction.description', 'Cette fonctionnalité est actuellement en développement. Elle sera bientôt disponible !')}
+          {description || t('common:underConstruction.description', 'Cette fonctionnalité est actuellement en développement. Elle sera bientôt disponible !')}
         </p>
 
         {/* Bouton Retour */}
@@ -59,7 +59,7 @@ const UnderConstructionPage: React.FC<UnderConstructionPageProps> = ({
             variant="outline"
             onClick={handleBackClick}
           >
-            {t('common.back', 'Retour')}
+            {t('common:back', 'Retour')}
           </Button>
         </div>
       </div>

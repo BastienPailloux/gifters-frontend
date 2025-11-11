@@ -1,0 +1,45 @@
+{
+  "title": "Contact Us",
+  "subtitle": "We'd love to hear from you. Feel free to reach out with any questions or suggestions.",
+  "infoTitle": "Contact Information",
+  "email": "Email",
+  "phone": "Phone",
+  "address": "Address",
+  "formTitle": "Send Us a Message",
+  "successMessage": "Your message has been sent successfully. We'll get back to you as soon as possible.",
+  "mapPlaceholder": "Interactive map to be embedded here",
+  "faqTitle": "Frequently Asked Questions",
+  "form": {
+    "name": "Name",
+    "email": "Email",
+    "subject": "Subject",
+    "message": "Message",
+    "send": "Send",
+    "sending": "Sending..."
+  },
+  "faq": {
+    "question1": "How do I create an account?",
+    "answer1": "You can create an account by clicking on \"Register\" in the main menu. Then fill out the form with your personal information.",
+    "question2": "How do I create a wishlist?",
+    "answer2": "Once logged in, go to the \"My Gifts\" section, then click on the \"My wishlist\" tab and on the \"Add a gift idea\" button.",
+    "question3": "How do I share my wishlist?",
+    "answer3": "All the gifts of your wishlist are shared with all the members of your groups.",
+    "question4": "Is the Gifters service free?",
+    "answer4": "Yes, all basic features of Gifters are free. We also offer premium features for the most demanding users."
+  },
+  "errors": {
+    "submission": "An error occurred while sending the message. Please try again."
+  },
+  "newsletter": {
+    "emailLabel": "Email address for newsletter",
+    "subscriptionSuccess": "You are now subscribed to our newsletter!",
+    "unsubscriptionSuccess": "You have been successfully unsubscribed from our newsletter.",
+    "subscribe": "I would like to receive the newsletter",
+    "errors": {
+      "generic": "An error occurred while subscribing to the newsletter.",
+      "invalid_email": "Please enter a valid email address.",
+      "already_subscribed": "This email address is already subscribed to our newsletter.",
+      "unsubscribe_error": "An error occurred while unsubscribing."
+    }
+  }
+}

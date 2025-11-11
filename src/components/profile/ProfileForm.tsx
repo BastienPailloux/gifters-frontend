@@ -6,7 +6,7 @@ import Checkbox from '../common/forms/Checkbox';
 import { ProfileFormProps, ProfileFormData } from '../../types';
 
 const ProfileForm: React.FC<ProfileFormProps> = ({ user, onSubmit, onCancel }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('profile');
   const [formData, setFormData] = useState<ProfileFormData>({
     name: user.name || '',
     email: user.email || '',
@@ -54,7 +54,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ user, onSubmit, onCancel }) =
       if (err instanceof Error) {
         setError(err.message);
       } else {
-        setError(t('common.error'));
+        setError(t('common:error'));
       }
     } finally {
       setIsSubmitting(false);
@@ -63,7 +63,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ user, onSubmit, onCancel }) =
 
   return (
     <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-6">
-      <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('profile.editProfile')}</h2>
+      <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('profile:editProfile')}</h2>
 
       {error && (
         <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-md">
@@ -74,17 +74,17 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ user, onSubmit, onCancel }) =
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         {/* Informations personnelles */}
         <div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('profile.personalInfo')}</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('profile:personalInfo')}</h3>
           <div className="space-y-4">
             <Input
-              label={t('profile.name')}
+              label={t('profile:name')}
               name="name"
               value={formData.name}
               onChange={handleChange}
               required
             />
             <Input
-              label={t('profile.email')}
+              label={t('profile:email')}
               name="email"
               type="email"
               value={formData.email}
@@ -92,14 +92,14 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ user, onSubmit, onCancel }) =
               required
             />
             <Input
-              label={t('profile.birthday')}
+              label={t('profile:birthday')}
               name="birthday"
               type="date"
               value={formData.birthday}
               onChange={handleChange}
             />
             <Input
-              label={t('profile.phone')}
+              label={t('profile:phone')}
               name="phone_number"
               type="tel"
               value={formData.phone_number}
@@ -110,34 +110,34 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ user, onSubmit, onCancel }) =
 
         {/* Adresse */}
         <div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('profile.address')}</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('profile:address')}</h3>
           <div className="space-y-4">
             <Input
-              label={t('profile.street')}
+              label={t('profile:street')}
               name="address"
               value={formData.address}
               onChange={handleChange}
             />
             <Input
-              label={t('profile.city')}
+              label={t('profile:city')}
               name="city"
               value={formData.city}
               onChange={handleChange}
             />
             <Input
-              label={t('profile.state')}
+              label={t('profile:state')}
               name="state"
               value={formData.state}
               onChange={handleChange}
             />
             <Input
-              label={t('profile.zipCode')}
+              label={t('profile:zipCode')}
               name="zip_code"
               value={formData.zip_code}
               onChange={handleChange}
             />
             <Input
-              label={t('profile.country')}
+              label={t('profile:country')}
               name="country"
               value={formData.country}
               onChange={handleChange}
@@ -153,7 +153,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ user, onSubmit, onCancel }) =
           name="newsletter_subscription"
           checked={formData.newsletter_subscription}
           onChange={handleChange}
-          label={t('newsletter.subscribe', 'Je souhaite recevoir la newsletter')}
+          label={t('contact:newsletter.subscribe', 'Je souhaite recevoir la newsletter')}
         />
       </div>
 
@@ -162,25 +162,25 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ user, onSubmit, onCancel }) =
 
       {/* Changement de mot de passe */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('profile.changePassword')}</h3>
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('profile:changePassword')}</h3>
         <div className="space-y-4">
           <Input
-            label={t('profile.currentPassword')}
+            label={t('profile:currentPassword')}
             name="current_password"
             type="password"
             value={formData.current_password}
             onChange={handleChange}
-            helperText={t('profile.currentPasswordRequired')}
+            helperText={t('profile:currentPasswordRequired')}
           />
           <Input
-            label={t('profile.newPassword')}
+            label={t('profile:newPassword')}
             name="password"
             type="password"
             value={formData.password}
             onChange={handleChange}
           />
           <Input
-            label={t('profile.confirmPassword')}
+            label={t('profile:confirmPassword')}
             name="password_confirmation"
             type="password"
             value={formData.password_confirmation}
@@ -196,14 +196,14 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ user, onSubmit, onCancel }) =
           onClick={onCancel}
           disabled={isSubmitting}
         >
-          {t('common.cancel')}
+          {t('common:cancel')}
         </Button>
         <Button
           type="submit"
           isLoading={isSubmitting}
           disabled={isSubmitting}
         >
-          {t('common.save')}
+          {t('common:save')}
         </Button>
       </div>
     </form>

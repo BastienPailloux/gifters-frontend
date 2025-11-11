@@ -13,7 +13,7 @@ const CelebrationModal: React.FC<CelebrationModalProps> = ({
   giftTitle = '',
   recipientName = ''
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(); // Utilise 'common' par défaut
   const contentRef = useRef<HTMLDivElement>(null);
 
   // Fermer automatiquement la modal après 5 secondes
@@ -28,11 +28,11 @@ const CelebrationModal: React.FC<CelebrationModalProps> = ({
 
   // Construire le message avec les variables
   const celebrationMessage = giftTitle && recipientName
-    ? t('celebration.giftMarkedAsBought', {
+    ? t('common:celebration.giftMarkedAsBought', {
         giftTitle,
         recipientName
       })
-    : t('celebration.genericSuccess');
+    : t('common:celebration.genericSuccess');
 
   return (
     <Modal
@@ -61,7 +61,7 @@ const CelebrationModal: React.FC<CelebrationModalProps> = ({
         </div>
 
         <h3 className="text-2xl font-bold text-gray-900 mb-2 relative z-10">
-          {t('celebration.congratulations')}
+          {t('common:celebration.congratulations')}
         </h3>
 
         <p className="text-lg text-gray-600 mb-6 relative z-10">
@@ -74,7 +74,7 @@ const CelebrationModal: React.FC<CelebrationModalProps> = ({
             className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary-600 text-base font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:text-sm"
             onClick={onClose}
           >
-            {t('common.close')}
+            {t('common:close')}
           </button>
         </div>
       </div>

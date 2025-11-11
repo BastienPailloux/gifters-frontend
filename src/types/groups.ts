@@ -3,6 +3,15 @@ import { ReactNode } from 'react';
 import { GiftStatus } from './ui';
 
 /**
+ * Permissions de l'utilisateur sur un groupe
+ */
+export interface GroupPermissions {
+  can_administer: boolean;
+  is_direct_admin: boolean;
+  is_member: boolean;
+}
+
+/**
  * Représente un groupe d'utilisateurs
  */
 export interface Group {
@@ -16,6 +25,7 @@ export interface Group {
   member_count?: number;
   created_by?: User;
   isAdmin?: boolean;
+  permissions?: GroupPermissions;
 }
 
 /**
@@ -90,6 +100,8 @@ export interface GroupCreationFormProps {
   inputOnly?: boolean;
   /** Indique si le composant doit refetch les données après création (au lieu de recharger la page) */
   refetchOnCreate?: boolean;
+  /** ID de l'enfant pour lequel créer le groupe (optionnel, si non fourni, le groupe est créé pour l'utilisateur courant) */
+  childId?: string;
 }
 
 /**
@@ -215,6 +227,7 @@ export interface GroupDetailsData {
   name: string;
   description?: string;
   members_count?: number;
+  permissions?: GroupPermissions;
   members?: {
     id: string;
     name: string;

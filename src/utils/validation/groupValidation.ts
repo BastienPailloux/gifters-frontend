@@ -24,7 +24,7 @@ export const validateGroupName = (
   if (!trimmedName) {
     return {
       isValid: false,
-      errorMessage: t ? t('validation.groupName.required') : 'Le nom du groupe est requis'
+      errorMessage: t ? t('validation:groupName.required') : 'Le nom du groupe est requis'
     };
   }
 
@@ -33,7 +33,7 @@ export const validateGroupName = (
     return {
       isValid: false,
       errorMessage: t ?
-        t('validation.groupName.tooShort', { min: MIN_GROUP_NAME_LENGTH }) :
+        t('validation:groupName.tooShort', { min: MIN_GROUP_NAME_LENGTH }) :
         `Le nom doit contenir au moins ${MIN_GROUP_NAME_LENGTH} caractères`
     };
   }
@@ -43,7 +43,7 @@ export const validateGroupName = (
     return {
       isValid: false,
       errorMessage: t ?
-        t('validation.groupName.tooLong', { max: MAX_GROUP_NAME_LENGTH }) :
+        t('validation:groupName.tooLong', { max: MAX_GROUP_NAME_LENGTH }) :
         `Le nom ne doit pas dépasser ${MAX_GROUP_NAME_LENGTH} caractères`
     };
   }
@@ -54,7 +54,7 @@ export const validateGroupName = (
     return {
       isValid: false,
       errorMessage: t ?
-        t('validation.groupName.invalidCharacters') :
+        t('validation:groupName.invalidCharacters') :
         'Le nom contient des caractères non autorisés'
     };
   }

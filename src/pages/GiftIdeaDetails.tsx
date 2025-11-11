@@ -14,7 +14,7 @@ import { SEO } from '../components/common/seo';
 
 const GiftIdeaDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { t } = useTranslation();
+  const { t } = useTranslation('gifts');
   const navigate = useNavigate();
   const { user } = useAuth();
 
@@ -76,7 +76,7 @@ const GiftIdeaDetails: React.FC = () => {
         }
       } catch (error) {
         console.error('Error fetching gift idea details:', error);
-        setError(t('common.error') || 'Failed to load gift idea details');
+        setError(t('common:error') || 'Failed to load gift idea details');
       } finally {
         setLoading(false);
       }
@@ -178,8 +178,8 @@ const GiftIdeaDetails: React.FC = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center py-10">
-        <SEO translationKey="seo.giftIdea" />
-        <p className="text-lg">{t('common.loading')}</p>
+        <SEO translationKey="giftIdea" />
+        <p className="text-lg">{t('common:loading')}</p>
       </div>
     );
   }
@@ -187,10 +187,10 @@ const GiftIdeaDetails: React.FC = () => {
   if (error) {
     return (
       <div className="flex flex-col items-center py-10">
-        <SEO translationKey="seo.giftIdea" />
+        <SEO translationKey="giftIdea" />
         <p className="text-lg text-red-600">{error}</p>
         <Button variant="outline" onClick={handleBackToGroup} className="mt-4">
-          {t('common.back')}
+          {t('common:back')}
         </Button>
       </div>
     );
@@ -199,10 +199,10 @@ const GiftIdeaDetails: React.FC = () => {
   if (!giftIdea) {
     return (
       <div className="flex flex-col items-center py-10">
-        <SEO translationKey="seo.giftIdea" />
+        <SEO translationKey="giftIdea" />
         <p className="text-lg">{t('giftIdeas.notFound')}</p>
         <Button variant="outline" onClick={handleBackToGroup} className="mt-4">
-          {t('common.back')}
+          {t('common:back')}
         </Button>
       </div>
     );
@@ -213,14 +213,14 @@ const GiftIdeaDetails: React.FC = () => {
       {giftIdea && (
         <SEO
           title={giftIdea.title}
-          description={giftIdea.description || t('giftIdea.noDescription')}
+          description={giftIdea.description || t('gifts:giftIdeas.noDescription')}
           image={giftIdea.image_url || undefined}
           type="product"
         />
       )}
 
       <PageHeader
-        title={loading ? t('common.loading') : (giftIdea?.title || t('giftIdea.notFound'))}
+        title={loading ? t('common:loading') : (giftIdea?.title || t('gifts:giftIdeas.notFound'))}
         onBackClick={() => navigate(-1)}
         actions={
           canEditOrDelete() ? (
@@ -231,7 +231,7 @@ const GiftIdeaDetails: React.FC = () => {
                 className="flex items-center gap-1"
               >
                 <FaEdit className="h-4 w-4" />
-                {t('common.edit')}
+                {t('common:edit')}
               </Button>
 
               <Button
@@ -241,7 +241,7 @@ const GiftIdeaDetails: React.FC = () => {
                 className="flex items-center gap-1"
               >
                 <FaTrash className="h-4 w-4" />
-                {t('common.delete')}
+                {t('common:delete')}
               </Button>
             </div>
           ) : null
@@ -271,12 +271,12 @@ const GiftIdeaDetails: React.FC = () => {
       <ConfirmationModal
         isOpen={isDeleteModalOpen}
         onClose={closeDeleteModal}
-        title={t('giftIdeas.confirmDeleteTitle')}
-        message={t('giftIdeas.confirmDeleteMessage')}
+        title={t('gifts:giftIdeas.confirmDeleteTitle')}
+        message={t('gifts:giftIdeas.confirmDeleteMessage')}
         onConfirm={handleDeleteGiftIdea}
         isLoading={isDeleting}
         confirmVariant="danger"
-        confirmText={isDeleting ? t('common.deleting') : t('common.delete')}
+        confirmText={isDeleting ? t('common:deleting') : t('common:delete')}
       />
     </div>
   );

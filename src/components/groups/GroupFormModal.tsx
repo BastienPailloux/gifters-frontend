@@ -18,7 +18,7 @@ const GroupFormModal: React.FC<GroupFormModalProps> = ({
   onClose,
   onSuccess,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(['groups', 'validation']);
   const navigate = useNavigate();
   const isCreateMode = mode === 'create';
 
@@ -35,7 +35,7 @@ const GroupFormModal: React.FC<GroupFormModalProps> = ({
     e.preventDefault();
 
     if (!name.trim()) {
-      setError(t('groups.nameRequired') || 'Group name is required');
+      setError(t('groups:nameRequired') || 'Group name is required');
       return;
     }
 
@@ -71,8 +71,8 @@ const GroupFormModal: React.FC<GroupFormModalProps> = ({
       console.error(`Error ${isCreateMode ? 'creating' : 'updating'} group:`, err);
       setError(
         isCreateMode
-          ? t('groups.createError') || 'Failed to create group'
-          : t('groups.updateError') || 'Failed to update group'
+          ? t('groups:createError') || 'Failed to create group'
+          : t('groups:updateError') || 'Failed to update group'
       );
     } finally {
       setIsLoading(false);
@@ -97,7 +97,7 @@ const GroupFormModal: React.FC<GroupFormModalProps> = ({
       navigate('/dashboard'); // Rediriger vers le dashboard après la suppression
     } catch (err) {
       console.error('Error deleting group:', err);
-      setError(t('groups.deleteError') || 'Failed to delete group');
+      setError(t('groups:deleteError') || 'Failed to delete group');
       setShowDeleteConfirm(false);
     } finally {
       setIsLoading(false);
@@ -106,8 +106,8 @@ const GroupFormModal: React.FC<GroupFormModalProps> = ({
 
   // Titre du modal en fonction du mode
   const modalTitle = isCreateMode
-    ? t('groups.createGroup') || 'Create Group'
-    : t('groups.editGroup') || 'Edit Group';
+    ? t('groups:createGroup') || 'Create Group'
+    : t('groups:editGroup') || 'Edit Group';
 
   return (
     <Modal
@@ -125,18 +125,18 @@ const GroupFormModal: React.FC<GroupFormModalProps> = ({
           )}
 
           <TextInput
-            label={t('groups.name') || 'Group Name'}
+            label={t('groups:name') || 'Group Name'}
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder={t('groups.namePlaceholder') || 'Enter group name'}
+            placeholder={t('groups:namePlaceholder') || 'Enter group name'}
             required
           />
 
           <TextInput
-            label={t('groups.description') || 'Description'}
+            label={t('groups:description') || 'Description'}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            placeholder={t('groups.descriptionPlaceholder') || 'Enter group description (optional)'}
+            placeholder={t('groups:descriptionPlaceholder') || 'Enter group description (optional)'}
           />
 
           <div className="mt-6 flex justify-between">
@@ -147,7 +147,7 @@ const GroupFormModal: React.FC<GroupFormModalProps> = ({
                 variant="danger"
                 onClick={() => setShowDeleteConfirm(true)}
               >
-                {t('common.delete') || 'Delete'}
+                {t('common:delete') || 'Delete'}
               </Button>
             )}
 
@@ -158,7 +158,7 @@ const GroupFormModal: React.FC<GroupFormModalProps> = ({
                 onClick={onClose}
                 disabled={isLoading}
               >
-                {t('common.cancel') || 'Cancel'}
+                {t('common:cancel') || 'Cancel'}
               </Button>
 
               <Button
@@ -172,12 +172,12 @@ const GroupFormModal: React.FC<GroupFormModalProps> = ({
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    {t('common.saving') || 'Saving...'}
+                    {t('common:saving') || 'Saving...'}
                   </span>
                 ) : (
                   isCreateMode
-                    ? t('common.create') || 'Create'
-                    : t('common.save') || 'Save'
+                    ? t('common:create') || 'Create'
+                    : t('common:save') || 'Save'
                 )}
               </Button>
             </div>
@@ -186,10 +186,10 @@ const GroupFormModal: React.FC<GroupFormModalProps> = ({
       ) : (
         <div>
           <h3 className="text-lg font-medium text-gray-900 mb-3">
-            {t('groups.confirmDelete') || 'Are you sure you want to delete this group?'}
+            {t('groups:confirmDelete') || 'Are you sure you want to delete this group?'}
           </h3>
           <p className="text-sm text-gray-500 mb-6">
-            {t('groups.deleteWarning') || 'This action cannot be undone. All group data will be permanently removed.'}
+            {t('groups:deleteWarning') || 'This action cannot be undone. All group data will be permanently removed.'}
           </p>
 
           {error && (
@@ -200,12 +200,12 @@ const GroupFormModal: React.FC<GroupFormModalProps> = ({
 
           <div className="mb-6">
             <p className="text-sm text-gray-700 mb-2">
-              {t('groups.typeGroupNameToConfirm', { name: group?.name }) || `Please type "${group?.name}" to confirm:`}
+              {t('groups:typeGroupNameToConfirm', { name: group?.name }) || `Please type "${group?.name}" to confirm:`}
             </p>
             <TextInput
               value={confirmGroupName}
               onChange={(e) => setConfirmGroupName(e.target.value)}
-              placeholder={t('groups.confirmGroupNamePlaceholder') || "Enter group name"}
+              placeholder={t('groups:confirmGroupNamePlaceholder') || "Enter group name"}
             />
           </div>
 
@@ -216,7 +216,7 @@ const GroupFormModal: React.FC<GroupFormModalProps> = ({
               onClick={() => setShowDeleteConfirm(false)}
               disabled={isLoading}
             >
-              {t('common.cancel') || 'Cancel'}
+              {t('common:cancel') || 'Cancel'}
             </Button>
 
             <Button
@@ -231,10 +231,10 @@ const GroupFormModal: React.FC<GroupFormModalProps> = ({
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                   </svg>
-                  {t('common.deleting') || 'Deleting...'}
+                  {t('common:deleting') || 'Deleting...'}
                 </span>
               ) : (
-                t('common.confirmDelete') || 'Yes, delete group'
+                t('common:confirmDelete') || 'Yes, delete group'
               )}
             </Button>
           </div>

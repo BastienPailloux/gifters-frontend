@@ -162,9 +162,11 @@ export const authService = {
 // Service pour les groupes
 export const groupService = {
   // Récupérer tous les groupes de l'utilisateur
-  getGroups: async () => {
+  // Si withChildren=true, retourne une structure hiérarchique avec les groupes des enfants managés
+  getGroups: async (withChildren: boolean = false) => {
     try {
-      const response = await api.get('/groups');
+      const params = withChildren ? { with_children: 'true' } : {};
+      const response = await api.get('/groups', { params });
       return response.data;
     } catch (error) {
       console.error('Error in getGroups API call:', error);
@@ -179,8 +181,10 @@ export const groupService = {
   },
 
   // Créer un nouveau groupe
-  createGroup: async (groupData: { name: string; description: string }) => {
-    const response = await api.post('/groups', { group: groupData });
+  // Si userId est fourni, le groupe est créé pour cet utilisateur (enfant managé)
+  createGroup: async (groupData: { name: string; description: string }, userId?: string) => {
+    const url = userId ? `/groups?user_id=${userId}` : '/groups';
+    const response = await api.post(url, { group: groupData });
     return response.data;
   },
 
@@ -382,8 +386,11 @@ export const invitationService = {
   },
 
   // Accepter une invitation
-  acceptInvitation: async (token: string) => {
-    const response = await api.post('/invitations/accept', { token });
+  acceptInvitation: async (token: string, userIds?: number[]) => {
+    const response = await api.post('/invitations/accept', {
+      token,
+      user_ids: userIds
+    });
     return response.data;
   },
 
@@ -619,6 +626,64 @@ export const userService = {
       return response.data;
     } catch (error) {
       console.error('Error updating user locale:', error);
+      throw error;
+    }
+  },
+};
+
+// Service pour les comptes managés (children)
+export const childrenService = {
+  // Récupérer tous les comptes children de l'utilisateur courant
+  getChildren: async () => {
+    try {
+      const response = await api.get('/children');
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching children:', error);
+      throw error;
+    }
+  },
+
+  // Récupérer un compte child spécifique
+  getChild: async (childId: string) => {
+    try {
+      const response = await api.get(`/children/${childId}`);
+      return response.data;
+    } catch (error) {
+      console.error(`Error fetching child ${childId}:`, error);
+      throw error;
+    }
+  },
+
+  // Créer un nouveau compte child
+  createChild: async (childData: { name: string; birthday?: string; gender?: string }) => {
+    try {
+      const response = await api.post('/children', { user: childData });
+      return response.data;
+    } catch (error) {
+      console.error('Error creating child:', error);
+      throw error;
+    }
+  },
+
+  // Mettre à jour un compte child
+  updateChild: async (childId: string, childData: { name?: string; birthday?: string; gender?: string }) => {
+    try {
+      const response = await api.put(`/children/${childId}`, { user: childData });
+      return response.data;
+    } catch (error) {
+      console.error(`Error updating child ${childId}:`, error);
+      throw error;
+    }
+  },
+
+  // Supprimer un compte child
+  deleteChild: async (childId: string) => {
+    try {
+      const response = await api.delete(`/children/${childId}`);
+      return response.data;
+    } catch (error) {
+      console.error(`Error deleting child ${childId}:`, error);
       throw error;
     }
   },

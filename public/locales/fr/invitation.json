@@ -1,0 +1,23 @@
+{
+  "joinGroup": "Rejoindre un groupe",
+  "joinGroupTitle": "Invitation à rejoindre un groupe",
+  "missingParameters": "Paramètres d'invitation manquants",
+  "errorTitle": "Erreur d'invitation",
+  "errorFetchingDetails": "Erreur lors de la récupération des détails du groupe",
+  "errorAccepting": "Erreur lors de l'acceptation de l'invitation",
+  "genericError": "Une erreur s'est produite avec cette invitation",
+  "youAreInvitedTo": "Vous êtes invité à rejoindre le groupe",
+  "acceptInvitation": "Accepter l'invitation",
+  "alreadyMember": "Vous êtes déjà membre de ce groupe",
+  "needAccount": "Vous devez être connecté pour rejoindre ce groupe",
+  "invitationPlaceholder": "Entrez le code d'invitation ou collez le lien",
+  "invitationCode": "Code d'invitation",
+  "invalidInput": "Veuillez entrer un code d'invitation valide",
+  "invalidInvitation": "Invitation non valide ou expirée",
+  "errorCheckingInvitation": "Erreur lors de la vérification de l'invitation",
+  "enterInvitationDescription": "Entrez le code d'invitation ou collez le lien d'invitation que vous avez reçu pour rejoindre un groupe.",
+  "proceed": "Continuer",
+  "selectWhoJoins": "Sélectionnez qui va rejoindre le groupe",
+  "selectMultipleUsers": "Vous pouvez sélectionner votre compte et/ou vos comptes managés.",
+  "pleaseSelectAtLeastOne": "Veuillez sélectionner au moins un compte pour rejoindre le groupe."
+}

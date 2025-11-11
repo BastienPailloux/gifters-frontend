@@ -7,7 +7,7 @@ import LanguageSwitcher from '../common/navigation/LanguageSwitcher';
 import { HeaderProps } from '../../types';
 
 const Header: React.FC<HeaderProps> = ({ onLogout }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(['navigation', 'auth']);
   const { isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -42,13 +42,13 @@ const Header: React.FC<HeaderProps> = ({ onLogout }) => {
       return (
         <>
           <Link to="/dashboard" className="text-white hover:text-primary-200 font-medium">
-            {t('header.dashboard')}
+            {t('navigation:header.dashboard')}
           </Link>
           <Link to="/groups" className="text-white hover:text-primary-200 font-medium">
-            {t('header.groups')}
+            {t('navigation:header.groups')}
           </Link>
           <Link to="/gifts" className="text-white hover:text-primary-200 font-medium">
-            {t('header.gifts')}
+            {t('navigation:header.gifts')}
           </Link>
         </>
       );
@@ -56,16 +56,16 @@ const Header: React.FC<HeaderProps> = ({ onLogout }) => {
       return (
         <>
           <Link to="/features" className="text-white hover:text-primary-200 font-medium">
-            {t('header.features')}
+            {t('navigation:header.features')}
           </Link>
           <Link to="/pricing" className="text-white hover:text-primary-200 font-medium">
-            {t('header.pricing')}
+            {t('navigation:header.pricing')}
           </Link>
           <Link to="/about" className="text-white hover:text-primary-200 font-medium">
-            {t('header.about')}
+            {t('navigation:header.about')}
           </Link>
           <Link to="/contact" className="text-white hover:text-primary-200 font-medium">
-            {t('header.contact')}
+            {t('navigation:header.contact')}
           </Link>
         </>
       );
@@ -82,7 +82,7 @@ const Header: React.FC<HeaderProps> = ({ onLogout }) => {
           className="text-white border-white hover:bg-primary-600"
           onClick={handleLogout}
         >
-          {t('auth.logout')}
+          {t('auth:logout')}
         </Button>
       );
     } else {
@@ -90,12 +90,12 @@ const Header: React.FC<HeaderProps> = ({ onLogout }) => {
         <>
           <Link to="/login">
             <Button variant="outline" size="sm" className="text-white border-white hover:bg-primary-600">
-              {t('header.login')}
+              {t('navigation:header.login')}
             </Button>
           </Link>
           <Link to="/register">
             <Button variant="secondary" size="sm">
-              {t('header.signup')}
+              {t('navigation:header.signup')}
             </Button>
           </Link>
         </>

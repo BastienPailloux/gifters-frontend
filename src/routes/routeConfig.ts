@@ -21,6 +21,7 @@ const Contact = lazy(() => import('../pages/Contact'));
 const Pricing = lazy(() => import('../pages/Pricing'));
 const About = lazy(() => import('../pages/About'));
 const TermsAndConditions = lazy(() => import('../pages/TermsAndConditions'));
+const MyChildren = lazy(() => import('../pages/children/MyChildren'));
 
 /**
  * Configuration des routes publiques sans layout
@@ -31,7 +32,7 @@ export const publicRoutes: RouteConfig[] = [
   { path: '/register', component: Register },
   { path: '/forgot-password', component: ForgotPassword },
   { path: '/reset-password', component: ResetPassword },
-  { path: '/invitation/join', component: InvitationJoin },
+  { path: '/invitation/join', component: InvitationJoin }
 ];
 
 /**
@@ -58,6 +59,7 @@ export const protectedRoutes: RouteConfig[] = [
   { path: '/profile', component: Profile, protected: true, layout: true },
   { path: '/profile/:id', component: Profile, protected: true, layout: true },
   { path: '/invitations', component: InvitationInput, protected: true, layout: true },
+  { path: '/children', component: MyChildren, protected: true, layout: true },
 ];
 
 /**

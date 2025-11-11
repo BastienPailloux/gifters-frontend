@@ -22,22 +22,22 @@ const SEO: React.FC<SEOProps> = ({
   canonicalUrl,
   translationKey,
 }) => {
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation(['seo']);
   const currentLanguage = i18n.language;
   const siteName = 'Gifters';
   const defaultUrl = typeof window !== 'undefined' ? window.location.href : '';
 
   // Si une clé de traduction est fournie, utiliser les traductions
   const pageTitle = translationKey
-    ? t(`${translationKey}.title`, '')
+    ? t(`seo:${translationKey}.title`, '')
     : title || 'Gifters'; // Valeur par défaut si ni title ni translationKey n'est fourni
 
   const pageDescription = translationKey && !description
-    ? t(`${translationKey}.description`, '')
+    ? t(`seo:${translationKey}.description`, '')
     : description || '';
 
   const pageKeywords = translationKey && !keywords
-    ? t(`${translationKey}.keywords`, '').split(',').map(k => k.trim()).filter(Boolean)
+    ? t(`seo:${translationKey}.keywords`, '').split(',').map(k => k.trim()).filter(Boolean)
     : keywords || [];
 
   // Construction du titre complet

@@ -1,0 +1,13 @@
+{
+  "required": "Ce champ est requis",
+  "tooShort": "Doit contenir au moins {{min}} caractères",
+  "tooLong": "Ne doit pas dépasser {{max}} caractères",
+  "invalidCharacters": "Contient des caractères non autorisés",
+  "invalid": "Cette valeur est invalide",
+  "groupName": {
+    "required": "Le nom du groupe est requis",
+    "tooShort": "Le nom du groupe doit contenir au moins {{min}} caractères",
+    "tooLong": "Le nom du groupe ne doit pas dépasser {{max}} caractères",
+    "invalidCharacters": "Le nom du groupe contient des caractères non autorisés"
+  }
+}

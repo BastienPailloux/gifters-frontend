@@ -8,7 +8,7 @@ import { GroupCardProps } from '../../types/groups';
  * Utilisé principalement dans la page MyGroups
  */
 const GroupCard: React.FC<GroupCardProps> = ({ group, onViewGroup }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('groups');
 
   return (
     <div className="flex items-center justify-between py-3 hover:bg-gray-50 rounded-md px-3 transition-colors duration-200">
@@ -25,8 +25,8 @@ const GroupCard: React.FC<GroupCardProps> = ({ group, onViewGroup }) => {
               : 1;
 
             return memberCount === 1
-              ? t('groups.memberCount.singular', { count: 1 })
-              : t('groups.memberCount.plural', { count: memberCount });
+              ? t('groups:memberCount.singular', { count: 1 })
+              : t('groups:memberCount.plural', { count: memberCount });
           })()}
         </p>
       </div>
@@ -35,7 +35,7 @@ const GroupCard: React.FC<GroupCardProps> = ({ group, onViewGroup }) => {
         size="sm"
         onClick={() => onViewGroup(group.id)}
       >
-        {t('common.view')}
+        {t('common:view')}
       </Button>
     </div>
   );

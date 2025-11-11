@@ -18,7 +18,7 @@ const RecipientSelector: React.FC<RecipientSelectorProps> = ({
   label,
   errorMessage = '',
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('gifts');
   const [showAll, setShowAll] = useState(false);
 
   const displayedRecipients = showAll
@@ -44,7 +44,7 @@ const RecipientSelector: React.FC<RecipientSelectorProps> = ({
           {label}
           {maxSelection < Infinity && (
             <span className="text-gray-500 text-xs ml-1">
-              ({t('giftIdeas.maxRecipients', { count: maxSelection })})
+              ({t('gifts:giftIdeas.maxRecipients', { count: maxSelection })})
             </span>
           )}
         </label>
@@ -88,13 +88,13 @@ const RecipientSelector: React.FC<RecipientSelectorProps> = ({
             onClick={() => setShowAll(true)}
             className="text-primary-600 hover:text-primary-800 text-sm py-2"
           >
-            {t('giftIdeas.viewAll', { count: recipients.length - maxDisplayed })}
+            {t('gifts:giftIdeas.viewAll', { count: recipients.length - maxDisplayed })}
           </button>
         )}
 
         {recipients.length === 0 && (
           <p className="text-gray-500 text-sm py-2">
-            {t('giftIdeas.noRecipientsAvailable')}
+            {t('gifts:giftIdeas.noRecipientsAvailable')}
           </p>
         )}
       </div>
@@ -102,7 +102,7 @@ const RecipientSelector: React.FC<RecipientSelectorProps> = ({
       {selectedIds.length > 0 && (
         <div className="mt-2">
           <p className="text-sm text-gray-600">
-            {t(selectedIds.length === 1 ? 'giftIdeas.recipientsSelected' : 'giftIdeas.recipientsSelectedPlural', { count: selectedIds.length })}
+            {t(selectedIds.length === 1 ? 'gifts:giftIdeas.recipientsSelected' : 'gifts:giftIdeas.recipientsSelectedPlural', { count: selectedIds.length })}
           </p>
         </div>
       )}

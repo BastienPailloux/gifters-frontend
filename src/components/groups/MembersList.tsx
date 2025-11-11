@@ -9,7 +9,7 @@ import ConfirmationModal from '../common/modals/ConfirmationModal';
 import { MembersListProps, Member } from '../../types';
 
 const MembersList: React.FC<MembersListProps> = ({ groupId, isCurrentUserAdmin, groupName }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('groups');
   const { user } = useAuth();
 
   const [members, setMembers] = useState<Member[]>([]);
@@ -49,7 +49,7 @@ const MembersList: React.FC<MembersListProps> = ({ groupId, isCurrentUserAdmin, 
         }
       } catch (err) {
         console.error('Error fetching members:', err);
-        setError(t('groups.errorLoadingMembers'));
+        setError(t('groups:errorLoadingMembers'));
         // Même en cas d'erreur, on considère que le statut est déterminé
         setAdminStatusDetermined(true);
       } finally {
@@ -73,7 +73,7 @@ const MembersList: React.FC<MembersListProps> = ({ groupId, isCurrentUserAdmin, 
       );
     } catch (err) {
       console.error('Error updating member role:', err);
-      setError(t('groups.errorUpdatingRole'));
+      setError(t('groups:errorUpdatingRole'));
     }
   };
 
@@ -107,7 +107,7 @@ const MembersList: React.FC<MembersListProps> = ({ groupId, isCurrentUserAdmin, 
       }
     } catch (err) {
       console.error('Error removing member:', err);
-      setError(t('groups.errorRemovingMember'));
+      setError(t('groups:errorRemovingMember'));
     } finally {
       setIsRemoving(false);
       closeRemoveModal();
@@ -127,7 +127,7 @@ const MembersList: React.FC<MembersListProps> = ({ groupId, isCurrentUserAdmin, 
   };
 
   if (loading || !adminStatusDetermined) {
-    return <div className="p-4 text-center">{t('common.loading')}</div>;
+    return <div className="p-4 text-center">{t('common:loading')}</div>;
   }
 
   if (error) {
@@ -141,7 +141,7 @@ const MembersList: React.FC<MembersListProps> = ({ groupId, isCurrentUserAdmin, 
   return (
     <div className="mt-6">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-semibold">{t('groups.membersList')}</h2>
+        <h2 className="text-xl font-semibold">{t('groups:membersList')}</h2>
         {isAdminDetermined && (
           <Button
             variant="outline"
@@ -151,14 +151,14 @@ const MembersList: React.FC<MembersListProps> = ({ groupId, isCurrentUserAdmin, 
             <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
             </svg>
-            {t('groups.addNewMember')}
+            {t('groups:addNewMember')}
           </Button>
         )}
       </div>
 
       {members.length === 0 ? (
         <div className="text-center p-4 bg-gray-50 rounded-md">
-          {t('groups.noMembers')}
+          {t('groups:noMembers')}
         </div>
       ) : (
         <div>
@@ -186,12 +186,12 @@ const MembersList: React.FC<MembersListProps> = ({ groupId, isCurrentUserAdmin, 
       <ConfirmationModal
         isOpen={isRemoveModalOpen}
         onClose={closeRemoveModal}
-        title={t('groups.removeMember')}
-        message={t('groups.confirmRemoveMember')}
+        title={t('groups:removeMember')}
+        message={t('groups:confirmRemoveMember')}
         onConfirm={confirmRemoveMember}
         isLoading={isRemoving}
         confirmVariant="danger"
-        confirmText={isRemoving ? t('common.deleting') : t('common.delete')}
+        confirmText={isRemoving ? t('common:deleting') : t('common:delete')}
       />
     </div>
   );

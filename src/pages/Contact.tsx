@@ -10,7 +10,7 @@ import { SEO } from '../components/common/seo';
 import { ContactInfoItem } from '../types';
 
 const Contact: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('contact');
 
   // Animation variants
   const containerVariants = {
@@ -28,17 +28,17 @@ const Contact: React.FC = () => {
     {
       id: 'email',
       icon: <FaEnvelope className="text-primary-500 mt-1 text-xl" />,
-      title: t('contact.email'),
+      title: t('contact:email'),
       content: 'contact@gifters.fr'
     }
   ];
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <SEO translationKey="seo.contact" />
+      <SEO translationKey="contact" />
 
-      <Title>{t('contact.title')}</Title>
-      <Subtitle className="mb-12">{t('contact.subtitle')}</Subtitle>
+      <Title>{t('contact:title')}</Title>
+      <Subtitle className="mb-12">{t('contact:subtitle')}</Subtitle>
 
       <div className="flex flex-col md:flex-row gap-8 mb-16">
         {/* Contact Form */}
