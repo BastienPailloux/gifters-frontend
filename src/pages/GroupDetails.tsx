@@ -52,14 +52,20 @@ const GroupDetails: React.FC = () => {
       const groupData = await groupService.getGroup(id);
       setGroup(groupData);
 
-      // Vérifier si l'utilisateur est admin du groupe
-      if (groupData && groupData.members && user) {
-        const currentUserMember = groupData.members.find(
-          (member: {id: string; name: string; email: string; role?: string}) => member.id === user.id
-        );
-        setIsUserAdmin(
-          currentUserMember?.role === 'admin'
-        );
+      // Vérifier si l'utilisateur peut administrer le groupe
+      // Utiliser le champ permissions.can_administer (qui prend en compte les enfants managés)
+      // Sinon, vérification manuelle
+      if (groupData) {
+        if (groupData.permissions?.can_administer !== undefined) {
+          setIsUserAdmin(groupData.permissions.can_administer);
+        } else if (groupData.members && user) {
+          const currentUserMember = groupData.members.find(
+            (member: {id: string; name: string; email: string; role?: string}) => member.id === user.id
+          );
+          setIsUserAdmin(
+            currentUserMember?.role === 'admin'
+          );
+        }
       }
 
       setError(null);
