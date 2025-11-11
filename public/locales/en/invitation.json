@@ -16,5 +16,8 @@
   "invalidInvitation": "Invalid or expired invitation",
   "errorCheckingInvitation": "Error checking invitation",
   "enterInvitationDescription": "Enter the invitation code or paste the invitation link you received to join a group.",
-  "proceed": "Continue"
+  "proceed": "Continue",
+  "selectWhoJoins": "Select who will join the group",
+  "selectMultipleUsers": "You can select yourself and/or your managed accounts.",
+  "pleaseSelectAtLeastOne": "Please select at least one account to join the group."
 }

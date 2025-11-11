@@ -16,5 +16,8 @@
   "invalidInvitation": "Invitation non valide ou expirée",
   "errorCheckingInvitation": "Erreur lors de la vérification de l'invitation",
   "enterInvitationDescription": "Entrez le code d'invitation ou collez le lien d'invitation que vous avez reçu pour rejoindre un groupe.",
-  "proceed": "Continuer"
+  "proceed": "Continuer",
+  "selectWhoJoins": "Sélectionnez qui va rejoindre le groupe",
+  "selectMultipleUsers": "Vous pouvez sélectionner votre compte et/ou vos comptes managés.",
+  "pleaseSelectAtLeastOne": "Veuillez sélectionner au moins un compte pour rejoindre le groupe."
 }

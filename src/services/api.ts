@@ -386,8 +386,11 @@ export const invitationService = {
   },
 
   // Accepter une invitation
-  acceptInvitation: async (token: string) => {
-    const response = await api.post('/invitations/accept', { token });
+  acceptInvitation: async (token: string, userIds?: number[]) => {
+    const response = await api.post('/invitations/accept', {
+      token,
+      user_ids: userIds
+    });
     return response.data;
   },
 

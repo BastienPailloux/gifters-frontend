@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { invitationService, groupService } from '../../services/api';
+import { invitationService, groupService, childrenService } from '../../services/api';
 import Button from '../../components/common/forms/Button';
 import useAuth from '../../hooks/useAuth';
 import { SEO } from '../../components/common/seo';
+import UserSelector from '../../components/profile/UserSelector';
+import { Child } from '../../types/children';
 
 /**
  * Page pour rejoindre un groupe via une invitation
@@ -16,14 +18,19 @@ import { SEO } from '../../components/common/seo';
 const InvitationJoin: React.FC = () => {
   const { t } = useTranslation('invitation');
   const [searchParams] = useSearchParams();
+  const { token: tokenParam } = useParams<{ token?: string }>();
   const groupId = searchParams.get('group');
-  const token = searchParams.get('token');
+  const token = searchParams.get('token') || tokenParam;
   const navigate = useNavigate();
-  const { isAuthenticated, isLoading } = useAuth();
+  const { isAuthenticated, isLoading, user } = useAuth();
 
   const [groupName, setGroupName] = useState<string>('');
-  const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
+  const [status, setStatus] = useState<'loading' | 'success' | 'error' | 'select-users'>('loading');
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [children, setChildren] = useState<Child[]>([]);
+  const [selectedUserIds, setSelectedUserIds] = useState<number[]>([]);
+  const [isAccepting, setIsAccepting] = useState(false);
+  const [invitationGroupId, setInvitationGroupId] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchGroupDetails = async () => {
@@ -39,22 +46,29 @@ const InvitationJoin: React.FC = () => {
           const invitation = await invitationService.getInvitation(token);
           if (invitation && invitation.group) {
             setGroupName(invitation.group.name);
+            setInvitationGroupId(invitation.group.id);
 
-            // Si l'utilisateur est connecté, accepter automatiquement l'invitation
-            if (isAuthenticated && !isLoading) {
+            // Si l'utilisateur est connecté, charger les enfants et montrer la sélection
+            if (isAuthenticated && !isLoading && user) {
               try {
-                await invitationService.acceptInvitation(token);
-                setStatus('success');
-                // Rediriger vers la page du groupe après 2 secondes
-                setTimeout(() => {
-                  navigate(`/groups/${invitation.group.id}`);
-                }, 2000);
-              } catch (acceptError) {
-                setStatus('error');
-                setErrorMessage(t('invitation:errorAccepting'));
+                // Récupérer les enfants managés
+                const childrenData = await childrenService.getChildren();
+                setChildren(childrenData.children || []);
+
+                // Par défaut, sélectionner l'utilisateur actuel
+                setSelectedUserIds([Number(user.id)]);
+
+                // Passer au statut de sélection des utilisateurs
+                setStatus('select-users');
+              } catch (childrenError) {
+                console.error('Error fetching children:', childrenError);
+                // Continuer même si on ne peut pas récupérer les enfants
+                setChildren([]);
+                setSelectedUserIds([Number(user.id)]);
+                setStatus('select-users');
               }
             } else {
-              // L'utilisateur n'est pas connecté, mais nous avons les infos du groupe
+              // L'utilisateur n'est pas connecté, afficher le message de connexion
               setStatus('success');
             }
           }
@@ -78,21 +92,37 @@ const InvitationJoin: React.FC = () => {
     if (!isLoading) {
       fetchGroupDetails();
     }
-  }, [groupId, token, isAuthenticated, isLoading, navigate, t]);
+  }, [groupId, token, isAuthenticated, isLoading, user, t]);
 
   const handleAcceptInvitation = async () => {
-    if (!token) return;
+    if (!token || selectedUserIds.length === 0) return;
 
     try {
-      setStatus('loading');
-      await invitationService.acceptInvitation(token);
-      setStatus('success');
-      // Rediriger vers la page du groupe
-      const invitation = await invitationService.getInvitation(token);
-      navigate(`/groups/${invitation.group.id}`);
+      setIsAccepting(true);
+      const response = await invitationService.acceptInvitation(token, selectedUserIds);
+
+      // Afficher un message de succès
+      if (response.success) {
+        setStatus('success');
+        // Rediriger vers la page du groupe après 2 secondes
+        setTimeout(() => {
+          if (invitationGroupId) {
+            navigate(`/groups/${invitationGroupId}`);
+          }
+        }, 2000);
+      } else {
+        setStatus('error');
+        setErrorMessage(response.message || t('invitation:errorAccepting'));
+      }
     } catch (acceptError) {
+      console.error('Error accepting invitation:', acceptError);
       setStatus('error');
-      setErrorMessage(t('invitation:errorAccepting'));
+      const errorMessage = acceptError instanceof Error
+        ? acceptError.message
+        : t('invitation:errorAccepting');
+      setErrorMessage(errorMessage);
+    } finally {
+      setIsAccepting(false);
     }
   };
 
@@ -129,6 +159,53 @@ const InvitationJoin: React.FC = () => {
           <Button variant="primary" onClick={() => navigate('/')}>
             {t('common:backToHome')}
           </Button>
+        </div>
+      </div>
+    );
+  }
+
+  // État de sélection des utilisateurs
+  if (status === 'select-users' && user) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-6">
+        <SEO translationKey="invitation" />
+        <div className="max-w-2xl w-full bg-white rounded-lg shadow-md p-8">
+          <div className="text-center mb-6">
+            <svg className="h-16 w-16 text-primary-500 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            <h1 className="text-2xl font-bold text-gray-800 mb-2">
+              {t('invitation:joinGroupTitle')}
+            </h1>
+            <p className="text-gray-600 mb-6">
+              {t('invitation:youAreInvitedTo')} <span className="font-semibold">{groupName}</span>
+            </p>
+          </div>
+
+          <UserSelector
+            currentUser={user}
+            children={children}
+            selectedUserIds={selectedUserIds}
+            onSelectionChange={setSelectedUserIds}
+          />
+
+          <div className="mt-6 flex gap-4 justify-end">
+            <Button
+              variant="outline"
+              onClick={() => navigate(-1)}
+              disabled={isAccepting}
+            >
+              {t('common:cancel')}
+            </Button>
+            <Button
+              variant="primary"
+              onClick={handleAcceptInvitation}
+              isLoading={isAccepting}
+              disabled={selectedUserIds.length === 0 || isAccepting}
+            >
+              {t('invitation:acceptInvitation')}
+            </Button>
+          </div>
         </div>
       </div>
     );

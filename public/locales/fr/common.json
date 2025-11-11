@@ -45,5 +45,9 @@
     "congratulations": "Félicitations !",
     "giftMarkedAsBought": "Vous avez marqué \"{{giftTitle}}\" comme acheté pour {{recipientName}}.",
     "genericSuccess": "Le cadeau a été marqué comme acheté avec succès !"
-  }
+  },
+  "you": "Vous",
+  "managedAccount": "Compte managé",
+  "selectAll": "Tout sélectionner",
+  "deselectAll": "Tout désélectionner"
 }

@@ -32,7 +32,7 @@ export const publicRoutes: RouteConfig[] = [
   { path: '/register', component: Register },
   { path: '/forgot-password', component: ForgotPassword },
   { path: '/reset-password', component: ResetPassword },
-  { path: '/invitation/join', component: InvitationJoin },
+  { path: '/invitation/join', component: InvitationJoin }
 ];
 
 /**

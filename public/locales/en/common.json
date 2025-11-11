@@ -45,5 +45,9 @@
     "congratulations": "Congratulations!",
     "giftMarkedAsBought": "You have marked \"{{giftTitle}}\" as bought for {{recipientName}}.",
     "genericSuccess": "The gift has been successfully marked as bought!"
-  }
+  },
+  "you": "You",
+  "managedAccount": "Managed account",
+  "selectAll": "Select all",
+  "deselectAll": "Deselect all"
 }
