@@ -131,60 +131,18 @@ const LeaveGroupModal: React.FC<LeaveGroupModalProps> = ({
       size="lg"
     >
       <div className="space-y-4">
-        <p className="text-gray-600">
-          {t('groups:selectWhoLeaves')}
-        </p>
-
         <Alert type="warning">
           {t('groups:leaveGroupWarning')}
         </Alert>
 
-        {isCurrentUserMember && (
-          <UserSelector
-            currentUser={user}
-            children={childrenInGroup}
-            selectedUserIds={selectedUserIds}
-            onSelectionChange={setSelectedUserIds}
-          />
-        )}
-
-        {!isCurrentUserMember && childrenInGroup.length > 0 && (
-          <div className="space-y-2">
-            <h3 className="text-lg font-medium text-gray-900">
-              {t('groups:selectChildren')}
-            </h3>
-            {childrenInGroup.map((child) => (
-              <div
-                key={child.id}
-                onClick={() => {
-                  const childId = Number(child.id);
-                  if (selectedUserIds.includes(childId)) {
-                    setSelectedUserIds(selectedUserIds.filter(id => id !== childId));
-                  } else {
-                    setSelectedUserIds([...selectedUserIds, childId]);
-                  }
-                }}
-                className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
-                  selectedUserIds.includes(Number(child.id))
-                    ? 'border-primary-500 bg-primary-50'
-                    : 'border-gray-200 hover:border-gray-300'
-                }`}
-              >
-                <input
-                  type="checkbox"
-                  checked={selectedUserIds.includes(Number(child.id))}
-                  onChange={() => {}}
-                  className="h-5 w-5 text-primary-600 focus:ring-primary-500 border-gray-300 rounded mr-4"
-                  onClick={(e) => e.stopPropagation()}
-                />
-                <div className="flex-1">
-                  <p className="text-base font-medium text-gray-900">{child.name}</p>
-                  <p className="text-sm text-gray-500">{t('common:managedAccount')}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
+        <UserSelector
+          users={isCurrentUserMember ? [user, ...childrenInGroup] : childrenInGroup}
+          currentUserId={user.id}
+          selectedUserIds={selectedUserIds}
+          onSelectionChange={setSelectedUserIds}
+          title={isCurrentUserMember ? t('groups:selectWhoLeaves') : t('groups:selectChildren')}
+          description={isCurrentUserMember ? t('invitation:selectMultipleUsers') : undefined}
+        />
 
         {error && (
           <Alert type="error">
