@@ -26,6 +26,8 @@
   "delete": "Delete",
   "deleting": "Deleting...",
   "confirmDelete": "Yes, delete",
+  "leave": "Leave",
+  "leaving": "Leaving...",
   "confirmation": {
     "title": "Confirm action",
     "message": "Are you sure you want to perform this action?",

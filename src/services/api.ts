@@ -201,8 +201,9 @@ export const groupService = {
   },
 
   // Quitter un groupe
-  leaveGroup: async (id: string) => {
-    const response = await api.delete(`/groups/${id}/leave`);
+  leaveGroup: async (id: string, userId?: string) => {
+    const url = userId ? `/groups/${id}/leave?user_id=${userId}` : `/groups/${id}/leave`;
+    const response = await api.delete(url);
     return response.data;
   },
 };

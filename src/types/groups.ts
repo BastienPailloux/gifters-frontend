@@ -33,13 +33,12 @@ export interface Group {
  */
 export interface Member {
   id: string;
-  user_id: string;
-  group_id: string;
+  name: string;
+  email: string;
   role: 'member' | 'admin';
-  user_name: string;
-  user_email: string;
-  name?: string;
-  email?: string;
+  account_type?: 'standard' | 'managed';
+  parent_id?: number;
+  group_id?: string;
   avatar?: string;
   isAdmin?: boolean;
   membership_id?: string;
@@ -61,6 +60,7 @@ export interface GroupItemProps {
 export interface MemberItemProps {
   member: Member;
   currentUserIsAdmin: boolean;
+  currentUserId?: string;
   onChangeRole?: (memberId: string, newRole: 'member' | 'admin') => void;
   onRemove?: (memberId: string) => void;
   onClick?: () => void;
@@ -228,12 +228,7 @@ export interface GroupDetailsData {
   description?: string;
   members_count?: number;
   permissions?: GroupPermissions;
-  members?: {
-    id: string;
-    name: string;
-    email: string;
-    role?: string;
-  }[];
+  members?: Member[];
   events?: GroupEvent[];
   createdAt?: string;
   updatedAt?: string;

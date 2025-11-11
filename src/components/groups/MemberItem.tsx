@@ -10,6 +10,7 @@ import { MemberItemProps } from '../../types';
 const MemberItem: React.FC<MemberItemProps> = ({
   member,
   currentUserIsAdmin,
+  currentUserId,
   onChangeRole,
   onRemove,
   onClick,
@@ -17,6 +18,9 @@ const MemberItem: React.FC<MemberItemProps> = ({
 }) => {
   const { t } = useTranslation('groups');
   const navigate = useNavigate();
+
+  const isCurrentUser = currentUserId === member.id;
+  const canRemove = currentUserIsAdmin || isCurrentUser;
 
   const handleChangeRole = () => {
     if (onChangeRole) {
@@ -35,7 +39,7 @@ const MemberItem: React.FC<MemberItemProps> = ({
       onClick();
     }
     // Naviguer vers le profil du membre
-    navigate(`/profile/${member.user_id}`);
+    navigate(`/profile/${member.id}`);
   };
 
   return (
@@ -48,13 +52,13 @@ const MemberItem: React.FC<MemberItemProps> = ({
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           <Avatar
-            name={member.user_name}
+            name={member.name}
             size="md"
             variant={member.role === 'admin' ? 'primary' : 'secondary'}
           />
           <div className="ml-3">
-            <div className="font-medium text-gray-900">{member.user_name}</div>
-            <div className="text-sm text-gray-500">{member.user_email}</div>
+            <div className="font-medium text-gray-900">{member.name}</div>
+            <div className="text-sm text-gray-500">{member.email}</div>
           </div>
         </div>
 
@@ -64,9 +68,9 @@ const MemberItem: React.FC<MemberItemProps> = ({
             color={member.role === 'admin' ? 'purple' : 'blue'}
           />
 
-          {currentUserIsAdmin && (
+          {(currentUserIsAdmin || canRemove) && (
             <div className="flex ml-4" onClick={(e) => e.stopPropagation()}>
-              {onChangeRole && (
+              {currentUserIsAdmin && onChangeRole && (
                 <FlatButton
                   onClick={handleChangeRole}
                   variant="primary"
@@ -78,14 +82,14 @@ const MemberItem: React.FC<MemberItemProps> = ({
                 </FlatButton>
               )}
 
-              {onRemove && (
+              {canRemove && onRemove && (
                 <FlatButton
                   onClick={handleRemove}
                   variant="danger"
                   size="small"
-                  aria-label={t('groups:removeMember')}
+                  aria-label={isCurrentUser ? t('groups:leaveGroup') : t('groups:removeMember')}
                 >
-                  {t('groups:remove')}
+                  {isCurrentUser ? t('groups:leaveGroup') : t('groups:remove')}
                 </FlatButton>
               )}
             </div>
