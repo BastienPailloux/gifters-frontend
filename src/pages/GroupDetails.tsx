@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { groupService, giftIdeaService } from '../services/api';
@@ -9,18 +9,19 @@ import GiftIdeaItem from '../components/gift-ideas/GiftIdeaItem';
 import MembersList from '../components/groups/MembersList';
 import GroupFormModal from '../components/groups/GroupFormModal';
 import { GiftIdeaFormModal } from '../components/gift-ideas/GiftIdeaFormModal';
+import LeaveGroupModal from '../components/groups/LeaveGroupModal';
 import useAuth from '../hooks/useAuth';
-import { GroupDetailsData, GroupEvent } from '../types/groups';
+import { GroupDetailsData, GroupEvent, Member } from '../types/groups';
 import { ApiGiftIdea } from '../types/gift-ideas';
 import { SEO } from '../components/common/seo';
 
 /**
- * Adapte les membres du format simplifié de GroupDetailsData au format compatible avec GiftIdeaFormModal
+ * Adapte les membres au format compatible avec GiftIdeaFormModal
  */
-const adaptMembersToFullFormat = (simplifiedMembers: GroupDetailsData['members'] = []): Array<{ id: string; name: string; email?: string }> => {
-  return simplifiedMembers.map(member => ({
+const adaptMembersToFullFormat = (members: GroupDetailsData['members'] = []): Array<{ id: string; name: string; email?: string }> => {
+  return members.map(member => ({
     id: member.id,
-    name: member.name || 'Unknown',
+    name: member.name,
     email: member.email
   }));
 };
@@ -40,9 +41,10 @@ const GroupDetails: React.FC = () => {
   const [isUserAdmin, setIsUserAdmin] = useState<boolean>(false);
   const [isGroupEditModalOpen, setIsGroupEditModalOpen] = useState<boolean>(false);
   const [isGiftIdeaModalOpen, setIsGiftIdeaModalOpen] = useState<boolean>(false);
+  const [isLeaveModalOpen, setIsLeaveModalOpen] = useState<boolean>(false);
 
   // Fonction pour récupérer les détails du groupe
-  const fetchGroupDetails = async () => {
+  const fetchGroupDetails = useCallback(async () => {
     if (!id) return;
 
     setLoading(true);
@@ -60,7 +62,7 @@ const GroupDetails: React.FC = () => {
           setIsUserAdmin(groupData.permissions.can_administer);
         } else if (groupData.members && user) {
           const currentUserMember = groupData.members.find(
-            (member: {id: string; name: string; email: string; role?: string}) => member.id === user.id
+            (member: Member) => String(member.id) === user.id
           );
           setIsUserAdmin(
             currentUserMember?.role === 'admin'
@@ -76,12 +78,12 @@ const GroupDetails: React.FC = () => {
       setLoading(false);
       setAdminStatusLoaded(true);
     }
-  };
+  }, [id, t, user]);
 
   // Récupérer les détails du groupe
   useEffect(() => {
     fetchGroupDetails();
-  }, [id, t, user]);
+  }, [fetchGroupDetails]);
 
   // Récupérer les idées de cadeaux du groupe
   useEffect(() => {
@@ -155,6 +157,10 @@ const GroupDetails: React.FC = () => {
   const handleViewGift = (giftId: string | number) => {
     // Naviguer vers la page de détails de l'idée cadeau
     navigate(`/gift-ideas/${giftId}`);
+  };
+
+  const handleLeaveGroup = () => {
+    setIsLeaveModalOpen(true);
   };
 
   // Fonction pour rafraîchir les idées de cadeaux après en avoir ajouté une nouvelle
@@ -244,6 +250,12 @@ const GroupDetails: React.FC = () => {
           {t('common:edit') || 'Edit'}
         </Button>
       )}
+      <Button
+        variant="danger"
+        onClick={handleLeaveGroup}
+      >
+        {t('groups:leaveGroup')}
+      </Button>
     </>
   );
 
@@ -354,6 +366,15 @@ const GroupDetails: React.FC = () => {
           groupMembers={adaptMembersToFullFormat(group.members)}
           onSuccess={handleGiftIdeaCreationSuccess}
           mode="create"
+        />
+      )}
+
+      {id && group && group.members && (
+        <LeaveGroupModal
+          isOpen={isLeaveModalOpen}
+          onClose={() => setIsLeaveModalOpen(false)}
+          groupId={id}
+          groupMembers={group.members}
         />
       )}
     </div>

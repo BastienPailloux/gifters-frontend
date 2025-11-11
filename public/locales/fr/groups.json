@@ -64,5 +64,14 @@
   "errorGettingGroups": "Erreur lors de la récupération des groupes. Veuillez réessayer.",
   "errorUpdatingRole": "Erreur lors de la mise à jour du rôle. Veuillez réessayer.",
   "errorRemovingMember": "Erreur lors de la suppression du membre. Veuillez réessayer.",
-  "errorCreatingInvitationLink": "Erreur lors de la création du lien d'invitation. Un lien plus simple a été généré."
+  "errorCreatingInvitationLink": "Erreur lors de la création du lien d'invitation. Un lien plus simple a été généré.",
+  "leaveGroup": "Quitter le groupe",
+  "confirmLeaveGroup": "Êtes-vous sûr de vouloir quitter ce groupe ?",
+  "leaveGroupWarning": "Vous ne pourrez plus voir les idées cadeaux de ce groupe après l'avoir quitté.",
+  "leaveGroupSuccess": "Vous avez quitté le groupe avec succès",
+  "errorLeavingGroup": "Erreur lors de la tentative de quitter le groupe. Veuillez réessayer.",
+  "cannotLeaveLastAdmin": "Vous ne pouvez pas quitter ce groupe car vous êtes le dernier administrateur. Veuillez d'abord nommer un autre administrateur.",
+  "selectWhoLeaves": "Sélectionnez qui doit quitter le groupe :",
+  "selectChildren": "Sélectionnez les enfants à retirer du groupe",
+  "pleaseSelectAtLeastOne": "Veuillez sélectionner au moins un utilisateur"
 }

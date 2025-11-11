@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import MemberItem from './MemberItem';
-import { membershipService } from '../../services/api';
+import { membershipService, groupService } from '../../services/api';
 import useAuth from '../../hooks/useAuth';
 import Button from '../common/forms/Button';
 import InvitationModal from './InvitationModal';
@@ -11,6 +12,7 @@ import { MembersListProps, Member } from '../../types';
 const MembersList: React.FC<MembersListProps> = ({ groupId, isCurrentUserAdmin, groupName }) => {
   const { t } = useTranslation('groups');
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   const [members, setMembers] = useState<Member[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -42,7 +44,7 @@ const MembersList: React.FC<MembersListProps> = ({ groupId, isCurrentUserAdmin, 
         // Trouver le membership de l'utilisateur actuel uniquement si le statut admin n'est pas déjà fourni
         if (isCurrentUserAdmin === undefined && user) {
           const userMembership = membersData.find(
-            (member: Member) => member.user_id === user.id
+            (member: Member) => String(member.id) === user.id
           );
           setCurrentUserMembership(userMembership || null);
           setAdminStatusDetermined(true);
@@ -60,15 +62,21 @@ const MembersList: React.FC<MembersListProps> = ({ groupId, isCurrentUserAdmin, 
     fetchMembers();
   }, [groupId, user, t, isCurrentUserAdmin]);
 
-  const handleChangeRole = async (membershipId: string, newRole: 'member' | 'admin') => {
+  const handleChangeRole = async (userId: string, newRole: 'member' | 'admin') => {
     try {
-      await membershipService.updateMemberRole(groupId, membershipId, newRole);
+      // Trouver le membre pour obtenir son membershipId
+      const member = members.find(m => String(m.id) === String(userId));
+      if (!member || !member.membershipId) {
+        throw new Error('Membership ID not found');
+      }
+
+      await membershipService.updateMemberRole(groupId, member.membershipId, newRole);
       // Mettre à jour l'état local pour refléter le changement
       setMembers(prevMembers =>
-        prevMembers.map(member =>
-          member.id === membershipId
-            ? { ...member, role: newRole }
-            : member
+        prevMembers.map(m =>
+          m.id === userId
+            ? { ...m, role: newRole }
+            : m
         )
       );
     } catch (err) {
@@ -96,21 +104,37 @@ const MembersList: React.FC<MembersListProps> = ({ groupId, isCurrentUserAdmin, 
 
     try {
       setIsRemoving(true);
-      await membershipService.removeMember(groupId, memberToRemove);
-      // Mettre à jour l'état local pour refléter le changement
-      setMembers(prevMembers =>
-        prevMembers.filter(member => member.id !== memberToRemove)
-      );
-      // Si nous supprimons le membre sélectionné, réinitialiser la sélection
-      if (selectedMemberId === memberToRemove) {
-        setSelectedMemberId(null);
+
+      const memberBeingRemoved = members.find(m => m.id === memberToRemove);
+
+      if (memberBeingRemoved && user && String(memberBeingRemoved.id) === user.id) {
+        await groupService.leaveGroup(groupId);
+        navigate('/groups');
+      } else {
+        const memberToDelete = members.find(m => m.id === memberToRemove);
+        if (!memberToDelete || !memberToDelete.membershipId) {
+          throw new Error('Membership ID not found');
+        }
+
+        await membershipService.removeMember(groupId, memberToDelete.membershipId);
+        setMembers(prevMembers =>
+          prevMembers.filter(member => member.id !== memberToRemove)
+        );
+        if (selectedMemberId === memberToRemove) {
+          setSelectedMemberId(null);
+        }
+        closeRemoveModal();
       }
-    } catch (err) {
+    } catch (err: unknown) {
       console.error('Error removing member:', err);
-      setError(t('groups:errorRemovingMember'));
+      if (err instanceof Error && err.message.includes('last admin')) {
+        setError(t('groups:cannotLeaveLastAdmin'));
+      } else {
+        setError(t('groups:errorRemovingMember'));
+      }
+      closeRemoveModal();
     } finally {
       setIsRemoving(false);
-      closeRemoveModal();
     }
   };
 
@@ -137,6 +161,12 @@ const MembersList: React.FC<MembersListProps> = ({ groupId, isCurrentUserAdmin, 
   const isAdminDetermined = isCurrentUserAdmin !== undefined
     ? isCurrentUserAdmin
     : currentUserMembership?.role === 'admin';
+
+  // Calculer une seule fois le membre à retirer pour éviter des recherches répétées
+  const memberBeingRemovedInModal = memberToRemove
+    ? members.find(m => m.id === memberToRemove)
+    : null;
+  const isRemovingSelf = memberBeingRemovedInModal && user && String(memberBeingRemovedInModal.id) === user.id;
 
   return (
     <div className="mt-6">
@@ -167,8 +197,9 @@ const MembersList: React.FC<MembersListProps> = ({ groupId, isCurrentUserAdmin, 
               key={member.id}
               member={member}
               currentUserIsAdmin={isAdminDetermined}
+              currentUserId={user?.id}
               onChangeRole={isAdminDetermined ? handleChangeRole : undefined}
-              onRemove={isAdminDetermined ? handleRemoveMember : undefined}
+              onRemove={(isAdminDetermined || String(member.id) === user?.id) ? handleRemoveMember : undefined}
               onClick={() => handleMemberClick(member.id)}
               isActive={selectedMemberId === member.id}
             />
@@ -186,12 +217,20 @@ const MembersList: React.FC<MembersListProps> = ({ groupId, isCurrentUserAdmin, 
       <ConfirmationModal
         isOpen={isRemoveModalOpen}
         onClose={closeRemoveModal}
-        title={t('groups:removeMember')}
-        message={t('groups:confirmRemoveMember')}
+        title={isRemovingSelf ? t('groups:leaveGroup') : t('groups:removeMember')}
+        message={
+          isRemovingSelf
+            ? `${t('groups:confirmLeaveGroup')}\n\n${t('groups:leaveGroupWarning')}`
+            : t('groups:confirmRemoveMember')
+        }
         onConfirm={confirmRemoveMember}
         isLoading={isRemoving}
         confirmVariant="danger"
-        confirmText={isRemoving ? t('common:deleting') : t('common:delete')}
+        confirmText={
+          isRemovingSelf
+            ? (isRemoving ? t('common:leaving') : t('common:leave'))
+            : (isRemoving ? t('common:deleting') : t('common:delete'))
+        }
       />
     </div>
   );

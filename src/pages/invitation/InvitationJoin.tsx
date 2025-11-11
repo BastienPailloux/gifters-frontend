@@ -183,8 +183,8 @@ const InvitationJoin: React.FC = () => {
           </div>
 
           <UserSelector
-            currentUser={user}
-            children={children}
+            users={user ? [user, ...children] : children}
+            currentUserId={user?.id}
             selectedUserIds={selectedUserIds}
             onSelectionChange={setSelectedUserIds}
           />

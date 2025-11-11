@@ -26,6 +26,8 @@
   "delete": "Supprimer",
   "deleting": "Suppression...",
   "confirmDelete": "Oui, supprimer",
+  "leave": "Quitter",
+  "leaving": "En cours...",
   "confirmation": {
     "title": "Confirmer l'action",
     "message": "Êtes-vous sûr de vouloir effectuer cette action ?",
