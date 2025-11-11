@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../common/forms/Button';
 import TextInput from '../common/forms/TextInput';
 import Modal from '../common/modals/Modal';
+import Alert from '../common/display/Alert';
 import { groupService } from '../../services/api';
 import { GroupFormModalProps } from '../../types/groups';
 
@@ -119,9 +120,9 @@ const GroupFormModal: React.FC<GroupFormModalProps> = ({
       {!showDeleteConfirm ? (
         <form onSubmit={handleSubmit}>
           {error && (
-            <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-md">
-              <p className="text-sm text-red-600">{error}</p>
-            </div>
+            <Alert type="error" className="mb-4">
+              {error}
+            </Alert>
           )}
 
           <TextInput
@@ -193,9 +194,9 @@ const GroupFormModal: React.FC<GroupFormModalProps> = ({
           </p>
 
           {error && (
-            <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-md">
-              <p className="text-sm text-red-600">{error}</p>
-            </div>
+            <Alert type="error" className="mb-4">
+              {error}
+            </Alert>
           )}
 
           <div className="mb-6">

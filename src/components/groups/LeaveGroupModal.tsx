@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../common/modals/Modal';
 import Button from '../common/forms/Button';
+import Alert from '../common/display/Alert';
 import UserSelector from '../profile/UserSelector';
 import { groupService } from '../../services/api';
 import useAuth from '../../hooks/useAuth';
@@ -134,11 +135,9 @@ const LeaveGroupModal: React.FC<LeaveGroupModalProps> = ({
           {t('groups:selectWhoLeaves')}
         </p>
 
-        <div className="bg-amber-50 border border-amber-200 rounded-md p-4">
-          <p className="text-sm text-amber-800">
-            {t('groups:leaveGroupWarning')}
-          </p>
-        </div>
+        <Alert type="warning">
+          {t('groups:leaveGroupWarning')}
+        </Alert>
 
         {isCurrentUserMember && (
           <UserSelector
@@ -188,9 +187,9 @@ const LeaveGroupModal: React.FC<LeaveGroupModalProps> = ({
         )}
 
         {error && (
-          <div className="bg-red-50 border border-red-200 rounded-md p-4">
-            <p className="text-sm text-red-800">{error}</p>
-          </div>
+          <Alert type="error">
+            {error}
+          </Alert>
         )}
 
         <div className="flex justify-end space-x-3 pt-4">
