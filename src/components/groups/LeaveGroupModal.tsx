@@ -116,7 +116,7 @@ const LeaveGroupModal: React.FC<LeaveGroupModalProps> = ({
   };
 
   const isCurrentUserMember = groupMembers.some(
-    member => user && member.id === user.id
+    member => user && Number(member.id) === Number(user.id)
   );
 
   const hasEligibleUsers = isCurrentUserMember || childrenInGroup.length > 0;

@@ -49,7 +49,7 @@ const UserSelector: React.FC<UserSelectorProps> = ({
   const allSelected = selectedUserIds.length === allUserIds.length && allUserIds.length > 0;
 
   const isCurrentUser = (userId: string | number) => {
-    return String(userId) === String(currentUserId);
+    return Number(userId) === Number(currentUserId);
   };
 
   const getUserLabel = (user: User | Child) => {
@@ -57,7 +57,7 @@ const UserSelector: React.FC<UserSelectorProps> = ({
       return t('common:you');
     }
 
-    if ('account_type' in user && user.account_type === 'managed' && 'parent_id' in user && user.parent_id === currentUserId) {
+    if ('account_type' in user && user.account_type === 'managed' && 'parent_id' in user && user.parent_id === Number(currentUserId)) {
       return t('common:managedAccount');
     }
 

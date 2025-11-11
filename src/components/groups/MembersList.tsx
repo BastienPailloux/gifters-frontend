@@ -162,6 +162,12 @@ const MembersList: React.FC<MembersListProps> = ({ groupId, isCurrentUserAdmin, 
     ? isCurrentUserAdmin
     : currentUserMembership?.role === 'admin';
 
+  // Calculer une seule fois le membre à retirer pour éviter des recherches répétées
+  const memberBeingRemovedInModal = memberToRemove
+    ? members.find(m => m.id === memberToRemove)
+    : null;
+  const isRemovingSelf = memberBeingRemovedInModal && user && String(memberBeingRemovedInModal.id) === user.id;
+
   return (
     <div className="mt-6">
       <div className="flex justify-between items-center mb-4">
@@ -211,13 +217,9 @@ const MembersList: React.FC<MembersListProps> = ({ groupId, isCurrentUserAdmin, 
       <ConfirmationModal
         isOpen={isRemoveModalOpen}
         onClose={closeRemoveModal}
-        title={
-          memberToRemove && String(members.find(m => m.id === memberToRemove)?.id) === user?.id
-            ? t('groups:leaveGroup')
-            : t('groups:removeMember')
-        }
+        title={isRemovingSelf ? t('groups:leaveGroup') : t('groups:removeMember')}
         message={
-          memberToRemove && String(members.find(m => m.id === memberToRemove)?.id) === user?.id
+          isRemovingSelf
             ? `${t('groups:confirmLeaveGroup')}\n\n${t('groups:leaveGroupWarning')}`
             : t('groups:confirmRemoveMember')
         }
@@ -225,7 +227,7 @@ const MembersList: React.FC<MembersListProps> = ({ groupId, isCurrentUserAdmin, 
         isLoading={isRemoving}
         confirmVariant="danger"
         confirmText={
-          memberToRemove && String(members.find(m => m.id === memberToRemove)?.id) === user?.id
+          isRemovingSelf
             ? (isRemoving ? t('common:leaving') : t('common:leave'))
             : (isRemoving ? t('common:deleting') : t('common:delete'))
         }

@@ -19,7 +19,7 @@ const MemberItem: React.FC<MemberItemProps> = ({
   const { t } = useTranslation('groups');
   const navigate = useNavigate();
 
-  const isCurrentUser = currentUserId === member.id;
+  const isCurrentUser = Number(currentUserId) === Number(member.id);
   const canRemove = currentUserIsAdmin || isCurrentUser;
 
   const handleChangeRole = () => {
