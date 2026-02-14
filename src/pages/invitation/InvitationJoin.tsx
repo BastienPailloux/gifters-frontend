@@ -126,14 +126,19 @@ const InvitationJoin: React.FC = () => {
     }
   };
 
+  const getInvitationRedirectUrl = () => {
+    const params = new URLSearchParams();
+    if (token) params.set('token', token);
+    if (groupId) params.set('group', groupId);
+    return `/invitation/join?${params.toString()}`;
+  };
+
   const handleLogin = () => {
-    // Rediriger vers la page de connexion, avec un paramètre pour revenir à cette page
-    navigate(`/login?redirect=/invitation/join?group=${groupId || ''}&token=${token || ''}`);
+    navigate(`/login?redirect=${encodeURIComponent(getInvitationRedirectUrl())}`);
   };
 
   const handleRegister = () => {
-    // Rediriger vers la page d'inscription, avec un paramètre pour revenir à cette page
-    navigate(`/register?redirect=/invitation/join?group=${groupId || ''}&token=${token || ''}`);
+    navigate(`/register?redirect=${encodeURIComponent(getInvitationRedirectUrl())}`);
   };
 
   if (status === 'loading' || isLoading) {
