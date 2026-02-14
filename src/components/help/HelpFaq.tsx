@@ -14,7 +14,7 @@ const HelpFaq: React.FC<HelpFaqProps> = ({ className, faqs, title, description, 
     {
       id: 2,
       question: "Comment puis-je contacter le support ?",
-      answer: "Vous pouvez contacter notre équipe de support via la page Contact ou en envoyant un email à support@gifters.com."
+      answer: "Vous pouvez contacter notre équipe de support via la page Contact ou en envoyant un email à support@gifters.fr."
     }
   ];
 

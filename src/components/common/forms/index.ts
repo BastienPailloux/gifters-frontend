@@ -9,3 +9,4 @@ export { default as RecipientSelector } from './RecipientSelector';
 export { default as IconButton } from './IconButton';
 export { default as IconLinkButton } from './IconLinkButton';
 export { default as InlineGroupCreationInput } from './InlineGroupCreationInput';
+export { default as PasswordToggleButton } from './PasswordToggleButton';
