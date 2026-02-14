@@ -1,6 +1,7 @@
-import { forwardRef } from 'react';
+import { forwardRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { InputProps } from '../../../types';
+import PasswordToggleButton from './PasswordToggleButton';
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
   (
@@ -14,10 +15,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       className,
       containerClassName,
       id,
+      type,
       ...rest
     },
     ref
   ) => {
+    const [showPassword, setShowPassword] = useState(false);
+    const isPassword = type === 'password';
+
     // Generate a unique ID if not provided
     const inputId = id || `input-${Math.random().toString(36).substring(2, 9)}`;
 
@@ -32,8 +37,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     // Width classes
     const widthClasses = fullWidth ? 'w-full' : '';
 
-    // Icon padding
-    const iconPaddingClasses = startIcon ? 'pl-10' : endIcon ? 'pr-10' : '';
+    // Icon padding (right side: password toggle or endIcon)
+    const hasRightContent = isPassword || endIcon;
+    const iconPaddingClasses = startIcon ? 'pl-10' : hasRightContent ? 'pr-10' : '';
 
     // Combine all classes
     const inputClasses = twMerge(
@@ -43,6 +49,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       iconPaddingClasses,
       className
     );
+
+    const inputType = isPassword ? (showPassword ? 'text' : 'password') : type;
 
     return (
       <div className={twMerge('mb-4', containerClassName)} data-testid="input-container">
@@ -60,12 +68,21 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           <input
             id={inputId}
             ref={ref}
+            type={inputType}
             className={inputClasses}
             aria-invalid={!!error}
             aria-describedby={error ? `${inputId}-error` : helperText ? `${inputId}-helper` : undefined}
             {...rest}
           />
-          {endIcon && (
+          {isPassword && (
+            <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+              <PasswordToggleButton
+                visible={showPassword}
+                onToggle={() => setShowPassword((prev) => !prev)}
+              />
+            </div>
+          )}
+          {!isPassword && endIcon && (
             <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
               {endIcon}
             </div>
