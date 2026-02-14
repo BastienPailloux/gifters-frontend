@@ -196,6 +196,10 @@ export interface ExtendedGiftIdea extends GiftIdea {
     name: string;
   }>;
   group_name?: string;
+  // Permissions calculées par le backend
+  can_mark_as_buying?: boolean;
+  can_mark_as_bought?: boolean;
+  can_cancel_buying?: boolean;
 }
 
 /**

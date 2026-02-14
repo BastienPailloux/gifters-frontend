@@ -328,9 +328,20 @@ export const giftIdeaService = {
     return response.data;
   },
 
+  // Récupérer les acheteurs éligibles pour un cadeau
+  getEligibleBuyers: async (id: string) => {
+    const response = await api.get(`/gift_ideas/${id}/eligible_buyers`);
+    return response.data as {
+      eligibleBuyers: Array<{ id: number; name: string; accountType: string }>;
+      needsSelection: boolean;
+    };
+  },
+
   // Marquer comme "en cours d'achat"
-  markAsBuying: async (id: string) => {
-    const response = await api.put(`/gift_ideas/${id}/mark_as_buying`);
+  markAsBuying: async (id: string, actorId?: number) => {
+    const response = await api.put(`/gift_ideas/${id}/mark_as_buying`, {
+      actor_id: actorId
+    });
     return response.data;
   },
 
