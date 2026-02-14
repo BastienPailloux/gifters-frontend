@@ -1,5 +1,9 @@
 {
   "welcome": "Welcome to your dashboard",
+  "createGift": {
+    "title": "Suggest a gift idea",
+    "description": "Propose a gift for someone you know"
+  },
   "summary": "Find here a summary of your upcoming events and gifts you're buying.",
   "personalInfo": "Your personal information",
   "noName": "No name provided",

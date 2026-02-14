@@ -1,5 +1,9 @@
 {
   "welcome": "Bienvenue sur votre tableau de bord",
+  "createGift": {
+    "title": "Proposer une idée cadeau",
+    "description": "Suggérez un cadeau pour quelqu'un de votre entourage"
+  },
   "summary": "Retrouvez ici un résumé de vos prochains événements et vos cadeaux en cours.",
   "personalInfo": "Vos informations personnelles",
   "noName": "Aucun nom fourni",

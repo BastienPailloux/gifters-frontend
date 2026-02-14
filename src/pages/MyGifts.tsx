@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { giftIdeaService, groupService, membershipService } from '../services/api';
 import useAuth from '../hooks/useAuth';
 import PageHeader from '../components/common/layout/PageHeader';
@@ -23,6 +23,7 @@ import { SEO } from '../components/common/seo';
 const MyGifts: React.FC = () => {
   const { t } = useTranslation('gifts');
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const { user } = useAuth();
 
   // Catégorie sélectionnée
@@ -53,6 +54,16 @@ const MyGifts: React.FC = () => {
 
   // État pour l'ouverture du modal de création de cadeau
   const [isGiftFormModalOpen, setIsGiftFormModalOpen] = useState<boolean>(false);
+
+  // Gérer le paramètre URL ?action=create pour ouvrir le modal automatiquement
+  useEffect(() => {
+    if (searchParams.get('action') === 'create') {
+      setIsGiftFormModalOpen(true);
+      // Retirer le paramètre de l'URL après ouverture
+      searchParams.delete('action');
+      setSearchParams(searchParams, { replace: true });
+    }
+  }, [searchParams, setSearchParams]);
 
   // Fonction pour charger les membres des groupes de l'utilisateur
   const fetchGroupMembers = async () => {
