@@ -177,6 +177,8 @@ export interface ApiGiftIdea {
   group?: { id: number | string; name: string } | string;
   link?: string;
   image_url?: string;
+  buyer?: { id: number | string; name: string };
+  buyer_id?: number | string;
 }
 
 /**

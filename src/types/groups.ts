@@ -18,14 +18,15 @@ export interface Group {
   id: string;
   name: string;
   description?: string;
-  created_at: string;
-  updated_at: string;
-  created_by_id: string;
+  created_at?: string;
+  updated_at?: string;
+  created_by_id?: string;
   members_count?: number;
   member_count?: number;
   created_by?: User;
   isAdmin?: boolean;
   permissions?: GroupPermissions;
+  childMemberName?: string; // Nom de l'enfant membre (pour les groupes des enfants)
 }
 
 /**
