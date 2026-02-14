@@ -41,8 +41,10 @@ api.interceptors.response.use(
       localStorage.removeItem('token');
       localStorage.removeItem('user');
 
-      // Rediriger vers la page de login
-      window.location.href = '/login';
+      // Rediriger vers la page de login en conservant l'URL actuelle pour y revenir après connexion
+      const currentPath = window.location.pathname + window.location.search;
+      const redirectParam = currentPath && currentPath !== '/login' ? `?redirect=${encodeURIComponent(currentPath)}` : '';
+      window.location.href = `/login${redirectParam}`;
     }
     return Promise.reject(error);
   }

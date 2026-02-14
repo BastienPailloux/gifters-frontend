@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import AuthForm from '../../components/auth/AuthForm';
@@ -13,6 +13,8 @@ const Login: React.FC = () => {
   const { t } = useTranslation('auth');
   const { login, error, clearError } = useAuth();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const redirectTo = searchParams.get('redirect');
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -28,7 +30,8 @@ const Login: React.FC = () => {
     try {
       const result = await login({ email, password });
       if (result.success) {
-        navigate('/dashboard');
+        const target = redirectTo && redirectTo.startsWith('/') ? redirectTo : '/dashboard';
+        navigate(target);
       }
     } finally {
       setIsSubmitting(false);
@@ -42,7 +45,7 @@ const Login: React.FC = () => {
         title={t('auth:login.title')}
         subtitle={t('auth:login.subtitle')}
         linkText={t('auth:login.registerLink')}
-        linkUrl="/register"
+        linkUrl={redirectTo ? `/register?redirect=${encodeURIComponent(redirectTo)}` : '/register'}
         error={error}
         onSubmit={handleSubmit}
       >
