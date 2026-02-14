@@ -177,6 +177,8 @@ export interface ApiGiftIdea {
   group?: { id: number | string; name: string } | string;
   link?: string;
   image_url?: string;
+  buyer?: { id: number | string; name: string };
+  buyer_id?: number | string;
 }
 
 /**
@@ -196,6 +198,10 @@ export interface ExtendedGiftIdea extends GiftIdea {
     name: string;
   }>;
   group_name?: string;
+  // Permissions calculées par le backend
+  can_mark_as_buying?: boolean;
+  can_mark_as_bought?: boolean;
+  can_cancel_buying?: boolean;
 }
 
 /**

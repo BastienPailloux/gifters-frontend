@@ -6,6 +6,7 @@ import Button from '../components/common/forms/Button';
 import PageHeader from '../components/common/layout/PageHeader';
 import GiftIdeaDetailCard from '../components/gift-ideas/GiftIdeaDetailCard';
 import { GiftIdeaFormModal } from '../components/gift-ideas/GiftIdeaFormModal';
+import BuyerSelectionModal from '../components/gift-ideas/BuyerSelectionModal';
 import useAuth from '../hooks/useAuth';
 import { ExtendedGiftIdea } from '../types';
 import { FaEdit, FaTrash } from 'react-icons/fa';
@@ -24,6 +25,9 @@ const GiftIdeaDetails: React.FC = () => {
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
+  const [isBuyerModalOpen, setIsBuyerModalOpen] = useState<boolean>(false);
+  const [isMarkingAsBuying, setIsMarkingAsBuying] = useState<boolean>(false);
+  const [eligibleBuyers, setEligibleBuyers] = useState<Array<{ id: number; name: string; accountType: string }>>([]);
   const [groupMembers, setGroupMembers] = useState<Array<{ id: string; name: string; email?: string }>>([]);
 
   // Formatage du prix en euros
@@ -90,10 +94,39 @@ const GiftIdeaDetails: React.FC = () => {
     if (!id) return;
 
     try {
-      const response = await giftIdeaService.markAsBuying(id);
-      setGiftIdea(response.giftIdea as ExtendedGiftIdea);
+      // D'abord, vérifier les acheteurs éligibles
+      const eligibilityResponse = await giftIdeaService.getEligibleBuyers(id);
+      
+      if (eligibilityResponse.needsSelection && eligibilityResponse.eligibleBuyers.length > 1) {
+        // Plusieurs acheteurs possibles, afficher la modal de sélection
+        setEligibleBuyers(eligibilityResponse.eligibleBuyers);
+        setIsBuyerModalOpen(true);
+      } else if (eligibilityResponse.eligibleBuyers.length === 1) {
+        // Un seul acheteur, procéder directement
+        const response = await giftIdeaService.markAsBuying(id, eligibilityResponse.eligibleBuyers[0].id);
+        setGiftIdea(response.giftIdea as ExtendedGiftIdea);
+      } else {
+        // Aucun acheteur éligible (ne devrait pas arriver si le bouton est affiché)
+        console.error('No eligible buyers found');
+      }
     } catch (error) {
       console.error('Error marking gift as buying:', error);
+    }
+  };
+
+  // Confirmer la sélection de l'acheteur
+  const handleConfirmBuyer = async (buyerId: number) => {
+    if (!id) return;
+
+    setIsMarkingAsBuying(true);
+    try {
+      const response = await giftIdeaService.markAsBuying(id, buyerId);
+      setGiftIdea(response.giftIdea as ExtendedGiftIdea);
+      setIsBuyerModalOpen(false);
+    } catch (error) {
+      console.error('Error marking gift as buying:', error);
+    } finally {
+      setIsMarkingAsBuying(false);
     }
   };
 
@@ -277,6 +310,15 @@ const GiftIdeaDetails: React.FC = () => {
         isLoading={isDeleting}
         confirmVariant="danger"
         confirmText={isDeleting ? t('common:deleting') : t('common:delete')}
+      />
+
+      {/* Modal de sélection de l'acheteur */}
+      <BuyerSelectionModal
+        isOpen={isBuyerModalOpen}
+        onClose={() => setIsBuyerModalOpen(false)}
+        onConfirm={handleConfirmBuyer}
+        eligibleBuyers={eligibleBuyers}
+        isLoading={isMarkingAsBuying}
       />
     </div>
   );

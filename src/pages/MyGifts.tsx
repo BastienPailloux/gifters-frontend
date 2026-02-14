@@ -39,8 +39,10 @@ const MyGifts: React.FC = () => {
   // États pour stocker les différentes catégories de cadeaux
   const [myWishlist, setMyWishlist] = useState<ApiGiftIdea[]>([]);
   const [mySuggestions, setMySuggestions] = useState<ApiGiftIdea[]>([]);
-  const [buyingGifts, setBuyingGifts] = useState<ApiGiftIdea[]>([]);
-  const [boughtGifts, setBoughtGifts] = useState<ApiGiftIdea[]>([]);
+  const [myBuyingGifts, setMyBuyingGifts] = useState<ApiGiftIdea[]>([]);
+  const [childrenBuyingGifts, setChildrenBuyingGifts] = useState<ApiGiftIdea[]>([]);
+  const [myBoughtGifts, setMyBoughtGifts] = useState<ApiGiftIdea[]>([]);
+  const [childrenBoughtGifts, setChildrenBoughtGifts] = useState<ApiGiftIdea[]>([]);
 
   // État pour stocker les membres des groupes de l'utilisateur
   const [groupMembers, setGroupMembers] = useState<Array<{id: string; name: string; email?: string}>>([]);
@@ -57,6 +59,8 @@ const MyGifts: React.FC = () => {
     if (!user) return;
 
     try {
+      const uniqueMembers = new Map<string, {id: string; name: string; email?: string}>();
+
       // Récupérer tous les groupes de l'utilisateur
       const groupsResponse = await groupService.getGroups();
 
@@ -71,19 +75,29 @@ const MyGifts: React.FC = () => {
         const allMembersArrays = await Promise.all(allMembersPromises);
 
         // Fusionner tous les membres en un seul tableau et dédupliquer par ID
-        const uniqueMembers = new Map();
         allMembersArrays.flat().forEach(member => {
-          if (!uniqueMembers.has(member.user_id)) {
-            uniqueMembers.set(member.user_id, {
-              id: member.user_id,
+          const memberId = String(member.id || member.user_id);
+          if (!uniqueMembers.has(memberId)) {
+            uniqueMembers.set(memberId, {
+              id: memberId,
               name: member.name || member.user_name,
               email: member.email || member.user_email
             });
           }
         });
-
-        setGroupMembers(Array.from(uniqueMembers.values()));
       }
+
+      // Toujours inclure l'utilisateur courant comme destinataire potentiel (pour sa wishlist)
+      // Seulement s'il n'est pas déjà dans la liste
+      if (!uniqueMembers.has(String(user.id))) {
+        uniqueMembers.set(String(user.id), {
+          id: String(user.id),
+          name: user.name,
+          email: user.email
+        });
+      }
+
+      setGroupMembers(Array.from(uniqueMembers.values()));
     } catch (err) {
       console.error('Error fetching group members:', err);
     }
@@ -117,16 +131,32 @@ const MyGifts: React.FC = () => {
         setMySuggestions(mySuggestionGifts);
       }
 
-      // 3. Récupérer les idées cadeaux en cours d'achat par l'utilisateur
+      // 3. Récupérer les idées cadeaux en cours d'achat (par moi et mes enfants)
       const buyingResponse = await giftIdeaService.getGiftIdeasByBuyer(user.id, undefined, ['buying']);
       if (buyingResponse && buyingResponse.giftIdeas) {
-        setBuyingGifts(buyingResponse.giftIdeas);
+        // Séparer mes achats et ceux de mes enfants
+        const myBuying = buyingResponse.giftIdeas.filter(
+          (gift: ApiGiftIdea) => String(gift.buyer?.id) === String(user.id) || String(gift.buyer_id) === String(user.id)
+        );
+        const childrenBuying = buyingResponse.giftIdeas.filter(
+          (gift: ApiGiftIdea) => String(gift.buyer?.id) !== String(user.id) && String(gift.buyer_id) !== String(user.id)
+        );
+        setMyBuyingGifts(myBuying);
+        setChildrenBuyingGifts(childrenBuying);
       }
 
-      // 4. Récupérer les cadeaux achetés par l'utilisateur
+      // 4. Récupérer les cadeaux achetés (par moi et mes enfants)
       const boughtResponse = await giftIdeaService.getGiftIdeasByBuyer(user.id, undefined, ['bought']);
       if (boughtResponse && boughtResponse.giftIdeas) {
-        setBoughtGifts(boughtResponse.giftIdeas);
+        // Séparer mes achats et ceux de mes enfants
+        const myBought = boughtResponse.giftIdeas.filter(
+          (gift: ApiGiftIdea) => String(gift.buyer?.id) === String(user.id) || String(gift.buyer_id) === String(user.id)
+        );
+        const childrenBought = boughtResponse.giftIdeas.filter(
+          (gift: ApiGiftIdea) => String(gift.buyer?.id) !== String(user.id) && String(gift.buyer_id) !== String(user.id)
+        );
+        setMyBoughtGifts(myBought);
+        setChildrenBoughtGifts(childrenBought);
       }
 
     } catch (err) {
@@ -187,39 +217,53 @@ const MyGifts: React.FC = () => {
     </Card>
   );
 
-  // Obtenir les données de la catégorie sélectionnée
-  const getCurrentCategoryData = (): { title: string; gifts: ApiGiftIdea[]; emptyMessage: string } => {
+  // Obtenir les données de la catégorie sélectionnée (peut retourner plusieurs sections)
+  const getCurrentCategorySections = (): Array<{ title: string; gifts: ApiGiftIdea[]; emptyMessage: string }> => {
     switch (selectedCategory) {
       case 'wishlist':
-        return {
+        return [{
           title: t('gifts:myGifts.myWishlist'),
           gifts: myWishlist,
           emptyMessage: t('gifts:myGifts.noWishlist')
-        };
+        }];
       case 'suggestions':
-        return {
+        return [{
           title: t('gifts:myGifts.mySuggestions'),
           gifts: mySuggestions,
           emptyMessage: t('gifts:myGifts.noSuggestions')
-        };
+        }];
       case 'buying':
-        return {
-          title: t('gifts:myGifts.buyingGifts'),
-          gifts: buyingGifts,
-          emptyMessage: t('gifts:myGifts.noBuyingGifts')
-        };
+        return [
+          {
+            title: t('gifts:myGifts.myBuyingGifts'),
+            gifts: myBuyingGifts,
+            emptyMessage: t('gifts:myGifts.noMyBuyingGifts')
+          },
+          {
+            title: t('gifts:myGifts.childrenBuyingGifts'),
+            gifts: childrenBuyingGifts,
+            emptyMessage: t('gifts:myGifts.noChildrenBuyingGifts')
+          }
+        ].filter(section => section.gifts.length > 0 || selectedCategory === 'buying');
       case 'bought':
-        return {
-          title: t('gifts:myGifts.boughtGifts'),
-          gifts: boughtGifts,
-          emptyMessage: t('gifts:myGifts.noBoughtGifts')
-        };
+        return [
+          {
+            title: t('gifts:myGifts.myBoughtGifts'),
+            gifts: myBoughtGifts,
+            emptyMessage: t('gifts:myGifts.noMyBoughtGifts')
+          },
+          {
+            title: t('gifts:myGifts.childrenBoughtGifts'),
+            gifts: childrenBoughtGifts,
+            emptyMessage: t('gifts:myGifts.noChildrenBoughtGifts')
+          }
+        ].filter(section => section.gifts.length > 0 || selectedCategory === 'bought');
       default:
-        return {
+        return [{
           title: t('gifts:myGifts.myWishlist'),
           gifts: myWishlist,
           emptyMessage: t('gifts:myGifts.noWishlist')
-        };
+        }];
     }
   };
 
@@ -247,8 +291,8 @@ const MyGifts: React.FC = () => {
     );
   }
 
-  // Obtenir les données de la catégorie actuelle
-  const currentCategory = getCurrentCategoryData();
+  // Obtenir les sections de la catégorie actuelle
+  const currentSections = getCurrentCategorySections();
 
   return (
     <div className="p-4">
@@ -271,12 +315,16 @@ const MyGifts: React.FC = () => {
           className="mb-6"
         />
 
-        {/* Affichage de la catégorie sélectionnée */}
-        {renderGiftSection(
-          currentCategory.title,
-          currentCategory.gifts,
-          currentCategory.emptyMessage
-        )}
+        {/* Affichage des sections de la catégorie sélectionnée */}
+        {currentSections.map((section, index) => (
+          <div key={index}>
+            {renderGiftSection(
+              section.title,
+              section.gifts,
+              section.emptyMessage
+            )}
+          </div>
+        ))}
       </div>
 
       {/* Modal pour ajouter une idée de cadeau */}

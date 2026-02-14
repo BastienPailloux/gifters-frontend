@@ -20,7 +20,8 @@ const MyGroups: React.FC = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
 
-  const [groups, setGroups] = useState<Group[]>([]);
+  const [myGroups, setMyGroups] = useState<Group[]>([]);
+  const [childrenGroups, setChildrenGroups] = useState<Group[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState<boolean>(false);
@@ -33,26 +34,52 @@ const MyGroups: React.FC = () => {
       setIsLoading(true);
       setError(null);
 
-      // Appel à l'API pour récupérer les groupes
-      const response = await groupService.getGroups();
+      // Appel à l'API pour récupérer les groupes avec la structure hiérarchique
+      const response = await groupService.getGroups(true);
 
-      // Gestion robuste de la réponse pour s'assurer que groups est toujours un tableau
-      let groupsData: Group[] = [];
+      let userGroupsData: Group[] = [];
+      let childrenGroupsData: Group[] = [];
 
       if (response) {
-        if (Array.isArray(response)) {
-          // Si la réponse est déjà un tableau
-          groupsData = response;
-        } else if (response.data && Array.isArray(response.data)) {
-          // Si les données sont dans response.data
-          groupsData = response.data;
+        // Format hiérarchique avec enfants
+        if (response.children && Array.isArray(response.children)) {
+          userGroupsData = response.groups || [];
+
+          // Collecter tous les groupes des enfants
+          response.children.forEach((child: { id: number; name: string; groups: Group[] }) => {
+            if (child.groups && Array.isArray(child.groups)) {
+              // Ajouter info sur l'enfant membre pour chaque groupe
+              const childGroupsWithInfo = child.groups.map((group: Group) => ({
+                ...group,
+                childMemberName: child.name
+              }));
+              childrenGroupsData = [...childrenGroupsData, ...childGroupsWithInfo];
+            }
+          });
+
+          // Dédupliquer les groupes des enfants (un groupe peut avoir plusieurs enfants membres)
+          const uniqueChildrenGroups = new Map<string, Group>();
+          childrenGroupsData.forEach(group => {
+            if (!uniqueChildrenGroups.has(String(group.id))) {
+              uniqueChildrenGroups.set(String(group.id), group);
+            }
+          });
+          childrenGroupsData = Array.from(uniqueChildrenGroups.values());
+
+          // Exclure les groupes où l'utilisateur est déjà membre
+          const userGroupIds = new Set(userGroupsData.map(g => String(g.id)));
+          childrenGroupsData = childrenGroupsData.filter(g => !userGroupIds.has(String(g.id)));
+        }
+        // Rétro-compatibilité : format simple
+        else if (Array.isArray(response)) {
+          userGroupsData = response;
         } else if (response.groups && Array.isArray(response.groups)) {
-          // Si les données sont dans response.groups
-          groupsData = response.groups;
+          userGroupsData = response.groups;
         }
       }
 
-      setGroups(groupsData);
+      setMyGroups(userGroupsData);
+      setChildrenGroups(childrenGroupsData);
     } catch (err) {
       console.error('Error fetching groups:', err);
       setError(t('common:error'));
@@ -112,16 +139,33 @@ const MyGroups: React.FC = () => {
         }
       />
 
-      <GroupsList
-        groups={groups}
-        onViewGroup={handleViewGroup}
-        isLoading={isLoading}
-        emptyMessage={t('groups:noGroups')}
-      />
+      {/* Mes groupes */}
+      <div className="mb-8">
+        <h2 className="text-lg font-semibold text-gray-900 mb-4">{t('groups:myGroupsSection')}</h2>
+        <GroupsList
+          groups={myGroups}
+          onViewGroup={handleViewGroup}
+          isLoading={isLoading}
+          emptyMessage={t('groups:noMyGroups')}
+        />
+      </div>
 
-      <div className="mt-6">
+      <div className="m-6">
         <AddGroupCard onClick={handleCreateGroup} />
       </div>
+
+      {/* Groupes de mes enfants */}
+      {childrenGroups.length > 0 && (
+        <div className="mb-8">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">{t('groups:childrenGroupsSection')}</h2>
+          <GroupsList
+            groups={childrenGroups}
+            onViewGroup={handleViewGroup}
+            isLoading={false}
+            emptyMessage=""
+          />
+        </div>
+      )}
 
       {/* Modal pour créer un nouveau groupe */}
       {isCreateModalOpen && (

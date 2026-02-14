@@ -19,19 +19,9 @@ const GiftIdeaDetailCard: React.FC<GiftIdeaDetailCardProps> = ({
 }) => {
   const { t } = useTranslation('gifts');
 
-  // Vérifier si l'utilisateur peut interagir avec ce cadeau
-  const canInteract = (): boolean => {
-    if (!giftIdea || !currentUser) return false;
-
-    // L'utilisateur ne peut pas acheter son propre cadeau
-    const isRecipient = giftIdea.recipients.some((recipient) => recipient.id === currentUser.id);
-    if (isRecipient) return false;
-
-    // Si le cadeau est déjà acheté, personne ne peut interagir
-    if (giftIdea.status === 'bought') return false;
-
-    return true;
-  };
+  // Permissions calculées par le backend
+  const canMarkAsBuying = giftIdea?.can_mark_as_buying ?? false;
+  const canMarkAsBought = giftIdea?.can_mark_as_bought ?? false;
 
   // Vérifier si l'utilisateur est le destinataire
   const isRecipient = (): boolean => {
@@ -44,27 +34,44 @@ const GiftIdeaDetailCard: React.FC<GiftIdeaDetailCardProps> = ({
     return Boolean(giftIdea?.buyer) && !isRecipient();
   };
 
+  // Obtenir le label approprié pour l'acheteur selon le statut
+  const getBuyerLabel = (): string => {
+    if (giftIdea.status === 'bought') {
+      return t('gifts:giftIdeas.boughtBy');
+    }
+    return t('gifts:giftIdeas.onGoingBuyer');
+  };
+
   // Rendu des boutons d'action
   const renderActionButtons = () => {
-    const canBuyOrMark = canInteract();
+    const hasActions = canMarkAsBuying || canMarkAsBought || giftIdea.link;
+    
+    if (!hasActions) return null;
 
-    if (!canBuyOrMark) return null;
+    // Déterminer le texte du bouton "Mark as bought" avec le nom de l'acheteur
+    const getMarkAsBoughtText = () => {
+      if (giftIdea.buyer) {
+        // Si l'acheteur est le current user, afficher "Je l'ai acheté"
+        if (giftIdea.buyer.id === currentUser?.id) {
+          return t('gifts:giftIdeas.markAsBought');
+        }
+        // Sinon afficher "[Prénom] l'a acheté"
+        return t('gifts:giftIdeas.markAsBoughtFor', { name: giftIdea.buyer.name });
+      }
+      return t('gifts:giftIdeas.markAsBought');
+    };
 
     return (
       <div className="flex gap-2 mb-4 flex-wrap">
-        {canBuyOrMark && (
-          <>
-            {giftIdea.status === 'proposed' && (
-              <Button variant="primary" onClick={onMarkAsBuying}>
-                {t('gifts:giftIdeas.markAsBuying')}
-              </Button>
-            )}
-            {giftIdea.status === 'buying' && giftIdea.buyer?.id === currentUser?.id && (
-              <Button variant="primary" onClick={onMarkAsBought}>
-                {t('gifts:giftIdeas.markAsBought')}
-              </Button>
-            )}
-          </>
+        {canMarkAsBuying && (
+          <Button variant="primary" onClick={onMarkAsBuying}>
+            {t('gifts:giftIdeas.markAsBuying')}
+          </Button>
+        )}
+        {canMarkAsBought && (
+          <Button variant="primary" onClick={onMarkAsBought}>
+            {getMarkAsBoughtText()}
+          </Button>
         )}
 
         {giftIdea.link && (
@@ -113,7 +120,7 @@ const GiftIdeaDetailCard: React.FC<GiftIdeaDetailCardProps> = ({
 
               {shouldShowBuyer() && giftIdea.buyer && (
                 <LabelValue
-                  label={t('gifts:giftIdeas.onGoingBuyer')}
+                  label={getBuyerLabel()}
                   value={giftIdea.buyer.name}
                 />
               )}
@@ -154,7 +161,7 @@ const GiftIdeaDetailCard: React.FC<GiftIdeaDetailCardProps> = ({
 
               {shouldShowBuyer() && giftIdea.buyer && (
                 <LabelValue
-                  label={t('gifts:giftIdeas.onGoingBuyer')}
+                  label={getBuyerLabel()}
                   value={giftIdea.buyer.name}
                 />
               )}
