@@ -114,7 +114,7 @@ const Header: React.FC<HeaderProps> = ({ onLogout }) => {
             className="text-white border-white hover:bg-primary-600"
             onClick={handleLogout}
           >
-            {t('auth.logout')}
+            {t('auth:logout')}
           </Button>
         </div>
       );
