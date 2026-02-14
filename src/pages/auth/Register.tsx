@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import AuthForm from '../../components/auth/AuthForm';
@@ -12,6 +12,8 @@ const Register: React.FC = () => {
   const { t } = useTranslation(['auth', 'contact']);
   const { register, error, clearError } = useAuth();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const redirectTo = searchParams.get('redirect');
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -45,7 +47,8 @@ const Register: React.FC = () => {
         newsletter_subscription: newsletterSubscription
       });
       if (result.success) {
-        navigate('/dashboard');
+        const target = redirectTo && redirectTo.startsWith('/') ? redirectTo : '/dashboard';
+        navigate(target);
       }
     } finally {
       setIsSubmitting(false);
