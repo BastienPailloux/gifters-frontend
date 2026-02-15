@@ -142,6 +142,18 @@ const GiftIdeaDetails: React.FC = () => {
     }
   };
 
+  // Annuler l'achat (en cours d'achat ou déjà marqué acheté)
+  const handleCancelPurchase = async () => {
+    if (!id) return;
+
+    try {
+      const response = await giftIdeaService.cancelPurchase(id);
+      setGiftIdea(response.giftIdea as ExtendedGiftIdea);
+    } catch (error) {
+      console.error('Error cancelling purchase:', error);
+    }
+  };
+
   // Gérer la suppression de l'idée cadeau
   const handleDeleteGiftIdea = async () => {
     if (!id) return;
@@ -286,6 +298,7 @@ const GiftIdeaDetails: React.FC = () => {
         currentUser={user}
         onMarkAsBuying={handleMarkAsBuying}
         onMarkAsBought={handleMarkAsBought}
+        onCancelPurchase={handleCancelPurchase}
         formatPrice={formatPrice}
       />
 

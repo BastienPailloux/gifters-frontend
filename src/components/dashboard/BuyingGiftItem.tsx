@@ -11,9 +11,10 @@ export type { BuyingGift as GiftIdea };
 const BuyingGiftItem: React.FC<BuyingGiftItemProps> = ({
   gift,
   onMarkAsBought,
+  onCancelPurchase,
   isProcessing = false
 }) => {
-  const { t } = useTranslation('dashboard');
+  const { t } = useTranslation(['dashboard', 'gifts']);
   const navigate = useNavigate();
 
   const handleViewGift = () => {
@@ -37,28 +38,40 @@ const BuyingGiftItem: React.FC<BuyingGiftItemProps> = ({
           </p>
         </div>
       </div>
-      <div className="mt-2 flex gap-4 items-center">
+      <div className="mt-2 flex gap-4 items-center flex-wrap">
         <FlatButton
           onClick={handleViewGift}
           size="small"
         >
           {t('dashboard:viewGift')}
         </FlatButton>
-        <FlatButton
-          variant="secondary"
-          size="small"
-          onClick={() => onMarkAsBought(gift.id)}
-          disabled={isProcessing}
-        >
-          {isProcessing ? (
-            <>
-              <span className="inline-block h-4 w-4 rounded-full border-2 border-t-transparent border-white animate-spin mr-2" />
-              {t('common:processing')}
-            </>
-          ) : (
-            t('dashboard:markAsBought')
-          )}
-        </FlatButton>
+        {gift.status === 'buying' && (
+          <FlatButton
+            variant="secondary"
+            size="small"
+            onClick={() => onMarkAsBought(gift.id)}
+            disabled={isProcessing}
+          >
+            {isProcessing ? (
+              <>
+                <span className="inline-block h-4 w-4 rounded-full border-2 border-t-transparent border-white animate-spin mr-2" />
+                {t('common:processing')}
+              </>
+            ) : (
+              t('dashboard:markAsBought')
+            )}
+          </FlatButton>
+        )}
+        {gift.can_cancel_purchase && onCancelPurchase && (
+          <FlatButton
+            variant="secondary"
+            size="small"
+            onClick={() => onCancelPurchase(gift.id)}
+            disabled={isProcessing}
+          >
+            {t('gifts:giftIdeas.cancelPurchase')}
+          </FlatButton>
+        )}
       </div>
     </li>
   );

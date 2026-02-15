@@ -24,7 +24,8 @@
     "loadingData": "Error loading data",
     "loadingEvents": "Error loading events",
     "loadingGifts": "Error loading gifts",
-    "markingGift": "Error marking gift as bought"
+    "markingGift": "Error marking gift as bought",
+    "cancellingPurchase": "Error cancelling purchase"
   },
   "cards": {
     "gifts": {

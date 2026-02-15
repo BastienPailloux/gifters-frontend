@@ -44,6 +44,21 @@ const BuyingGiftsList: React.FC<BuyingGiftsListProps> = ({ maxGifts = 5 }) => {
     refetch: fetchGifts
   } = useAsyncData<ApiGiftIdeasResponse>(fetchUserGifts);
 
+  // Annuler l'achat (en cours d'achat ou déjà marqué acheté)
+  const handleCancelPurchase = async (giftId: string) => {
+    try {
+      setProcessingGiftId(giftId);
+      setActionError(null);
+      await giftIdeaService.cancelPurchase(giftId);
+      fetchGifts();
+    } catch (error) {
+      console.error('Error cancelling purchase:', error);
+      setActionError(t('dashboard:errors.cancellingPurchase'));
+    } finally {
+      setProcessingGiftId(null);
+    }
+  };
+
   // Marquer un cadeau comme acheté
   const handleMarkAsBought = async (giftId: string) => {
     try {
@@ -112,7 +127,8 @@ const BuyingGiftsList: React.FC<BuyingGiftsListProps> = ({ maxGifts = 5 }) => {
           name: r.name
         })),
         group_name: groupName,
-        status: gift.status as 'proposed' | 'buying' | 'bought'
+        status: gift.status as 'proposed' | 'buying' | 'bought',
+        can_cancel_purchase: gift.can_cancel_purchase ?? false
       };
     });
 
@@ -174,6 +190,7 @@ const BuyingGiftsList: React.FC<BuyingGiftsListProps> = ({ maxGifts = 5 }) => {
               key={gift.id}
               gift={gift}
               onMarkAsBought={handleMarkAsBought}
+              onCancelPurchase={handleCancelPurchase}
               isProcessing={processingGiftId === gift.id}
             />
           ))}
