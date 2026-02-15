@@ -100,6 +100,7 @@ export interface GiftIdeaDetailCardProps {
   currentUser: User | null;
   onMarkAsBuying: () => void;
   onMarkAsBought: () => void;
+  onCancelPurchase?: () => void;
   formatPrice: (price?: number) => string;
 }
 
@@ -132,6 +133,7 @@ export interface BuyingGift {
   recipients?: Array<{id: string, name: string}>;
   group_name: string;
   status: GiftStatus;
+  can_cancel_purchase?: boolean;
 }
 
 /**
@@ -140,6 +142,7 @@ export interface BuyingGift {
 export interface BuyingGiftItemProps {
   gift: BuyingGift;
   onMarkAsBought: (giftId: string) => void;
+  onCancelPurchase?: (giftId: string) => void;
   isProcessing?: boolean;
 }
 
@@ -179,6 +182,7 @@ export interface ApiGiftIdea {
   image_url?: string;
   buyer?: { id: number | string; name: string };
   buyer_id?: number | string;
+  can_cancel_purchase?: boolean;
 }
 
 /**
@@ -202,6 +206,7 @@ export interface ExtendedGiftIdea extends GiftIdea {
   can_mark_as_buying?: boolean;
   can_mark_as_bought?: boolean;
   can_cancel_buying?: boolean;
+  can_cancel_purchase?: boolean;
 }
 
 /**

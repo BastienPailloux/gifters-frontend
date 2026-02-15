@@ -65,6 +65,7 @@
     "markAsBuying": "I'm buying this",
     "markAsBought": "I've bought this",
     "markAsBoughtFor": "{{name}} bought this",
+    "cancelPurchase": "Cancel purchase",
     "selectBuyer": "Who will buy this gift?",
     "selectBuyerDescription": "Multiple accounts can buy this gift. Select who will make the purchase.",
     "visitStore": "Visit store",

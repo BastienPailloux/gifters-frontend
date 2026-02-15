@@ -51,6 +51,7 @@
     "markAsBuying": "Je vais l'acheter",
     "markAsBought": "Je l'ai acheté",
     "markAsBoughtFor": "{{name}} l'a acheté",
+    "cancelPurchase": "Annuler l'achat",
     "selectBuyer": "Qui va acheter ce cadeau ?",
     "selectBuyerDescription": "Plusieurs comptes peuvent acheter ce cadeau. Sélectionnez qui va effectuer l'achat.",
     "visitStore": "Visiter la boutique",

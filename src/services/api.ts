@@ -352,6 +352,12 @@ export const giftIdeaService = {
     const response = await api.put(`/gift_ideas/${id}/mark_as_bought`);
     return response.data;
   },
+
+  // Annuler l'achat (en cours d'achat ou déjà marqué acheté)
+  cancelPurchase: async (id: string) => {
+    const response = await api.put(`/gift_ideas/${id}/cancel_purchase`);
+    return response.data;
+  },
 };
 
 // Service pour les invitations

@@ -24,7 +24,8 @@
     "loadingData": "Erreur lors du chargement des données",
     "loadingEvents": "Erreur lors du chargement des événements",
     "loadingGifts": "Erreur lors du chargement des cadeaux",
-    "markingGift": "Erreur lors du marquage du cadeau comme acheté"
+    "markingGift": "Erreur lors du marquage du cadeau comme acheté",
+    "cancellingPurchase": "Erreur lors de l'annulation de l'achat"
   },
   "cards": {
     "gifts": {

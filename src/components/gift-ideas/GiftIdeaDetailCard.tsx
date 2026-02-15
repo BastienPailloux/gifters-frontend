@@ -15,6 +15,7 @@ const GiftIdeaDetailCard: React.FC<GiftIdeaDetailCardProps> = ({
   currentUser,
   onMarkAsBuying,
   onMarkAsBought,
+  onCancelPurchase,
   formatPrice
 }) => {
   const { t } = useTranslation('gifts');
@@ -22,6 +23,7 @@ const GiftIdeaDetailCard: React.FC<GiftIdeaDetailCardProps> = ({
   // Permissions calculées par le backend
   const canMarkAsBuying = giftIdea?.can_mark_as_buying ?? false;
   const canMarkAsBought = giftIdea?.can_mark_as_bought ?? false;
+  const canCancelPurchase = giftIdea?.can_cancel_purchase ?? false;
 
   // Vérifier si l'utilisateur est le destinataire
   const isRecipient = (): boolean => {
@@ -44,8 +46,8 @@ const GiftIdeaDetailCard: React.FC<GiftIdeaDetailCardProps> = ({
 
   // Rendu des boutons d'action
   const renderActionButtons = () => {
-    const hasActions = canMarkAsBuying || canMarkAsBought || giftIdea.link;
-    
+    const hasActions = canMarkAsBuying || canMarkAsBought || canCancelPurchase || giftIdea.link;
+
     if (!hasActions) return null;
 
     // Déterminer le texte du bouton "Mark as bought" avec le nom de l'acheteur
@@ -63,6 +65,11 @@ const GiftIdeaDetailCard: React.FC<GiftIdeaDetailCardProps> = ({
 
     return (
       <div className="flex gap-2 mb-4 flex-wrap">
+        {canCancelPurchase && onCancelPurchase && (
+          <Button variant="danger" onClick={onCancelPurchase}>
+            {t('gifts:giftIdeas.cancelPurchase')}
+          </Button>
+        )}
         {canMarkAsBuying && (
           <Button variant="primary" onClick={onMarkAsBuying}>
             {t('gifts:giftIdeas.markAsBuying')}
