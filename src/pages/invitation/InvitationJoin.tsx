@@ -101,15 +101,21 @@ const InvitationJoin: React.FC = () => {
       setIsAccepting(true);
       const response = await invitationService.acceptInvitation(token, selectedUserIds);
 
-      // Afficher un message de succès
+      // Afficher un message de succès ou rediriger si déjà membre
       if (response.success) {
-        setStatus('success');
-        // Rediriger vers la page du groupe après 2 secondes
-        setTimeout(() => {
-          if (invitationGroupId) {
-            navigate(`/groups/${invitationGroupId}`);
-          }
-        }, 2000);
+        const groupId = response.group?.id ?? invitationGroupId;
+        if (response.already_member && groupId) {
+          // Déjà membre : redirection immédiate vers le groupe
+          navigate(`/groups/${groupId}`);
+        } else {
+          setStatus('success');
+          // Rediriger vers la page du groupe après 2 secondes
+          setTimeout(() => {
+            if (groupId) {
+              navigate(`/groups/${groupId}`);
+            }
+          }, 2000);
+        }
       } else {
         setStatus('error');
         setErrorMessage(response.message || t('invitation:errorAccepting'));
