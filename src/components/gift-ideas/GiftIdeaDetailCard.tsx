@@ -47,7 +47,7 @@ const GiftIdeaDetailCard: React.FC<GiftIdeaDetailCardProps> = ({
   // Rendu des boutons d'action
   const renderActionButtons = () => {
     const hasActions = canMarkAsBuying || canMarkAsBought || canCancelPurchase || giftIdea.link;
-    
+
     if (!hasActions) return null;
 
     // Déterminer le texte du bouton "Mark as bought" avec le nom de l'acheteur
@@ -65,6 +65,11 @@ const GiftIdeaDetailCard: React.FC<GiftIdeaDetailCardProps> = ({
 
     return (
       <div className="flex gap-2 mb-4 flex-wrap">
+        {canCancelPurchase && onCancelPurchase && (
+          <Button variant="danger" onClick={onCancelPurchase}>
+            {t('gifts:giftIdeas.cancelPurchase')}
+          </Button>
+        )}
         {canMarkAsBuying && (
           <Button variant="primary" onClick={onMarkAsBuying}>
             {t('gifts:giftIdeas.markAsBuying')}
@@ -73,11 +78,6 @@ const GiftIdeaDetailCard: React.FC<GiftIdeaDetailCardProps> = ({
         {canMarkAsBought && (
           <Button variant="primary" onClick={onMarkAsBought}>
             {getMarkAsBoughtText()}
-          </Button>
-        )}
-        {canCancelPurchase && onCancelPurchase && (
-          <Button variant="outline" onClick={onCancelPurchase}>
-            {t('gifts:giftIdeas.cancelPurchase')}
           </Button>
         )}
 
