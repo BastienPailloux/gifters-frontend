@@ -35,8 +35,11 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Persist to localStorage on change
   useEffect(() => {
-    const trimmed = messages.slice(-MAX_MESSAGES);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(trimmed));
+    if (messages.length > MAX_MESSAGES) {
+      setMessages(prev => prev.slice(-MAX_MESSAGES));
+      return;
+    }
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
   }, [messages]);
 
   const sendMessage = useCallback((text: string) => {
@@ -96,7 +99,6 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const clearHistory = useCallback(() => {
     setMessages([]);
-    localStorage.removeItem(STORAGE_KEY);
   }, []);
 
   return (

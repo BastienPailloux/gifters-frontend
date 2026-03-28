@@ -13,11 +13,6 @@ const config: Config = {
     '^.+\\.tsx?$': '<rootDir>/jest-import-meta-transform.cjs',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
-  globals: {
-    'ts-jest': {
-      isolatedModules: true,
-    },
-  },
 };
 
 export default config;
