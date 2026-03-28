@@ -38,6 +38,16 @@ describe('conversationService', () => {
     });
   });
 
+  describe('get', () => {
+    it('calls GET /conversations/:id and returns data', async () => {
+      const conv = { id: 1, title: 'Test', last_activity_at: '2026-01-01T00:00:00Z', created_at: '2026-01-01T00:00:00Z', messages: [] };
+      mockedApi.get.mockResolvedValue({ data: conv });
+      const result = await conversationService.get(1);
+      expect(mockedApi.get).toHaveBeenCalledWith('/conversations/1');
+      expect(result).toEqual(conv);
+    });
+  });
+
   describe('stream', () => {
     it('returns a cleanup function', () => {
       const mockBody = {
