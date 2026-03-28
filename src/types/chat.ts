@@ -1,24 +1,26 @@
-export interface ChatMessage {
-  id: string;
+// src/types/chat.ts
+export interface Conversation {
+  id: number;
+  title: string;
+  last_activity_at: string;
+  created_at: string;
+}
+
+export interface Message {
+  id: number;
   role: 'user' | 'assistant';
   content: string;
-  timestamp: number;
+  created_at: string;
+}
+
+export interface ConversationWithMessages extends Conversation {
+  messages: Message[];
 }
 
 export interface ThinkingStep {
   id: string;
   label: string;
   status: 'running' | 'done';
-}
-
-export interface ChatContextValue {
-  messages: ChatMessage[];
-  steps: ThinkingStep[];
-  isStreaming: boolean;
-  isOpen: boolean;
-  sendMessage: (text: string) => void;
-  toggleWidget: () => void;
-  clearHistory: () => void;
 }
 
 export interface StreamCallbacks {
