@@ -1,0 +1,14 @@
+{
+  "title": "AI Assistant",
+  "widgetLabel": "AI Assistant",
+  "expandLabel": "Open full screen",
+  "sendLabel": "Send",
+  "inputPlaceholder": "Your message...",
+  "emptyHint": "I can help you with your gifts and groups.",
+  "pageTitle": "AI Assistant",
+  "suggestions": {
+    "giftIdeas": "What are my gift ideas?",
+    "groups": "Show my groups",
+    "recommend": "What can I give to someone?"
+  }
+}

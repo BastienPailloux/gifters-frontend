@@ -1,0 +1,14 @@
+{
+  "title": "Assistant IA",
+  "widgetLabel": "Assistant IA",
+  "expandLabel": "Ouvrir en grand",
+  "sendLabel": "Envoyer",
+  "inputPlaceholder": "Votre message...",
+  "emptyHint": "Je peux vous aider avec vos cadeaux et groupes.",
+  "pageTitle": "Assistant IA",
+  "suggestions": {
+    "giftIdeas": "Quelles sont mes idées de cadeaux ?",
+    "groups": "Montre mes groupes",
+    "recommend": "Qu'est-ce que je peux offrir à quelqu'un ?"
+  }
+}
