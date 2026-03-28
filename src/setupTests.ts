@@ -46,4 +46,16 @@ Object.defineProperty(global, 'TextDecoder', {
   }
 });
 
+// Polyfill crypto.randomUUID for jsdom environment
+if (typeof crypto === 'undefined' || typeof crypto.randomUUID !== 'function') {
+  const nodeCrypto = require('crypto') as typeof import('crypto');
+  Object.defineProperty(global, 'crypto', {
+    value: {
+      ...global.crypto,
+      randomUUID: () => nodeCrypto.randomUUID(),
+    },
+    writable: true,
+  });
+}
+
 // Autres configurations de test pourraient être ajoutées ici
