@@ -33,6 +33,14 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
     messagesRef.current = messages;
   }, [messages]);
 
+  const cleanupRef = useRef<(() => void) | null>(null);
+
+  useEffect(() => {
+    return () => {
+      cleanupRef.current?.();
+    };
+  }, []);
+
   // Persist to localStorage on change
   useEffect(() => {
     if (messages.length > MAX_MESSAGES) {
@@ -61,7 +69,7 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
       content: m.content,
     }));
 
-    agentService.streamChat(apiMessages, {
+    cleanupRef.current = agentService.streamChat(apiMessages, {
       onStep: (label, status) => {
         setSteps(prev => {
           const updated = prev.map(s =>

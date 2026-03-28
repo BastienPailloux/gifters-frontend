@@ -45,6 +45,7 @@ i18n
       'legal',
       'seo',
       'validation',
+      'chat',
     ],
     defaultNS: 'common',
   });

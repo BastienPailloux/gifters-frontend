@@ -67,7 +67,7 @@ const Layout: React.FC<LayoutProps> = ({ children, forceSideMenu }) => {
         </MainContainer>
       </div>
       <Footer />
-      {shouldShowSideMenu && <ChatWidget />}
+      {shouldShowSideMenu && location.pathname !== '/chat' && <ChatWidget />}
     </div>
   );
 };
