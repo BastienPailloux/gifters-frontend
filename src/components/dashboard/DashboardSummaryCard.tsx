@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import Card from '../common/display/Card';
 import UpcomingEventsList from './UpcomingEventsList';
 import BuyingGiftsList from './BuyingGiftsList';
+import DashboardChatInput from './DashboardChatInput';
 import { DashboardSummaryCardProps } from '../../types/dashboard';
 
 const DashboardSummaryCard: React.FC<DashboardSummaryCardProps> = ({ user }) => {
@@ -14,6 +15,9 @@ const DashboardSummaryCard: React.FC<DashboardSummaryCardProps> = ({ user }) => 
       subtitle={t('dashboard:summary')}
       className="mb-6"
     >
+      <div className="mb-6">
+        <DashboardChatInput />
+      </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <UpcomingEventsList maxEvents={5} />
         <BuyingGiftsList maxGifts={5} />

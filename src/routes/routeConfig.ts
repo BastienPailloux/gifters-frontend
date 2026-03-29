@@ -22,6 +22,7 @@ const Pricing = lazy(() => import('../pages/Pricing'));
 const About = lazy(() => import('../pages/About'));
 const TermsAndConditions = lazy(() => import('../pages/TermsAndConditions'));
 const MyChildren = lazy(() => import('../pages/children/MyChildren'));
+const Chat = lazy(() => import('../pages/Chat'));
 
 /**
  * Configuration des routes publiques sans layout
@@ -60,6 +61,7 @@ export const protectedRoutes: RouteConfig[] = [
   { path: '/profile/:id', component: Profile, protected: true, layout: true },
   { path: '/invitations', component: InvitationInput, protected: true, layout: true },
   { path: '/children', component: MyChildren, protected: true, layout: true },
+  { path: '/chat', component: Chat, protected: true, layout: true },
 ];
 
 /**

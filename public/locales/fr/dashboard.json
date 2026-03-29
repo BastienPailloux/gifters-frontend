@@ -27,6 +27,9 @@
     "markingGift": "Erreur lors du marquage du cadeau comme acheté",
     "cancellingPurchase": "Erreur lors de l'annulation de l'achat"
   },
+  "chatInput": {
+    "placeholder": "Pose une question à l'assistant IA..."
+  },
   "cards": {
     "gifts": {
       "title": "Mes Cadeaux",
