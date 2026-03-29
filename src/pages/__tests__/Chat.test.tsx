@@ -3,11 +3,15 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import Chat from '../Chat';
 import { ChatProvider } from '../../contexts/ChatContext';
-import * as agentServiceModule from '../../services/agentService';
 
-jest.mock('../../services/agentService');
-(agentServiceModule.agentService as jest.Mocked<typeof agentServiceModule.agentService>)
-  .streamChat.mockReturnValue(() => {});
+jest.mock('../../services/conversationService', () => ({
+  conversationService: {
+    list: jest.fn().mockResolvedValue([]),
+    create: jest.fn().mockResolvedValue({ id: 1, title: 'Nouvelle conversation', last_activity_at: new Date().toISOString(), created_at: new Date().toISOString() }),
+    get: jest.fn().mockResolvedValue({ id: 1, title: 'T', last_activity_at: new Date().toISOString(), created_at: new Date().toISOString(), messages: [] }),
+    stream: jest.fn().mockReturnValue(() => {}),
+  },
+}));
 
 const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <MemoryRouter>

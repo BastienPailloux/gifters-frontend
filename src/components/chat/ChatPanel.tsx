@@ -1,3 +1,4 @@
+// src/components/chat/ChatPanel.tsx
 import React, { useRef, useEffect, useState, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -18,10 +19,11 @@ const SUGGESTIONS = [
 
 const ChatPanel: React.FC<Props> = ({ variant }) => {
   const { t } = useTranslation('chat');
-  const { messages, steps, isStreaming, sendMessage } = useChat();
+  const { currentConversation, steps, isStreaming, sendMessage } = useChat();
   const navigate = useNavigate();
   const [input, setInput] = useState('');
   const bottomRef = useRef<HTMLDivElement>(null);
+  const messages = currentConversation?.messages ?? [];
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });

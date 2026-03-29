@@ -1,10 +1,11 @@
+// src/components/chat/ChatMessage.tsx
 import React from 'react';
 import { motion } from 'framer-motion';
 import { twMerge } from 'tailwind-merge';
-import { ChatMessage as ChatMessageType } from '../../types/chat';
+import { Message } from '../../types/chat';
 
 interface Props {
-  message: ChatMessageType;
+  message: Message;
 }
 
 const ChatMessage: React.FC<Props> = ({ message }) => {

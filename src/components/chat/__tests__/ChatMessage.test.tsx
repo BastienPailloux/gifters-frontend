@@ -1,13 +1,12 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
 import ChatMessage from '../ChatMessage';
-import { ChatMessage as ChatMessageType } from '../../../types/chat';
+import { Message } from '../../../types/chat';
 
-const baseMessage = (overrides: Partial<ChatMessageType> = {}): ChatMessageType => ({
-  id: '1',
+const baseMessage = (overrides: Partial<Message> = {}): Message => ({
+  id: 1,
   role: 'user',
   content: 'Bonjour',
-  timestamp: Date.now(),
+  created_at: new Date().toISOString(),
   ...overrides,
 });
 
