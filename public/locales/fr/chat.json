@@ -6,6 +6,8 @@
   "inputPlaceholder": "Votre message...",
   "emptyHint": "Je peux vous aider avec vos cadeaux et groupes.",
   "pageTitle": "Assistant IA",
+  "newConversation": "Nouvelle conversation",
+  "conversations": "Conversations",
   "suggestions": {
     "giftIdeas": "Quelles sont mes idées de cadeaux ?",
     "groups": "Montre mes groupes",
