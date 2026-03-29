@@ -1,85 +1,84 @@
+// src/contexts/__tests__/ChatContext.test.tsx
 import React from 'react';
-import { render, screen, act } from '@testing-library/react';
+import { render, screen, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ChatProvider, useChat } from '../ChatContext';
-import * as agentServiceModule from '../../services/agentService';
 
-jest.mock('../../services/agentService');
+jest.mock('../../services/conversationService', () => ({
+  conversationService: {
+    list: jest.fn().mockResolvedValue([]),
+    create: jest.fn().mockResolvedValue({
+      id: 1,
+      title: 'Nouvelle conversation',
+      last_activity_at: new Date().toISOString(),
+      created_at: new Date().toISOString(),
+    }),
+    get: jest.fn(),
+    stream: jest.fn().mockReturnValue(() => {}),
+  },
+}));
 
-const mockedAgentService = agentServiceModule.agentService as jest.Mocked<typeof agentServiceModule.agentService>;
+import { conversationService } from '../../services/conversationService';
+const mockedService = conversationService as jest.Mocked<typeof conversationService>;
 
-const TestConsumer: React.FC = () => {
-  const { messages, steps, isStreaming, isOpen, sendMessage, toggleWidget, clearHistory } = useChat();
+const TestComponent: React.FC = () => {
+  const { currentConversation, isStreaming, sendMessage, loadConversations } = useChat();
   return (
     <div>
-      <div data-testid="message-count">{messages.length}</div>
-      <div data-testid="step-count">{steps.length}</div>
-      <div data-testid="is-streaming">{String(isStreaming)}</div>
-      <div data-testid="is-open">{String(isOpen)}</div>
-      <button onClick={() => sendMessage('test')}>Send</button>
-      <button onClick={toggleWidget}>Toggle</button>
-      <button onClick={clearHistory}>Clear</button>
+      <div data-testid="streaming">{isStreaming ? 'streaming' : 'idle'}</div>
+      <div data-testid="messages">{currentConversation?.messages.length ?? 0}</div>
+      <button onClick={() => sendMessage('Hello')}>send</button>
+      <button onClick={() => loadConversations()}>load</button>
     </div>
   );
 };
 
-const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <ChatProvider>{children}</ChatProvider>
-);
-
 describe('ChatContext', () => {
-  beforeEach(() => {
-    localStorage.clear();
-    jest.clearAllMocks();
-    mockedAgentService.streamChat.mockReturnValue(() => {});
+  beforeEach(() => jest.clearAllMocks());
+
+  it('provides initial idle state with no current conversation', () => {
+    render(<ChatProvider><TestComponent /></ChatProvider>);
+    expect(screen.getByTestId('streaming')).toHaveTextContent('idle');
+    expect(screen.getByTestId('messages')).toHaveTextContent('0');
   });
 
-  it('fournit les valeurs initiales par défaut', () => {
-    render(<TestConsumer />, { wrapper });
-    expect(screen.getByTestId('message-count').textContent).toBe('0');
-    expect(screen.getByTestId('is-streaming').textContent).toBe('false');
-    expect(screen.getByTestId('is-open').textContent).toBe('false');
+  it('loadConversations calls conversationService.list', async () => {
+    render(<ChatProvider><TestComponent /></ChatProvider>);
+    await act(async () => { userEvent.click(screen.getByText('load')); });
+    await waitFor(() => expect(mockedService.list).toHaveBeenCalledTimes(1));
   });
 
-  it('ajoute le message user et passe isStreaming à true après sendMessage', async () => {
-    render(<TestConsumer />, { wrapper });
-    await act(async () => {
-      await userEvent.click(screen.getByText('Send'));
-    });
-    expect(screen.getByTestId('message-count').textContent).toBe('1');
-    expect(screen.getByTestId('is-streaming').textContent).toBe('true');
+  it('sendMessage creates a new conversation when none exists', async () => {
+    render(<ChatProvider><TestComponent /></ChatProvider>);
+    await act(async () => { userEvent.click(screen.getByText('send')); });
+    await waitFor(() => expect(mockedService.create).toHaveBeenCalledTimes(1));
+    expect(mockedService.stream).toHaveBeenCalledWith(1, 'Hello', expect.any(Object));
   });
 
-  it('toggleWidget change isOpen', async () => {
-    render(<TestConsumer />, { wrapper });
-    expect(screen.getByTestId('is-open').textContent).toBe('false');
-    await act(async () => {
-      await userEvent.click(screen.getByText('Toggle'));
-    });
-    expect(screen.getByTestId('is-open').textContent).toBe('true');
-  });
+  it('sendMessage creates a new conversation when inactive > 10 min', async () => {
+    const oldConv = {
+      id: 99,
+      title: 'Old',
+      last_activity_at: new Date(Date.now() - 11 * 60 * 1000).toISOString(),
+      created_at: new Date().toISOString(),
+      messages: [],
+    };
+    mockedService.list.mockResolvedValueOnce([oldConv]);
 
-  it('clearHistory vide les messages', async () => {
-    render(<TestConsumer />, { wrapper });
-    await act(async () => {
-      await userEvent.click(screen.getByText('Send'));
-    });
-    await act(async () => {
-      await userEvent.click(screen.getByText('Clear'));
-    });
-    expect(screen.getByTestId('message-count').textContent).toBe('0');
-  });
+    const TestWithLoad: React.FC = () => {
+      const { sendMessage, loadConversations, openConversation } = useChat();
+      return (
+        <>
+          <button onClick={async () => { await loadConversations(); await openConversation(99); }}>setup</button>
+          <button onClick={() => sendMessage('Hi')}>send</button>
+        </>
+      );
+    };
 
-  it('charge l\'historique depuis localStorage', () => {
-    const stored = [{ id: '1', role: 'user', content: 'Hello', timestamp: 1 }];
-    localStorage.setItem('gifters_chat_history', JSON.stringify(stored));
-    render(<TestConsumer />, { wrapper });
-    expect(screen.getByTestId('message-count').textContent).toBe('1');
-  });
-
-  it('useChat lance une erreur hors du provider', () => {
-    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
-    expect(() => render(<TestConsumer />)).toThrow();
-    spy.mockRestore();
+    mockedService.get.mockResolvedValueOnce(oldConv);
+    render(<ChatProvider><TestWithLoad /></ChatProvider>);
+    await act(async () => { userEvent.click(screen.getByText('setup')); });
+    await act(async () => { userEvent.click(screen.getByText('send')); });
+    await waitFor(() => expect(mockedService.create).toHaveBeenCalledTimes(1));
   });
 });

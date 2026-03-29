@@ -1,3 +1,4 @@
+// src/contexts/ChatContext.tsx
 import React, {
   createContext,
   useCallback,
@@ -6,70 +7,90 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { ChatContextValue, ChatMessage, ThinkingStep } from '../types/chat';
-import { agentService } from '../services/agentService';
+import { Conversation, ConversationWithMessages, Message, ThinkingStep } from '../types/chat';
+import { conversationService } from '../services/conversationService';
 
-const MAX_MESSAGES = 50;
-const STORAGE_KEY = 'gifters_chat_history';
+const INACTIVITY_DURATION = 10 * 60 * 1000;
+
+interface ChatContextValue {
+  conversations: Conversation[];
+  currentConversation: ConversationWithMessages | null;
+  steps: ThinkingStep[];
+  isStreaming: boolean;
+  isOpen: boolean;
+  loadConversations: () => Promise<void>;
+  openConversation: (id: number) => Promise<void>;
+  sendMessage: (text: string) => void;
+  toggleWidget: () => void;
+  newConversation: () => Promise<void>;
+}
 
 const ChatContext = createContext<ChatContextValue | null>(null);
 
 export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [messages, setMessages] = useState<ChatMessage[]>(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      return stored ? (JSON.parse(stored) as ChatMessage[]) : [];
-    } catch {
-      return [];
-    }
-  });
+  const [conversations, setConversations] = useState<Conversation[]>([]);
+  const [currentConversation, setCurrentConversation] = useState<ConversationWithMessages | null>(null);
   const [steps, setSteps] = useState<ThinkingStep[]>([]);
   const [isStreaming, setIsStreaming] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  // Ref always pointing to latest messages (avoids stale closure in sendMessage)
-  const messagesRef = useRef<ChatMessage[]>(messages);
-  useEffect(() => {
-    messagesRef.current = messages;
-  }, [messages]);
+  const currentConvRef = useRef<ConversationWithMessages | null>(null);
+  useEffect(() => { currentConvRef.current = currentConversation; }, [currentConversation]);
 
   const cleanupRef = useRef<(() => void) | null>(null);
+  useEffect(() => () => { cleanupRef.current?.(); }, []);
 
-  useEffect(() => {
-    return () => {
-      cleanupRef.current?.();
-    };
+  const loadConversations = useCallback(async () => {
+    const list = await conversationService.list();
+    setConversations(list);
   }, []);
 
-  // Persist to localStorage on change
-  useEffect(() => {
-    if (messages.length > MAX_MESSAGES) {
-      setMessages(prev => prev.slice(-MAX_MESSAGES));
-      return;
+  const openConversation = useCallback(async (id: number) => {
+    const conv = await conversationService.get(id);
+    setCurrentConversation(conv);
+  }, []);
+
+  const newConversation = useCallback(async () => {
+    const conv = await conversationService.create();
+    setConversations(prev => [conv, ...prev]);
+    setCurrentConversation({ ...conv, messages: [] });
+    setSteps([]);
+  }, []);
+
+  const _sendMessage = async (text: string) => {
+    let conv = currentConvRef.current;
+    let convId: number;
+
+    const isInactive = !conv ||
+      Date.now() - new Date(conv.last_activity_at).getTime() > INACTIVITY_DURATION;
+
+    if (isInactive) {
+      const created = await conversationService.create();
+      setConversations(prev => [created, ...prev]);
+      conv = { ...created, messages: [] };
+      setCurrentConversation(conv);
+      convId = created.id;
+    } else {
+      convId = conv!.id;
     }
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
-  }, [messages]);
 
-  const sendMessage = useCallback((text: string) => {
-    if (isStreaming) return;
-
-    const userMessage: ChatMessage = {
-      id: crypto.randomUUID(),
+    const optimisticMsg: Message = {
+      id: Date.now(),
       role: 'user',
       content: text,
-      timestamp: Date.now(),
+      created_at: new Date().toISOString(),
     };
+    setCurrentConversation(prev => prev ? { ...prev, messages: [...prev.messages, optimisticMsg] } : null);
 
-    setMessages(prev => [...prev, userMessage]);
+    const now = new Date().toISOString();
+    setConversations(prev =>
+      prev.map(c => c.id === convId ? { ...c, last_activity_at: now } : c)
+    );
+
     setSteps([]);
     setIsStreaming(true);
 
-    const apiMessages = [...messagesRef.current, userMessage].map(m => ({
-      role: m.role,
-      content: m.content,
-    }));
-
-    cleanupRef.current = agentService.streamChat(apiMessages, {
+    cleanupRef.current = conversationService.stream(convId, text, {
       onStep: (label, status) => {
         setSteps(prev => {
           const updated = prev.map(s =>
@@ -79,38 +100,50 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
         });
       },
       onFinal: (content) => {
-        const assistantMessage: ChatMessage = {
-          id: crypto.randomUUID(),
+        const msg: Message = {
+          id: Date.now() + 1,
           role: 'assistant',
           content,
-          timestamp: Date.now(),
+          created_at: new Date().toISOString(),
         };
-        setMessages(prev => [...prev, assistantMessage]);
+        setCurrentConversation(prev => prev ? { ...prev, messages: [...prev.messages, msg] } : null);
         setSteps([]);
         setIsStreaming(false);
       },
       onError: (message) => {
-        const errorMessage: ChatMessage = {
-          id: crypto.randomUUID(),
+        const msg: Message = {
+          id: Date.now() + 1,
           role: 'assistant',
           content: `__error__${message}`,
-          timestamp: Date.now(),
+          created_at: new Date().toISOString(),
         };
-        setMessages(prev => [...prev, errorMessage]);
+        setCurrentConversation(prev => prev ? { ...prev, messages: [...prev.messages, msg] } : null);
         setSteps([]);
         setIsStreaming(false);
       },
     });
-  }, [isStreaming]);
+  };
+
+  const sendMessage = useCallback((text: string) => {
+    if (isStreaming) return;
+    void _sendMessage(text);
+  }, [isStreaming]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const toggleWidget = useCallback(() => setIsOpen(prev => !prev), []);
 
-  const clearHistory = useCallback(() => {
-    setMessages([]);
-  }, []);
-
   return (
-    <ChatContext.Provider value={{ messages, steps, isStreaming, isOpen, sendMessage, toggleWidget, clearHistory }}>
+    <ChatContext.Provider value={{
+      conversations,
+      currentConversation,
+      steps,
+      isStreaming,
+      isOpen,
+      loadConversations,
+      openConversation,
+      sendMessage,
+      toggleWidget,
+      newConversation,
+    }}>
       {children}
     </ChatContext.Provider>
   );
