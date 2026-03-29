@@ -73,12 +73,12 @@ const ChatPanel: React.FC<Props> = ({ variant }) => {
         {messages.length === 0 && steps.length === 0 ? (
           <div className="flex flex-col gap-2 mt-2">
             <p className="text-xs text-gray-400 text-center">{t('chat:emptyHint')}</p>
-            <div className="flex flex-col gap-2 mt-1">
+            <div className="flex flex-wrap gap-2 mt-1">
               {SUGGESTIONS.map(key => (
                 <button
                   key={key}
                   onClick={() => handleSuggestion(key)}
-                  className="text-left text-xs px-3 py-2 rounded-xl bg-primary-50 text-primary-700 hover:bg-primary-100 transition-colors"
+                  className="text-xs px-3 py-2 rounded-xl bg-primary-50 text-primary-700 hover:bg-primary-100 transition-colors"
                 >
                   {t(key)}
                 </button>
