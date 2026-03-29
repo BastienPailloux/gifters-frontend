@@ -23,13 +23,13 @@ const ConversationList: React.FC = () => {
     <div className="flex flex-col h-full">
       <div className="p-3 border-b border-gray-100">
         <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
-          {t('chat:conversations')}
+          {t('conversations')}
         </p>
         <button
           onClick={() => void newConversation()}
           className="w-full text-sm font-medium text-primary-600 hover:text-primary-700 py-1.5 px-3 rounded-lg hover:bg-primary-50 transition-colors text-left"
         >
-          + Nouvelle conversation
+          + {t('newConversation')}
         </button>
       </div>
       <div className="flex-1 overflow-y-auto">

@@ -46,7 +46,7 @@ describe('ConversationList', () => {
 
   it('calls newConversation when clicking the new button', async () => {
     render(<ConversationList />);
-    await userEvent.click(screen.getByRole('button', { name: /nouvelle/i }));
+    await userEvent.click(screen.getByRole('button', { name: /newConversation/i }));
     expect(mockNewConversation).toHaveBeenCalled();
   });
 });
