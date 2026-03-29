@@ -27,6 +27,9 @@
     "markingGift": "Error marking gift as bought",
     "cancellingPurchase": "Error cancelling purchase"
   },
+  "chatInput": {
+    "placeholder": "Ask a question to the AI assistant..."
+  },
   "cards": {
     "gifts": {
       "title": "My Gifts",
