@@ -21,12 +21,20 @@ jest.mock('../../services/conversationService', () => ({
 import { conversationService } from '../../services/conversationService';
 const mockedService = conversationService as jest.Mocked<typeof conversationService>;
 
+let lastStreamCallbacks: {
+  onStep: (label: string, status: 'running' | 'done') => void;
+  onFinal: (content: string) => void;
+  onError: (message: string) => void;
+} | null = null;
+
 const TestComponent: React.FC = () => {
-  const { currentConversation, isStreaming, sendMessage, loadConversations } = useChat();
+  const { currentConversation, isStreaming, sendMessage, loadConversations, steps } = useChat();
   return (
     <div>
       <div data-testid="streaming">{isStreaming ? 'streaming' : 'idle'}</div>
       <div data-testid="messages">{currentConversation?.messages.length ?? 0}</div>
+      <div data-testid="steps-count">{steps.length}</div>
+      <div data-testid="steps-snapshot">{steps.map(s => `${s.label}:${s.status}`).join('|')}</div>
       <button onClick={() => sendMessage('Hello')}>send</button>
       <button onClick={() => loadConversations()}>load</button>
     </div>
@@ -34,7 +42,14 @@ const TestComponent: React.FC = () => {
 };
 
 describe('ChatContext', () => {
-  beforeEach(() => jest.clearAllMocks());
+  beforeEach(() => {
+    jest.clearAllMocks();
+    lastStreamCallbacks = null;
+    mockedService.stream.mockImplementation((_id, _text, callbacks) => {
+      lastStreamCallbacks = callbacks;
+      return () => {};
+    });
+  });
 
   it('provides initial idle state with no current conversation', () => {
     render(<ChatProvider><TestComponent /></ChatProvider>);
@@ -53,6 +68,37 @@ describe('ChatContext', () => {
     await act(async () => { userEvent.click(screen.getByText('send')); });
     await waitFor(() => expect(mockedService.create).toHaveBeenCalledTimes(1));
     expect(mockedService.stream).toHaveBeenCalledWith(1, 'Hello', expect.any(Object));
+  });
+
+  it('ne duplique pas une étape quand le backend envoie running puis done pour le même libellé', async () => {
+    render(<ChatProvider><TestComponent /></ChatProvider>);
+    await act(async () => { userEvent.click(screen.getByText('send')); });
+    await waitFor(() => expect(lastStreamCallbacks).not.toBeNull());
+
+    await act(async () => {
+      lastStreamCallbacks!.onStep('Connexion au serveur MCP', 'running');
+      lastStreamCallbacks!.onStep('Connexion au serveur MCP', 'done');
+    });
+
+    expect(screen.getByTestId('steps-count')).toHaveTextContent('1');
+    expect(screen.getByTestId('steps-snapshot')).toHaveTextContent('Connexion au serveur MCP:done');
+  });
+
+  it('ajoute une ligne done pour un outil sans étape running préalable', async () => {
+    render(<ChatProvider><TestComponent /></ChatProvider>);
+    await act(async () => { userEvent.click(screen.getByText('send')); });
+    await waitFor(() => expect(lastStreamCallbacks).not.toBeNull());
+
+    await act(async () => {
+      lastStreamCallbacks!.onStep('Analyse de votre demande', 'running');
+      lastStreamCallbacks!.onStep('Analyse de votre demande', 'done');
+      lastStreamCallbacks!.onStep('Récupération des idées cadeaux', 'done');
+    });
+
+    expect(screen.getByTestId('steps-count')).toHaveTextContent('2');
+    expect(screen.getByTestId('steps-snapshot')).toHaveTextContent(
+      'Analyse de votre demande:done|Récupération des idées cadeaux:done',
+    );
   });
 
   it('sendMessage creates a new conversation when inactive > 10 min', async () => {

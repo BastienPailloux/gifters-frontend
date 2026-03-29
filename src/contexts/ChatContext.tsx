@@ -93,10 +93,25 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
     cleanupRef.current = conversationService.stream(convId, text, {
       onStep: (label, status) => {
         setSteps(prev => {
-          const updated = prev.map(s =>
+          if (status === 'running') {
+            const finalized = prev.map(s =>
+              s.status === 'running' ? { ...s, status: 'done' as const } : s,
+            );
+            return [...finalized, { id: crypto.randomUUID(), label, status: 'running' as const }];
+          }
+          const runningIdx = [...prev.entries()]
+            .filter(([, s]) => s.label === label && s.status === 'running')
+            .map(([i]) => i)
+            .pop();
+          if (runningIdx !== undefined) {
+            return prev.map((s, i) =>
+              i === runningIdx ? { ...s, status: 'done' as const } : s,
+            );
+          }
+          const finalized = prev.map(s =>
             s.status === 'running' ? { ...s, status: 'done' as const } : s,
           );
-          return [...updated, { id: crypto.randomUUID(), label, status }];
+          return [...finalized, { id: crypto.randomUUID(), label, status: 'done' as const }];
         });
       },
       onFinal: (content) => {
