@@ -22,11 +22,12 @@ const ChatPanel: React.FC<Props> = ({ variant }) => {
   const { currentConversation, steps, isStreaming, sendMessage } = useChat();
   const navigate = useNavigate();
   const [input, setInput] = useState('');
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const messagesRef = useRef<HTMLDivElement>(null);
   const messages = currentConversation?.messages ?? [];
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    const el = messagesRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
   }, [messages, steps]);
 
   const handleSubmit = (e: FormEvent) => {
@@ -69,7 +70,7 @@ const ChatPanel: React.FC<Props> = ({ variant }) => {
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto px-4 py-3 flex flex-col gap-3">
+      <div ref={messagesRef} className="flex-1 overflow-y-auto px-4 py-3 flex flex-col gap-3">
         {messages.length === 0 && steps.length === 0 ? (
           <div className="flex flex-col gap-2 mt-2">
             <p className="text-xs text-gray-400 text-center">{t('chat:emptyHint')}</p>
@@ -93,7 +94,6 @@ const ChatPanel: React.FC<Props> = ({ variant }) => {
             {steps.length > 0 && <ThinkingSteps steps={steps} />}
           </>
         )}
-        <div ref={bottomRef} />
       </div>
 
       {/* Input */}
